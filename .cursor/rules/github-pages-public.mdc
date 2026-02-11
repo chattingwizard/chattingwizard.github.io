@@ -1,0 +1,24 @@
+---
+description: CRITICAL - GitHub Pages repo must ALWAYS stay public after any git push or repo change
+alwaysApply: true
+---
+
+# GitHub Pages — ALWAYS PUBLIC
+
+## Rule
+
+After EVERY `git push` to `chattingwizard/chattingwizard.github.io`:
+
+1. **Verify visibility**: Run `gh repo view chattingwizard/chattingwizard.github.io --json visibility`
+2. **If not PUBLIC**: Run `gh repo edit chattingwizard/chattingwizard.github.io --visibility public --accept-visibility-change-consequences`
+3. **Re-enable Pages if needed**: Run `gh api repos/chattingwizard/chattingwizard.github.io/pages` to verify Pages is active
+
+## Why
+
+GitHub Pages on free organization accounts requires the repo to be **public**. If it goes private, the site stops working and the user (Pau) can't access it.
+
+## NEVER
+
+- NEVER set the repo to private
+- NEVER skip the visibility check after pushing
+- NEVER assume the repo stayed public after a push

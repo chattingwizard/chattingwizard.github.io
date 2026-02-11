@@ -560,24 +560,44 @@ When exporting scripts to xlsx for Infloww import:
 
 **Script** = A single standalone message. The chatter picks it and sends it manually when they decide it's the right moment.
 
-**Sequence** = A chain of scripts that activate in order. When the chatter sends the first script in a sequence, Infloww automatically queues the next message in the chatbox. The chatter can still edit each message before sending, but the flow is pre-loaded.
+**Sequence** = A chain of scripts that activate in order. When the chatter sends the first script in a sequence, Infloww automatically queues the next message in the chatbox. The chatter can still edit each message before sending, but the flow is pre-loaded and ready to go step by step.
+
+**CRITICAL — Infloww marks scripts/sequences as USED.** Once a chatter activates a sequence or script, Infloww marks it. This means:
+- You CANNOT reuse the same sequence with the same fan
+- For situations that repeat (e.g., fan says "too expensive" again next session), you need MULTIPLE COMPLETE sequences with different wording
+- Each sequence must be self-contained — NEVER mix variant wording within one sequence
 
 **When to use a sequence:**
-- The customer journey (R → TB → S → AC) is ONE sequence — messages flow one after another
-- Any multi-message flow where the chatter sends 2+ messages in a row WITHOUT waiting for a sub response (e.g., "hold on" + [wait 2 min] + "look what I just did" = 3-message sequence)
-- NR Waves can be a sequence (send W1, if no reply W2 is queued, etc.)
+- The customer journey (R → TB → S → AC) is ONE sequence
+- **OBJ/RES handling: each complete escalation path = one sequence.** Example: `\price1` is a full 5-step price objection sequence. `\price2` is an ENTIRELY different 5-step sequence with different wording for the same situation.
+- NR Waves can be a sequence
+- Any multi-message flow where the chatter sends 2+ messages in a row
 
 **When to use standalone scripts (NOT a sequence):**
-- Objection handling steps that require WAITING for the sub's response between each step — each step is a standalone script the chatter picks manually based on what the sub said
-- Personal Info responses (chatter picks the relevant one based on what sub asked)
+- Personal Info responses (chatter picks based on what sub asked)
 - Positive Spin responses (chatter picks based on what sub shared)
-- Situational scripts (dickpic response, cum management, etc.)
+- Situational scripts (dickpic response, cum management, horny boosters) — these are single-message reactions, not escalations
 
-**When to use a SHORT sequence within OBJ handling:**
-- If an objection response naturally needs 2 quick messages together (e.g., react + redirect), make it a 2-message sequence
-- Example: OBJ step where you acknowledge + pivot: "haha I get it 😏" → "but seriously wait until you see this" = sequence of 2
+**Naming for Infloww commands:**
+- The chatter types `\commandname` to activate a script/sequence
+- Names MUST be short, lowercase, no spaces: `\price1`, `\nosex2`, `\card1`
+- Max 32 chars for sheet/tag name (which becomes the command)
+- Pattern: `\protocol` + number → `\price1`, `\price2`, `\free1`, `\free2`
+- For standalone situational: `\edge1`, `\sync1`, `\dpsext1`, `\h1`
 
-**Rule of thumb:** If the chatter needs to READ the sub's response before deciding the next move → standalone scripts. If the chatter sends 2+ messages in a row regardless of sub response → sequence.
+**OBJ/RES sequence structure:**
+- Each protocol (e.g., PRICE) gets 2-3 complete sequences
+- Each sequence has ALL steps of the escalation with consistent wording
+- Example: `\price1` = Reframe(A) → FOMO(A) → Challenge(A) → Downgrade(A) → Seed(A)
+- Example: `\price2` = Reframe(B) → FOMO(B) → Challenge(B) → Downgrade(B) → Seed(B)
+- The chatter uses `\price1` first time, `\price2` next time the same fan objects
+- In the XLSX, each sequence = its own sheet (sheet name = command name)
+
+**Emoji rule for OBJ/RES scripts:**
+- Objection handling should feel NATURAL, not scripted — reduce emojis
+- Target: ~40% of messages with 1 emoji, 60% with zero
+- Emojis feel forced during tense moments (objections, resistance)
+- Exception: Situational scripts (SIT-HORNY boosters) can have more emojis
 
 ---
 
@@ -590,9 +610,9 @@ When exporting scripts to xlsx for Infloww import:
 | Rapport | `R-` | `R-1` through `R-9` |
 | Teasing Bridge | `TB-` | `TB-1` through `TB-7` |
 | Sexting Sequence | `S[N]-` | `S1-1`, `S1-PPV1` |
-| Objection Handler | `OBJ-` | `OBJ-PRICE1`, `OBJ-FREE1`, `OBJ-NOMONEY1`, `OBJ-NOPPV1`, `OBJ-CARD1`, `OBJ-DISCOUNT1` |
-| Resistance Handler | `RES-` | `RES-NOSEX1`, `RES-REAL1`, `RES-VOICE1`, `RES-OFFTOPIC1`, `RES-CUSTOM1`, `RES-DONE1` |
-| Situational Script | `SIT-` | `SIT-CUM1`, `SIT-DICKPIC1`, `SIT-HORNY1` |
+| Objection Sequence | `\` | `\price1`, `\price2`, `\free1`, `\discount1`, `\nomoney1`, `\noppv1`, `\card1` |
+| Resistance Sequence | `\` | `\nosex1`, `\nosex2`, `\real1`, `\voice1`, `\offtopic1`, `\customyes1`, `\customno1`, `\done1` |
+| Situational Script | `\` | `\edge1`, `\sync1`, `\delay1`, `\dpsext1`, `\dprapport1`, `\dpppv1`, `\h1`-`\h8` |
 | No Response Wave | `NR-W` | `NR-W1` through `NR-W5` |
 | Aftercare | `AC-` | `AC-1`, `AC-2` (NEVER close conversation) |
 | Re-engagement | `RE-` | `RE-1`, `RE-2` |
