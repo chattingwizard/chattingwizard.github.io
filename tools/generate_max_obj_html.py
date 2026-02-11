@@ -257,7 +257,7 @@ sit = {
         "desc": "NEVER ignore. ALWAYS react positively. This is a SALES OPPORTUNITY.",
         "items": [
             ("\\dpsext1", "fuck okay that's... damn. you have no idea what that just did to me"),
-            ("\\dpsext2", "holy shit that is... fuck. I need to show you something rn"),
+            ("\\dpsext2", "oh fuck that is... damn. I need to show you something rn"),
             ("\\dprapport1", "damn you don't waste time huh, that's actually really hot though ngl"),
             ("\\dprapport2", "woah I wasn't expecting that but... damn"),
             ("\\dpppv1", "you can't just send me that and expect me not to do something about it, hold on..."),

@@ -35,11 +35,11 @@ config = {
     # ═══════════════════════════════════════
     "journey": [
         # Rapport
-        ("R-1", "hey man, nice to meet you. so what made you hit subscribe?", "Add his name if known", "rapport"),
+        ("R-1", "hey man, glad you're here. so what made you hit subscribe?", "Add his name if known", "rapport"),
         ("R-2", "haha respect. so where you from?", "React to what he says. Add a short react like 'oh nice', 'damn ok'", "rapport"),
         ("R-3", "nice. I'm originally from Turkey but I've been in Texas for a while now. gym and training is my whole life basically", "If he named somewhere Marco visited, add 'oh I've been there'", "rapport"),
         ("R-4", "so what do you do when you're not keeping me on my phone all day?", None, "rapport"),
-        ("R-5", "gotta say... talking to you is different. most guys on here bore me to death", "Ego boost. Next → TB-1. From MR path: go TB-1 + TB-2 then skip to S1-1.", "rapport"),
+        ("R-5", "gotta say... talking to you is different. most guys on here are so boring honestly", "Ego boost. Next → TB-1. From MR path: go TB-1 + TB-2 then skip to S1-1.", "rapport"),
 
         # Teasing Bridge
         ("TB-1", "just finished a session at the gym and I'm still wired... this convo isn't helping me calm down", "THE PIVOT. Physical state.", "teasing"),
@@ -58,7 +58,7 @@ config = {
         # Sexting Phase 2 → PPV 2
         ("S1-6", "you watched it?", "Wait for reply. Brief cooldown.", "sext"),
         ("S1-7", "fuck talking to you is doing something to me right now", "React to what he said. HE caused this.", "sext"),
-        ("S1-8", "I'm hard and I can't do shit about it because of you", None, "sext"),
+        ("S1-8", "I'm hard and I can't do anything about it because of you", None, "sext"),
         ("S1-9", "what would you do if you were here right now", "Wait for reply. React to what he says.", "sext"),
         ("S1-10", "fuck hold on I need to show you something", "WAIT 2-3 MIN", "wait"),
         ("S1-11", "look what you did to me", "SEND PPV 2 — $25. Bought → continue. Silent 3 min → NR Waves.", "ppv"),
@@ -324,7 +324,7 @@ config = {
         ], "sit"),
         "dickpic": ([
             ("dpsext1", "fuck okay that's... damn. you have no idea what that just did to me", "DURING SEXTING."),
-            ("dpsext2", "holy shit that is... fuck. I need to show you something right now", "DURING SEXTING variant."),
+            ("dpsext2", "oh fuck that is... damn. I need to show you something right now", "DURING SEXTING variant."),
             ("dprapport1", "damn you don't waste time huh, that's actually really hot though ngl", "DURING RAPPORT."),
             ("dprapport2", "woah I wasn't expecting that but... damn", "DURING RAPPORT variant."),
             ("dpppv1", "you can't just send me that and expect me not to do something about it, hold on", "LEVERAGE. WAIT 1-2 min then send PPV."),

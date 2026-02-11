@@ -81,7 +81,7 @@ setup_sheet(ws1)
 
 journey = [
     # Rapport (first chatter-sent messages)
-    ("R-1", "nice to meet you man 😏 so be honest, what caught your eye", "Add his name before 'man'", "rapport"),
+    ("R-1", "glad you're here man 😏 so be honest, what caught your eye", "Add his name before 'man'", "rapport"),
     ("R-2", "haha respect 💪 so where you from?", "Add a short react before ('haha damn', 'I like that', 'oh word?')", "rapport"),
     ("R-3", "nice. I'm from Rome originally but I moved to the states a couple years ago. gym and creating content is basically my life rn 😏", "If he named somewhere Max visited → add 'oh I've been there' before 'nice'", "rapport"),
     ("R-4", "so what do you do besides making me check my phone every 5 seconds 😏", None, "rapport"),
@@ -104,7 +104,7 @@ journey = [
     # Sexting Phase 2 → PPV 2
     ("S1-6", "you watched it? 😏", "Wait for reply. Brief cooldown.", "sext"),
     ("S1-7", "fuck... talking to you is doing something to me rn 🥵", "React to what he said. HE caused this.", "sext"),
-    ("S1-8", "I'm hard as fuck because of you and I can't do shit about it", None, "sext"),
+    ("S1-8", "I'm hard as fuck because of you and I can't do anything about it", None, "sext"),
     ("S1-9", "what would you do if you were here rn", "Wait for reply. React to what he says before continuing.", "sext"),
     ("S1-10", "fuck 🥵🥵 hold on I need to show you something", "WAIT 2-3 MIN", "wait"),
     ("S1-11", "look what you did to me 🥵", "SEND PPV 2 — $25. Bought → continue. Silent 3 min → NR Waves.", "ppv"),
@@ -175,7 +175,7 @@ ws4 = wb.create_sheet("PersonalMax")
 setup_sheet(ws4)
 
 personal_rows = [
-    ("Age", "I'm 20. young but I know what I'm doing 😏", None, None),
+    ("Age", "I'm 20 but trust me I know what I'm doing 😏", None, None),
     ("Location", "from Rome originally but I'm in the states now. moved when I was 18", "NEVER name a specific US city", None),
     ("Profession", "modeling and content creation. also help with my family's business", None, None),
     ("Hobbies", "gym and boxing is my life bro. 5-6 times a week. that and traveling, fashion, cars 💪", None, None),

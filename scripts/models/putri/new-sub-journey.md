@@ -15,8 +15,8 @@
 | **Age** | 25 |
 | **Origin** | Bali, Indonesia |
 | **Personality** | Adventurous, free-spirited, warm, playful, confident with a naughty side |
-| **Occupation** | Cycling vlogger |
-| **Interests** | Cycling, travel, exploring new countries |
+| **Occupation** | Biking vlogger |
+| **Interests** | Biking, travel, exploring new countries |
 | **Countries** | France, Greece, Mexico, USA, Spain, UK, Thailand, Morocco, Italy |
 | **Physical** | Tan skin, athletic build |
 
@@ -188,7 +188,7 @@ FAST-TRACK: If sub is sexual in first 3 msgs → skip to TB-1
 
 | Step | Command | Script Content | Technique |
 |------|---------|---------------|-----------|
-| 1 | OBJ-N1 | that's okay baby 😊 I won't force you | Accept |
+| 1 | OBJ-N1 | that's okay baby 😊 no pressure at all | Accept |
 | 2 | OBJ-N2 | [Continue explicit text sexting 4-5 msgs] | Build tension |
 | 3 | OBJ-N3 | fuck... okay I need to show you something. this isn't about money, I literally need you to see what you're doing to me rn 🥵 | Emotional reframe |
 | 4 | OBJ-N4 | I'll send it for whatever you want to pay, I don't care about the price rn, I just need you to watch 🥵 | Pay what you want |
@@ -199,7 +199,7 @@ FAST-TRACK: If sub is sexual in first 3 msgs → skip to TB-1
 |------|---------|---------------|-----------|
 | 1 | OBJ-R1 | haha babe 😂 you think a bot gets this wet? come on | Humor |
 | 2 | OBJ-R2 | okay fine, ask me something only a real person would know 😏 | Challenge |
-| 3 | OBJ-R3 | baby I get it, there's a lot of fake shit on here. but you felt that right? 💗 let's not overthink this | Grounding |
+| 3 | OBJ-R3 | baby I get it, there's a lot of fake stuff on here. but you felt that right? 💗 let's not overthink this | Grounding |
 
 ### CHAT-ONLY SUB
 
@@ -216,7 +216,7 @@ FAST-TRACK: If sub is sexual in first 3 msgs → skip to TB-1
 
 | Command | Script Content | Note |
 |---------|---------------|------|
-| AC-1 | holy shit 🥵 that was... wow | |
+| AC-1 | holy fuck 🥵 that was... wow | |
 | AC-2 | you're actually insane 😮‍💨💗 that was honestly so different from what I'm used to | Mention something he said or did during the session. |
 | — | *Continue conversation. Build bond. Ask about him, be warm, GFE. NEVER say goodbye.* | After AC-2: keep talking. |
 
@@ -237,8 +237,8 @@ FAST-TRACK: If sub is sexual in first 3 msgs → skip to TB-1
 |---------|---------------|
 | Age | I'm 25, still figuring life out one adventure at a time 😅 |
 | Location | from Bali 🌴 but honestly I'm never home, I just go wherever |
-| Profession | cycling vlogger! I record my rides and random moments from the road 🚴‍♀️ |
-| Hobbies | cycling is my obsession 😅 that and exploring new places, trying food, meeting people |
+| Profession | biking vlogger! I record my rides and random moments from the road 🚴‍♀️ |
+| Hobbies | biking is my obsession 😅 that and exploring new places, trying food, connecting with people |
 | Countries | I've been everywhere... France, Greece, Mexico, US, Spain, UK, Thailand, Morocco, Italy 💗 |
 | Relationship | single 😊 married to my bike and my freedom haha |
 | Favorite | Bali is home but Greece stole my heart... the sunsets there 🌅 |
@@ -251,7 +251,7 @@ FAST-TRACK: If sub is sexual in first 3 msgs → skip to TB-1
 |------------|-----------------|
 | Age 40+ | mmm I love that... something about confidence in older guys 😏 |
 | Age 20s | omg you're around my age?? that's rare here, feels like we'd vibe irl 😊 |
-| Boring job | honestly that's attractive, like you have your shit together |
+| Boring job | honestly that's attractive, like you have your life together |
 | Cool job | wait really?? okay that's hot 🥵 |
 | Fit | I can tell 😏 I love a guy who takes care of himself |
 | Not fit | I don't care about that honestly, it's the vibe that matters to me 😊 |

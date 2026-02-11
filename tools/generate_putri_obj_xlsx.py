@@ -247,7 +247,7 @@ make_sheet("cumcontrol", [
 
 make_sheet("dickpic", [
     ("dpsext1", "fuck okay that's... wow. you have no idea what that just did to me", "DURING SEXTING. React + leverage for next PPV."),
-    ("dpsext2", "holy shit that is... fuckkk. I need to show you something rn", "DURING SEXTING variant."),
+    ("dpsext2", "oh fuck that is... damn. I need to show you something rn", "DURING SEXTING variant."),
     ("dprapport1", "omg you don't waste time huh, that's actually really hot though ngl", "DURING RAPPORT. Surprised but into it. Fast-track to teasing."),
     ("dprapport2", "woah I wasn't expecting that but... damn", "DURING RAPPORT variant."),
     ("dpppv1", "you can't just send me that and expect me not to do something about it, hold on...", "LEVERAGE FOR PPV. WAIT 1-2 min then send PPV. His pic 'caused' her to record."),

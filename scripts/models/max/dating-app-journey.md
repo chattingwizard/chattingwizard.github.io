@@ -98,7 +98,7 @@ MEETING: If sub asks about meeting → go to MR-1, then return to R-1 (full rapp
 
 | Command | Script Content | Note |
 |---------|---------------|------|
-| R-1 | nice to meet you man 😏 so be honest, what caught your eye | Add his name before "man". |
+| R-1 | glad you're here man 😏 so be honest, what caught your eye | Add his name before "man". |
 | R-2 | haha respect 💪 so where you from? | Add a short react to what he said before this ("haha damn", "I like that", "oh word?"). |
 
 ### Block B: Vibe
@@ -176,7 +176,7 @@ MEETING: If sub asks about meeting → go to MR-1, then return to R-1 (full rapp
 |---------|---------------|------|-----------|
 | S1-6 | you watched it? 😏 | Wait for response. Brief cooldown. | 6 |
 | S1-7 | fuck... talking to you is doing something to me rn 🥵 | Add a react to what he said. Sexual vulnerability — HE caused this. | 8 |
-| S1-8 | I'm hard as fuck because of you and I can't do shit about it | | 8 |
+| S1-8 | I'm hard as fuck because of you and I can't do anything about it | | 8 |
 | S1-9 | what would you do if you were here rn | Wait for response. REACTION SLOT — chatter reacts to what sub says. | 8 |
 | S1-10 | fuck 🥵🥵 hold on I need to show you something | WAIT 2-3 MIN. | 9 |
 | S1-11 | look what you did to me 🥵 | Send PPV 2 — $25. Bought → S1-12. Silent 3 min → NR-W1. Objection → OBJ protocol. | 9 |
@@ -233,7 +233,7 @@ MEETING: If sub asks about meeting → go to MR-1, then return to R-1 (full rapp
 
 | Step | Command | Script Content | Technique |
 |------|---------|---------------|-----------|
-| 1 | OBJ-F1 | I already sent you free shit man 😏 this one is on a whole different level... trust me | Reminder |
+| 1 | OBJ-F1 | I already gave you a free one man 😏 this one is on a whole different level... trust me | Reminder |
 | 2 | OBJ-F2 | tell you what... $[price]. but you better actually watch it 😏 | Downgrade |
 | 3 | OBJ-F3 | maybe you're not ready for what I really do 😈 it's intense | Challenge |
 | 4 | OBJ-F4 | trust me bro... what I did in that video? worth every cent 🥵 | Seed + Return |
@@ -253,7 +253,7 @@ MEETING: If sub asks about meeting → go to MR-1, then return to R-1 (full rapp
 |------|---------|---------------|-----------|
 | 1 | OBJ-R1 | haha bro 😂 you think a bot gets this hard? come on | Humor |
 | 2 | OBJ-R2 | ask me anything man. go ahead 😏 | Challenge |
-| 3 | OBJ-R3 | I get it, there's a lot of fake shit on here. but you felt that right? 💪 let's not overthink this | Grounding |
+| 3 | OBJ-R3 | I get it, there's a lot of fake stuff on here. but you felt that right? 💪 let's not overthink this | Grounding |
 
 ### CHAT-ONLY SUB
 
@@ -289,7 +289,7 @@ MEETING: If sub asks about meeting → go to MR-1, then return to R-1 (full rapp
 
 | Command | Script Content |
 |---------|---------------|
-| Age | I'm 20. young but I know what I'm doing 😏 |
+| Age | I'm 20 but trust me I know what I'm doing 😏 |
 | Location | from Rome originally but I'm in the states now. moved when I was 18 |
 | Profession | modeling and content creation. also help with my family's business |
 | Hobbies | gym and boxing is my life bro. 5-6 times a week. that and traveling, fashion, cars 💪 |
