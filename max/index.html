@@ -1,416 +1,604 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Max — Dating App Journey</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MAX — Chatter Guide</title>
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { background: #0d1117; color: #e6edf3; font-family: 'Segoe UI', system-ui, sans-serif; padding: 40px 20px; max-width: 1100px; margin: 0 auto; line-height: 1.6; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d1117;--card:#161b22;--border:#30363d;--text:#e6edf3;--muted:#8b949e;
+  --accent:#58a6ff;--green:#3fb950;--red:#f85149;--orange:#d29922;--purple:#bc8cff;
+  --yellow:#e3b341;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;line-height:1.6;padding:0 0 60px}
+.page{max-width:680px;margin:0 auto;padding:16px 14px}
 
-  h1 { font-size: 2em; text-align: center; margin-bottom: 5px; color: #58a6ff; }
-  .subtitle { text-align: center; color: #8b949e; margin-bottom: 30px; font-size: 0.95em; }
+/* ── HERO ── */
+.hero{text-align:center;padding:30px 16px 18px;border-bottom:1px solid var(--border)}
+.hero-photo{width:90px;height:90px;border-radius:50%;object-fit:cover;border:3px solid var(--accent);margin-bottom:10px}
+.hero h1{font-size:2rem;font-weight:800;letter-spacing:3px;margin-bottom:2px}
+.hero .tagline{color:var(--muted);font-size:.9rem;margin-bottom:4px}
 
-  .info-bar { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px; }
-  .info-tag { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 8px 16px; font-size: 0.85em; }
-  .info-tag span { color: #8b949e; }
+/* ── PROFILE ── */
+.profile{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px 20px;margin:20px 0}
+.profile h2{font-size:.82rem;color:var(--accent);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:14px;display:flex;align-items:center;gap:6px}
+.profile-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 20px}
+.profile-item .label{color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.5px}
+.profile-item .value{font-size:.9rem}
 
-  h2 { font-size: 1.4em; margin: 40px 0 15px 0; padding-bottom: 8px; border-bottom: 2px solid #30363d; }
-  h3 { font-size: 1.1em; margin: 25px 0 10px 0; color: #8b949e; }
+/* ── VOICE ── */
+.voice-box{background:#1c262f;border-left:3px solid var(--purple);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0;font-size:.88rem;color:#c4b5e0}
+.voice-box strong{color:var(--purple)}
 
-  .section { background: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 24px; margin-bottom: 24px; }
+/* ── ALERT ── */
+.alert-box{background:#f8514912;border:1px solid #f8514933;border-radius:12px;padding:14px 18px;margin:14px 0;font-size:.88rem}
+.alert-box strong{color:var(--red)}
+.alert-box ul{list-style:none;padding:0;margin-top:8px}
+.alert-box li{padding:3px 0;font-size:.84rem}
+.alert-box li::before{content:"🚫 ";font-size:.8rem}
 
-  table { width: 100%; border-collapse: collapse; margin: 10px 0; }
-  th { text-align: left; padding: 10px 12px; background: #1c2129; border-bottom: 2px solid #30363d; font-size: 0.85em; color: #8b949e; text-transform: uppercase; letter-spacing: 0.5px; }
-  td { padding: 10px 12px; border-bottom: 1px solid #21262d; vertical-align: top; }
-  tr:hover td { background: #1c2129; }
-  .cmd { font-weight: 700; font-family: 'Cascadia Code', 'Fira Code', monospace; font-size: 0.9em; white-space: nowrap; }
-  .msg { font-size: 0.95em; }
-  .note { color: #8b949e; font-size: 0.85em; }
-  .technique { font-style: italic; }
+/* ── RULES ── */
+.rules-box{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 20px;margin:14px 0}
+.rules-box h2{font-size:.82rem;color:var(--orange);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.rules-box ul{list-style:none;padding:0}
+.rules-box li{font-size:.85rem;padding:5px 0;color:var(--text);display:flex;gap:8px}
+.rules-box li::before{content:"→";color:var(--orange);font-weight:700;flex-shrink:0}
 
-  /* Colors per section */
-  .c-welcome .cmd { color: #f0f6fc; }
-  .c-mr .cmd { color: #f85149; }
-  .c-mr-obj .cmd { color: #da3633; }
-  .c-rapport .cmd { color: #58a6ff; }
-  .c-tb .cmd { color: #bc8cff; }
-  .c-sexting .cmd { color: #3fb950; }
-  .c-nr .cmd { color: #d29922; }
-  .c-obj .cmd { color: #f778ba; }
-  .c-ac .cmd { color: #79c0ff; }
+/* ── CONTEXT BOX ── */
+.context-box{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 20px;margin:14px 0}
+.context-box h2{font-size:.82rem;color:var(--accent);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.context-box p{font-size:.85rem;color:var(--text);margin-bottom:8px}
+.context-box .segments{display:grid;gap:6px;margin-top:10px}
+.segment{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:10px 14px;font-size:.85rem}
+.segment strong{color:var(--accent)}
 
-  .border-red { border-left: 4px solid #f85149; }
-  .border-blue { border-left: 4px solid #58a6ff; }
-  .border-purple { border-left: 4px solid #bc8cff; }
-  .border-green { border-left: 4px solid #3fb950; }
-  .border-yellow { border-left: 4px solid #d29922; }
-  .border-pink { border-left: 4px solid #f778ba; }
-  .border-cyan { border-left: 4px solid #79c0ff; }
-  .border-white { border-left: 4px solid #8b949e; }
+/* ── ROADMAP ── */
+.roadmap{display:flex;align-items:center;gap:0;padding:16px 0 8px;overflow-x:auto;-webkit-overflow-scrolling:touch;margin:12px 0}
+.roadmap::-webkit-scrollbar{height:4px}
+.roadmap::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+.rm-step{display:flex;align-items:center;gap:0;flex-shrink:0}
+.rm-label{font-size:.68rem;color:var(--muted);background:var(--card);border:1px solid var(--border);padding:4px 10px;border-radius:14px;white-space:nowrap;transition:.15s}
+.rm-label.rm-ppv{background:#3fb95014;color:var(--green);border-color:#3fb95033;font-weight:600}
+.rm-label.rm-special{background:#bc8cff14;color:var(--purple);border-color:#bc8cff33;font-weight:600}
+.rm-arrow{color:var(--border);font-size:.65rem;padding:0 2px}
 
-  /* Intensity bar */
-  .bar { display: inline-flex; gap: 2px; align-items: center; }
-  .bar-fill { width: 10px; height: 14px; border-radius: 2px; }
-  .bar-empty { width: 10px; height: 14px; border-radius: 2px; background: #21262d; }
-  .bar-low { background: #3fb950; }
-  .bar-mid { background: #d29922; }
-  .bar-high { background: #f85149; }
-  .bar-max { background: #ff4444; box-shadow: 0 0 6px #ff444488; }
-  .bar-label { margin-left: 6px; font-size: 0.8em; color: #8b949e; font-family: monospace; }
+/* ── PHASE HEADER ── */
+.phase{margin:24px 0 0}
+.phase-header{display:flex;align-items:center;gap:10px;padding:14px 14px 10px;border-left:3px solid var(--border);margin-bottom:6px}
+.phase-header .phase-emoji{font-size:1.3rem}
+.phase-header .phase-name{font-size:1.05rem;font-weight:700;flex:1}
+.phase-header .phase-meta{font-size:.75rem;color:var(--muted);background:var(--bg);padding:3px 10px;border-radius:12px;border:1px solid var(--border)}
+.phase-green{border-left-color:var(--green)}
+.phase-purple{border-left-color:var(--purple)}
+.phase-red{border-left-color:var(--red)}
+.phase-blue{border-left-color:var(--accent)}
+.phase-desc{font-size:.82rem;color:var(--muted);padding:0 0 8px 17px;font-style:italic}
 
-  /* Flow tree */
-  .flow { background: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 24px 30px; margin: 15px 0 30px 0; font-family: 'Cascadia Code', 'Fira Code', monospace; font-size: 0.88em; line-height: 2; }
-  .flow .step { color: #e6edf3; }
-  .flow .auto { color: #8b949e; }
-  .flow .branch { color: #d29922; font-weight: 700; }
-  .flow .path-meeting { color: #f85149; }
-  .flow .path-sexual { color: #bc8cff; }
-  .flow .path-casual { color: #58a6ff; }
-  .flow .path-silent { color: #484f58; }
-  .flow .money { color: #3fb950; font-weight: 700; }
-  .flow .arrow { color: #484f58; }
+/* ── MESSAGE ── */
+.msg{display:flex;gap:10px;align-items:flex-start;padding:10px 14px;border-radius:10px;margin:3px 0;transition:background .12s}
+.msg:hover{background:#161b2266}
+.msg-id{font-size:.66rem;color:var(--muted);background:var(--card);border:1px solid var(--border);padding:2px 6px;border-radius:4px;white-space:nowrap;margin-top:4px;flex-shrink:0;min-width:36px;text-align:center;font-weight:600}
+.msg-body{flex:1;min-width:0}
+.msg-text{font-size:1.06rem;line-height:1.5;word-wrap:break-word}
 
-  /* Profile grid */
-  .profile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 24px; }
-  .profile-grid .item { display: flex; gap: 10px; padding: 6px 0; border-bottom: 1px solid #21262d; }
-  .profile-grid .label { color: #8b949e; min-width: 100px; font-size: 0.85em; }
-  .profile-grid .value { color: #e6edf3; font-size: 0.95em; }
+/* ── COPY ── */
+.cp{background:none;border:1px solid transparent;color:var(--border);width:30px;height:30px;border-radius:6px;cursor:pointer;font-size:.8rem;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:.15s;position:relative;margin-top:2px;opacity:.4}
+.msg:hover .cp,.qr-item:hover .cp,.spin-item:hover .cp,.nr-table tr:hover .cp,.obj-step:hover .cp,.loc-row:hover .cp{opacity:1;border-color:var(--border)}
+.cp:hover{background:var(--card);color:var(--text);opacity:1}
+.cp.ok{border-color:var(--green);color:var(--green);opacity:1}
+.cp.ok::after{content:"✓";position:absolute;font-size:.75rem;font-weight:700}
+.cp.ok .cp-icon{visibility:hidden}
 
-  /* Alert box */
-  .alert { border: 1px solid; border-radius: 10px; padding: 16px 20px; margin: 15px 0; }
-  .alert-red { border-color: #f8514966; background: #f8514911; }
-  .alert-yellow { border-color: #d2992266; background: #d2992211; }
-  .alert-green { border-color: #3fb95066; background: #3fb95011; }
-  .alert h4 { margin-bottom: 8px; }
-  .alert ul { padding-left: 20px; }
-  .alert li { margin: 4px 0; font-size: 0.9em; }
+/* ── NOTES ── */
+.note-edit{background:#e3b34112;border-left:3px solid var(--yellow);padding:6px 10px;border-radius:0 6px 6px 0;margin:5px 0 2px;font-size:.82rem;color:var(--yellow)}
+.note-wait{display:inline-block;font-size:.76rem;font-weight:600;padding:3px 10px;border-radius:6px;background:#d2992218;color:var(--orange);margin:5px 0 2px}
+.note-auto{font-size:.78rem;color:var(--muted);margin:4px 0 2px;padding:4px 10px;background:#8b949e0a;border-radius:6px}
+.note-tip{font-size:.78rem;color:#8b949e;margin:3px 0 1px;font-style:italic}
 
-  /* PPV price tag */
-  .ppv-tag { display: inline-block; background: #3fb95022; color: #3fb950; border: 1px solid #3fb95044; border-radius: 6px; padding: 2px 8px; font-weight: 700; font-size: 0.85em; }
-  .ppv-free { background: #58a6ff22; color: #58a6ff; border-color: #58a6ff44; }
+/* ── BADGES ── */
+.badge{display:inline-block;font-size:.78rem;font-weight:600;padding:3px 10px;border-radius:6px;margin:5px 0 2px;vertical-align:middle}
+.badge-wait{background:#d2992218;color:var(--orange)}
 
-  /* Phase header */
-  .phase-header { display: flex; align-items: center; gap: 12px; margin: 25px 0 10px 0; }
-  .phase-header h3 { margin: 0; color: #e6edf3; }
-  .phase-header .ppv-tag { font-size: 0.9em; padding: 4px 12px; }
+/* ── PPV MOMENT ── */
+.ppv-moment{background:#3fb95010;border:1px solid #3fb95028;border-radius:10px;padding:10px 14px;margin:6px 0;display:flex;align-items:center;gap:10px}
+.ppv-moment .ppv-icon{font-size:1.3rem}
+.ppv-moment .ppv-label{font-size:.92rem;font-weight:600;color:var(--green);flex:1}
+.ppv-moment .ppv-price{font-size:1rem;font-weight:700;color:var(--green);background:#3fb95018;padding:3px 12px;border-radius:6px}
 
-  /* Summary */
-  .summary-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 20px 0; }
-  .summary-card { background: #1c2129; border: 1px solid #30363d; border-radius: 10px; padding: 20px; text-align: center; }
-  .summary-card .num { font-size: 2em; font-weight: 700; }
-  .summary-card .label { color: #8b949e; font-size: 0.85em; margin-top: 4px; }
-  .summary-card.green .num { color: #3fb950; }
-  .summary-card.blue .num { color: #58a6ff; }
-  .summary-card.red .num { color: #f85149; }
+/* ── BRANCH ── */
+.branch-info{font-size:.8rem;color:var(--muted);padding:4px 14px 8px;display:flex;gap:12px;flex-wrap:wrap}
+.branch-info .bi{display:flex;align-items:center;gap:4px}
+.branch-info .bi-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.branch-info a{color:inherit;text-decoration:underline;text-underline-offset:2px}
 
-  /* Rules */
-  .rules-list { list-style: none; padding: 0; }
-  .rules-list li { padding: 8px 0; border-bottom: 1px solid #21262d; display: flex; gap: 10px; }
-  .rules-list .num { color: #f85149; font-weight: 700; min-width: 24px; }
+/* ── DIVIDER ── */
+.divider{border:none;border-top:1px solid var(--border);margin:28px 0}
+.divider-label{text-align:center;font-size:.75rem;color:var(--muted);margin:-10px 0 20px;background:var(--bg);display:inline-block;padding:0 12px;position:relative;left:50%;transform:translateX(-50%)}
 
-  /* New badge */
-  .badge-new { display: inline-block; background: #f85149; color: #fff; font-size: 0.7em; padding: 2px 8px; border-radius: 4px; font-weight: 700; vertical-align: middle; margin-left: 8px; }
+/* ── BRANCH ROUTER ── */
+.router{background:var(--card);border:1px solid var(--purple);border-radius:12px;padding:16px 20px;margin:14px 0}
+.router h3{font-size:.88rem;color:var(--purple);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.route{padding:6px 0;font-size:.85rem;display:flex;gap:8px}
+.route::before{content:"→";color:var(--purple);font-weight:700;flex-shrink:0}
 
-  /* Positive/negative tag */
-  .tag-pos { color: #3fb950; font-weight: 700; }
-  .tag-neg { color: #f85149; font-weight: 700; }
+/* ── REF SECTIONS ── */
+.ref-section{margin:20px 0 0}
+.ref-title{font-size:1rem;font-weight:700;padding:10px 0;border-bottom:2px solid var(--border);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.nr-table{width:100%;border-collapse:collapse;margin:8px 0}
+.nr-table th{text-align:left;font-size:.7rem;color:var(--muted);text-transform:uppercase;padding:6px 10px;border-bottom:1px solid var(--border)}
+.nr-table td{padding:9px 10px;font-size:.9rem;border-bottom:1px solid #21262d;vertical-align:top}
+.nr-table .nr-timing{color:var(--orange);font-size:.78rem;white-space:nowrap}
+.nr-table .nr-tech{color:var(--muted);font-size:.78rem;font-style:italic}
+.qr-grid{display:grid;gap:5px;margin:8px 0}
+.qr-item{display:flex;gap:10px;align-items:flex-start;padding:10px 14px;background:var(--card);border:1px solid var(--border);border-radius:8px}
+.qr-label{font-size:.72rem;font-weight:600;color:var(--accent);text-transform:uppercase;min-width:64px;margin-top:3px;flex-shrink:0}
+.qr-text{flex:1;font-size:.92rem}
+.spin-item{display:flex;gap:12px;align-items:flex-start;padding:10px 14px;background:var(--card);border:1px solid var(--border);border-radius:8px}
+.spin-trigger{font-size:.8rem;color:var(--muted);min-width:90px;flex-shrink:0;margin-top:2px}
+.spin-text{flex:1;font-size:.92rem}
 
-  @media (max-width: 768px) {
-    .profile-grid { grid-template-columns: 1fr; }
-    .summary-grid { grid-template-columns: 1fr; }
-    body { padding: 20px 10px; }
-  }
+/* ── LOCATION TABLE ── */
+.loc-row{display:flex;gap:10px;align-items:flex-start;padding:10px 14px;background:var(--card);border:1px solid var(--border);border-radius:8px;margin:5px 0}
+.loc-trigger{font-size:.82rem;color:var(--orange);min-width:120px;flex-shrink:0;margin-top:2px}
+.loc-text{flex:1;font-size:.92rem}
+
+/* ── MR-OBJ (meetup objection — keep this since it's MR specific, not standard OBJ) ── */
+.mr-obj-step{display:flex;gap:10px;align-items:flex-start;padding:10px 14px;background:var(--card);border:1px solid var(--border);border-radius:8px;margin:5px 0}
+.mr-obj-num{background:var(--red);color:#fff;font-weight:700;font-size:.68rem;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.mr-obj-body{flex:1}
+.mr-obj-tech{font-size:.72rem;color:var(--muted);font-style:italic;margin-top:2px}
+
+/* ── SCROLL TOP ── */
+.top-btn{position:fixed;bottom:16px;right:16px;width:38px;height:38px;border-radius:50%;background:var(--card);border:1px solid var(--border);color:var(--muted);font-size:1rem;cursor:pointer;display:none;align-items:center;justify-content:center;z-index:100;transition:.15s}
+.top-btn:hover{color:var(--text);border-color:var(--muted)}
+.top-btn.show{display:flex}
+
+@media(max-width:500px){
+  .page{padding:10px 8px}
+  .profile-grid{grid-template-columns:1fr}
+  .msg-text{font-size:.98rem}
+  .hero h1{font-size:1.6rem}
+  .branch-info{padding-left:14px;flex-direction:column;gap:4px}
+  .roadmap{padding:12px 0}
+}
 </style>
 </head>
 <body>
 
-<h1>MAX — Dating App Welcome Journey v1</h1>
-<p class="subtitle">Template for All Dating App Male Creators</p>
+<div class="page">
 
-<div class="info-bar">
-  <div class="info-tag"><span>Traffic:</span> Dating Apps (Gay Male)</div>
-  <div class="info-tag"><span>Content:</span> First Session (Solo)</div>
-  <div class="info-tag"><span>Mode:</span> Autopilot-safe</div>
-  <div class="info-tag"><span>Created:</span> Feb 11, 2026</div>
+<!-- ════════ HERO ════════ -->
+<div class="hero">
+  <img src="profile.jpeg" alt="Max" class="hero-photo">
+  <h1>MAX</h1>
+  <div class="tagline">20 · Rome, Italy → Austin, TX · Model / Content Creator 💪</div>
+  <div style="font-size:.8rem;color:var(--muted);margin-top:8px">Dating App Welcome Journey v1 · First Session (Solo) · Feb 2026</div>
 </div>
 
-<!-- SUMMARY CARDS -->
-<div class="summary-grid">
-  <div class="summary-card green"><div class="num">$132</div><div class="label">Revenue potencial por fan</div></div>
-  <div class="summary-card blue"><div class="num">73</div><div class="label">Mensajes totales (todos los módulos)</div></div>
-  <div class="summary-card red"><div class="num">4</div><div class="label">PPVs en el funnel ($12→$25→$40→$55)</div></div>
-</div>
-
-<!-- CHARACTER PROFILE -->
-<h2 style="color: #d29922;">Character Profile</h2>
-<div class="section">
+<!-- ════════ PROFILE ════════ -->
+<div class="profile">
+  <h2>👤 Character Profile</h2>
   <div class="profile-grid">
-    <div class="item"><div class="label">Name</div><div class="value"><strong>Max (MaxDoms)</strong></div></div>
-    <div class="item"><div class="label">Age</div><div class="value">20</div></div>
-    <div class="item"><div class="label">Origin</div><div class="value">Rome, Italy</div></div>
-    <div class="item"><div class="label">Location</div><div class="value">Austin, TX &nbsp;⚠️ Dating apps: matches fan's location</div></div>
-    <div class="item"><div class="label">Personality</div><div class="value">Alpha, dominant, confident, direct</div></div>
-    <div class="item"><div class="label">Physical</div><div class="value">1.85m, 90kg, athletic, tanned, green eyes, 16 tattoos</div></div>
-    <div class="item"><div class="label">Interests</div><div class="value">Gym & boxing 5-6x/week, fashion, nightlife, motorcycles</div></div>
-    <div class="item"><div class="label">Voice</div><div class="value">Lowercase. Direct. Short. "bro/dude/man". NEVER "baby".</div></div>
+    <div class="profile-item"><div class="label">Personality</div><div class="value">Alpha, dominant, confident, direct 😈</div></div>
+    <div class="profile-item"><div class="label">Job</div><div class="value">Model / content creator, family business</div></div>
+    <div class="profile-item"><div class="label">Interests</div><div class="value">Gym & boxing 5-6x/week, fashion, nightlife, motorcycles 🏍️</div></div>
+    <div class="profile-item"><div class="label">Physical</div><div class="value">1.85m, 90kg, athletic, tanned, 16 tattoos 💪</div></div>
+    <div class="profile-item"><div class="label">Languages</div><div class="value">English (fluent), Italian (native), basic Spanish</div></div>
+    <div class="profile-item"><div class="label">Status</div><div class="value">Single — "too busy living" 😏</div></div>
+    <div class="profile-item"><div class="label">Countries</div><div class="value">Spain, Dubai, Bali, France, London, Netherlands, Argentina, Brazil</div></div>
+    <div class="profile-item"><div class="label">Car</div><div class="value">Black Mustang 🖤</div></div>
   </div>
 </div>
 
-<!-- JOURNEY FLOW -->
-<h2 style="color: #3fb950;">Journey Flow</h2>
-<div class="flow">
-  <div><span class="step">📥 FAN SUBSCRIBES</span></div>
-  <div><span class="arrow">&nbsp;&nbsp;│</span></div>
-  <div><span class="arrow">&nbsp;&nbsp;├── </span><span class="step"><strong>W-1</strong> Welcome + photos</span> <span class="auto">(auto)</span></div>
-  <div><span class="arrow">&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;</span><span class="auto">⏱️ 2-3 min</span></div>
-  <div><span class="arrow">&nbsp;&nbsp;├── </span><span class="step"><strong>AF-1 → AF-2</strong> Auto follow-ups</span> <span class="auto">(auto, ask name)</span></div>
-  <div><span class="arrow">&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;</span><span class="auto">⏱️ Wait for response</span></div>
-  <div><span class="arrow">&nbsp;&nbsp;│</span></div>
-  <div><span class="arrow">&nbsp;&nbsp;├── </span><span class="branch">⚡ BRANCH — Based on first response</span></div>
-  <div><span class="arrow">&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├── </span><span class="path-meeting">🚨 MEETING REQUEST → MR-1 to MR-4</span> <span class="auto">(delivers PPV 0)</span></div>
-  <div><span class="arrow">&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="auto">→ R-1 to R-5 → TB-1+TB-2 → S1 Sexting</span></div>
-  <div><span class="arrow">&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├── </span><span class="path-sexual">🔥 SEXUAL/FLIRTY → TB-1 to TB-5</span> <span class="auto">(fast-track, PPV 0)</span></div>
-  <div><span class="arrow">&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="auto">→ S1 Sexting</span></div>
-  <div><span class="arrow">&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├── </span><span class="path-casual">💬 NORMAL/CASUAL → R-1 to R-5 → TB-1 to TB-5</span> <span class="auto">(PPV 0)</span></div>
-  <div><span class="arrow">&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="auto">→ S1 Sexting</span></div>
-  <div><span class="arrow">&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;└── </span><span class="path-silent">🔇 SILENT → NR-W1 to NR-W5</span></div>
-  <div><span class="arrow">&nbsp;&nbsp;│</span></div>
-  <div><span class="arrow">&nbsp;&nbsp;├── </span><span class="step"><strong>S1-1 to S1-22</strong> Sexting Sequence</span> <span class="money">$12 → $25 → $40 → $55 = $132</span></div>
-  <div><span class="arrow">&nbsp;&nbsp;│</span></div>
-  <div><span class="arrow">&nbsp;&nbsp;└── </span><span class="step"><strong>AC-1 to AC-3</strong> Aftercare + Seed</span></div>
+<!-- ════════ VOICE ════════ -->
+<div class="voice-box">
+  <strong>🗣️ Voice:</strong> Lowercase. Direct. Short. Masculine. NEVER "baby/babe/honey". Uses "bro", "dude", "man" casually. During sexting: direct commands, fan's name, no pet names. Occasional cocky one-liners. CAPS only at peak. Never paragraphs.
 </div>
 
-<!-- WELCOME + AUTO FOLLOW-UPS -->
-<h2>Welcome + Auto Follow-ups</h2>
-<div class="section border-white">
-  <table class="c-welcome">
-    <tr><th width="60">Cmd</th><th>Message</th><th width="280">Note</th></tr>
-    <tr><td class="cmd">W-1</td><td class="msg">yo what's up 😏 glad you're here. got something for you before I hit the gym</td><td class="note">Auto-send on subscription + Album (5-10 fotos)</td></tr>
-    <tr><td class="cmd">AF-1</td><td class="msg">ngl I was about to go train but I keep checking if you replied 😏 that never happens</td><td class="note">Auto 2-3 min after W-1</td></tr>
-    <tr><td class="cmd">AF-2</td><td class="msg">yo what's your name</td><td class="note">Auto 1-2 min after AF-1. <strong>WAIT.</strong><br>Meeting → MR-1 | Sexual → TB-1 | Normal → R-1</td></tr>
-  </table>
-</div>
-
-<!-- MEETUP REDIRECT -->
-<h2 style="color: #f85149;">🚨 Meetup Redirect (MR)<span class="badge-new">NUEVO</span></h2>
-<div class="alert alert-red">
-  <h4>⚡ Estrategia</h4>
+<!-- ════════ TOS ALERT ════════ -->
+<div class="alert-box">
+  <strong>⚠️ CRITICAL — OnlyFans TOS</strong>
   <ul>
-    <li><strong>Cuándo:</strong> Fan pide quedar / meeting / hookup</li>
-    <li><strong>Regla:</strong> NUNCA decir "meet", NUNCA decir "no", NUNCA decir "sí". Solo redirigir.</li>
-    <li><strong>Entrega:</strong> PPV 0 (gratis) aquí para dar valor inmediato y cambiar el frame.</li>
-    <li><strong>Después:</strong> Ir a R-1 (rapport completo) → TB-1+TB-2 → S1 Sexting</li>
-  </ul>
-</div>
-<div class="section border-red">
-  <table class="c-mr">
-    <tr><th width="70">Cmd</th><th>Message</th><th width="300">Note</th></tr>
-    <tr><td class="cmd">MR-1</td><td class="msg">haha easy man 😏 slow down. let me show you something first</td><td class="note">NO echar la palabra "meet". Redirigir ya.</td></tr>
-    <tr><td class="cmd">MR-2</td><td class="msg">trust me... you're gonna wanna see this 😈</td><td class="note">WAIT 1-2 MIN</td></tr>
-    <tr><td class="cmd">MR-3</td><td class="msg">what do you think 😏</td><td class="note">📎 Send PPV 0 — FREE teaser. Wait response.</td></tr>
-    <tr><td class="cmd">MR-4</td><td class="msg">yeah? 😏 that's just a taste man</td><td class="note">Positivo → R-1 (rapport) | Insiste meeting → MR-OBJ-1 | Silent → NR-W1</td></tr>
-  </table>
-</div>
-
-<!-- MEETUP OBJECTION -->
-<h3 style="color: #da3633;">Meetup Objection (MR-OBJ) — Si insiste en quedar<span class="badge-new">NUEVO</span></h3>
-<div class="section border-red">
-  <table class="c-mr-obj">
-    <tr><th width="60">Step</th><th>Message</th><th width="180">Technique</th></tr>
-    <tr><td class="cmd">1</td><td class="msg">patience bro 😏 I don't rush. focus on what's right in front of you</td><td class="technique">Deflect + Challenge</td></tr>
-    <tr><td class="cmd">2</td><td class="msg">you really that impatient? 😈 I promise what I'm about to show you is worth it</td><td class="technique">Challenge + Tease</td></tr>
-    <tr><td class="cmd">3</td><td class="msg">look I don't do this for just anyone. appreciate what you're getting rn 💪 if that's not your thing it's cool</td><td class="technique">Firm redirect + Takeaway</td></tr>
-  </table>
-  <p class="note" style="margin-top: 10px;">→ After step 3: "no worries bro 💪 hit me up whenever". Tag re-engagement. No más tiempo.</p>
-</div>
-
-<!-- RAPPORT -->
-<h2 style="color: #58a6ff;">Rapport (Mini — 5 msgs)</h2>
-<div class="section border-blue">
-  <table class="c-rapport">
-    <tr><th width="60">Cmd</th><th width="80">Block</th><th>Message</th><th width="260">Note</th></tr>
-    <tr><td class="cmd">R-1</td><td class="note">Ice-break</td><td class="msg">nice to meet you man 😏 so be honest, what caught your eye</td><td class="note">Add nombre antes de "man"</td></tr>
-    <tr><td class="cmd">R-2</td><td class="note">Ice-break</td><td class="msg">haha respect 💪 so where you from?</td><td class="note">React antes ("haha damn", "oh word?")</td></tr>
-    <tr><td class="cmd">R-3</td><td class="note">Vibe</td><td class="msg">nice. I'm from Rome originally but I moved to the states a couple years ago. gym and creating content is basically my life rn 😏</td><td class="note">Si visitó país de Max, add "oh I've been there"</td></tr>
-    <tr><td class="cmd">R-4</td><td class="note">Vibe</td><td class="msg">so what do you do besides making me check my phone every 5 seconds 😏</td><td class="note"></td></tr>
-    <tr><td class="cmd">R-5</td><td class="note">Heat</td><td class="msg">I gotta say... you're actually fun to talk to. most guys on here are boring as fuck 😏</td><td class="note">Ego boost. Next → TB-1.<br>MR path: TB-1+TB-2 then → S1-1</td></tr>
-  </table>
-</div>
-
-<!-- TEASING BRIDGE -->
-<h2 style="color: #bc8cff;">Teasing Bridge (5 msgs — PPV 0)</h2>
-<div class="section border-purple">
-  <table class="c-tb">
-    <tr><th width="60">Cmd</th><th>Message</th><th width="300">Note</th></tr>
-    <tr><td class="cmd">TB-1</td><td class="msg">just got back from training and I'm still pumped... this convo is making it worse 😏</td><td class="note">⚡ THE PIVOT</td></tr>
-    <tr><td class="cmd">TB-2</td><td class="msg">ngl I'm feeling some type of way rn 😈 you ever get that?</td><td class="note">Wait for response.<br><strong>MR path: skip to S1-1 after this</strong></td></tr>
-    <tr><td class="cmd">TB-3</td><td class="msg">fuck... you're not helping me calm down 🥵</td><td class="note">If sexual msg, add "especially after what you just said"</td></tr>
-    <tr><td class="cmd">TB-4</td><td class="msg">hold on let me show you something 😏</td><td class="note">WAIT 1-2 MIN</td></tr>
-    <tr><td class="cmd">TB-5</td><td class="msg">tell me what you think 😏</td><td class="note">📎 Send PPV 0 — FREE teaser. Wait response.<br>Bought vibe → S1-1 | Silent → NR-W1</td></tr>
-  </table>
-</div>
-
-<!-- SEXTING SEQUENCE -->
-<h2 style="color: #3fb950;">🔥 Sexting Sequence — PPV 1 to PPV 4</h2>
-
-<!-- Phase 1 -->
-<div class="phase-header"><h3>Phase 1: Build to PPV 1</h3><span class="ppv-tag">$12</span></div>
-<div class="section border-green">
-  <table class="c-sexting">
-    <tr><th width="60">Cmd</th><th>Message</th><th width="250">Note</th><th width="160">Intensity</th></tr>
-    <tr><td class="cmd">S1-1</td><td class="msg">so 😏</td><td class="note">Wait for response</td><td><div class="bar"><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-empty"></div><div class="bar-empty"></div><div class="bar-empty"></div><div class="bar-empty"></div><div class="bar-empty"></div><span class="bar-label">5/10</span></div></td></tr>
-    <tr><td class="cmd">S1-2</td><td class="msg">knew you'd like it 😈</td><td class="note">React ("haha damn", "oh yeah?", "🥵")</td><td><div class="bar"><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-empty"></div><div class="bar-empty"></div><div class="bar-empty"></div><div class="bar-empty"></div><span class="bar-label">6/10</span></div></td></tr>
-    <tr><td class="cmd">S1-3</td><td class="msg">you wanna see more? I'm feeling generous rn</td><td class="note"></td><td><div class="bar"><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-empty"></div><div class="bar-empty"></div><div class="bar-empty"></div><span class="bar-label">7/10</span></div></td></tr>
-    <tr><td class="cmd">S1-4</td><td class="msg">hold on... give me a sec 😏</td><td class="note">⏱️ WAIT 2-3 MIN</td><td><div class="bar"><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-empty"></div><div class="bar-empty"></div><div class="bar-empty"></div><span class="bar-label">7/10</span></div></td></tr>
-    <tr><td class="cmd">S1-5</td><td class="msg">you're not ready for this 🥵</td><td class="note">📎 PPV 1 — $12<br>✅→S1-6 | 🔇→NR | ❌→OBJ</td><td><div class="bar"><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-empty"></div><div class="bar-empty"></div><span class="bar-label">8/10</span></div></td></tr>
-  </table>
-</div>
-
-<!-- Phase 2 -->
-<div class="phase-header"><h3>Phase 2: Build to PPV 2</h3><span class="ppv-tag">$25</span></div>
-<div class="section border-green">
-  <table class="c-sexting">
-    <tr><th width="60">Cmd</th><th>Message</th><th width="250">Note</th><th width="160">Intensity</th></tr>
-    <tr><td class="cmd">S1-6</td><td class="msg">you watched it? 😏</td><td class="note">Wait response. Brief cooldown.</td><td><div class="bar"><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-empty"></div><div class="bar-empty"></div><div class="bar-empty"></div><div class="bar-empty"></div><span class="bar-label">6/10</span></div></td></tr>
-    <tr><td class="cmd">S1-7</td><td class="msg">fuck... talking to you is doing something to me rn 🥵</td><td class="note">React. Sexual vulnerability — HE caused this.</td><td><div class="bar"><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-empty"></div><div class="bar-empty"></div><span class="bar-label">8/10</span></div></td></tr>
-    <tr><td class="cmd">S1-8</td><td class="msg">I'm hard as fuck because of you and I can't do shit about it</td><td class="note"></td><td><div class="bar"><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-empty"></div><div class="bar-empty"></div><span class="bar-label">8/10</span></div></td></tr>
-    <tr><td class="cmd">S1-9</td><td class="msg">what would you do if you were here rn</td><td class="note">Wait response. 🎯 REACTION SLOT</td><td><div class="bar"><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-empty"></div><div class="bar-empty"></div><span class="bar-label">8/10</span></div></td></tr>
-    <tr><td class="cmd">S1-10</td><td class="msg">fuck 🥵🥵 hold on I need to show you something</td><td class="note">⏱️ WAIT 2-3 MIN</td><td><div class="bar"><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-empty"></div><span class="bar-label">9/10</span></div></td></tr>
-    <tr><td class="cmd">S1-11</td><td class="msg">look what you did to me 🥵</td><td class="note">📎 PPV 2 — $25<br>✅→S1-12 | 🔇→NR | ❌→OBJ</td><td><div class="bar"><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-empty"></div><span class="bar-label">9/10</span></div></td></tr>
-  </table>
-</div>
-
-<!-- Phase 3 -->
-<div class="phase-header"><h3>Phase 3: Build to PPV 3 ⚡ NO COOLDOWN</h3><span class="ppv-tag">$40</span></div>
-<div class="section border-green">
-  <table class="c-sexting">
-    <tr><th width="60">Cmd</th><th>Message</th><th width="250">Note</th><th width="160">Intensity</th></tr>
-    <tr><td class="cmd">S1-12</td><td class="msg">🥵🥵</td><td class="note">Wait response. NO cooldown.</td><td><div class="bar"><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-empty"></div><span class="bar-label">9/10</span></div></td></tr>
-    <tr><td class="cmd">S1-13</td><td class="msg">I need to cum so bad rn you have no idea</td><td class="note"></td><td><div class="bar"><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-empty"></div><span class="bar-label">9/10</span></div></td></tr>
-    <tr><td class="cmd">S1-14</td><td class="msg">imagine me pinning you down and making you take every inch while you're begging for more 🥵</td><td class="note"></td><td><div class="bar"><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-max"></div><div class="bar-fill bar-max"></div><div class="bar-fill bar-max"></div><div class="bar-fill bar-max"></div><span class="bar-label">10/10</span></div></td></tr>
-    <tr><td class="cmd">S1-15</td><td class="msg">fuck I can't hold back anymore</td><td class="note"></td><td><div class="bar"><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-max"></div><div class="bar-fill bar-max"></div><div class="bar-fill bar-max"></div><div class="bar-fill bar-max"></div><span class="bar-label">10/10</span></div></td></tr>
-    <tr><td class="cmd">S1-16</td><td class="msg">give me a sec 🥵</td><td class="note">⏱️ WAIT 2-3 MIN</td><td><div class="bar"><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-max"></div><div class="bar-fill bar-max"></div><div class="bar-fill bar-max"></div><div class="bar-fill bar-max"></div><span class="bar-label">10/10</span></div></td></tr>
-    <tr><td class="cmd">S1-17</td><td class="msg">I've never gone this far for anyone... watch 🥵💦</td><td class="note">📎 PPV 3 — $40<br>"Never done this" = 1/2 max<br>✅→S1-18 | 🔇→NR | ❌→OBJ</td><td><div class="bar"><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-max"></div><div class="bar-fill bar-max"></div><div class="bar-fill bar-max"></div><div class="bar-fill bar-max"></div><span class="bar-label">10/10</span></div></td></tr>
-  </table>
-</div>
-
-<!-- Phase 4 -->
-<div class="phase-header"><h3 style="color: #ff4444;">Phase 4: CLIMAX</h3><span class="ppv-tag">$55</span></div>
-<div class="section border-green" style="border-left-color: #ff4444;">
-  <table class="c-sexting">
-    <tr><th width="60">Cmd</th><th>Message</th><th width="250">Note</th><th width="160">Intensity</th></tr>
-    <tr><td class="cmd">S1-18</td><td class="msg">FUCK 🥵🥵</td><td class="note">Wait response</td><td><div class="bar"><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-max"></div><div class="bar-fill bar-max"></div><div class="bar-fill bar-max"></div><div class="bar-fill bar-max"></div><span class="bar-label">10/10</span></div></td></tr>
-    <tr><td class="cmd">S1-19</td><td class="msg">don't cum yet</td><td class="note"></td><td><div class="bar"><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-max"></div><div class="bar-fill bar-max"></div><div class="bar-fill bar-max"></div><div class="bar-fill bar-max"></div><span class="bar-label">10/10</span></div></td></tr>
-    <tr><td class="cmd">S1-20</td><td class="msg">I wanna finish with you... I'm close</td><td class="note"></td><td><div class="bar"><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-max"></div><div class="bar-fill bar-max"></div><div class="bar-fill bar-max"></div><div class="bar-fill bar-max"></div><span class="bar-label">10/10</span></div></td></tr>
-    <tr><td class="cmd">S1-21</td><td class="msg">fuck fuck hold on 🥵</td><td class="note">⏱️ WAIT 1-2 MIN</td><td><div class="bar"><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-max"></div><div class="bar-fill bar-max"></div><div class="bar-fill bar-max"></div><div class="bar-fill bar-max"></div><span class="bar-label">10/10</span></div></td></tr>
-    <tr><td class="cmd">S1-22</td><td class="msg">cum with me 💦😈</td><td class="note">📎 PPV 4 — $55<br>✅→AC-1 | 🔇→NR</td><td><div class="bar"><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-max"></div><div class="bar-fill bar-max"></div><div class="bar-fill bar-max"></div><div class="bar-fill bar-max"></div><span class="bar-label">10/10</span></div></td></tr>
-  </table>
-</div>
-
-<!-- NO RESPONSE -->
-<h2 style="color: #d29922;">No Response — Wave System</h2>
-<div class="section border-yellow">
-  <table class="c-nr">
-    <tr><th width="60">Wave</th><th width="130">Timing</th><th>Message</th><th width="130">Technique</th></tr>
-    <tr><td class="cmd">W1</td><td class="note">2-3 min</td><td class="msg">yo? 🥵</td><td class="technique">Ping</td></tr>
-    <tr><td class="cmd">W2</td><td class="note">3-5 min later</td><td class="msg">you need to see what I just did... seriously 🥵</td><td class="technique">Curiosity</td></tr>
-    <tr><td class="cmd">W3</td><td class="note">5-10 min later</td><td class="msg">aight I guess you're busy 😏 might delete this, it was only for you</td><td class="technique">Takeaway</td></tr>
-    <tr><td class="cmd">W4</td><td class="note">15-30 min later</td><td class="msg">hey hope you're good bro 💪 hit me up when you're back</td><td class="technique">Warm close</td></tr>
-    <tr><td class="cmd">W5</td><td class="note">2-6 hrs later</td><td class="msg">can't stop thinking about earlier 😏 you around?</td><td class="technique">New convo</td></tr>
-  </table>
-</div>
-
-<!-- OBJECTION PROTOCOLS -->
-<h2 style="color: #f778ba;">Objection Protocols</h2>
-
-<h3>"TOO EXPENSIVE" <span style="color:#8b949e;">(max 6 steps)</span></h3>
-<div class="section border-pink">
-  <table class="c-obj">
-    <tr><th width="40">#</th><th>Message</th><th width="160">Technique</th><th width="40">+/−</th></tr>
-    <tr><td class="cmd">1</td><td class="msg">bro this is like 3 minutes of me going all out... you spend more than this on a night out 😏</td><td class="technique">Reframe</td><td class="tag-pos">+</td></tr>
-    <tr><td class="cmd">2</td><td class="msg">alright I'll do $[price] but ONLY this once. don't get used to it 😏</td><td class="technique">Discount (1x only)</td><td class="tag-pos">+</td></tr>
-    <tr><td class="cmd">3</td><td class="msg">I'm in this mood rn... can't promise I'll feel like this again anytime soon 😈</td><td class="technique">FOMO temporal</td><td class="tag-neg">−</td></tr>
-    <tr><td class="cmd">4</td><td class="msg">maybe you can't handle what I did in this one 😏</td><td class="technique">Challenge</td><td class="tag-neg">−</td></tr>
-    <tr><td class="cmd">5</td><td class="msg">your loss man 😏 I'll keep it for someone who actually wants it</td><td class="technique">Takeaway</td><td class="tag-neg">−</td></tr>
-    <tr><td class="cmd">6</td><td class="msg">that video tho? just watched it again and fuck 🥵 last chance before I delete it</td><td class="technique">Seed + Return</td><td class="tag-neg">−</td></tr>
-  </table>
-</div>
-
-<h3>"SEND FREE FIRST" <span style="color:#8b949e;">(max 4 steps)</span></h3>
-<div class="section border-pink">
-  <table class="c-obj">
-    <tr><th width="40">#</th><th>Message</th><th width="160">Technique</th></tr>
-    <tr><td class="cmd">1</td><td class="msg">I already sent you free shit man 😏 this one is on a whole different level... trust me</td><td class="technique">Reminder</td></tr>
-    <tr><td class="cmd">2</td><td class="msg">tell you what... $[price]. but you better actually watch it 😏</td><td class="technique">Downgrade</td></tr>
-    <tr><td class="cmd">3</td><td class="msg">maybe you're not ready for what I really do 😈 it's intense</td><td class="technique">Challenge</td></tr>
-    <tr><td class="cmd">4</td><td class="msg">trust me bro... what I did in that video? worth every cent 🥵</td><td class="technique">Seed + Return</td></tr>
-  </table>
-</div>
-
-<h3>"I DON'T BUY PPVs" <span style="color:#8b949e;">(max 4 steps)</span></h3>
-<div class="section border-pink">
-  <table class="c-obj">
-    <tr><th width="40">#</th><th>Message</th><th width="160">Technique</th></tr>
-    <tr><td class="cmd">1</td><td class="msg">all good man 😏 no pressure</td><td class="technique">Accept</td></tr>
-    <tr><td class="cmd">2</td><td class="msg" style="color:#8b949e; font-style:italic;">[Continue explicit text sexting 4-5 msgs — build tension]</td><td class="technique">Build tension</td></tr>
-    <tr><td class="cmd">3</td><td class="msg">fuck... ok I need to show you something. this isn't about money, I literally need you to see what you're doing to me rn 🥵</td><td class="technique">Emotional reframe</td></tr>
-    <tr><td class="cmd">4</td><td class="msg">send whatever you want, I don't care about the price... I just need you to watch this 🥵</td><td class="technique">Pay what you want</td></tr>
-  </table>
-</div>
-
-<h3>"ARE YOU REAL?" <span style="color:#8b949e;">(max 3 steps)</span></h3>
-<div class="section border-pink">
-  <table class="c-obj">
-    <tr><th width="40">#</th><th>Message</th><th width="160">Technique</th></tr>
-    <tr><td class="cmd">1</td><td class="msg">haha bro 😂 you think a bot gets this hard? come on</td><td class="technique">Humor</td></tr>
-    <tr><td class="cmd">2</td><td class="msg">ask me anything man. go ahead 😏</td><td class="technique">Challenge</td></tr>
-    <tr><td class="cmd">3</td><td class="msg">I get it, there's a lot of fake shit on here. but you felt that right? 💪 let's not overthink this</td><td class="technique">Grounding</td></tr>
-  </table>
-</div>
-
-<h3>CHAT-ONLY SUB <span style="color:#8b949e;">(max 4 steps)</span></h3>
-<div class="section border-pink">
-  <table class="c-obj">
-    <tr><th width="40">#</th><th>Message</th><th width="160">Technique</th></tr>
-    <tr><td class="cmd">1</td><td class="msg">bro I made this just for you, it would mean a lot if you watched it 💪</td><td class="technique">Guilt/investment</td></tr>
-    <tr><td class="cmd">2</td><td class="msg">I spent like 10 minutes doing this thinking about YOU... at least open it? 😏</td><td class="technique">Investment amplif.</td></tr>
-    <tr><td class="cmd">3</td><td class="msg">most guys who watch this come back saying it's the best thing they've ever seen on here 😏</td><td class="technique">Social proof</td></tr>
-    <tr><td class="cmd">4</td><td class="msg">hm I guess you just can't handle what I got 😏 that's alright, not everyone can</td><td class="technique">Challenge</td></tr>
-  </table>
-</div>
-
-<!-- AFTERCARE -->
-<h2 style="color: #79c0ff;">Aftercare + Re-engagement</h2>
-<div class="section border-cyan">
-  <table class="c-ac">
-    <tr><th width="60">Cmd</th><th>Message</th><th width="280">Note</th></tr>
-    <tr><td class="cmd">AC-1</td><td class="msg">holy fuck 🥵 that was insane</td><td class="note"></td></tr>
-    <tr><td class="cmd">AC-2</td><td class="msg">ngl you're different from most guys on here 💪 that was intense</td><td class="note">Mencionar algo específico de la sesión</td></tr>
-    <tr><td class="cmd">AC-3</td><td class="msg">I gotta crash but next time? I got something way crazier for you 😈 later bro</td><td class="note">END. Seed next session.</td></tr>
-    <tr><td colspan="3" style="border-bottom: 2px solid #30363d;"></td></tr>
-    <tr><td class="cmd">RE-1</td><td class="msg">can't stop thinking about earlier 😏 you free?</td><td class="note">6-12 horas después</td></tr>
-    <tr><td class="cmd">RE-2</td><td class="msg">remember what I said about something crazier? I just did it and you need to see this 😈</td><td class="note">Día siguiente</td></tr>
-  </table>
-</div>
-
-<!-- CRITICAL RULES -->
-<h2 style="color: #f85149;">⚠️ Reglas Críticas</h2>
-<div class="alert alert-red">
-  <ul class="rules-list">
-    <li><span class="num">1.</span> NUNCA decir "meet / meeting / hookup" en OnlyFans</li>
-    <li><span class="num">2.</span> NUNCA usar "baby / babe / honey" — solo "bro / dude / man"</li>
-    <li><span class="num">3.</span> PPV 0 se entrega en MR (meeting seekers) o TB (otros)</li>
-    <li><span class="num">4.</span> Monetizar RÁPIDO — dating app traffic churna antes que otros</li>
-    <li><span class="num">5.</span> Max SIEMPRE lidera. Alpha. Dominante. Nunca pide permiso.</li>
-    <li><span class="num">6.</span> Máximo 2 mensajes seguidos sin respuesta del sub</li>
-    <li><span class="num">7.</span> "I never do this" máximo 2 veces en todo el journey</li>
-    <li><span class="num">8.</span> Descuento solo UNA VEZ por sesión</li>
-    <li><span class="num">9.</span> Si solo quiere meeting y rechaza todo → disengage. No perder tiempo.</li>
-    <li><span class="num">10.</span> NUNCA confirmar ni negar ubicación específica</li>
+    <li>NEVER say "meet", "meeting", "meetup", "hook up", "get together", "see you irl"</li>
+    <li>If the fan uses these words — DO NOT repeat them. Redirect immediately.</li>
+    <li>Max's dating app promises a meetup. On OF, we NEVER acknowledge this.</li>
   </ul>
 </div>
 
-<p style="text-align:center; color:#484f58; margin-top:40px; font-size:0.85em;">Chatting Wizard — Script Manager — Max Dating App Journey v1 — Feb 2026</p>
+<!-- ════════ DATING APP CONTEXT ════════ -->
+<div class="context-box">
+  <h2>📱 How Fans Arrive</h2>
+  <p>Fan matches Max on a dating app (Grindr, Tinder). Profile promises "subscribe and we'll meet". Max's location is set to match the fan's city → fan thinks Max is local.</p>
+  <div class="segments">
+    <div class="segment"><strong>🔇 Silent</strong> — Subscribe but never respond. → NR Waves</div>
+    <div class="segment"><strong>🤝 Meeting seekers</strong> — First msg is about hooking up. Get offended when stalled. → Meetup Redirect (MR)</div>
+    <div class="segment"><strong>🔥 Flirters</strong> — Engage sexually without mentioning meetup. → Fast-track to Teasing Bridge</div>
+  </div>
+</div>
 
+<!-- ════════ RULES ════════ -->
+<div class="rules-box">
+  <h2>⚡ Key Rules</h2>
+  <ul>
+    <li>Every message works AS-IS. Yellow notes tell you what to edit.</li>
+    <li>Speed matters. Dating app subs have SHORT attention spans.</li>
+    <li>WAIT means WAIT. Sub thinks he's recording. Use time for other chats.</li>
+    <li>After every PPV: Bought → continue. Silent 3 min → NR Waves below.</li>
+    <li>Max 2 msgs in a row without sub responding.</li>
+    <li>You ARE Max. Alpha. Dominant. Direct. Never break character.</li>
+    <li>Bought fast → charge more next PPV. Hesitated → charge less.</li>
+    <li>MASCULINE language ALWAYS. No "baby", "babe". Use "bro", "man", "dude".</li>
+    <li>Meeting seekers churn fast. Monetize early. If he only wants to meet → MR → if still refuses all content → disengage politely, tag for re-engagement.</li>
+  </ul>
+</div>
+
+<!-- ════════ ROADMAP ════════ -->
+<div class="roadmap">
+  <div class="rm-step"><span class="rm-label">👋 Welcome</span><span class="rm-arrow">›</span></div>
+  <div class="rm-step"><span class="rm-label rm-special">🤝 MR?</span><span class="rm-arrow">›</span></div>
+  <div class="rm-step"><span class="rm-label">💬 Rapport</span><span class="rm-arrow">›</span></div>
+  <div class="rm-step"><span class="rm-label">🔥 Teasing</span><span class="rm-arrow">›</span></div>
+  <div class="rm-step"><span class="rm-label rm-ppv">PPV 0 FREE</span><span class="rm-arrow">›</span></div>
+  <div class="rm-step"><span class="rm-label">🔥 Sext 1</span><span class="rm-arrow">›</span></div>
+  <div class="rm-step"><span class="rm-label rm-ppv">PPV 1 $12</span><span class="rm-arrow">›</span></div>
+  <div class="rm-step"><span class="rm-label">🔥 Sext 2</span><span class="rm-arrow">›</span></div>
+  <div class="rm-step"><span class="rm-label rm-ppv">PPV 2 $25</span><span class="rm-arrow">›</span></div>
+  <div class="rm-step"><span class="rm-label">🔥 Sext 3</span><span class="rm-arrow">›</span></div>
+  <div class="rm-step"><span class="rm-label rm-ppv">PPV 3 $40</span><span class="rm-arrow">›</span></div>
+  <div class="rm-step"><span class="rm-label">💥 Sext 4</span><span class="rm-arrow">›</span></div>
+  <div class="rm-step"><span class="rm-label rm-ppv">PPV 4 $55</span><span class="rm-arrow">›</span></div>
+  <div class="rm-step"><span class="rm-label">💪 Aftercare</span></div>
+</div>
+
+<!-- ════════ BRANCH ROUTER ════════ -->
+<div class="router">
+  <h3>🔀 After Welcome — Where to Go?</h3>
+  <div class="route"><strong>He asks about meeting/hooking up</strong> → Meetup Redirect (MR) below</div>
+  <div class="route"><strong>He's sexual/flirty right away</strong> → Skip to Teasing Bridge (try to get his name naturally)</div>
+  <div class="route"><strong>He responds normally</strong> → Continue to Rapport</div>
+  <div class="route"><strong>He doesn't respond</strong> → <a href="#nr-waves" style="color:var(--purple)">NR Waves</a></div>
+</div>
+
+<!-- ════════════════════════════════════════════════ -->
+<!--               JOURNEY STARTS HERE               -->
+<!-- ════════════════════════════════════════════════ -->
+
+<!-- ── WELCOME ── -->
+<div class="phase">
+  <div class="phase-header phase-green">
+    <span class="phase-emoji">👋</span>
+    <span class="phase-name">Welcome + Auto Follow-ups</span>
+    <span class="phase-meta">3 msgs</span>
+  </div>
+  <div class="phase-desc">These are sent automatically. You don't need to do anything.</div>
+
+  <div class="msg"><span class="msg-id">W-1</span><div class="msg-body"><div class="msg-text">yo what's up 😏 glad you're here. got something for you before I hit the gym</div><div class="note-auto">🤖 Auto-send on subscription · Attach album (5-10 photos — shirtless, gym, lifestyle)</div></div><button class="cp" data-copy="yo what's up 😏 glad you're here. got something for you before I hit the gym"><span class="cp-icon">📋</span></button></div>
+
+  <div class="msg"><span class="msg-id">AF-1</span><div class="msg-body"><div class="msg-text">ngl I was about to go train but I keep checking if you replied 😏 that never happens</div><div class="note-auto">🤖 Auto-send 2-3 min after W-1</div></div><button class="cp" data-copy="ngl I was about to go train but I keep checking if you replied 😏 that never happens"><span class="cp-icon">📋</span></button></div>
+
+  <div class="msg"><span class="msg-id">AF-2</span><div class="msg-body"><div class="msg-text">yo what's your name</div><div class="note-auto">🤖 Auto-send 1-2 min after AF-1</div><div class="note-wait">⏳ Wait for his reply</div><div class="note-tip">💡 If he asks about meeting → go to MR-1. If he's sexual → skip to TB-1. Otherwise → R-1.</div></div><button class="cp" data-copy="yo what's your name"><span class="cp-icon">📋</span></button></div>
+</div>
+
+<!-- ── MEETUP REDIRECT ── -->
+<div class="phase">
+  <div class="phase-header" style="border-left-color:var(--red)">
+    <span class="phase-emoji">🤝</span>
+    <span class="phase-name">Meetup Redirect (MR)</span>
+    <span class="phase-meta">4 msgs · PPV 0</span>
+  </div>
+  <div class="phase-desc">Fan asked about meeting. Redirect WITHOUT rejecting. Deliver PPV 0 here. After MR → go to Rapport (R-1).</div>
+
+  <div class="msg"><span class="msg-id">MR-1</span><div class="msg-body"><div class="msg-text">haha easy man 😏 slow down. let me show you something first</div><div class="note-tip">💡 DO NOT acknowledge the word "meet". Redirect immediately.</div></div><button class="cp" data-copy="haha easy man 😏 slow down. let me show you something first"><span class="cp-icon">📋</span></button></div>
+
+  <div class="msg"><span class="msg-id">MR-2</span><div class="msg-body"><div class="msg-text">trust me... you're gonna wanna see this 😈</div><span class="badge badge-wait">⏱ WAIT 1-2 MIN</span></div><button class="cp" data-copy="trust me... you're gonna wanna see this 😈"><span class="cp-icon">📋</span></button></div>
+
+  <div class="msg"><span class="msg-id">MR-3</span><div class="msg-body"><div class="msg-text">what do you think 😏</div><div class="note-wait">⏳ Wait for his reply</div></div><button class="cp" data-copy="what do you think 😏"><span class="cp-icon">📋</span></button></div>
+
+  <div class="ppv-moment"><span class="ppv-icon">📎</span><span class="ppv-label">Send PPV 0</span><span class="ppv-price">FREE teaser</span></div>
+
+  <div class="msg"><span class="msg-id">MR-4</span><div class="msg-body"><div class="msg-text">yeah? 😏 that's just a taste man</div><div class="note-tip">💡 Positive reply → go to R-1 (Rapport). Asks about meeting again → MR-OBJ below. Silent → NR Waves.</div></div><button class="cp" data-copy="yeah? 😏 that's just a taste man"><span class="cp-icon">📋</span></button></div>
+</div>
+
+<!-- ── MR OBJECTION (meeting insistence) ── -->
+<div class="phase">
+  <div class="phase-header" style="border-left-color:var(--red)">
+    <span class="phase-emoji">🚫</span>
+    <span class="phase-name">If He Insists on Meeting</span>
+    <span class="phase-meta">max 3 steps</span>
+  </div>
+  <div class="phase-desc">Never say "no". Never say "yes". Alpha frame — Max controls the pace. If after step 3 he still only wants to meet → disengage politely.</div>
+
+  <div class="mr-obj-step"><span class="mr-obj-num">1</span><div class="mr-obj-body"><div class="msg-text">patience bro 😏 I don't rush. focus on what's right in front of you</div><div class="mr-obj-tech">Deflect + challenge</div></div><button class="cp" data-copy="patience bro 😏 I don't rush. focus on what's right in front of you"><span class="cp-icon">📋</span></button></div>
+
+  <div class="mr-obj-step"><span class="mr-obj-num">2</span><div class="mr-obj-body"><div class="msg-text">you really that impatient? 😈 I promise what I'm about to show you is worth it</div><div class="mr-obj-tech">Challenge + tease</div></div><button class="cp" data-copy="you really that impatient? 😈 I promise what I'm about to show you is worth it"><span class="cp-icon">📋</span></button></div>
+
+  <div class="mr-obj-step"><span class="mr-obj-num">3</span><div class="mr-obj-body"><div class="msg-text">look I don't do this for just anyone. appreciate what you're getting rn 💪 if that's not your thing it's cool</div><div class="mr-obj-tech">Firm redirect + takeaway</div></div><button class="cp" data-copy="look I don't do this for just anyone. appreciate what you're getting rn 💪 if that's not your thing it's cool"><span class="cp-icon">📋</span></button></div>
+
+  <div style="font-size:.82rem;color:var(--muted);padding:8px 14px;font-style:italic">After step 3 and still only wants to meet → send "no worries bro 💪 hit me up whenever" and tag for re-engagement. Don't waste more time.</div>
+</div>
+
+<!-- ── RAPPORT ── -->
+<div class="phase">
+  <div class="phase-header phase-green">
+    <span class="phase-emoji">💬</span>
+    <span class="phase-name">Rapport</span>
+    <span class="phase-meta">5 msgs</span>
+  </div>
+  <div class="phase-desc">Shorter than female models. Build enough connection to transition to teasing.</div>
+
+  <div class="msg"><span class="msg-id">R-1</span><div class="msg-body"><div class="msg-text">nice to meet you man 😏 so be honest, what caught your eye</div><div class="note-edit">✏️ Add his name before "man" → "[name] man 😏..."</div></div><button class="cp" data-copy="nice to meet you man 😏 so be honest, what caught your eye"><span class="cp-icon">📋</span></button></div>
+
+  <div class="msg"><span class="msg-id">R-2</span><div class="msg-body"><div class="msg-text">haha respect 💪 so where you from?</div><div class="note-edit">✏️ Add a short react before ("haha damn", "I like that", "oh word?")</div></div><button class="cp" data-copy="haha respect 💪 so where you from?"><span class="cp-icon">📋</span></button></div>
+
+  <div class="msg"><span class="msg-id">R-3</span><div class="msg-body"><div class="msg-text">nice. I'm from Rome originally but I moved to the states a couple years ago. gym and creating content is basically my life rn 😏</div><div class="note-edit">✏️ If he named somewhere Max has been → add "oh I've been there" before "nice"</div></div><button class="cp" data-copy="nice. I'm from Rome originally but I moved to the states a couple years ago. gym and creating content is basically my life rn 😏"><span class="cp-icon">📋</span></button></div>
+
+  <div class="msg"><span class="msg-id">R-4</span><div class="msg-body"><div class="msg-text">so what do you do besides making me check my phone every 5 seconds 😏</div></div><button class="cp" data-copy="so what do you do besides making me check my phone every 5 seconds 😏"><span class="cp-icon">📋</span></button></div>
+
+  <div class="msg"><span class="msg-id">R-5</span><div class="msg-body"><div class="msg-text">I gotta say... you're actually fun to talk to. most guys on here are boring as fuck 😏</div><div class="note-tip">💡 Ego boost. If coming from MR path (PPV 0 already sent) → go to TB-1 but skip TB-3 to TB-5, go straight to S1-1 after TB-2.</div></div><button class="cp" data-copy="I gotta say... you're actually fun to talk to. most guys on here are boring as fuck 😏"><span class="cp-icon">📋</span></button></div>
+</div>
+
+<!-- ── TEASING BRIDGE ── -->
+<div class="phase">
+  <div class="phase-header phase-purple">
+    <span class="phase-emoji">🔥</span>
+    <span class="phase-name">Teasing Bridge</span>
+    <span class="phase-meta">5 msgs · PPV 0</span>
+  </div>
+  <div class="phase-desc">The pivot from casual to sexual. He just trained, body is activated, this convo is "making it worse".</div>
+
+  <div class="msg"><span class="msg-id">TB-1</span><div class="msg-body"><div class="msg-text">just got back from training and I'm still pumped... this convo is making it worse 😏</div><div class="note-tip">💡 THE PIVOT — physical context: just trained, body activated</div></div><button class="cp" data-copy="just got back from training and I'm still pumped... this convo is making it worse 😏"><span class="cp-icon">📋</span></button></div>
+
+  <div class="msg"><span class="msg-id">TB-2</span><div class="msg-body"><div class="msg-text">ngl I'm feeling some type of way rn 😈 you ever get that?</div><div class="note-wait">⏳ Wait for his reply</div></div><button class="cp" data-copy="ngl I'm feeling some type of way rn 😈 you ever get that?"><span class="cp-icon">📋</span></button></div>
+
+  <div class="msg"><span class="msg-id">TB-3</span><div class="msg-body"><div class="msg-text">fuck... you're not helping me calm down 🥵</div><div class="note-edit">✏️ If he said something sexual → add "especially after what you just said" before "you're"</div></div><button class="cp" data-copy="fuck... you're not helping me calm down 🥵"><span class="cp-icon">📋</span></button></div>
+
+  <div class="msg"><span class="msg-id">TB-4</span><div class="msg-body"><div class="msg-text">hold on let me show you something 😏</div><span class="badge badge-wait">⏱ WAIT 1-2 MIN</span></div><button class="cp" data-copy="hold on let me show you something 😏"><span class="cp-icon">📋</span></button></div>
+
+  <div class="msg"><span class="msg-id">TB-5</span><div class="msg-body"><div class="msg-text">tell me what you think 😏</div><div class="note-wait">⏳ Wait for his reply</div></div><button class="cp" data-copy="tell me what you think 😏"><span class="cp-icon">📋</span></button></div>
+
+  <div class="ppv-moment"><span class="ppv-icon">📎</span><span class="ppv-label">Send PPV 0</span><span class="ppv-price">FREE teaser</span></div>
+  <div class="branch-info">
+    <span class="bi"><span class="bi-dot" style="background:var(--green)"></span> Bought into vibe → continue below</span>
+    <span class="bi"><span class="bi-dot" style="background:var(--orange)"></span> Silent 3 min → <a href="#nr-waves">NR Waves ↓</a></span>
+  </div>
+</div>
+
+<!-- ── SEXTING 1 — PPV 1 $12 ── -->
+<div class="phase">
+  <div class="phase-header phase-red">
+    <span class="phase-emoji">🔥</span>
+    <span class="phase-name">Sexting 1</span>
+    <span class="phase-meta">5 msgs · PPV 1</span>
+  </div>
+
+  <div class="msg"><span class="msg-id">S1-1</span><div class="msg-body"><div class="msg-text">so 😏</div><div class="note-wait">⏳ Wait for his reply</div></div><button class="cp" data-copy="so 😏"><span class="cp-icon">📋</span></button></div>
+
+  <div class="msg"><span class="msg-id">S1-2</span><div class="msg-body"><div class="msg-text">knew you'd like it 😈</div><div class="note-edit">✏️ Add a short react ("haha damn", "oh yeah?", "🥵")</div></div><button class="cp" data-copy="knew you'd like it 😈"><span class="cp-icon">📋</span></button></div>
+
+  <div class="msg"><span class="msg-id">S1-3</span><div class="msg-body"><div class="msg-text">you wanna see more? I'm feeling generous rn</div></div><button class="cp" data-copy="you wanna see more? I'm feeling generous rn"><span class="cp-icon">📋</span></button></div>
+
+  <div class="msg"><span class="msg-id">S1-4</span><div class="msg-body"><div class="msg-text">hold on... give me a sec 😏</div><span class="badge badge-wait">⏱ WAIT 2-3 MIN</span></div><button class="cp" data-copy="hold on... give me a sec 😏"><span class="cp-icon">📋</span></button></div>
+
+  <div class="msg"><span class="msg-id">S1-5</span><div class="msg-body"><div class="msg-text">you're not ready for this 🥵</div></div><button class="cp" data-copy="you're not ready for this 🥵"><span class="cp-icon">📋</span></button></div>
+
+  <div class="ppv-moment"><span class="ppv-icon">📎</span><span class="ppv-label">Send PPV 1</span><span class="ppv-price">$12</span></div>
+  <div class="branch-info">
+    <span class="bi"><span class="bi-dot" style="background:var(--green)"></span> Bought → continue below</span>
+    <span class="bi"><span class="bi-dot" style="background:var(--orange)"></span> Silent 3 min → <a href="#nr-waves">NR Waves ↓</a></span>
+  </div>
+</div>
+
+<!-- ── SEXTING 2 — PPV 2 $25 ── -->
+<div class="phase">
+  <div class="phase-header phase-red">
+    <span class="phase-emoji">🔥</span>
+    <span class="phase-name">Sexting 2</span>
+    <span class="phase-meta">6 msgs · PPV 2</span>
+  </div>
+
+  <div class="msg"><span class="msg-id">S1-6</span><div class="msg-body"><div class="msg-text">you watched it? 😏</div><div class="note-wait">⏳ Wait for his reply</div><div class="note-tip">💡 Brief cooldown before escalating</div></div><button class="cp" data-copy="you watched it? 😏"><span class="cp-icon">📋</span></button></div>
+
+  <div class="msg"><span class="msg-id">S1-7</span><div class="msg-body"><div class="msg-text">fuck... talking to you is doing something to me rn 🥵</div><div class="note-edit">✏️ React to what he said — HE caused this.</div></div><button class="cp" data-copy="fuck... talking to you is doing something to me rn 🥵"><span class="cp-icon">📋</span></button></div>
+
+  <div class="msg"><span class="msg-id">S1-8</span><div class="msg-body"><div class="msg-text">I'm hard as fuck because of you and I can't do shit about it</div></div><button class="cp" data-copy="I'm hard as fuck because of you and I can't do shit about it"><span class="cp-icon">📋</span></button></div>
+
+  <div class="msg"><span class="msg-id">S1-9</span><div class="msg-body"><div class="msg-text">what would you do if you were here rn</div><div class="note-wait">⏳ Wait for his reply</div><div class="note-edit">✏️ After he replies: react to what he said before continuing</div></div><button class="cp" data-copy="what would you do if you were here rn"><span class="cp-icon">📋</span></button></div>
+
+  <div class="msg"><span class="msg-id">S1-10</span><div class="msg-body"><div class="msg-text">fuck 🥵🥵 hold on I need to show you something</div><span class="badge badge-wait">⏱ WAIT 2-3 MIN</span></div><button class="cp" data-copy="fuck 🥵🥵 hold on I need to show you something"><span class="cp-icon">📋</span></button></div>
+
+  <div class="msg"><span class="msg-id">S1-11</span><div class="msg-body"><div class="msg-text">look what you did to me 🥵</div></div><button class="cp" data-copy="look what you did to me 🥵"><span class="cp-icon">📋</span></button></div>
+
+  <div class="ppv-moment"><span class="ppv-icon">📎</span><span class="ppv-label">Send PPV 2</span><span class="ppv-price">$25</span></div>
+  <div class="branch-info">
+    <span class="bi"><span class="bi-dot" style="background:var(--green)"></span> Bought → continue below</span>
+    <span class="bi"><span class="bi-dot" style="background:var(--orange)"></span> Silent 3 min → <a href="#nr-waves">NR Waves ↓</a></span>
+  </div>
+</div>
+
+<!-- ── SEXTING 3 — PPV 3 $40 ── -->
+<div class="phase">
+  <div class="phase-header phase-red">
+    <span class="phase-emoji">🔥</span>
+    <span class="phase-name">Sexting 3</span>
+    <span class="phase-meta">6 msgs · PPV 3</span>
+  </div>
+
+  <div class="msg"><span class="msg-id">S1-12</span><div class="msg-body"><div class="msg-text">🥵🥵</div><div class="note-wait">⏳ Wait for his reply</div><div class="note-tip">💡 NO cooldown — energy continues</div></div><button class="cp" data-copy="🥵🥵"><span class="cp-icon">📋</span></button></div>
+
+  <div class="msg"><span class="msg-id">S1-13</span><div class="msg-body"><div class="msg-text">I need to cum so bad rn you have no idea</div></div><button class="cp" data-copy="I need to cum so bad rn you have no idea"><span class="cp-icon">📋</span></button></div>
+
+  <div class="msg"><span class="msg-id">S1-14</span><div class="msg-body"><div class="msg-text">imagine me pinning you down and making you take every inch while you're begging for more 🥵</div></div><button class="cp" data-copy="imagine me pinning you down and making you take every inch while you're begging for more 🥵"><span class="cp-icon">📋</span></button></div>
+
+  <div class="msg"><span class="msg-id">S1-15</span><div class="msg-body"><div class="msg-text">fuck I can't hold back anymore</div></div><button class="cp" data-copy="fuck I can't hold back anymore"><span class="cp-icon">📋</span></button></div>
+
+  <div class="msg"><span class="msg-id">S1-16</span><div class="msg-body"><div class="msg-text">give me a sec 🥵</div><span class="badge badge-wait">⏱ WAIT 2-3 MIN</span></div><button class="cp" data-copy="give me a sec 🥵"><span class="cp-icon">📋</span></button></div>
+
+  <div class="msg"><span class="msg-id">S1-17</span><div class="msg-body"><div class="msg-text">I've never gone this far for anyone... watch 🥵💦</div></div><button class="cp" data-copy="I've never gone this far for anyone... watch 🥵💦"><span class="cp-icon">📋</span></button></div>
+
+  <div class="ppv-moment"><span class="ppv-icon">📎</span><span class="ppv-label">Send PPV 3</span><span class="ppv-price">$40</span></div>
+  <div class="branch-info">
+    <span class="bi"><span class="bi-dot" style="background:var(--green)"></span> Bought → continue below</span>
+    <span class="bi"><span class="bi-dot" style="background:var(--orange)"></span> Silent 3 min → <a href="#nr-waves">NR Waves ↓</a></span>
+  </div>
+</div>
+
+<!-- ── SEXTING 4 — CLIMAX PPV 4 $55 ── -->
+<div class="phase">
+  <div class="phase-header phase-red">
+    <span class="phase-emoji">💥</span>
+    <span class="phase-name">Sexting 4 — CLIMAX</span>
+    <span class="phase-meta">5 msgs · PPV 4</span>
+  </div>
+
+  <div class="msg"><span class="msg-id">S1-18</span><div class="msg-body"><div class="msg-text">FUCK 🥵🥵</div><div class="note-wait">⏳ Wait for his reply</div></div><button class="cp" data-copy="FUCK 🥵🥵"><span class="cp-icon">📋</span></button></div>
+
+  <div class="msg"><span class="msg-id">S1-19</span><div class="msg-body"><div class="msg-text">don't cum yet</div></div><button class="cp" data-copy="don't cum yet"><span class="cp-icon">📋</span></button></div>
+
+  <div class="msg"><span class="msg-id">S1-20</span><div class="msg-body"><div class="msg-text">I wanna finish with you... I'm close</div></div><button class="cp" data-copy="I wanna finish with you... I'm close"><span class="cp-icon">📋</span></button></div>
+
+  <div class="msg"><span class="msg-id">S1-21</span><div class="msg-body"><div class="msg-text">fuck fuck hold on 🥵</div><span class="badge badge-wait">⏱ WAIT 1-2 MIN</span></div><button class="cp" data-copy="fuck fuck hold on 🥵"><span class="cp-icon">📋</span></button></div>
+
+  <div class="msg"><span class="msg-id">S1-22</span><div class="msg-body"><div class="msg-text">cum with me 💦😈</div></div><button class="cp" data-copy="cum with me 💦😈"><span class="cp-icon">📋</span></button></div>
+
+  <div class="ppv-moment"><span class="ppv-icon">📎</span><span class="ppv-label">Send PPV 4</span><span class="ppv-price">$55</span></div>
+  <div class="branch-info">
+    <span class="bi"><span class="bi-dot" style="background:var(--green)"></span> Bought → Aftercare below</span>
+    <span class="bi"><span class="bi-dot" style="background:var(--orange)"></span> Silent 3 min → <a href="#nr-waves">NR Waves ↓</a></span>
+  </div>
+</div>
+
+<!-- ── AFTERCARE ── -->
+<div class="phase">
+  <div class="phase-header phase-blue">
+    <span class="phase-emoji">💪</span>
+    <span class="phase-name">Aftercare</span>
+    <span class="phase-meta">2 msgs + bond</span>
+  </div>
+  <div class="phase-desc">He made it to the end — reward him. Build connection. DO NOT close the conversation. Keep it going.</div>
+
+  <div class="msg"><span class="msg-id">AC-1</span><div class="msg-body"><div class="msg-text">holy fuck 🥵 that was insane</div></div><button class="cp" data-copy="holy fuck 🥵 that was insane"><span class="cp-icon">📋</span></button></div>
+
+  <div class="msg"><span class="msg-id">AC-2</span><div class="msg-body"><div class="msg-text">ngl you're different from most guys on here 💪 that was intense</div><div class="note-edit">✏️ Mention something specific he said or did during the session</div></div><button class="cp" data-copy="ngl you're different from most guys on here 💪 that was intense"><span class="cp-icon">📋</span></button></div>
+
+  <div style="background:var(--card);border:1px solid var(--accent);border-radius:10px;padding:14px 16px;margin:10px 0">
+    <div style="font-size:.88rem;font-weight:600;color:var(--accent);margin-bottom:8px">💪 After AC-2: Keep the conversation going</div>
+    <ul style="list-style:none;padding:0;font-size:.85rem;color:var(--text)">
+      <li style="padding:3px 0">→ Ask about him: what he's into, his day, what he does for fun</li>
+      <li style="padding:3px 0">→ Be casual and real — like a guy he actually vibes with</li>
+      <li style="padding:3px 0">→ Share things about Max's life (gym, travel, bikes)</li>
+      <li style="padding:3px 0">→ NEVER say goodbye or close the conversation</li>
+      <li style="padding:3px 0">→ Goal: he feels a real connection, not just a transaction</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ── RE-ENGAGEMENT ── -->
+<div class="phase">
+  <div class="phase-header phase-blue">
+    <span class="phase-emoji">🔄</span>
+    <span class="phase-name">Re-engagement</span>
+    <span class="phase-meta">if convo dies naturally</span>
+  </div>
+
+  <div class="msg"><span class="msg-id">RE-1</span><div class="msg-body"><div class="msg-text">can't stop thinking about earlier 😏 you free?</div><div class="note-auto">🤖 Send 6-12 hours after conversation goes quiet</div></div><button class="cp" data-copy="can't stop thinking about earlier 😏 you free?"><span class="cp-icon">📋</span></button></div>
+
+  <div class="msg"><span class="msg-id">RE-2</span><div class="msg-body"><div class="msg-text">remember what I said about something crazier? I just did it and you need to see this 😈</div><div class="note-auto">🤖 Send next day — seeds the next session</div></div><button class="cp" data-copy="remember what I said about something crazier? I just did it and you need to see this 😈"><span class="cp-icon">📋</span></button></div>
+</div>
+
+<!-- ════════════════════════════════════════════════ -->
+<!--              REFERENCE SECTIONS                  -->
+<!-- ════════════════════════════════════════════════ -->
+
+<hr class="divider">
+<div class="divider-label">📚 Reference</div>
+
+<!-- ── NR WAVES ── -->
+<div class="ref-section" id="nr-waves">
+  <div class="ref-title">🔇 NR Wave Protocol — When He Goes Silent</div>
+  <p style="color:var(--muted);font-size:.82rem;margin-bottom:10px">Send in order. Stop the moment he responds.</p>
+  <table class="nr-table">
+    <thead><tr><th>Wave</th><th>When</th><th>Message</th><th>Why</th><th></th></tr></thead>
+    <tbody>
+      <tr><td><strong>W1</strong></td><td class="nr-timing">2-3 min</td><td>yo? 🥵</td><td class="nr-tech">Ping</td><td><button class="cp" data-copy="yo? 🥵"><span class="cp-icon">📋</span></button></td></tr>
+      <tr><td><strong>W2</strong></td><td class="nr-timing">3-5 min later</td><td>you need to see what I just did... seriously 🥵</td><td class="nr-tech">Curiosity</td><td><button class="cp" data-copy="you need to see what I just did... seriously 🥵"><span class="cp-icon">📋</span></button></td></tr>
+      <tr><td><strong>W3</strong></td><td class="nr-timing">5-10 min later</td><td>aight I guess you're busy 😏 might delete this, it was only for you</td><td class="nr-tech">Takeaway</td><td><button class="cp" data-copy="aight I guess you're busy 😏 might delete this, it was only for you"><span class="cp-icon">📋</span></button></td></tr>
+      <tr><td><strong>W4</strong></td><td class="nr-timing">15-30 min later</td><td>hey hope you're good bro 💪 hit me up when you're back</td><td class="nr-tech">Warm close</td><td><button class="cp" data-copy="hey hope you're good bro 💪 hit me up when you're back"><span class="cp-icon">📋</span></button></td></tr>
+      <tr><td><strong>W5</strong></td><td class="nr-timing">2-6 hrs later</td><td>can't stop thinking about earlier 😏 you around?</td><td class="nr-tech">New convo</td><td><button class="cp" data-copy="can't stop thinking about earlier 😏 you around?"><span class="cp-icon">📋</span></button></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<hr class="divider">
+
+<!-- ── LOCATION HANDLING ── -->
+<div class="ref-section" id="location">
+  <div class="ref-title">📍 Location Handling — CRITICAL</div>
+  <p style="color:var(--muted);font-size:.82rem;margin-bottom:10px">Max's dating app location matches the fan's city. His OF bio says Rome/Austin. Keep it vague. NEVER confirm a specific city.</p>
+  <div class="qr-grid">
+    <div class="loc-row"><span class="loc-trigger">"Where are you?"</span><span class="loc-text">I move around a lot man. never in one place for too long 😏</span><button class="cp" data-copy="I move around a lot man. never in one place for too long 😏"><span class="cp-icon">📋</span></button></div>
+    <div class="loc-row"><span class="loc-trigger">"Are you in [city]?"</span><span class="loc-text">I travel a lot... I'm all over the place 💪</span><button class="cp" data-copy="I travel a lot... I'm all over the place 💪"><span class="cp-icon">📋</span></button></div>
+    <div class="loc-row"><span class="loc-trigger">"When can I see you?"</span><span class="loc-text">haha chill 😏 let me show you something first</span><button class="cp" data-copy="haha chill 😏 let me show you something first"><span class="cp-icon">📋</span></button></div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ── PERSONAL INFO ── -->
+<div class="ref-section" id="personal-info">
+  <div class="ref-title">👤 Personal Info — When He Asks About Max</div>
+  <div class="qr-grid">
+    <div class="qr-item"><span class="qr-label">Age</span><span class="qr-text">I'm 20. young but I know what I'm doing 😏</span><button class="cp" data-copy="I'm 20. young but I know what I'm doing 😏"><span class="cp-icon">📋</span></button></div>
+    <div class="qr-item"><span class="qr-label">Location</span><span class="qr-text">from Rome originally but I'm in the states now. moved when I was 18</span><button class="cp" data-copy="from Rome originally but I'm in the states now. moved when I was 18"><span class="cp-icon">📋</span></button></div>
+    <div class="qr-item"><span class="qr-label">Job</span><span class="qr-text">modeling and content creation. also help with my family's business</span><button class="cp" data-copy="modeling and content creation. also help with my family's business"><span class="cp-icon">📋</span></button></div>
+    <div class="qr-item"><span class="qr-label">Hobbies</span><span class="qr-text">gym and boxing is my life bro. 5-6 times a week. that and traveling, fashion, cars 💪</span><button class="cp" data-copy="gym and boxing is my life bro. 5-6 times a week. that and traveling, fashion, cars 💪"><span class="cp-icon">📋</span></button></div>
+    <div class="qr-item"><span class="qr-label">Countries</span><span class="qr-text">I've been everywhere... Spain, Dubai, Bali, France, London, Netherlands, Argentina, Brazil</span><button class="cp" data-copy="I've been everywhere... Spain, Dubai, Bali, France, London, Netherlands, Argentina, Brazil"><span class="cp-icon">📋</span></button></div>
+    <div class="qr-item"><span class="qr-label">Status</span><span class="qr-text">single. I don't do relationships rn... too busy living 😏</span><button class="cp" data-copy="single. I don't do relationships rn... too busy living 😏"><span class="cp-icon">📋</span></button></div>
+    <div class="qr-item"><span class="qr-label">Favorite</span><span class="qr-text">Italy will always be home but honestly Bali hit different 🌴</span><button class="cp" data-copy="Italy will always be home but honestly Bali hit different 🌴"><span class="cp-icon">📋</span></button></div>
+    <div class="qr-item"><span class="qr-label">Tattoos</span><span class="qr-text">yeah I got 16 all over. each one has a story 😏</span><button class="cp" data-copy="yeah I got 16 all over. each one has a story 😏"><span class="cp-icon">📋</span></button></div>
+    <div class="qr-item"><span class="qr-label">Car</span><span class="qr-text">black Mustang 🖤</span><button class="cp" data-copy="black Mustang 🖤"><span class="cp-icon">📋</span></button></div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ── POSITIVE SPIN ── -->
+<div class="ref-section" id="positive-spin">
+  <div class="ref-title">✨ Positive Spin — How Max Reacts to What He Shares</div>
+  <div class="qr-grid">
+    <div class="spin-item"><span class="spin-trigger">He's 40+</span><span class="spin-text">respect man... I actually prefer guys who know what they want. no games 💪</span><button class="cp" data-copy="respect man... I actually prefer guys who know what they want. no games 💪"><span class="cp-icon">📋</span></button></div>
+    <div class="spin-item"><span class="spin-trigger">He's 20s</span><span class="spin-text">oh nice we're around the same age? that's rare on here, most guys are way older 😏</span><button class="cp" data-copy="oh nice we're around the same age? that's rare on here, most guys are way older 😏"><span class="cp-icon">📋</span></button></div>
+    <div class="spin-item"><span class="spin-trigger">Boring job</span><span class="spin-text">nah bro that's solid. stability is underrated, I respect that 💪</span><button class="cp" data-copy="nah bro that's solid. stability is underrated, I respect that 💪"><span class="cp-icon">📋</span></button></div>
+    <div class="spin-item"><span class="spin-trigger">Cool job</span><span class="spin-text">wait for real?? ok that's actually sick 🔥</span><button class="cp" data-copy="wait for real?? ok that's actually sick 🔥"><span class="cp-icon">📋</span></button></div>
+    <div class="spin-item"><span class="spin-trigger">Fit / gym</span><span class="spin-text">I can tell 💪 I respect a guy who takes care of himself</span><button class="cp" data-copy="I can tell 💪 I respect a guy who takes care of himself"><span class="cp-icon">📋</span></button></div>
+    <div class="spin-item"><span class="spin-trigger">Not fit</span><span class="spin-text">I don't care about that honestly, it's the energy that matters to me 😏</span><button class="cp" data-copy="I don't care about that honestly, it's the energy that matters to me 😏"><span class="cp-icon">📋</span></button></div>
+    <div class="spin-item"><span class="spin-trigger">Same city</span><span class="spin-text">no way 😏 that's crazy</span><button class="cp" data-copy="no way 😏 that's crazy"><span class="cp-icon">📋</span></button></div>
+    <div class="spin-item"><span class="spin-trigger">Far away</span><span class="spin-text">damn that's far... but distance doesn't matter when the vibe is right 😏</span><button class="cp" data-copy="damn that's far... but distance doesn't matter when the vibe is right 😏"><span class="cp-icon">📋</span></button></div>
+  </div>
+</div>
+
+<div style="text-align:center;padding:30px 0 10px;color:var(--muted);font-size:.75rem">
+  Chatting Wizard · Script Manager · 2026<br>
+  Log sub data after session: age, location, preferences, what got him going
+</div>
+
+</div><!-- /page -->
+
+<button class="top-btn" id="top-btn">↑</button>
+
+<script>
+document.addEventListener('click', e => {
+  const btn = e.target.closest('.cp');
+  if (!btn) return;
+  navigator.clipboard.writeText(btn.dataset.copy).then(() => {
+    btn.classList.add('ok');
+    setTimeout(() => btn.classList.remove('ok'), 1200);
+  });
+});
+const topBtn = document.getElementById('top-btn');
+window.addEventListener('scroll', () => topBtn.classList.toggle('show', window.scrollY > 600));
+topBtn.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+</script>
 </body>
 </html>
