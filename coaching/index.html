@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coaching Dashboard — Chatting Wizard</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: #0d1117;
+            color: #e6edf3;
+            min-height: 100vh;
+        }
+        .container { max-width: 1400px; margin: 0 auto; padding: 24px; }
+
+        /* Header */
+        .header {
+            text-align: center; padding: 40px 20px 20px;
+        }
+        .header h1 { font-size: 2.2em; font-weight: 700; color: #58a6ff; margin-bottom: 8px; }
+        .header .subtitle { color: #8b949e; font-size: 1em; }
+        .header .generated { color: #484f58; font-size: 0.85em; margin-top: 8px; }
+        .back-link { display: inline-block; color: #58a6ff; text-decoration: none; font-size: 0.9em; margin-bottom: 16px; }
+        .back-link:hover { text-decoration: underline; }
+
+        /* Top stats */
+        .top-stats {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px; margin-bottom: 32px;
+        }
+        .top-stat {
+            background: #161b22; border-radius: 12px; padding: 20px;
+            border: 1px solid #30363d;
+        }
+        .top-stat .number { font-size: 32px; font-weight: 700; color: #e6edf3; }
+        .top-stat .label { font-size: 13px; color: #8b949e; margin-top: 4px; }
+
+        /* Alert */
+        .alert {
+            border-radius: 10px; padding: 14px 18px; margin-bottom: 24px;
+            font-size: 14px;
+        }
+        .alert-warning {
+            background: #161b22; border: 1px solid #d2992244; color: #d29922;
+        }
+        .alert-warning strong { color: #e6edf3; }
+
+        /* Section */
+        .section-title {
+            font-size: 1.1em; color: #8b949e; text-transform: uppercase;
+            letter-spacing: 1px; margin: 32px 0 16px; padding-bottom: 8px;
+            border-bottom: 1px solid #21262d;
+        }
+
+        /* TL Cards */
+        .tl-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 16px; margin-bottom: 32px;
+        }
+        .tl-card {
+            background: #161b22; border-radius: 12px; padding: 24px;
+            border: 1px solid #30363d; transition: border-color 0.2s;
+        }
+        .tl-card:hover { border-color: #58a6ff; }
+        .tl-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 16px; }
+        .tl-header h2 { font-size: 1.3em; font-weight: 700; color: #e6edf3; }
+        .tl-shift { font-size: 0.8em; color: #8b949e; background: #1c2129; padding: 2px 8px; border-radius: 4px; }
+        .tl-stats { display: flex; gap: 24px; margin-bottom: 16px; }
+        .stat { text-align: center; }
+        .stat-number { font-size: 1.5em; font-weight: 700; color: #e6edf3; }
+        .stat-label { font-size: 0.7em; color: #8b949e; text-transform: uppercase; letter-spacing: 0.5px; }
+
+        /* Progress bar */
+        .progress-bar-container {
+            height: 6px; background: #21262d; border-radius: 3px; margin-bottom: 6px; overflow: hidden;
+        }
+        .progress-bar { height: 100%; border-radius: 3px; transition: width 0.5s; }
+        .progress-label { font-size: 0.8em; color: #8b949e; margin-bottom: 16px; }
+
+        /* Chatter table */
+        .chatter-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        .chatter-table th {
+            text-align: left; padding: 8px 6px; color: #8b949e; font-weight: 500;
+            border-bottom: 1px solid #21262d; font-size: 0.7em; text-transform: uppercase;
+        }
+        .chatter-table td { padding: 8px 6px; border-bottom: 1px solid #161b22; }
+        .chatter-name { font-weight: 500; color: #e6edf3; }
+
+        /* Badges */
+        .badge {
+            display: inline-block; padding: 2px 8px; border-radius: 20px;
+            font-size: 0.7em; font-weight: 600;
+        }
+        .badge-red { background: #f8514922; color: #f85149; border: 1px solid #f8514933; }
+        .badge-yellow { background: #d2992222; color: #d29922; border: 1px solid #d2992233; }
+        .badge-green { background: #3fb95022; color: #3fb950; border: 1px solid #3fb95033; }
+
+        /* Tags */
+        .tag {
+            display: inline-block; padding: 2px 6px; border-radius: 4px;
+            font-size: 0.75em; margin-right: 4px;
+        }
+        .tag-red { background: #f8514922; color: #f85149; }
+        .tag-orange { background: #d2992222; color: #d29922; }
+        .tag-ok { background: #3fb95022; color: #3fb950; }
+
+        /* KPI alarm table */
+        .alarm-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        .alarm-table th {
+            text-align: left; padding: 10px 8px; color: #8b949e; font-weight: 500;
+            border-bottom: 1px solid #21262d; font-size: 0.7em; text-transform: uppercase;
+        }
+        .alarm-table td {
+            padding: 10px 8px; border-bottom: 1px solid #161b22;
+        }
+
+        /* Logs */
+        .log-entry {
+            padding: 12px 16px; border-bottom: 1px solid #161b22;
+        }
+        .log-entry:last-child { border-bottom: none; }
+        .log-header { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+        .log-date { color: #8b949e; font-size: 0.8em; font-weight: 500; }
+        .log-tl { color: #58a6ff; font-weight: 600; font-size: 0.9em; }
+        .log-arrow { color: #484f58; }
+        .log-chatter { color: #e6edf3; font-weight: 500; font-size: 0.9em; }
+        .log-meta { color: #8b949e; font-size: 0.8em; }
+        .log-notes { color: #8b949e; font-size: 0.8em; margin-top: 4px; padding-left: 4px; }
+        .logs-container {
+            background: #161b22; border-radius: 12px; border: 1px solid #30363d;
+            overflow: hidden;
+        }
+        .empty-state {
+            text-align: center; padding: 40px; color: #484f58;
+        }
+        .empty-state p { margin: 4px 0; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .tl-grid { grid-template-columns: 1fr; }
+            .top-stats { grid-template-columns: repeat(2, 1fr); }
+            .container { padding: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="../" class="back-link">&larr; Back to Scripts</a>
+        <h1>Coaching Dashboard</h1>
+        <p>Team coaching overview — Chatting Wizard</p>
+        <div class="generated">Last updated: 2026-02-11 12:48 UTC</div>
+    </div>
+
+    <div class="container">
+
+        <div class="top-stats">
+            <div class="top-stat">
+                <div class="number">31</div>
+                <div class="label">Active Chatters</div>
+            </div>
+            <div class="top-stat">
+                <div class="number">0</div>
+                <div class="label">Coaching Sessions</div>
+            </div>
+            <div class="top-stat">
+                <div class="number" style="color: #f85149">10</div>
+                <div class="label">KPI Alarms</div>
+            </div>
+            <div class="top-stat">
+                <div class="number">0</div>
+                <div class="label">Unassigned</div>
+            </div>
+        </div>
+
+        
+
+        <div class="section-title">Teams</div>
+        <div class="tl-grid">
+            
+        <div class="tl-card">
+            <div class="tl-header">
+                <h2>Huckle</h2>
+                <span class="tl-shift">12:00AM – 8:00AM UTC</span>
+            </div>
+            <div class="tl-stats">
+                <div class="stat">
+                    <div class="stat-number">11</div>
+                    <div class="stat-label">Chatters</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">0</div>
+                    <div class="stat-label">Sessions this week</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number" style="color: #f85149">4</div>
+                    <div class="stat-label">KPI Alarms</div>
+                </div>
+            </div>
+            <div class="progress-bar-container">
+                <div class="progress-bar" style="width: 0%; background: #f85149"></div>
+            </div>
+            <div class="progress-label">0/11 coached this week (0%)</div>
+            <table class="chatter-table">
+                <thead><tr><th>Chatter</th><th>Last coached</th><th>Issues</th></tr></thead>
+                <tbody>
+            <tr>
+                <td class="chatter-name">Samantha Vanguardia</td>
+                <td><span class="badge badge-red">Never coached</span></td>
+                <td><span class="tag tag-red">3 KPI</span><span class="tag tag-orange">2 errors</span></td>
+            </tr>
+            <tr>
+                <td class="chatter-name">Amos Wanjala</td>
+                <td><span class="badge badge-red">Never coached</span></td>
+                <td><span class="tag tag-red">3 KPI</span></td>
+            </tr>
+            <tr>
+                <td class="chatter-name">Adedeji Oyeniran</td>
+                <td><span class="badge badge-red">Never coached</span></td>
+                <td><span class="tag tag-red">1 KPI</span><span class="tag tag-orange">3 errors</span></td>
+            </tr>
+            <tr>
+                <td class="chatter-name">MARY WAMBUI GITHIGE</td>
+                <td><span class="badge badge-red">Never coached</span></td>
+                <td><span class="tag tag-orange">7 errors</span></td>
+            </tr>
+            <tr>
+                <td class="chatter-name">Dionefel Mamites</td>
+                <td><span class="badge badge-red">Never coached</span></td>
+                <td><span class="tag tag-orange">8 errors</span></td>
+            </tr>
+            <tr>
+                <td class="chatter-name">Don Mc Rey Parone</td>
+                <td><span class="badge badge-red">Never coached</span></td>
+                <td><span class="tag tag-red">1 KPI</span><span class="tag tag-orange">1 errors</span></td>
+            </tr>
+            <tr>
+                <td class="chatter-name">JOHN ARSEL MUHI </td>
+                <td><span class="badge badge-red">Never coached</span></td>
+                <td><span class="tag tag-orange">4 errors</span></td>
+            </tr>
+            <tr>
+                <td class="chatter-name">Steven Mwamuye</td>
+                <td><span class="badge badge-red">Never coached</span></td>
+                <td><span class="tag tag-orange">1 errors</span></td>
+            </tr>
+            <tr>
+                <td class="chatter-name">Angel Joyce Ranosa</td>
+                <td><span class="badge badge-red">Never coached</span></td>
+                <td><span class="tag tag-ok">OK</span></td>
+            </tr>
+            <tr>
+                <td class="chatter-name">Earl Clyde Leinand Ty</td>
+                <td><span class="badge badge-red">Never coached</span></td>
+                <td><span class="tag tag-ok">OK</span></td>
+            </tr>
+            <tr>
+                <td class="chatter-name">Allonah Yvonne D. Tumampos</td>
+                <td><span class="badge badge-red">Never coached</span></td>
+                <td><span class="tag tag-ok">OK</span></td>
+            </tr></tbody>
+            </table>
+        </div>
+        <div class="tl-card">
+            <div class="tl-header">
+                <h2>Danilyn</h2>
+                <span class="tl-shift">8:00AM – 4:00PM UTC</span>
+            </div>
+            <div class="tl-stats">
+                <div class="stat">
+                    <div class="stat-number">11</div>
+                    <div class="stat-label">Chatters</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">0</div>
+                    <div class="stat-label">Sessions this week</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number" style="color: #f85149">4</div>
+                    <div class="stat-label">KPI Alarms</div>
+                </div>
+            </div>
+            <div class="progress-bar-container">
+                <div class="progress-bar" style="width: 0%; background: #f85149"></div>
+            </div>
+            <div class="progress-label">0/11 coached this week (0%)</div>
+            <table class="chatter-table">
+                <thead><tr><th>Chatter</th><th>Last coached</th><th>Issues</th></tr></thead>
+                <tbody>
+            <tr>
+                <td class="chatter-name">Hannah Andrea Ibañez</td>
+                <td><span class="badge badge-red">Never coached</span></td>
+                <td><span class="tag tag-red">3 KPI</span></td>
+            </tr>
+            <tr>
+                <td class="chatter-name">Yhana Jean Aguelo</td>
+                <td><span class="badge badge-red">Never coached</span></td>
+                <td><span class="tag tag-red">3 KPI</span></td>
+            </tr>
+            <tr>
+                <td class="chatter-name">Ruztinn Josef Francisco</td>
+                <td><span class="badge badge-red">Never coached</span></td>
+                <td><span class="tag tag-red">2 KPI</span><span class="tag tag-orange">1 errors</span></td>
+            </tr>
+            <tr>
+                <td class="chatter-name">martin john aguilar</td>
+                <td><span class="badge badge-red">Never coached</span></td>
+                <td><span class="tag tag-orange">6 errors</span></td>
+            </tr>
+            <tr>
+                <td class="chatter-name">Cris John Lacno</td>
+                <td><span class="badge badge-red">Never coached</span></td>
+                <td><span class="tag tag-orange">8 errors</span></td>
+            </tr>
+            <tr>
+                <td class="chatter-name">Ralf Zyre Bambalan</td>
+                <td><span class="badge badge-red">Never coached</span></td>
+                <td><span class="tag tag-orange">6 errors</span></td>
+            </tr>
+            <tr>
+                <td class="chatter-name">Adriane Ellor Sulita</td>
+                <td><span class="badge badge-red">Never coached</span></td>
+                <td><span class="tag tag-red">1 KPI</span><span class="tag tag-orange">2 errors</span></td>
+            </tr>
+            <tr>
+                <td class="chatter-name">Cezar E. Edades Jr</td>
+                <td><span class="badge badge-red">Never coached</span></td>
+                <td><span class="tag tag-orange">5 errors</span></td>
+            </tr>
+            <tr>
+                <td class="chatter-name">Leny Rose L. Noma</td>
+                <td><span class="badge badge-red">Never coached</span></td>
+                <td><span class="tag tag-orange">3 errors</span></td>
+            </tr>
+            <tr>
+                <td class="chatter-name">Fiona Ajiambo</td>
+                <td><span class="badge badge-red">Never coached</span></td>
+                <td><span class="tag tag-orange">2 errors</span></td>
+            </tr>
+            <tr>
+                <td class="chatter-name">Kokoette Okon Umanah</td>
+                <td><span class="badge badge-red">Never coached</span></td>
+                <td><span class="tag tag-ok">OK</span></td>
+            </tr></tbody>
+            </table>
+        </div>
+        <div class="tl-card">
+            <div class="tl-header">
+                <h2>Ezekiel</h2>
+                <span class="tl-shift">4:00PM – 12:00AM UTC</span>
+            </div>
+            <div class="tl-stats">
+                <div class="stat">
+                    <div class="stat-number">9</div>
+                    <div class="stat-label">Chatters</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">0</div>
+                    <div class="stat-label">Sessions this week</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number" style="color: #f85149">2</div>
+                    <div class="stat-label">KPI Alarms</div>
+                </div>
+            </div>
+            <div class="progress-bar-container">
+                <div class="progress-bar" style="width: 0%; background: #f85149"></div>
+            </div>
+            <div class="progress-label">0/9 coached this week (0%)</div>
+            <table class="chatter-table">
+                <thead><tr><th>Chatter</th><th>Last coached</th><th>Issues</th></tr></thead>
+                <tbody>
+            <tr>
+                <td class="chatter-name">Princess Diane Manalo</td>
+                <td><span class="badge badge-red">Never coached</span></td>
+                <td><span class="tag tag-orange">6 errors</span></td>
+            </tr>
+            <tr>
+                <td class="chatter-name">Rachael Yvonne Murugi</td>
+                <td><span class="badge badge-red">Never coached</span></td>
+                <td><span class="tag tag-red">1 KPI</span></td>
+            </tr>
+            <tr>
+                <td class="chatter-name">Emmanuel Okoth Owino</td>
+                <td><span class="badge badge-red">Never coached</span></td>
+                <td><span class="tag tag-red">1 KPI</span></td>
+            </tr>
+            <tr>
+                <td class="chatter-name">Matt Yuri V. Albarillo</td>
+                <td><span class="badge badge-red">Never coached</span></td>
+                <td><span class="tag tag-orange">1 errors</span></td>
+            </tr>
+            <tr>
+                <td class="chatter-name">Jhunmar Velasco</td>
+                <td><span class="badge badge-red">Never coached</span></td>
+                <td><span class="tag tag-orange">1 errors</span></td>
+            </tr>
+            <tr>
+                <td class="chatter-name">Sheenmy A. Miro</td>
+                <td><span class="badge badge-red">Never coached</span></td>
+                <td><span class="tag tag-orange">1 errors</span></td>
+            </tr>
+            <tr>
+                <td class="chatter-name">Edgar Danson </td>
+                <td><span class="badge badge-red">Never coached</span></td>
+                <td><span class="tag tag-ok">OK</span></td>
+            </tr>
+            <tr>
+                <td class="chatter-name">Trishia Izze Casangyao</td>
+                <td><span class="badge badge-red">Never coached</span></td>
+                <td><span class="tag tag-ok">OK</span></td>
+            </tr>
+            <tr>
+                <td class="chatter-name">Kimberly Gaile Diaz Bacani</td>
+                <td><span class="badge badge-red">Never coached</span></td>
+                <td><span class="tag tag-ok">OK</span></td>
+            </tr></tbody>
+            </table>
+        </div>
+        </div>
+
+        <div class="section-title">KPI Alarms</div>
+        <div class="logs-container">
+            <table class="alarm-table">
+                <thead><tr><th>Chatter</th><th>Team</th><th>Alarms</th></tr></thead>
+                <tbody>
+                    
+        <tr>
+            <td class="chatter-name">Don Mc Rey Parone</td>
+            <td>Team Huckle</td>
+            <td><span class="tag tag-red">CVR: 2.93%</span></td>
+        </tr>
+        <tr>
+            <td class="chatter-name">Amos Wanjala</td>
+            <td>Team Huckle</td>
+            <td><span class="tag tag-red">Sales/hr: $7.10</span> <span class="tag tag-red">CVR: 4.98%</span> <span class="tag tag-red">Unlock Rate: 18.68%</span></td>
+        </tr>
+        <tr>
+            <td class="chatter-name">Adedeji Oyeniran</td>
+            <td>Team Huckle</td>
+            <td><span class="tag tag-red">Sales/hr: $6.72</span></td>
+        </tr>
+        <tr>
+            <td class="chatter-name">Hannah Andrea Ibañez</td>
+            <td>Team Danilyn</td>
+            <td><span class="tag tag-red">Sales/hr: $1.32</span> <span class="tag tag-red">CVR: 2.22%</span> <span class="tag tag-red">Golden Ratio: 0.80%</span></td>
+        </tr>
+        <tr>
+            <td class="chatter-name">Rachael Yvonne Murugi</td>
+            <td>Team Ezekiel</td>
+            <td><span class="tag tag-red">Sales/hr: $8.18</span></td>
+        </tr>
+        <tr>
+            <td class="chatter-name">Adriane Ellor Sulita</td>
+            <td>Team Danilyn</td>
+            <td><span class="tag tag-red">CVR: 4.95%</span></td>
+        </tr>
+        <tr>
+            <td class="chatter-name">Samantha Vanguardia</td>
+            <td>Team Huckle</td>
+            <td><span class="tag tag-red">Sales/hr: $6.12</span> <span class="tag tag-red">CVR: 2.37%</span> <span class="tag tag-red">Golden Ratio: 0.25%</span></td>
+        </tr>
+        <tr>
+            <td class="chatter-name">Yhana Jean Aguelo</td>
+            <td>Team Danilyn</td>
+            <td><span class="tag tag-red">Sales/hr: $8.56</span> <span class="tag tag-red">CVR: 2.14%</span> <span class="tag tag-red">Golden Ratio: 0.79%</span></td>
+        </tr>
+        <tr>
+            <td class="chatter-name">Ruztinn Josef Francisco</td>
+            <td>Team Danilyn</td>
+            <td><span class="tag tag-red">Sales/hr: $8.50</span> <span class="tag tag-red">CVR: 3.89%</span></td>
+        </tr>
+        <tr>
+            <td class="chatter-name">Emmanuel Okoth Owino</td>
+            <td>Team Ezekiel</td>
+            <td><span class="tag tag-red">Sales/hr: $5.93</span></td>
+        </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section-title">Recent Coaching Sessions</div>
+        <div class="logs-container">
+            
+        <div class="empty-state">
+            <p>No coaching sessions logged yet.</p>
+            <p>TLs need to start using the coaching form.</p>
+        </div>
+        </div>
+    </div>
+</body>
+</html>
