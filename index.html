@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CW Scripts — Chatting Wizard</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0d1117; color: #e6edf3; font-family: 'Segoe UI', system-ui, sans-serif; min-height: 100vh; }
+
+  .header { text-align: center; padding: 50px 20px 30px; }
+  .header h1 { font-size: 2.2em; color: #58a6ff; margin-bottom: 8px; }
+  .header p { color: #8b949e; font-size: 1em; max-width: 500px; margin: 0 auto; }
+
+  .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+
+  .section-title { font-size: 1.1em; color: #8b949e; text-transform: uppercase; letter-spacing: 1px; margin: 40px 0 16px 0; padding-bottom: 8px; border-bottom: 1px solid #21262d; }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+
+  .card { background: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 20px; transition: all 0.2s; cursor: pointer; text-decoration: none; color: inherit; display: block; }
+  .card:hover { border-color: #58a6ff; transform: translateY(-2px); box-shadow: 0 4px 20px rgba(88,166,255,0.1); }
+
+  .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+  .card-name { font-size: 1.3em; font-weight: 700; }
+  .card-badge { font-size: 0.7em; padding: 3px 10px; border-radius: 20px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+  .badge-live { background: #3fb95022; color: #3fb950; border: 1px solid #3fb95044; }
+  .badge-soon { background: #d2992222; color: #d29922; border: 1px solid #d2992244; }
+
+  .card-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+  .meta-tag { font-size: 0.8em; color: #8b949e; background: #1c2129; padding: 2px 8px; border-radius: 4px; }
+
+  .card-traffic { font-size: 0.85em; color: #8b949e; margin-bottom: 8px; }
+  .card-traffic strong { color: #e6edf3; }
+
+  .card-stats { display: flex; gap: 16px; margin-top: 12px; padding-top: 12px; border-top: 1px solid #21262d; }
+  .stat { text-align: center; flex: 1; }
+  .stat-num { font-size: 1.2em; font-weight: 700; }
+  .stat-label { font-size: 0.7em; color: #8b949e; text-transform: uppercase; }
+  .stat-green { color: #3fb950; }
+  .stat-blue { color: #58a6ff; }
+  .stat-red { color: #f85149; }
+
+  .empty-card { background: #161b22; border: 1px dashed #30363d; border-radius: 12px; padding: 20px; text-align: center; color: #484f58; }
+  .empty-card .icon { font-size: 2em; margin-bottom: 8px; }
+  .empty-card p { font-size: 0.9em; }
+
+  .footer { text-align: center; padding: 50px 20px; color: #484f58; font-size: 0.8em; }
+
+  .alert-bar { background: #161b22; border: 1px solid #f8514933; border-radius: 10px; padding: 14px 20px; margin: 20px 0 30px 0; display: flex; align-items: center; gap: 12px; }
+  .alert-bar .icon { font-size: 1.3em; }
+  .alert-bar .text { font-size: 0.9em; color: #f85149; }
+  .alert-bar .text strong { color: #e6edf3; }
+
+  @media (max-width: 600px) {
+    .grid { grid-template-columns: 1fr; }
+    .header h1 { font-size: 1.6em; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>CW Scripts</h1>
+  <p>Script guides for chatters — Chatting Wizard</p>
+</div>
+
+<div class="container">
+
+  <div class="alert-bar">
+    <div class="icon">⚠️</div>
+    <div class="text"><strong>Dating App Traffic:</strong> Creadores masculinos tienen el módulo Meetup Redirect (MR). NUNCA decir "meet/meeting" en OnlyFans.</div>
+  </div>
+
+  <div class="section-title">Male Creators — Dating App Traffic</div>
+  <div class="grid">
+
+    <a href="max/" class="card">
+      <div class="card-header">
+        <span class="card-name">Max</span>
+        <span class="card-badge badge-live">LIVE</span>
+      </div>
+      <div class="card-meta">
+        <span class="meta-tag">20 yrs</span>
+        <span class="meta-tag">Italian</span>
+        <span class="meta-tag">Paid Page</span>
+      </div>
+      <div class="card-traffic">Traffic: <strong>Dating Apps (Gay Male)</strong></div>
+      <div class="card-stats">
+        <div class="stat"><div class="stat-num stat-green">$132</div><div class="stat-label">Revenue</div></div>
+        <div class="stat"><div class="stat-num stat-blue">73</div><div class="stat-label">Messages</div></div>
+        <div class="stat"><div class="stat-num stat-red">4</div><div class="stat-label">PPVs</div></div>
+      </div>
+    </a>
+
+    <div class="empty-card">
+      <div class="icon">🔜</div>
+      <p>Más creadores masculinos próximamente<br>(Marco, Lucas, Liam, Peter, Damon, Stefan, Zack, Noah...)</p>
+    </div>
+
+  </div>
+
+  <div class="section-title">Female Creators</div>
+  <div class="grid">
+
+    <div class="empty-card">
+      <div class="icon">🔜</div>
+      <p>Putri, Irina, Jessica, Eva, Isabella...<br>Próximamente</p>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="footer">
+  Chatting Wizard — Script Manager — 2026<br>
+  Solo para uso interno del equipo
+</div>
+
+</body>
+</html>
