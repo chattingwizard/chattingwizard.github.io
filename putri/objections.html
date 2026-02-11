@@ -23,6 +23,17 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
 .hero h1{font-size:1.5rem;font-weight:800;letter-spacing:2px}
 .hero .tagline{color:var(--muted);font-size:.82rem}
 
+/* ── INFO BAR ── */
+.info-bar{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 4px;font-size:.78rem}
+.info-pill{background:var(--card);border:1px solid var(--border);padding:4px 12px;border-radius:20px;display:flex;align-items:center;gap:5px;color:var(--muted)}
+.info-pill b{color:var(--text)}
+.info-pill.pill-warn{border-color:#e3b34133;color:var(--yellow)}
+
+/* ── LEGEND ── */
+.legend{display:flex;gap:16px;flex-wrap:wrap;padding:8px 0;font-size:.78rem;color:var(--muted)}
+.legend-item{display:flex;align-items:center;gap:6px}
+.legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+
 /* ── STICKY TOC ── */
 .toc{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--border);padding:8px 0;margin:0 -20px;padding-left:20px;padding-right:20px;display:flex;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;transition:box-shadow .2s}
 .toc.shadow{box-shadow:0 4px 16px rgba(0,0,0,.4)}
@@ -74,16 +85,21 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
 .tone-pos{background:var(--green)}
 .tone-neg{background:var(--red)}
 .tone-neu{background:var(--muted)}
-.step-msg{font-size:1rem;line-height:1.5;padding:8px 12px;background:var(--bg);border:1px solid var(--border);border-radius:10px;margin:4px 0;word-wrap:break-word}
-.step-why{font-size:.76rem;color:var(--muted);font-style:italic;margin-top:4px}
+.step-why{font-size:.76rem;color:var(--muted);font-style:italic;margin-top:6px}
 .step-note{background:#e3b34112;border-left:3px solid var(--yellow);padding:5px 10px;border-radius:0 6px 6px 0;margin:5px 0 2px;font-size:.78rem;color:var(--yellow)}
 
+/* ── VARIANTS ── */
+.variants{display:flex;flex-direction:column;gap:3px;margin:4px 0}
+.variant{display:flex;align-items:flex-start;gap:8px}
+.var-label{font-size:.62rem;font-weight:800;color:var(--muted);background:var(--bg);border:1px solid var(--border);width:20px;height:20px;border-radius:4px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:8px;letter-spacing:0}
+.variant .step-msg{flex:1;font-size:.95rem;line-height:1.5;padding:7px 11px;background:var(--bg);border:1px solid var(--border);border-radius:10px;word-wrap:break-word}
+
 /* ── COPY ── */
-.cp{background:none;border:1px solid transparent;color:var(--border);width:26px;height:26px;border-radius:6px;cursor:pointer;font-size:.72rem;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:.15s;position:relative;margin-top:2px;opacity:.3}
-.step:hover .cp{opacity:1;border-color:var(--border)}
+.cp{background:none;border:1px solid transparent;color:var(--border);width:24px;height:24px;border-radius:6px;cursor:pointer;font-size:.7rem;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:.15s;position:relative;margin-top:7px;opacity:.3}
+.variant:hover .cp,.step:hover .cp{opacity:1;border-color:var(--border)}
 .cp:hover{background:var(--card);color:var(--text);opacity:1}
 .cp.ok{border-color:var(--green);color:var(--green);opacity:1}
-.cp.ok::after{content:"✓";position:absolute;font-size:.68rem;font-weight:700}
+.cp.ok::after{content:"\2713";position:absolute;font-size:.68rem;font-weight:700}
 .cp.ok .cp-icon{visibility:hidden}
 
 /* ── POOL (for SIT-HORNY) ── */
@@ -96,11 +112,6 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
 
 .divider{border:none;border-top:1px solid var(--border);margin:28px 0}
 
-/* ── LEGEND ── */
-.legend{display:flex;gap:16px;flex-wrap:wrap;padding:12px 0;font-size:.78rem;color:var(--muted)}
-.legend-item{display:flex;align-items:center;gap:6px}
-.legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
-
 .top-btn{position:fixed;bottom:16px;right:16px;width:36px;height:36px;border-radius:50%;background:var(--card);border:1px solid var(--border);color:var(--muted);font-size:1rem;cursor:pointer;display:none;align-items:center;justify-content:center;z-index:100;transition:.15s}
 .top-btn:hover{color:var(--text);border-color:var(--muted)}
 .top-btn.show{display:flex}
@@ -110,6 +121,7 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
   .pool-grid{grid-template-columns:1fr}
   .hero{flex-direction:column;text-align:center}
   .toc{margin:0 -10px;padding-left:10px;padding-right:10px}
+  .info-bar{justify-content:center}
 }
 </style>
 </head>
@@ -117,21 +129,28 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
 
 <div class="page">
 
-<a href="./" class="back-btn">← Putri Guide</a>
+<a href="./" class="back-btn">&larr; Putri Guide</a>
 
 <div class="hero">
   <img src="profile.jpg" alt="Putri" class="hero-photo">
   <div>
-    <h1>PUTRI — Objection & Resistance</h1>
-    <div class="tagline">All protocols in Putri's voice · Review Draft v1 · Feb 2026</div>
+    <h1>PUTRI &mdash; Objection & Resistance</h1>
+    <div class="tagline">All protocols in Putri's voice &middot; 2-3 variants per step &middot; Feb 2026</div>
   </div>
+</div>
+
+<div class="info-bar">
+  <span class="info-pill"><b>111</b> total scripts</span>
+  <span class="info-pill"><b>3</b> categories</span>
+  <span class="info-pill"><b>16</b> protocols</span>
+  <span class="info-pill pill-warn">Each step = standalone script &middot; Pick ONE variant per step</span>
 </div>
 
 <div class="legend">
   <span class="legend-item"><span class="legend-dot" style="background:var(--green)"></span> Positive tone</span>
   <span class="legend-item"><span class="legend-dot" style="background:var(--red)"></span> Negative tone</span>
   <span class="legend-item"><span class="legend-dot" style="background:var(--muted)"></span> Neutral tone</span>
-  <span class="legend-item">— Each step = standalone script (chatter picks based on sub response)</span>
+  <span class="legend-item"><b>A B C</b> = variants (same technique, different wording)</span>
 </div>
 
 <nav class="toc" id="toc">
@@ -145,8 +164,8 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
   <a href="#res-offtopic" class="toc-res">Off-topic</a>
   <a href="#res-real" class="toc-res">Are You Real</a>
   <a href="#res-voice" class="toc-res">Voice/Call</a>
-  <a href="#res-custom-yes" class="toc-res">Custom ✓</a>
-  <a href="#res-custom-no" class="toc-res">Custom ✗</a>
+  <a href="#res-custom-yes" class="toc-res">Custom Yes</a>
+  <a href="#res-custom-no" class="toc-res">Custom No</a>
   <a href="#res-done" class="toc-res">Already Came</a>
   <a href="#sit-cum" class="toc-sit">Cum</a>
   <a href="#sit-dickpic" class="toc-sit">Dick Pic</a>
@@ -161,7 +180,7 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
   <span class="cat-emoji">💰</span>
   <div class="cat-info">
     <h2>A. Objection Handling</h2>
-    <p>Fan pushes back on buying PPV. Goal: convert the sale.</p>
+    <p>Fan pushes back on buying PPV. Goal: convert the sale. 6 protocols, 47 scripts.</p>
   </div>
 </div>
 
@@ -170,8 +189,8 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
   <div class="protocol-header">
     <span class="p-code p-code-obj">OBJ-PRICE</span>
     <span class="p-name">"Too expensive"</span>
-    <span class="p-steps">5 steps</span>
-    <span class="toggle">▼</span>
+    <span class="p-steps">5 steps &middot; 11 scripts</span>
+    <span class="toggle">&#9660;</span>
   </div>
   <div class="protocol-body">
     <div class="p-desc">He says the PPV price is too high. Use each step only if the previous one didn't convert. Never jump steps.</div>
@@ -180,54 +199,65 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
       <span class="step-num step-pos">1</span>
       <div class="step-body">
         <div class="step-technique"><span class="tone-dot tone-pos"></span> Reframe Value</div>
-        <div class="step-msg">babe that's less than a smoothie after my ride 😏 and trust me this hits wayyyy harder</div>
+        <div class="variants">
+          <div class="variant"><span class="var-label">A</span><div class="step-msg">babe that's less than a smoothie after my ride 😏 and trust me this hits wayyyy harder</div><button class="cp" data-copy="babe that's less than a smoothie after my ride 😏 and trust me this hits wayyyy harder"><span class="cp-icon">📋</span></button></div>
+          <div class="variant"><span class="var-label">B</span><div class="step-msg">baby it's like the price of your morning coffee ☕ except this one keeps you up all night 😏</div><button class="cp" data-copy="baby it's like the price of your morning coffee ☕ except this one keeps you up all night 😏"><span class="cp-icon">📋</span></button></div>
+          <div class="variant"><span class="var-label">C</span><div class="step-msg">that's literally less than an uber ride 🙈 and I promise you'll enjoy this trip way more</div><button class="cp" data-copy="that's literally less than an uber ride 🙈 and I promise you'll enjoy this trip way more"><span class="cp-icon">📋</span></button></div>
+        </div>
         <div class="step-why">Shifts frame: not "expensive content" → "cheap thrill that beats everyday spending"</div>
       </div>
-      <button class="cp" data-copy="babe that's less than a smoothie after my ride 😏 and trust me this hits wayyyy harder"><span class="cp-icon">📋</span></button>
     </div>
 
     <div class="step">
       <span class="step-num step-neg">2</span>
       <div class="step-body">
         <div class="step-technique"><span class="tone-dot tone-neg"></span> FOMO Temporal</div>
-        <div class="step-msg">I'm literally only in this mood because of YOU rn 🥵 idk when I'll feel like this again... I never do this</div>
+        <div class="variants">
+          <div class="variant"><span class="var-label">A</span><div class="step-msg">I'm literally only in this mood because of YOU rn 🥵 idk when I'll feel like this again... I never do this</div><button class="cp" data-copy="I'm literally only in this mood because of YOU rn 🥵 idk when I'll feel like this again... I never do this"><span class="cp-icon">📋</span></button></div>
+          <div class="variant"><span class="var-label">B</span><div class="step-msg">this mood I'm in rn? it's not gonna last forever 🥵 and I really want you to be the one who sees it</div><button class="cp" data-copy="this mood I'm in rn? it's not gonna last forever 🥵 and I really want you to be the one who sees it"><span class="cp-icon">📋</span></button></div>
+        </div>
         <div class="step-why">Creates urgency. The moment is unique. If he waits, it's gone.</div>
       </div>
-      <button class="cp" data-copy="I'm literally only in this mood because of YOU rn 🥵 idk when I'll feel like this again... I never do this"><span class="cp-icon">📋</span></button>
     </div>
 
     <div class="step">
       <span class="step-num step-neg">3</span>
       <div class="step-body">
         <div class="step-technique"><span class="tone-dot tone-neg"></span> Challenge Competence</div>
-        <div class="step-msg">hmm maybe you're not ready for what I did in this one 😏</div>
+        <div class="variants">
+          <div class="variant"><span class="var-label">A</span><div class="step-msg">hmm maybe you're not ready for what I did in this one 😏</div><button class="cp" data-copy="hmm maybe you're not ready for what I did in this one 😏"><span class="cp-icon">📋</span></button></div>
+          <div class="variant"><span class="var-label">B</span><div class="step-msg">honestly? most guys can't handle what I just recorded 😈 I thought you were different</div><button class="cp" data-copy="honestly? most guys can't handle what I just recorded 😈 I thought you were different"><span class="cp-icon">📋</span></button></div>
+        </div>
         <div class="step-why">Ego attack. Buying = proving he can handle it. Not buying = weakness.</div>
       </div>
-      <button class="cp" data-copy="hmm maybe you're not ready for what I did in this one 😏"><span class="cp-icon">📋</span></button>
     </div>
 
     <div class="step">
       <span class="step-num step-pos">4</span>
       <div class="step-body">
         <div class="step-technique"><span class="tone-dot tone-pos"></span> Downgrade (ONE TIME)</div>
-        <div class="step-msg">okay fine... just for you I'll do it for [lower price] 💗 but only because this convo has been different</div>
-        <div class="step-note">✏️ Chatter: reduce price 20-30%. NEVER do this twice.</div>
+        <div class="variants">
+          <div class="variant"><span class="var-label">A</span><div class="step-msg">okay fine... just for you I'll do it for [lower price] 💗 but only because this convo has been different</div><button class="cp" data-copy="okay fine... just for you I'll do it for [lower price] 💗 but only because this convo has been different"><span class="cp-icon">📋</span></button></div>
+          <div class="variant"><span class="var-label">B</span><div class="step-msg">you know what... [lower price] because you've been making me feel some type of way 💗 don't tell anyone</div><button class="cp" data-copy="you know what... [lower price] because you've been making me feel some type of way 💗 don't tell anyone"><span class="cp-icon">📋</span></button></div>
+        </div>
+        <div class="step-note">&#9998; Chatter: reduce price 20-30%. NEVER do this twice with same fan.</div>
         <div class="step-why">One-time concession framed as exclusive ("for you"), not cheap ("on sale").</div>
       </div>
-      <button class="cp" data-copy="okay fine... just for you I'll do it for [lower price] 💗 but only because this convo has been different"><span class="cp-icon">📋</span></button>
     </div>
 
     <div class="step">
       <span class="step-num step-neu">5</span>
       <div class="step-body">
         <div class="step-technique"><span class="tone-dot tone-neu"></span> Seed + Return</div>
-        <div class="step-msg">it's okay baby 😊 let's just keep talking... I'm still thinking about you anyway</div>
-        <div class="step-why">Accept with zero pressure. Protect relationship. Retry naturally later in the conversation.</div>
+        <div class="variants">
+          <div class="variant"><span class="var-label">A</span><div class="step-msg">it's okay baby 😊 let's just keep talking... I'm still thinking about you anyway</div><button class="cp" data-copy="it's okay baby 😊 let's just keep talking... I'm still thinking about you anyway"><span class="cp-icon">📋</span></button></div>
+          <div class="variant"><span class="var-label">B</span><div class="step-msg">no worries 💗 we don't have to, I like talking to you regardless</div><button class="cp" data-copy="no worries 💗 we don't have to, I like talking to you regardless"><span class="cp-icon">📋</span></button></div>
+        </div>
+        <div class="step-why">Accept with zero pressure. Protect relationship. Retry naturally later.</div>
       </div>
-      <button class="cp" data-copy="it's okay baby 😊 let's just keep talking... I'm still thinking about you anyway"><span class="cp-icon">📋</span></button>
     </div>
 
-    <div class="p-after">After step 5: continue text sexting or GFE. Tag sub for re-engagement. Retry with different content in next session.</div>
+    <div class="p-after">After step 5: continue GFE. Tag sub for re-engagement. Retry with different content next session.</div>
   </div>
 </div>
 
@@ -236,51 +266,59 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
   <div class="protocol-header">
     <span class="p-code p-code-obj">OBJ-DISCOUNT</span>
     <span class="p-name">"Give me a discount"</span>
-    <span class="p-steps">4 steps</span>
-    <span class="toggle">▼</span>
+    <span class="p-steps">4 steps &middot; 8 scripts</span>
+    <span class="toggle">&#9660;</span>
   </div>
   <div class="protocol-body">
-    <div class="p-desc">He wants to pay less, but he's NOT refusing to pay. He's negotiating. Stay firm but playful — this is a GOOD sign.</div>
+    <div class="p-desc">He wants to pay less, but he's NOT refusing to pay. He's negotiating. Stay firm but playful &mdash; this is a GOOD sign.</div>
 
     <div class="step">
       <span class="step-num step-pos">1</span>
       <div class="step-body">
         <div class="step-technique"><span class="tone-dot tone-pos"></span> Playful Firmness</div>
-        <div class="step-msg">haha you trying to negotiate with me? 😏 baby this isn't a market... this is worth every penny trust me</div>
+        <div class="variants">
+          <div class="variant"><span class="var-label">A</span><div class="step-msg">haha you trying to negotiate with me? 😏 baby this isn't a market... this is worth every penny trust me</div><button class="cp" data-copy="haha you trying to negotiate with me? 😏 baby this isn't a market... this is worth every penny trust me"><span class="cp-icon">📋</span></button></div>
+          <div class="variant"><span class="var-label">B</span><div class="step-msg">a discount? 😏 babe do I look like I'm on sale?</div><button class="cp" data-copy="a discount? 😏 babe do I look like I'm on sale?"><span class="cp-icon">📋</span></button></div>
+        </div>
         <div class="step-why">Playful, not aggressive. Frame: she sets the value, he doesn't get to bargain.</div>
       </div>
-      <button class="cp" data-copy="haha you trying to negotiate with me? 😏 baby this isn't a market... this is worth every penny trust me"><span class="cp-icon">📋</span></button>
     </div>
 
     <div class="step">
       <span class="step-num step-neg">2</span>
       <div class="step-body">
         <div class="step-technique"><span class="tone-dot tone-neg"></span> Challenge Worthiness</div>
-        <div class="step-msg">I don't do discounts... I only share this with guys who really appreciate what they're getting 😏</div>
+        <div class="variants">
+          <div class="variant"><span class="var-label">A</span><div class="step-msg">I don't do discounts... I only share this with guys who really appreciate what they're getting 😏</div><button class="cp" data-copy="I don't do discounts... I only share this with guys who really appreciate what they're getting 😏"><span class="cp-icon">📋</span></button></div>
+          <div class="variant"><span class="var-label">B</span><div class="step-msg">the guys who value what I do don't ask for discounts 😏 just saying</div><button class="cp" data-copy="the guys who value what I do don't ask for discounts 😏 just saying"><span class="cp-icon">📋</span></button></div>
+        </div>
         <div class="step-why">Asking for discount = not worthy enough. Buying full price = proving he's different.</div>
       </div>
-      <button class="cp" data-copy="I don't do discounts... I only share this with guys who really appreciate what they're getting 😏"><span class="cp-icon">📋</span></button>
     </div>
 
     <div class="step">
       <span class="step-num step-pos">3</span>
       <div class="step-body">
         <div class="step-technique"><span class="tone-dot tone-pos"></span> Exclusive Concession (ONE TIME)</div>
-        <div class="step-msg">okay you know what... [lower price] just for you 💗 but seriously don't tell anyone, this is our thing</div>
-        <div class="step-note">✏️ Chatter: reduce 20-30%. Frame as SECRET, not sale. Only once per session.</div>
-        <div class="step-why">He "won" the negotiation. Framed as exclusive secret between them = intimacy + reciprocity.</div>
+        <div class="variants">
+          <div class="variant"><span class="var-label">A</span><div class="step-msg">okay you know what... [lower price] just for you 💗 but seriously don't tell anyone, this is our thing</div><button class="cp" data-copy="okay you know what... [lower price] just for you 💗 but seriously don't tell anyone, this is our thing"><span class="cp-icon">📋</span></button></div>
+          <div class="variant"><span class="var-label">B</span><div class="step-msg">fine... [lower price] but ONLY because I like you 💗 this is the one and only time</div><button class="cp" data-copy="fine... [lower price] but ONLY because I like you 💗 this is the one and only time"><span class="cp-icon">📋</span></button></div>
+        </div>
+        <div class="step-note">&#9998; Chatter: reduce 20-30%. Frame as SECRET, not sale. Only once per session.</div>
+        <div class="step-why">He "won" the negotiation. Framed as exclusive secret = intimacy + reciprocity.</div>
       </div>
-      <button class="cp" data-copy="okay you know what... [lower price] just for you 💗 but seriously don't tell anyone, this is our thing"><span class="cp-icon">📋</span></button>
     </div>
 
     <div class="step">
       <span class="step-num step-neg">4</span>
       <div class="step-body">
         <div class="step-technique"><span class="tone-dot tone-neg"></span> Takeaway</div>
-        <div class="step-msg">honestly? if you don't want it that's fine 😏 I'll keep it for myself... or maybe there's someone else who's been asking</div>
+        <div class="variants">
+          <div class="variant"><span class="var-label">A</span><div class="step-msg">honestly? if you don't want it that's fine 😏 I'll keep it for myself... or maybe there's someone else who's been asking</div><button class="cp" data-copy="honestly? if you don't want it that's fine 😏 I'll keep it for myself... or maybe there's someone else who's been asking"><span class="cp-icon">📋</span></button></div>
+          <div class="variant"><span class="var-label">B</span><div class="step-msg">okay 😏 I'll save it for someone who really wants it then</div><button class="cp" data-copy="okay 😏 I'll save it for someone who really wants it then"><span class="cp-icon">📋</span></button></div>
+        </div>
         <div class="step-why">Jealousy + loss aversion. She has other options. He's not the only one.</div>
       </div>
-      <button class="cp" data-copy="honestly? if you don't want it that's fine 😏 I'll keep it for myself... or maybe there's someone else who's been asking"><span class="cp-icon">📋</span></button>
     </div>
   </div>
 </div>
@@ -290,50 +328,58 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
   <div class="protocol-header">
     <span class="p-code p-code-obj">OBJ-FREE</span>
     <span class="p-name">"Send it for free"</span>
-    <span class="p-steps">4 steps</span>
-    <span class="toggle">▼</span>
+    <span class="p-steps">4 steps &middot; 8 scripts</span>
+    <span class="toggle">&#9660;</span>
   </div>
   <div class="protocol-body">
-    <div class="p-desc">He wants content without paying. Different from "too expensive" — this is entitlement, not price sensitivity.</div>
+    <div class="p-desc">He wants content without paying. Different from "too expensive" &mdash; this is entitlement, not price sensitivity.</div>
 
     <div class="step">
       <span class="step-num step-pos">1</span>
       <div class="step-body">
         <div class="step-technique"><span class="tone-dot tone-pos"></span> Reminder + Tease</div>
-        <div class="step-msg">baby I already sent you one for free remember? 😏 and this one is even crazier... you have no idea</div>
+        <div class="variants">
+          <div class="variant"><span class="var-label">A</span><div class="step-msg">baby I already sent you one for free remember? 😏 and this one is even crazier... you have no idea</div><button class="cp" data-copy="baby I already sent you one for free remember? 😏 and this one is even crazier... you have no idea"><span class="cp-icon">📋</span></button></div>
+          <div class="variant"><span class="var-label">B</span><div class="step-msg">you already got a free one 🙈 this one is on another level though, trust me</div><button class="cp" data-copy="you already got a free one 🙈 this one is on another level though, trust me"><span class="cp-icon">📋</span></button></div>
+        </div>
         <div class="step-why">PPV 0 WAS free. Reminds him of value already given. Teases what's next.</div>
       </div>
-      <button class="cp" data-copy="baby I already sent you one for free remember? 😏 and this one is even crazier... you have no idea"><span class="cp-icon">📋</span></button>
     </div>
 
     <div class="step">
       <span class="step-num step-neg">2</span>
       <div class="step-body">
         <div class="step-technique"><span class="tone-dot tone-neg"></span> Challenge Worthiness</div>
-        <div class="step-msg">free? 😏 I don't just give this to anyone... you have to earn the best stuff</div>
+        <div class="variants">
+          <div class="variant"><span class="var-label">A</span><div class="step-msg">free? 😏 I don't just give this to anyone... you have to earn the best stuff</div><button class="cp" data-copy="free? 😏 I don't just give this to anyone... you have to earn the best stuff"><span class="cp-icon">📋</span></button></div>
+          <div class="variant"><span class="var-label">B</span><div class="step-msg">haha free 😏 you think the best things in life are free? not this one baby</div><button class="cp" data-copy="haha free 😏 you think the best things in life are free? not this one baby"><span class="cp-icon">📋</span></button></div>
+        </div>
         <div class="step-why">Shifts from transactional to worthiness. Buying = earning, not spending.</div>
       </div>
-      <button class="cp" data-copy="free? 😏 I don't just give this to anyone... you have to earn the best stuff"><span class="cp-icon">📋</span></button>
     </div>
 
     <div class="step">
       <span class="step-num step-pos">3</span>
       <div class="step-body">
         <div class="step-technique"><span class="tone-dot tone-pos"></span> Guilt / Investment</div>
-        <div class="step-msg">I literally just spent time recording this because of what YOU said to me 🥺 this was for you, not just random content</div>
+        <div class="variants">
+          <div class="variant"><span class="var-label">A</span><div class="step-msg">I literally just spent time recording this because of what YOU said to me 🥺 this was for you, not just random content</div><button class="cp" data-copy="I literally just spent time recording this because of what YOU said to me 🥺 this was for you, not just random content"><span class="cp-icon">📋</span></button></div>
+          <div class="variant"><span class="var-label">B</span><div class="step-msg">I made this because of you... like specifically because of our convo 🥺 it took time and I did it for YOU</div><button class="cp" data-copy="I made this because of you... like specifically because of our convo 🥺 it took time and I did it for YOU"><span class="cp-icon">📋</span></button></div>
+        </div>
         <div class="step-why">Reciprocity. She invested time and emotion. It was personal. Not paying = disrespect.</div>
       </div>
-      <button class="cp" data-copy="I literally just spent time recording this because of what YOU said to me 🥺 this was for you, not just random content"><span class="cp-icon">📋</span></button>
     </div>
 
     <div class="step">
       <span class="step-num step-neu">4</span>
       <div class="step-body">
         <div class="step-technique"><span class="tone-dot tone-neu"></span> Seed + Return</div>
-        <div class="step-msg">it's fine baby 😊 I'm not going anywhere... let's just keep talking, I like you regardless</div>
-        <div class="step-why">Accept. Protect relationship. He might convert later when more invested emotionally.</div>
+        <div class="variants">
+          <div class="variant"><span class="var-label">A</span><div class="step-msg">it's fine baby 😊 I'm not going anywhere... let's just keep talking, I like you regardless</div><button class="cp" data-copy="it's fine baby 😊 I'm not going anywhere... let's just keep talking, I like you regardless"><span class="cp-icon">📋</span></button></div>
+          <div class="variant"><span class="var-label">B</span><div class="step-msg">no pressure at all 💗 I'm just happy talking to you honestly</div><button class="cp" data-copy="no pressure at all 💗 I'm just happy talking to you honestly"><span class="cp-icon">📋</span></button></div>
+        </div>
+        <div class="step-why">Accept. Protect relationship. He might convert later when more invested.</div>
       </div>
-      <button class="cp" data-copy="it's fine baby 😊 I'm not going anywhere... let's just keep talking, I like you regardless"><span class="cp-icon">📋</span></button>
     </div>
   </div>
 </div>
@@ -343,8 +389,8 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
   <div class="protocol-header">
     <span class="p-code p-code-obj">OBJ-NOMONEY</span>
     <span class="p-name">"I don't have money"</span>
-    <span class="p-steps">4 steps</span>
-    <span class="toggle">▼</span>
+    <span class="p-steps">4 steps &middot; 8 scripts</span>
+    <span class="toggle">&#9660;</span>
   </div>
   <div class="protocol-body">
     <div class="p-desc">Could be real or an excuse. Don't judge. Test gently, then adapt. If genuinely broke, protect the relationship for later.</div>
@@ -353,41 +399,49 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
       <span class="step-num step-pos">1</span>
       <div class="step-body">
         <div class="step-technique"><span class="tone-dot tone-pos"></span> Empathy</div>
-        <div class="step-msg">aww I totally get it baby 💗 no pressure at all okay?</div>
+        <div class="variants">
+          <div class="variant"><span class="var-label">A</span><div class="step-msg">aww I totally get it baby 💗 no pressure at all okay?</div><button class="cp" data-copy="aww I totally get it baby 💗 no pressure at all okay?"><span class="cp-icon">📋</span></button></div>
+          <div class="variant"><span class="var-label">B</span><div class="step-msg">that's okay 💗 don't even worry about it, seriously</div><button class="cp" data-copy="that's okay 💗 don't even worry about it, seriously"><span class="cp-icon">📋</span></button></div>
+        </div>
         <div class="step-why">Disarm. Zero judgment. If he's lying, this relaxes him. If true, builds trust.</div>
       </div>
-      <button class="cp" data-copy="aww I totally get it baby 💗 no pressure at all okay?"><span class="cp-icon">📋</span></button>
     </div>
 
     <div class="step">
       <span class="step-num step-neu">2</span>
       <div class="step-body">
         <div class="step-technique"><span class="tone-dot tone-neu"></span> Test Sincerity</div>
-        <div class="step-msg">not even like [small amount]? 🥺 I really really want you to see this one</div>
-        <div class="step-note">✏️ Chatter: suggest lowest viable price ($3-5). If he says no, it's likely real.</div>
+        <div class="variants">
+          <div class="variant"><span class="var-label">A</span><div class="step-msg">not even like [small amount]? 🥺 I really really want you to see this one</div><button class="cp" data-copy="not even like [small amount]? 🥺 I really really want you to see this one"><span class="cp-icon">📋</span></button></div>
+          <div class="variant"><span class="var-label">B</span><div class="step-msg">what about just [small amount]? 🙈 I really don't want you to miss this</div><button class="cp" data-copy="what about just [small amount]? 🙈 I really don't want you to miss this"><span class="cp-icon">📋</span></button></div>
+        </div>
+        <div class="step-note">&#9998; Chatter: suggest lowest viable price ($3-5). If he says no, it's likely real.</div>
         <div class="step-why">Tests if "no money" = "no money for THIS price" or genuinely empty wallet.</div>
       </div>
-      <button class="cp" data-copy="not even like [small amount]? 🥺 I really really want you to see this one"><span class="cp-icon">📋</span></button>
     </div>
 
     <div class="step">
       <span class="step-num step-pos">3</span>
       <div class="step-body">
         <div class="step-technique"><span class="tone-dot tone-pos"></span> Pay What You Want</div>
-        <div class="step-msg">okay send me whatever you can baby... even a tiny amount 💗 I just need you to see what you made me do</div>
+        <div class="variants">
+          <div class="variant"><span class="var-label">A</span><div class="step-msg">okay send me whatever you can baby... even a tiny amount 💗 I just need you to see what you made me do</div><button class="cp" data-copy="okay send me whatever you can baby... even a tiny amount 💗 I just need you to see what you made me do"><span class="cp-icon">📋</span></button></div>
+          <div class="variant"><span class="var-label">B</span><div class="step-msg">just send whatever feels right 🥺 even $1... I just can't keep this from you</div><button class="cp" data-copy="just send whatever feels right 🥺 even $1... I just can't keep this from you"><span class="cp-icon">📋</span></button></div>
+        </div>
         <div class="step-why">Breaks the barrier. ANY amount = he's now a buyer. Psychology shifts from "can't" to "did."</div>
       </div>
-      <button class="cp" data-copy="okay send me whatever you can baby... even a tiny amount 💗 I just need you to see what you made me do"><span class="cp-icon">📋</span></button>
     </div>
 
     <div class="step">
       <span class="step-num step-neu">4</span>
       <div class="step-body">
         <div class="step-technique"><span class="tone-dot tone-neu"></span> Protect Relationship</div>
-        <div class="step-msg">honestly it's okay 😊 I like talking to you, money or no money... you make me feel things 💗</div>
+        <div class="variants">
+          <div class="variant"><span class="var-label">A</span><div class="step-msg">honestly it's okay 😊 I like talking to you, money or no money... you make me feel things 💗</div><button class="cp" data-copy="honestly it's okay 😊 I like talking to you, money or no money... you make me feel things 💗"><span class="cp-icon">📋</span></button></div>
+          <div class="variant"><span class="var-label">B</span><div class="step-msg">baby it's totally fine 💗 you being here is what matters to me</div><button class="cp" data-copy="baby it's totally fine 💗 you being here is what matters to me"><span class="cp-icon">📋</span></button></div>
+        </div>
         <div class="step-why">GFE. He's tagged for re-engagement. The bond = future revenue. Don't burn it.</div>
       </div>
-      <button class="cp" data-copy="honestly it's okay 😊 I like talking to you, money or no money... you make me feel things 💗"><span class="cp-icon">📋</span></button>
     </div>
   </div>
 </div>
@@ -397,8 +451,8 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
   <div class="protocol-header">
     <span class="p-code p-code-obj">OBJ-NOPPV</span>
     <span class="p-name">"I don't buy PPVs"</span>
-    <span class="p-steps">4 steps</span>
-    <span class="toggle">▼</span>
+    <span class="p-steps">4 steps &middot; 6 scripts</span>
+    <span class="toggle">&#9660;</span>
   </div>
   <div class="protocol-body">
     <div class="p-desc">Identity stance, not price objection. "I'm the type of person who doesn't pay for this." You need to break the identity, not the price.</div>
@@ -407,18 +461,20 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
       <span class="step-num step-pos">1</span>
       <div class="step-body">
         <div class="step-technique"><span class="tone-dot tone-pos"></span> Accept (Disarm)</div>
-        <div class="step-msg">that's totally okay 😊 I'm not trying to sell you anything, I just like talking to you</div>
+        <div class="variants">
+          <div class="variant"><span class="var-label">A</span><div class="step-msg">that's totally okay 😊 I'm not trying to sell you anything, I just like talking to you</div><button class="cp" data-copy="that's totally okay 😊 I'm not trying to sell you anything, I just like talking to you"><span class="cp-icon">📋</span></button></div>
+          <div class="variant"><span class="var-label">B</span><div class="step-msg">no worries at all 😊 I don't care about that, I'm just enjoying this convo</div><button class="cp" data-copy="no worries at all 😊 I don't care about that, I'm just enjoying this convo"><span class="cp-icon">📋</span></button></div>
+        </div>
         <div class="step-why">Disarms the identity defense. She doesn't care about his money → he relaxes.</div>
       </div>
-      <button class="cp" data-copy="that's totally okay 😊 I'm not trying to sell you anything, I just like talking to you"><span class="cp-icon">📋</span></button>
     </div>
 
     <div class="step">
       <span class="step-num step-neu">2</span>
       <div class="step-body">
         <div class="step-technique"><span class="tone-dot tone-neu"></span> Continue Sexting (4-5 msgs)</div>
-        <div class="step-note">✏️ Continue text sexting from the main script. Build more tension. Make him WANT it so bad the identity breaks on its own.</div>
-        <div class="step-why">Build desire beyond his resistance. Don't mention PPV. Just keep escalating the sexual tension.</div>
+        <div class="step-note">&#9998; Continue text sexting from the main script. Build more tension. Make him WANT it so bad the identity breaks on its own. Do NOT mention PPV.</div>
+        <div class="step-why">Build desire beyond his resistance. Just keep escalating the sexual tension.</div>
       </div>
     </div>
 
@@ -426,20 +482,24 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
       <span class="step-num step-pos">3</span>
       <div class="step-body">
         <div class="step-technique"><span class="tone-dot tone-pos"></span> Emotional Reframe</div>
-        <div class="step-msg">okay but this isn't about money... I just need you to see what you're doing to me rn 🥵 I've never reacted like this to someone</div>
-        <div class="step-why">Reframes from "buying content" to "sharing an intimate moment." It's not a transaction, it's HER being vulnerable.</div>
+        <div class="variants">
+          <div class="variant"><span class="var-label">A</span><div class="step-msg">okay but this isn't about money... I just need you to see what you're doing to me rn 🥵 I've never reacted like this to someone</div><button class="cp" data-copy="okay but this isn't about money... I just need you to see what you're doing to me rn 🥵 I've never reacted like this to someone"><span class="cp-icon">📋</span></button></div>
+          <div class="variant"><span class="var-label">B</span><div class="step-msg">forget about money for a sec... I just want to share this moment with you 🥵 what you're making me feel is real</div><button class="cp" data-copy="forget about money for a sec... I just want to share this moment with you 🥵 what you're making me feel is real"><span class="cp-icon">📋</span></button></div>
+        </div>
+        <div class="step-why">Reframes from "buying content" to "sharing an intimate moment." Not a transaction, it's HER being vulnerable.</div>
       </div>
-      <button class="cp" data-copy="okay but this isn't about money... I just need you to see what you're doing to me rn 🥵 I've never reacted like this to someone"><span class="cp-icon">📋</span></button>
     </div>
 
     <div class="step">
       <span class="step-num step-pos">4</span>
       <div class="step-body">
         <div class="step-technique"><span class="tone-dot tone-pos"></span> Pay What You Want</div>
-        <div class="step-msg">just send whatever you want, even $1 🙈 I just can't keep this to myself... you need to see it</div>
+        <div class="variants">
+          <div class="variant"><span class="var-label">A</span><div class="step-msg">just send whatever you want, even $1 🙈 I just can't keep this to myself... you need to see it</div><button class="cp" data-copy="just send whatever you want, even $1 🙈 I just can't keep this to myself... you need to see it"><span class="cp-icon">📋</span></button></div>
+          <div class="variant"><span class="var-label">B</span><div class="step-msg">literally send me anything, even the smallest amount 🥺 I need you to see what you did to me</div><button class="cp" data-copy="literally send me anything, even the smallest amount 🥺 I need you to see what you did to me"><span class="cp-icon">📋</span></button></div>
+        </div>
         <div class="step-why">$1 breaks the identity. Once he pays ANYTHING, he's no longer "someone who doesn't buy PPVs."</div>
       </div>
-      <button class="cp" data-copy="just send whatever you want, even $1 🙈 I just can't keep this to myself... you need to see it"><span class="cp-icon">📋</span></button>
     </div>
   </div>
 </div>
@@ -449,8 +509,8 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
   <div class="protocol-header">
     <span class="p-code p-code-obj">OBJ-CARD</span>
     <span class="p-name">"Card doesn't work"</span>
-    <span class="p-steps">3 steps</span>
-    <span class="toggle">▼</span>
+    <span class="p-steps">3 steps &middot; 6 scripts</span>
+    <span class="toggle">&#9660;</span>
   </div>
   <div class="protocol-body">
     <div class="p-desc">Payment failed. Could be genuine technical issue. Keep it light, solve the problem, maintain momentum.</div>
@@ -459,30 +519,36 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
       <span class="step-num step-pos">1</span>
       <div class="step-body">
         <div class="step-technique"><span class="tone-dot tone-pos"></span> Empathy + Retry</div>
-        <div class="step-msg">aww nooo 😩 that happens sometimes baby, try again it usually works the second time</div>
+        <div class="variants">
+          <div class="variant"><span class="var-label">A</span><div class="step-msg">aww nooo 😩 that happens sometimes baby, try again it usually works the second time</div><button class="cp" data-copy="aww nooo 😩 that happens sometimes baby, try again it usually works the second time"><span class="cp-icon">📋</span></button></div>
+          <div class="variant"><span class="var-label">B</span><div class="step-msg">ugh that's so annoying 😩 it happens a lot, try one more time baby</div><button class="cp" data-copy="ugh that's so annoying 😩 it happens a lot, try one more time baby"><span class="cp-icon">📋</span></button></div>
+        </div>
         <div class="step-why">Normalize the issue. Don't make it awkward. Keep the energy up.</div>
       </div>
-      <button class="cp" data-copy="aww nooo 😩 that happens sometimes baby, try again it usually works the second time"><span class="cp-icon">📋</span></button>
     </div>
 
     <div class="step">
       <span class="step-num step-neu">2</span>
       <div class="step-body">
         <div class="step-technique"><span class="tone-dot tone-neu"></span> Alternative</div>
-        <div class="step-msg">maybe try a different card? 💗 I really don't want you to miss this</div>
+        <div class="variants">
+          <div class="variant"><span class="var-label">A</span><div class="step-msg">maybe try a different card? 💗 I really don't want you to miss this</div><button class="cp" data-copy="maybe try a different card? 💗 I really don't want you to miss this"><span class="cp-icon">📋</span></button></div>
+          <div class="variant"><span class="var-label">B</span><div class="step-msg">do you have another card you can try? 🥺 I really want you to see this</div><button class="cp" data-copy="do you have another card you can try? 🥺 I really want you to see this"><span class="cp-icon">📋</span></button></div>
+        </div>
         <div class="step-why">Practical solution. Shows she cares about HIM seeing it, not just the money.</div>
       </div>
-      <button class="cp" data-copy="maybe try a different card? 💗 I really don't want you to miss this"><span class="cp-icon">📋</span></button>
     </div>
 
     <div class="step">
       <span class="step-num step-pos">3</span>
       <div class="step-body">
         <div class="step-technique"><span class="tone-dot tone-pos"></span> Soft Urgency</div>
-        <div class="step-msg">I really want you to see this before I change my mind 😏 I don't keep stuff like this around forever</div>
+        <div class="variants">
+          <div class="variant"><span class="var-label">A</span><div class="step-msg">I really want you to see this before I change my mind 😏 I don't keep stuff like this around forever</div><button class="cp" data-copy="I really want you to see this before I change my mind 😏 I don't keep stuff like this around forever"><span class="cp-icon">📋</span></button></div>
+          <div class="variant"><span class="var-label">B</span><div class="step-msg">baby figure it out soon 🙈 I'm in this mood rn and I don't know how long it'll last</div><button class="cp" data-copy="baby figure it out soon 🙈 I'm in this mood rn and I don't know how long it'll last"><span class="cp-icon">📋</span></button></div>
+        </div>
         <div class="step-why">FOMO + urgency. Don't push too hard on a technical issue or it feels like a scam.</div>
       </div>
-      <button class="cp" data-copy="I really want you to see this before I change my mind 😏 I don't keep stuff like this around forever"><span class="cp-icon">📋</span></button>
     </div>
   </div>
 </div>
@@ -495,7 +561,7 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
   <span class="cat-emoji">🔀</span>
   <div class="cat-info">
     <h2>B. Resistance Handling</h2>
-    <p>Fan resists the direction of the conversation. Goal: redirect without forcing.</p>
+    <p>Fan resists the direction of the conversation. Goal: redirect without forcing. 7 protocols, 44 scripts.</p>
   </div>
 </div>
 
@@ -504,50 +570,58 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
   <div class="protocol-header">
     <span class="p-code p-code-res">RES-NOSEX</span>
     <span class="p-name">Doesn't want to go sexual</span>
-    <span class="p-steps">4 steps</span>
-    <span class="toggle">▼</span>
+    <span class="p-steps">4 steps &middot; 8 scripts</span>
+    <span class="toggle">&#9660;</span>
   </div>
   <div class="protocol-body">
-    <div class="p-desc">He's not ready to escalate. NEVER force it. Respect, build tension subtly, try again. If still no, full GFE — he may convert next session.</div>
+    <div class="p-desc">He's not ready to escalate. NEVER force it. Respect, build tension subtly, try again. If still no, full GFE.</div>
 
     <div class="step">
       <span class="step-num step-pos">1</span>
       <div class="step-body">
         <div class="step-technique"><span class="tone-dot tone-pos"></span> Respect</div>
-        <div class="step-msg">haha okay okay 😊 I got a little carried away, you're just too easy to talk to</div>
+        <div class="variants">
+          <div class="variant"><span class="var-label">A</span><div class="step-msg">haha okay okay 😊 I got a little carried away, you're just too easy to talk to</div><button class="cp" data-copy="haha okay okay 😊 I got a little carried away, you're just too easy to talk to"><span class="cp-icon">📋</span></button></div>
+          <div class="variant"><span class="var-label">B</span><div class="step-msg">oops 😅 sorry I got ahead of myself haha, it's your fault for being so fun to talk to</div><button class="cp" data-copy="oops 😅 sorry I got ahead of myself haha, it's your fault for being so fun to talk to"><span class="cp-icon">📋</span></button></div>
+        </div>
         <div class="step-why">Zero pressure. She "got carried away" = it was HER impulse, not a sales pitch.</div>
       </div>
-      <button class="cp" data-copy="haha okay okay 😊 I got a little carried away, you're just too easy to talk to"><span class="cp-icon">📋</span></button>
     </div>
 
     <div class="step">
       <span class="step-num step-neu">2</span>
       <div class="step-body">
         <div class="step-technique"><span class="tone-dot tone-neu"></span> Subtle Tension</div>
-        <div class="step-msg">so tell me more about you... what do you do when you're not making girls on the internet blush? 😏</div>
+        <div class="variants">
+          <div class="variant"><span class="var-label">A</span><div class="step-msg">so tell me more about you... what do you do when you're not making girls on the internet blush? 😏</div><button class="cp" data-copy="so tell me more about you... what do you do when you're not making girls on the internet blush? 😏"><span class="cp-icon">📋</span></button></div>
+          <div class="variant"><span class="var-label">B</span><div class="step-msg">okay okay new topic 😊 but first... what's the most adventurous thing you've ever done? 😏</div><button class="cp" data-copy="okay okay new topic 😊 but first... what's the most adventurous thing you've ever done? 😏"><span class="cp-icon">📋</span></button></div>
+        </div>
         <div class="step-why">Flirt without being explicit. Keep attraction alive. He shouldn't feel "friendzoned."</div>
       </div>
-      <button class="cp" data-copy="so tell me more about you... what do you do when you're not making girls on the internet blush? 😏"><span class="cp-icon">📋</span></button>
     </div>
 
     <div class="step">
       <span class="step-num step-pos">3</span>
       <div class="step-body">
         <div class="step-technique"><span class="tone-dot tone-pos"></span> Natural Re-attempt</div>
-        <div class="step-msg">okay but like... I can't help it 🙈 there's something about you that's messing with my head rn</div>
+        <div class="variants">
+          <div class="variant"><span class="var-label">A</span><div class="step-msg">okay but like... I can't help it 🙈 there's something about you that's messing with my head rn</div><button class="cp" data-copy="okay but like... I can't help it 🙈 there's something about you that's messing with my head rn"><span class="cp-icon">📋</span></button></div>
+          <div class="variant"><span class="var-label">B</span><div class="step-msg">I'm trying to behave but you're making it really hard 🙈 there's something about you</div><button class="cp" data-copy="I'm trying to behave but you're making it really hard 🙈 there's something about you"><span class="cp-icon">📋</span></button></div>
+        </div>
         <div class="step-why">Natural reopening. She "can't help herself" = genuine attraction, not pushing.</div>
       </div>
-      <button class="cp" data-copy="okay but like... I can't help it 🙈 there's something about you that's messing with my head rn"><span class="cp-icon">📋</span></button>
     </div>
 
     <div class="step">
       <span class="step-num step-neu">4</span>
       <div class="step-body">
         <div class="step-technique"><span class="tone-dot tone-neu"></span> Accept + GFE</div>
-        <div class="step-msg">alright I'll behave... for now 😏 no promises though haha</div>
+        <div class="variants">
+          <div class="variant"><span class="var-label">A</span><div class="step-msg">alright I'll behave... for now 😏 no promises though haha</div><button class="cp" data-copy="alright I'll behave... for now 😏 no promises though haha"><span class="cp-icon">📋</span></button></div>
+          <div class="variant"><span class="var-label">B</span><div class="step-msg">okay fine I'll stop 😊 but don't blame me if it happens again later 😏</div><button class="cp" data-copy="okay fine I'll stop 😊 but don't blame me if it happens again later 😏"><span class="cp-icon">📋</span></button></div>
+        </div>
         <div class="step-why">Accept gracefully. "For now" = door stays open. Continue GFE, tag for next session.</div>
       </div>
-      <button class="cp" data-copy="alright I'll behave... for now 😏 no promises though haha"><span class="cp-icon">📋</span></button>
     </div>
   </div>
 </div>
@@ -557,42 +631,48 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
   <div class="protocol-header">
     <span class="p-code p-code-res">RES-OFFTOPIC</span>
     <span class="p-name">Goes off-topic / doesn't follow flow</span>
-    <span class="p-steps">3 steps</span>
-    <span class="toggle">▼</span>
+    <span class="p-steps">3 steps &middot; 6 scripts</span>
+    <span class="toggle">&#9660;</span>
   </div>
   <div class="protocol-body">
-    <div class="p-desc">He changes subject, talks about random things, doesn't follow the direction. Never dismiss — acknowledge, then redirect.</div>
+    <div class="p-desc">He changes subject, talks about random things. Never dismiss &mdash; acknowledge, then redirect.</div>
 
     <div class="step">
       <span class="step-num step-pos">1</span>
       <div class="step-body">
         <div class="step-technique"><span class="tone-dot tone-pos"></span> Acknowledge</div>
-        <div class="step-msg">haha wait that's actually funny 😂</div>
-        <div class="step-note">✏️ React to what he actually said. Don't use this exact msg — adapt to his topic.</div>
+        <div class="variants">
+          <div class="variant"><span class="var-label">A</span><div class="step-msg">haha wait that's actually funny 😂</div><button class="cp" data-copy="haha wait that's actually funny 😂"><span class="cp-icon">📋</span></button></div>
+          <div class="variant"><span class="var-label">B</span><div class="step-msg">omg 😂 okay that's random but I love it</div><button class="cp" data-copy="omg 😂 okay that's random but I love it"><span class="cp-icon">📋</span></button></div>
+        </div>
+        <div class="step-note">&#9998; React to what he actually said. Adapt to his topic &mdash; don't use exact msg.</div>
         <div class="step-why">Validate him. If you dismiss what he said, he feels ignored and disengages.</div>
       </div>
-      <button class="cp" data-copy="haha wait that's actually funny 😂"><span class="cp-icon">📋</span></button>
     </div>
 
     <div class="step">
       <span class="step-num step-pos">2</span>
       <div class="step-body">
         <div class="step-technique"><span class="tone-dot tone-pos"></span> Redirect with Hook</div>
-        <div class="step-msg">but hold on you totally distracted me 😏 I was about to tell you something and now I lost my train of thought...</div>
-        <div class="step-why">Creates curiosity. He wants to know what she was going to say. Power shifts back to her.</div>
+        <div class="variants">
+          <div class="variant"><span class="var-label">A</span><div class="step-msg">but hold on you totally distracted me 😏 I was about to tell you something and now I lost my train of thought...</div><button class="cp" data-copy="but hold on you totally distracted me 😏 I was about to tell you something and now I lost my train of thought..."><span class="cp-icon">📋</span></button></div>
+          <div class="variant"><span class="var-label">B</span><div class="step-msg">wait no stop 😏 you're distracting me from what I was going to say...</div><button class="cp" data-copy="wait no stop 😏 you're distracting me from what I was going to say..."><span class="cp-icon">📋</span></button></div>
+        </div>
+        <div class="step-why">Creates curiosity. He wants to know what she was going to say. Power shifts back.</div>
       </div>
-      <button class="cp" data-copy="but hold on you totally distracted me 😏 I was about to tell you something and now I lost my train of thought..."><span class="cp-icon">📋</span></button>
     </div>
 
     <div class="step">
       <span class="step-num step-neu">3</span>
       <div class="step-body">
         <div class="step-technique"><span class="tone-dot tone-neu"></span> Retake Control</div>
-        <div class="step-msg">okay wait no I remember now 😏 so like I was saying...</div>
-        <div class="step-note">✏️ Continue with the next message from the main journey script.</div>
+        <div class="variants">
+          <div class="variant"><span class="var-label">A</span><div class="step-msg">okay wait no I remember now 😏 so like I was saying...</div><button class="cp" data-copy="okay wait no I remember now 😏 so like I was saying..."><span class="cp-icon">📋</span></button></div>
+          <div class="variant"><span class="var-label">B</span><div class="step-msg">OKAY focus 😂 where was I... oh yeah 😏</div><button class="cp" data-copy="OKAY focus 😂 where was I... oh yeah 😏"><span class="cp-icon">📋</span></button></div>
+        </div>
+        <div class="step-note">&#9998; Continue with the next message from the main journey script.</div>
         <div class="step-why">Smooth transition back. She "remembers" = natural, not forced.</div>
       </div>
-      <button class="cp" data-copy="okay wait no I remember now 😏 so like I was saying..."><span class="cp-icon">📋</span></button>
     </div>
   </div>
 </div>
@@ -602,40 +682,46 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
   <div class="protocol-header">
     <span class="p-code p-code-res">RES-REAL</span>
     <span class="p-name">"Are you real?" / "Is this pre-recorded?"</span>
-    <span class="p-steps">3 steps</span>
-    <span class="toggle">▼</span>
+    <span class="p-steps">3 steps &middot; 6 scripts</span>
+    <span class="toggle">&#9660;</span>
   </div>
   <div class="protocol-body">
-    <div class="p-desc">He's questioning authenticity. Critical moment — if handled wrong, he leaves. Never get defensive. Use humor, then proof, then emotion.</div>
+    <div class="p-desc">He's questioning authenticity. Critical moment &mdash; if handled wrong, he leaves. Never get defensive.</div>
 
     <div class="step">
       <span class="step-num step-pos">1</span>
       <div class="step-body">
         <div class="step-technique"><span class="tone-dot tone-pos"></span> Humor + Redirect</div>
-        <div class="step-msg">lol do I sound like a robot to you? 😂 beep boop... send $5 for human verification 🤖 haha I'm kidding</div>
-        <div class="step-why">Humor disarms suspicion. Making a joke about it = someone real would do this, a bot wouldn't.</div>
+        <div class="variants">
+          <div class="variant"><span class="var-label">A</span><div class="step-msg">lol do I sound like a robot to you? 😂 beep boop... send $5 for human verification 🤖 haha I'm kidding</div><button class="cp" data-copy="lol do I sound like a robot to you? 😂 beep boop... send $5 for human verification 🤖 haha I'm kidding"><span class="cp-icon">📋</span></button></div>
+          <div class="variant"><span class="var-label">B</span><div class="step-msg">wait you think I'm fake?? 😂 that's actually the funniest thing anyone's said to me today</div><button class="cp" data-copy="wait you think I'm fake?? 😂 that's actually the funniest thing anyone's said to me today"><span class="cp-icon">📋</span></button></div>
+        </div>
+        <div class="step-why">Humor disarms suspicion. A bot wouldn't joke about it.</div>
       </div>
-      <button class="cp" data-copy="lol do I sound like a robot to you? 😂 beep boop... send $5 for human verification 🤖 haha I'm kidding"><span class="cp-icon">📋</span></button>
     </div>
 
     <div class="step">
       <span class="step-num step-neg">2</span>
       <div class="step-body">
         <div class="step-technique"><span class="tone-dot tone-neg"></span> Challenge (Invert Power)</div>
-        <div class="step-msg">ask me anything 😏 literally anything about me, my life, whatever you want. I'm an open book</div>
-        <div class="step-why">Inverts power. She has nothing to hide. He's now testing HER = engagement = he's still invested.</div>
+        <div class="variants">
+          <div class="variant"><span class="var-label">A</span><div class="step-msg">ask me anything 😏 literally anything about me, my life, whatever you want. I'm an open book</div><button class="cp" data-copy="ask me anything 😏 literally anything about me, my life, whatever you want. I'm an open book"><span class="cp-icon">📋</span></button></div>
+          <div class="variant"><span class="var-label">B</span><div class="step-msg">test me 😏 ask me something only a real person would know. go ahead</div><button class="cp" data-copy="test me 😏 ask me something only a real person would know. go ahead"><span class="cp-icon">📋</span></button></div>
+        </div>
+        <div class="step-why">Inverts power. She has nothing to hide. He's testing HER = engagement = still invested.</div>
       </div>
-      <button class="cp" data-copy="ask me anything 😏 literally anything about me, my life, whatever you want. I'm an open book"><span class="cp-icon">📋</span></button>
     </div>
 
     <div class="step">
       <span class="step-num step-pos">3</span>
       <div class="step-body">
         <div class="step-technique"><span class="tone-dot tone-pos"></span> Emotional Grounding</div>
-        <div class="step-msg">I get it, there's a lot of fake stuff on here 💗 but you felt something in this convo right? because I did... and that's real</div>
-        <div class="step-why">Acknowledges his concern. Then anchors on the EMOTIONAL experience they shared. Hard to deny feelings.</div>
+        <div class="variants">
+          <div class="variant"><span class="var-label">A</span><div class="step-msg">I get it, there's a lot of fake stuff on here 💗 but you felt something in this convo right? because I did... and that's real</div><button class="cp" data-copy="I get it, there's a lot of fake stuff on here 💗 but you felt something in this convo right? because I did... and that's real"><span class="cp-icon">📋</span></button></div>
+          <div class="variant"><span class="var-label">B</span><div class="step-msg">I know there's a lot of bots and stuff on here 💗 but what we've been talking about... that felt real to me. didn't it feel real to you?</div><button class="cp" data-copy="I know there's a lot of bots and stuff on here 💗 but what we've been talking about... that felt real to me. didn't it feel real to you?"><span class="cp-icon">📋</span></button></div>
+        </div>
+        <div class="step-why">Anchors on the EMOTIONAL experience they shared. Hard to deny feelings.</div>
       </div>
-      <button class="cp" data-copy="I get it, there's a lot of fake stuff on here 💗 but you felt something in this convo right? because I did... and that's real"><span class="cp-icon">📋</span></button>
     </div>
   </div>
 </div>
@@ -645,8 +731,8 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
   <div class="protocol-header">
     <span class="p-code p-code-res">RES-VOICE</span>
     <span class="p-name">"Send voice note" / "Let's video call"</span>
-    <span class="p-steps">3 steps</span>
-    <span class="toggle">▼</span>
+    <span class="p-steps">3 steps &middot; 6 scripts</span>
+    <span class="toggle">&#9660;</span>
   </div>
   <div class="protocol-body">
     <div class="p-desc">Authenticity test. Can't do voice/video (would break the illusion). Dodge playfully, redirect to content.</div>
@@ -655,30 +741,36 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
       <span class="step-num step-pos">1</span>
       <div class="step-body">
         <div class="step-technique"><span class="tone-dot tone-pos"></span> Playful Dodge</div>
-        <div class="step-msg">haha maybe one day if you're lucky 😏 but not yet... I'm shy about that stuff</div>
-        <div class="step-why">"Maybe one day" = door not closed. "Shy" = believable personality trait, not a refusal.</div>
+        <div class="variants">
+          <div class="variant"><span class="var-label">A</span><div class="step-msg">haha maybe one day if you're lucky 😏 but not yet... I'm shy about that stuff</div><button class="cp" data-copy="haha maybe one day if you're lucky 😏 but not yet... I'm shy about that stuff"><span class="cp-icon">📋</span></button></div>
+          <div class="variant"><span class="var-label">B</span><div class="step-msg">hmmm maybe 😏 but you gotta earn that first haha</div><button class="cp" data-copy="hmmm maybe 😏 but you gotta earn that first haha"><span class="cp-icon">📋</span></button></div>
+        </div>
+        <div class="step-why">"Maybe one day" = door not closed. "Shy" = believable personality trait.</div>
       </div>
-      <button class="cp" data-copy="haha maybe one day if you're lucky 😏 but not yet... I'm shy about that stuff"><span class="cp-icon">📋</span></button>
     </div>
 
     <div class="step">
       <span class="step-num step-pos">2</span>
       <div class="step-body">
         <div class="step-technique"><span class="tone-dot tone-pos"></span> Redirect to Content</div>
-        <div class="step-msg">I have something wayyy better for you though 🙈 trust me you'll forget you even asked</div>
+        <div class="variants">
+          <div class="variant"><span class="var-label">A</span><div class="step-msg">I have something wayyy better for you though 🙈 trust me you'll forget you even asked</div><button class="cp" data-copy="I have something wayyy better for you though 🙈 trust me you'll forget you even asked"><span class="cp-icon">📋</span></button></div>
+          <div class="variant"><span class="var-label">B</span><div class="step-msg">how about instead of a call, I show you something that'll blow your mind? 😈</div><button class="cp" data-copy="how about instead of a call, I show you something that'll blow your mind? 😈"><span class="cp-icon">📋</span></button></div>
+        </div>
         <div class="step-why">Redirect to what you CAN deliver. "Better" = she's offering more, not less.</div>
       </div>
-      <button class="cp" data-copy="I have something wayyy better for you though 🙈 trust me you'll forget you even asked"><span class="cp-icon">📋</span></button>
     </div>
 
     <div class="step">
       <span class="step-num step-neg">3</span>
       <div class="step-body">
         <div class="step-technique"><span class="tone-dot tone-neg"></span> Firm Boundary</div>
-        <div class="step-msg">I don't really do that on here baby 💗 but honestly what I'm about to show you is better than any call... you'll see 😈</div>
-        <div class="step-why">Clear boundary without killing the mood. Immediately redirects to value she CAN provide.</div>
+        <div class="variants">
+          <div class="variant"><span class="var-label">A</span><div class="step-msg">I don't really do that on here baby 💗 but honestly what I'm about to show you is better than any call... you'll see 😈</div><button class="cp" data-copy="I don't really do that on here baby 💗 but honestly what I'm about to show you is better than any call... you'll see 😈"><span class="cp-icon">📋</span></button></div>
+          <div class="variant"><span class="var-label">B</span><div class="step-msg">that's not something I do on here 💗 but baby what I have for you is wayyy better than my voice, trust me 😈</div><button class="cp" data-copy="that's not something I do on here 💗 but baby what I have for you is wayyy better than my voice, trust me 😈"><span class="cp-icon">📋</span></button></div>
+        </div>
+        <div class="step-why">Clear boundary without killing the mood. Immediately redirects to value.</div>
       </div>
-      <button class="cp" data-copy="I don't really do that on here baby 💗 but honestly what I'm about to show you is better than any call... you'll see 😈"><span class="cp-icon">📋</span></button>
     </div>
   </div>
 </div>
@@ -688,41 +780,47 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
   <div class="protocol-header">
     <span class="p-code p-code-res">RES-CUSTOM-YES</span>
     <span class="p-name">Asks for content model HAS</span>
-    <span class="p-steps">3 steps</span>
-    <span class="toggle">▼</span>
+    <span class="p-steps">3 steps &middot; 6 scripts</span>
+    <span class="toggle">&#9660;</span>
   </div>
   <div class="protocol-body">
-    <div class="p-desc">He asks for specific content and you have it (or similar). This is a SALE OPPORTUNITY — tease, price, close.</div>
+    <div class="p-desc">He asks for specific content and you have it (or similar). This is a SALE OPPORTUNITY &mdash; tease, price, close.</div>
 
     <div class="step">
       <span class="step-num step-pos">1</span>
       <div class="step-body">
         <div class="step-technique"><span class="tone-dot tone-pos"></span> Tease</div>
-        <div class="step-msg">mmm you want that? 😏 I might have something... actually I definitely have something 🙈</div>
-        <div class="step-why">Build anticipation. Don't give it instantly — make him want it more.</div>
+        <div class="variants">
+          <div class="variant"><span class="var-label">A</span><div class="step-msg">mmm you want that? 😏 I might have something... actually I definitely have something 🙈</div><button class="cp" data-copy="mmm you want that? 😏 I might have something... actually I definitely have something 🙈"><span class="cp-icon">📋</span></button></div>
+          <div class="variant"><span class="var-label">B</span><div class="step-msg">ohhh 😏 you have good taste... I think I have exactly what you're looking for</div><button class="cp" data-copy="ohhh 😏 you have good taste... I think I have exactly what you're looking for"><span class="cp-icon">📋</span></button></div>
+        </div>
+        <div class="step-why">Build anticipation. Don't give it instantly &mdash; make him want it more.</div>
       </div>
-      <button class="cp" data-copy="mmm you want that? 😏 I might have something... actually I definitely have something 🙈"><span class="cp-icon">📋</span></button>
     </div>
 
     <div class="step">
       <span class="step-num step-neu">2</span>
       <div class="step-body">
         <div class="step-technique"><span class="tone-dot tone-neu"></span> Price + Anticipation</div>
-        <div class="step-msg">okay I have exactly what you're thinking of 😈 you're gonna lose your mind... [price]</div>
-        <div class="step-note">✏️ Chatter: set price based on content type. Premium for specific requests.</div>
+        <div class="variants">
+          <div class="variant"><span class="var-label">A</span><div class="step-msg">okay I have exactly what you're thinking of 😈 you're gonna lose your mind... [price]</div><button class="cp" data-copy="okay I have exactly what you're thinking of 😈 you're gonna lose your mind... [price]"><span class="cp-icon">📋</span></button></div>
+          <div class="variant"><span class="var-label">B</span><div class="step-msg">I actually made something just like that 🙈 [price] and it's worth every penny baby</div><button class="cp" data-copy="I actually made something just like that 🙈 [price] and it's worth every penny baby"><span class="cp-icon">📋</span></button></div>
+        </div>
+        <div class="step-note">&#9998; Chatter: set price based on content type. Premium for specific requests.</div>
         <div class="step-why">He asked for it = high intent = price can be higher than standard PPV.</div>
       </div>
-      <button class="cp" data-copy="okay I have exactly what you're thinking of 😈 you're gonna lose your mind... [price]"><span class="cp-icon">📋</span></button>
     </div>
 
     <div class="step">
       <span class="step-num step-pos">3</span>
       <div class="step-body">
         <div class="step-technique"><span class="tone-dot tone-pos"></span> Close</div>
-        <div class="step-msg">trust me baby you won't regret it 😈 I made this one special</div>
+        <div class="variants">
+          <div class="variant"><span class="var-label">A</span><div class="step-msg">trust me baby you won't regret it 😈 I made this one special</div><button class="cp" data-copy="trust me baby you won't regret it 😈 I made this one special"><span class="cp-icon">📋</span></button></div>
+          <div class="variant"><span class="var-label">B</span><div class="step-msg">you're not gonna be able to stop watching this one 🥵</div><button class="cp" data-copy="you're not gonna be able to stop watching this one 🥵"><span class="cp-icon">📋</span></button></div>
+        </div>
         <div class="step-why">Reinforce decision. "Special" = he's getting something unique.</div>
       </div>
-      <button class="cp" data-copy="trust me baby you won't regret it 😈 I made this one special"><span class="cp-icon">📋</span></button>
     </div>
   </div>
 </div>
@@ -732,8 +830,8 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
   <div class="protocol-header">
     <span class="p-code p-code-res">RES-CUSTOM-NO</span>
     <span class="p-name">Asks for content model DOESN'T have</span>
-    <span class="p-steps">3 steps</span>
-    <span class="toggle">▼</span>
+    <span class="p-steps">3 steps &middot; 6 scripts</span>
+    <span class="toggle">&#9660;</span>
   </div>
   <div class="protocol-body">
     <div class="p-desc">He wants something you can't deliver. NEVER say "I don't have that." Redirect to what you DO have and make it sound better.</div>
@@ -742,30 +840,36 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
       <span class="step-num step-pos">1</span>
       <div class="step-body">
         <div class="step-technique"><span class="tone-dot tone-pos"></span> Redirect</div>
-        <div class="step-msg">I don't have exactly that but honestly I have something that'll make you forget you even asked 😏</div>
-        <div class="step-why">Never say "no" flat out. Redirect to something better. He doesn't know what he's missing.</div>
+        <div class="variants">
+          <div class="variant"><span class="var-label">A</span><div class="step-msg">I don't have exactly that but honestly I have something that'll make you forget you even asked 😏</div><button class="cp" data-copy="I don't have exactly that but honestly I have something that'll make you forget you even asked 😏"><span class="cp-icon">📋</span></button></div>
+          <div class="variant"><span class="var-label">B</span><div class="step-msg">hmm I don't have that specific thing but I have something you're gonna love even more 😈</div><button class="cp" data-copy="hmm I don't have that specific thing but I have something you're gonna love even more 😈"><span class="cp-icon">📋</span></button></div>
+        </div>
+        <div class="step-why">Never say "no" flat out. Redirect to something better.</div>
       </div>
-      <button class="cp" data-copy="I don't have exactly that but honestly I have something that'll make you forget you even asked 😏"><span class="cp-icon">📋</span></button>
     </div>
 
     <div class="step">
       <span class="step-num step-pos">2</span>
       <div class="step-body">
         <div class="step-technique"><span class="tone-dot tone-pos"></span> Alternative + FOMO</div>
-        <div class="step-msg">actually what I have might be even crazier 🙈 and literally no one else has seen it yet</div>
+        <div class="variants">
+          <div class="variant"><span class="var-label">A</span><div class="step-msg">actually what I have might be even crazier 🙈 and literally no one else has seen it yet</div><button class="cp" data-copy="actually what I have might be even crazier 🙈 and literally no one else has seen it yet"><span class="cp-icon">📋</span></button></div>
+          <div class="variant"><span class="var-label">B</span><div class="step-msg">what I DO have is something no one has ever seen 🙈 and I think it's even better than what you asked for</div><button class="cp" data-copy="what I DO have is something no one has ever seen 🙈 and I think it's even better than what you asked for"><span class="cp-icon">📋</span></button></div>
+        </div>
         <div class="step-why">Exclusivity. He's the FIRST to see this. Can't say no to being first.</div>
       </div>
-      <button class="cp" data-copy="actually what I have might be even crazier 🙈 and literally no one else has seen it yet"><span class="cp-icon">📋</span></button>
     </div>
 
     <div class="step">
       <span class="step-num step-pos">3</span>
       <div class="step-body">
         <div class="step-technique"><span class="tone-dot tone-pos"></span> Confidence Close</div>
-        <div class="step-msg">trust me baby... I know what you need better than you do 😈</div>
+        <div class="variants">
+          <div class="variant"><span class="var-label">A</span><div class="step-msg">trust me baby... I know what you need better than you do 😈</div><button class="cp" data-copy="trust me baby... I know what you need better than you do 😈"><span class="cp-icon">📋</span></button></div>
+          <div class="variant"><span class="var-label">B</span><div class="step-msg">just trust me on this one 😈 you'll thank me later</div><button class="cp" data-copy="just trust me on this one 😈 you'll thank me later"><span class="cp-icon">📋</span></button></div>
+        </div>
         <div class="step-why">Model leads. She knows best. Dominant frame = attractive + closes the sale.</div>
       </div>
-      <button class="cp" data-copy="trust me baby... I know what you need better than you do 😈"><span class="cp-icon">📋</span></button>
     </div>
   </div>
 </div>
@@ -775,8 +879,8 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
   <div class="protocol-header">
     <span class="p-code p-code-res">RES-DONE</span>
     <span class="p-name">"I already came" / finished early</span>
-    <span class="p-steps">3 steps</span>
-    <span class="toggle">▼</span>
+    <span class="p-steps">3 steps &middot; 6 scripts</span>
+    <span class="toggle">&#9660;</span>
   </div>
   <div class="protocol-body">
     <div class="p-desc">He finished before the final PPV. Revenue is at risk. Validate, then rescue the sale by making it about HER finishing.</div>
@@ -785,30 +889,36 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
       <span class="step-num step-pos">1</span>
       <div class="step-body">
         <div class="step-technique"><span class="tone-dot tone-pos"></span> Validate</div>
-        <div class="step-msg">fuck that's so hot 🥵 you came because of me??</div>
+        <div class="variants">
+          <div class="variant"><span class="var-label">A</span><div class="step-msg">fuck that's so hot 🥵 you came because of me??</div><button class="cp" data-copy="fuck that's so hot 🥵 you came because of me??"><span class="cp-icon">📋</span></button></div>
+          <div class="variant"><span class="var-label">B</span><div class="step-msg">omg 🥵🥵 already?? that's so hot baby</div><button class="cp" data-copy="omg 🥵🥵 already?? that's so hot baby"><span class="cp-icon">📋</span></button></div>
+        </div>
         <div class="step-why">Don't make it awkward. Celebrate it. Feed his ego. HE made her react.</div>
       </div>
-      <button class="cp" data-copy="fuck that's so hot 🥵 you came because of me??"><span class="cp-icon">📋</span></button>
     </div>
 
     <div class="step">
       <span class="step-num step-pos">2</span>
       <div class="step-body">
         <div class="step-technique"><span class="tone-dot tone-pos"></span> Rescue (Challenge)</div>
-        <div class="step-msg">but baby I haven't finished yet 🥺 don't you wanna watch me cum too?</div>
-        <div class="step-why">Flips the script. It's about HER now. Reciprocity + ego: "she needs YOU to finish."</div>
+        <div class="variants">
+          <div class="variant"><span class="var-label">A</span><div class="step-msg">but baby I haven't finished yet 🥺 don't you wanna watch me cum too?</div><button class="cp" data-copy="but baby I haven't finished yet 🥺 don't you wanna watch me cum too?"><span class="cp-icon">📋</span></button></div>
+          <div class="variant"><span class="var-label">B</span><div class="step-msg">wait but I'm not done yet 🥺 you're gonna leave me like this?</div><button class="cp" data-copy="wait but I'm not done yet 🥺 you're gonna leave me like this?"><span class="cp-icon">📋</span></button></div>
+        </div>
+        <div class="step-why">Flips the script. It's about HER now. Reciprocity + ego.</div>
       </div>
-      <button class="cp" data-copy="but baby I haven't finished yet 🥺 don't you wanna watch me cum too?"><span class="cp-icon">📋</span></button>
     </div>
 
     <div class="step">
       <span class="step-num step-neu">3</span>
       <div class="step-body">
         <div class="step-technique"><span class="tone-dot tone-neu"></span> Seed Next Session</div>
-        <div class="step-msg">okay but next time you have to wait for me 😏 I have something insane planned for round 2</div>
+        <div class="variants">
+          <div class="variant"><span class="var-label">A</span><div class="step-msg">okay but next time you have to wait for me 😏 I have something insane planned for round 2</div><button class="cp" data-copy="okay but next time you have to wait for me 😏 I have something insane planned for round 2"><span class="cp-icon">📋</span></button></div>
+          <div class="variant"><span class="var-label">B</span><div class="step-msg">next time you HAVE to hold it 😏 because what I have planned for us next time is way crazier</div><button class="cp" data-copy="next time you HAVE to hold it 😏 because what I have planned for us next time is way crazier"><span class="cp-icon">📋</span></button></div>
+        </div>
         <div class="step-why">Plants seed for next session. "Round 2" = anticipation. He'll come back.</div>
       </div>
-      <button class="cp" data-copy="okay but next time you have to wait for me 😏 I have something insane planned for round 2"><span class="cp-icon">📋</span></button>
     </div>
   </div>
 </div>
@@ -821,7 +931,7 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
   <span class="cat-emoji">⚡</span>
   <div class="cat-info">
     <h2>C. Situational Scripts</h2>
-    <p>Not objections. Specific moments that need a prepared response. Pick the right one.</p>
+    <p>Not objections. Specific moments that need a prepared response. 3 protocols, 20 scripts.</p>
   </div>
 </div>
 
@@ -830,41 +940,47 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
   <div class="protocol-header">
     <span class="p-code p-code-sit">SIT-CUM</span>
     <span class="p-name">He's close to cumming</span>
-    <span class="p-steps">3 options</span>
+    <span class="p-steps">3 options &middot; 6 scripts</span>
     <span class="p-type">pick one</span>
-    <span class="toggle">▼</span>
+    <span class="toggle">&#9660;</span>
   </div>
   <div class="protocol-body">
-    <div class="p-desc">He's about to finish. You need to CONTROL the timing. If he cums before the final PPV, you lose the sale. Pick one based on where you are in the journey.</div>
+    <div class="p-desc">He's about to finish. You need to CONTROL the timing. If he cums before the final PPV, you lose the sale.</div>
 
     <div class="step">
       <span class="step-num step-neg">A</span>
       <div class="step-body">
         <div class="step-technique"><span class="tone-dot tone-neg"></span> Edge / Slow Down (more PPVs left)</div>
-        <div class="step-msg">don't cum yet baby... I'm not done with you 😈</div>
+        <div class="variants">
+          <div class="variant"><span class="var-label">1</span><div class="step-msg">don't cum yet baby... I'm not done with you 😈</div><button class="cp" data-copy="don't cum yet baby... I'm not done with you 😈"><span class="cp-icon">📋</span></button></div>
+          <div class="variant"><span class="var-label">2</span><div class="step-msg">hold it 🥵 not yet... I need you to last a little longer for me</div><button class="cp" data-copy="hold it 🥵 not yet... I need you to last a little longer for me"><span class="cp-icon">📋</span></button></div>
+        </div>
         <div class="step-why">Use when there are still PPVs to sell. He edges = stays aroused longer = more purchases.</div>
       </div>
-      <button class="cp" data-copy="don't cum yet baby... I'm not done with you 😈"><span class="cp-icon">📋</span></button>
     </div>
 
     <div class="step">
       <span class="step-num step-pos">B</span>
       <div class="step-body">
         <div class="step-technique"><span class="tone-dot tone-pos"></span> Sync with Final PPV</div>
-        <div class="step-msg">I'm so close too 🥵 cum with me baby... but you need to see this first 💦</div>
-        <div class="step-why">Use at the LAST PPV. Time his orgasm with the final purchase. Maximum satisfaction = maximum retention.</div>
+        <div class="variants">
+          <div class="variant"><span class="var-label">1</span><div class="step-msg">I'm so close too 🥵 cum with me baby... but you need to see this first 💦</div><button class="cp" data-copy="I'm so close too 🥵 cum with me baby... but you need to see this first 💦"><span class="cp-icon">📋</span></button></div>
+          <div class="variant"><span class="var-label">2</span><div class="step-msg">wait for me 🥵 I want us to finish together... open this first 💦</div><button class="cp" data-copy="wait for me 🥵 I want us to finish together... open this first 💦"><span class="cp-icon">📋</span></button></div>
+        </div>
+        <div class="step-why">Use at the LAST PPV. Time his orgasm with the final purchase.</div>
       </div>
-      <button class="cp" data-copy="I'm so close too 🥵 cum with me baby... but you need to see this first 💦"><span class="cp-icon">📋</span></button>
     </div>
 
     <div class="step">
       <span class="step-num step-neg">C</span>
       <div class="step-body">
         <div class="step-technique"><span class="tone-dot tone-neg"></span> Tease Delay</div>
-        <div class="step-msg">hold it... I want you to wait until you see what I'm about to send 😏 trust me it's worth it</div>
-        <div class="step-why">Use when next PPV is about to be sent. Creates anticipation tied to the purchase.</div>
+        <div class="variants">
+          <div class="variant"><span class="var-label">1</span><div class="step-msg">hold it... I want you to wait until you see what I'm about to send 😏 trust me it's worth it</div><button class="cp" data-copy="hold it... I want you to wait until you see what I'm about to send 😏 trust me it's worth it"><span class="cp-icon">📋</span></button></div>
+          <div class="variant"><span class="var-label">2</span><div class="step-msg">don't you dare finish before you see this 😏 trust me you want to wait</div><button class="cp" data-copy="don't you dare finish before you see this 😏 trust me you want to wait"><span class="cp-icon">📋</span></button></div>
+        </div>
+        <div class="step-why">Use when next PPV is about to be sent. Anticipation tied to the purchase.</div>
       </div>
-      <button class="cp" data-copy="hold it... I want you to wait until you see what I'm about to send 😏 trust me it's worth it"><span class="cp-icon">📋</span></button>
     </div>
   </div>
 </div>
@@ -874,42 +990,48 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
   <div class="protocol-header">
     <span class="p-code p-code-sit">SIT-DICKPIC</span>
     <span class="p-name">He sends a dick pic</span>
-    <span class="p-steps">3 options</span>
+    <span class="p-steps">3 options &middot; 6 scripts</span>
     <span class="p-type">pick based on moment</span>
-    <span class="toggle">▼</span>
+    <span class="toggle">&#9660;</span>
   </div>
   <div class="protocol-body">
-    <div class="p-desc">NEVER ignore it. ALWAYS react positively. A dick pic = he's invested and aroused. This is a SALES OPPORTUNITY, not a problem.</div>
+    <div class="p-desc">NEVER ignore it. ALWAYS react positively. A dick pic = he's invested and aroused. This is a SALES OPPORTUNITY.</div>
 
     <div class="step">
       <span class="step-num step-pos">A</span>
       <div class="step-body">
         <div class="step-technique"><span class="tone-dot tone-pos"></span> During Sexting (high energy)</div>
-        <div class="step-msg">fuck 🥵🥵 okay that's... wow. you have no idea what that just did to me</div>
+        <div class="variants">
+          <div class="variant"><span class="var-label">1</span><div class="step-msg">fuck 🥵🥵 okay that's... wow. you have no idea what that just did to me</div><button class="cp" data-copy="fuck 🥵🥵 okay that's... wow. you have no idea what that just did to me"><span class="cp-icon">📋</span></button></div>
+          <div class="variant"><span class="var-label">2</span><div class="step-msg">holy shit 🥵 that is... fuckkk. I need to show you something rn</div><button class="cp" data-copy="holy shit 🥵 that is... fuckkk. I need to show you something rn"><span class="cp-icon">📋</span></button></div>
+        </div>
         <div class="step-why">Validate + ego boost. Then leverage: "now you NEED to see what that made me do" → PPV.</div>
       </div>
-      <button class="cp" data-copy="fuck 🥵🥵 okay that's... wow. you have no idea what that just did to me"><span class="cp-icon">📋</span></button>
     </div>
 
     <div class="step">
       <span class="step-num step-pos">B</span>
       <div class="step-body">
         <div class="step-technique"><span class="tone-dot tone-pos"></span> During Rapport (unexpected)</div>
-        <div class="step-msg">omg 🙈 you don't waste time huh 😏 that's actually really hot though ngl</div>
-        <div class="step-why">If it comes during rapport, she's "surprised but into it." Use to fast-track to teasing.</div>
+        <div class="variants">
+          <div class="variant"><span class="var-label">1</span><div class="step-msg">omg 🙈 you don't waste time huh 😏 that's actually really hot though ngl</div><button class="cp" data-copy="omg 🙈 you don't waste time huh 😏 that's actually really hot though ngl"><span class="cp-icon">📋</span></button></div>
+          <div class="variant"><span class="var-label">2</span><div class="step-msg">woah 🙈 I wasn't expecting that but... damn 😏</div><button class="cp" data-copy="woah 🙈 I wasn't expecting that but... damn 😏"><span class="cp-icon">📋</span></button></div>
+        </div>
+        <div class="step-why">If it comes during rapport, she's "surprised but into it." Fast-track to teasing.</div>
       </div>
-      <button class="cp" data-copy="omg 🙈 you don't waste time huh 😏 that's actually really hot though ngl"><span class="cp-icon">📋</span></button>
     </div>
 
     <div class="step">
       <span class="step-num step-pos">C</span>
       <div class="step-body">
         <div class="step-technique"><span class="tone-dot tone-pos"></span> Leverage for PPV</div>
-        <div class="step-msg">you can't just send me that and expect me not to do something about it 🥵 hold on...</div>
-        <div class="step-note">✏️ Follow this with a WAIT (1-2 min) then send the next PPV. His pic "caused" her to record.</div>
+        <div class="variants">
+          <div class="variant"><span class="var-label">1</span><div class="step-msg">you can't just send me that and expect me not to do something about it 🥵 hold on...</div><button class="cp" data-copy="you can't just send me that and expect me not to do something about it 🥵 hold on..."><span class="cp-icon">📋</span></button></div>
+          <div class="variant"><span class="var-label">2</span><div class="step-msg">okay you just made me do something... give me a sec 🥵</div><button class="cp" data-copy="okay you just made me do something... give me a sec 🥵"><span class="cp-icon">📋</span></button></div>
+        </div>
+        <div class="step-note">&#9998; Follow with WAIT (1-2 min) then send the next PPV. His pic "caused" her to record.</div>
         <div class="step-why">His dick pic → she "had to" record something. HE caused this. Maximum ego + reciprocity.</div>
       </div>
-      <button class="cp" data-copy="you can't just send me that and expect me not to do something about it 🥵 hold on..."><span class="cp-icon">📋</span></button>
     </div>
   </div>
 </div>
@@ -919,12 +1041,12 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
   <div class="protocol-header">
     <span class="p-code p-code-sit">SIT-HORNY</span>
     <span class="p-name">Mid-sexting boosters</span>
-    <span class="p-steps">8 options</span>
-    <span class="p-type">pick any, mix & match</span>
-    <span class="toggle">▼</span>
+    <span class="p-steps">8 scripts</span>
+    <span class="p-type">pick any, mix &amp; match</span>
+    <span class="toggle">&#9660;</span>
   </div>
   <div class="protocol-body">
-    <div class="p-desc">Filler messages to maintain sexual energy between script messages. NOT a sequence — chatter picks from this pool whenever they need an extra boost.</div>
+    <div class="p-desc">Filler messages to maintain sexual energy between script messages. NOT a sequence &mdash; chatter picks from this pool whenever they need a boost.</div>
 
     <div class="pool-grid">
       <div class="pool-item"><span class="pool-text">fuckkk 🥵</span><button class="cp" data-copy="fuckkk 🥵"><span class="cp-icon">📋</span></button></div>
@@ -940,13 +1062,13 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
 </div>
 
 <div style="text-align:center;padding:24px 0 10px;color:var(--muted);font-size:.73rem">
-  Chatting Wizard · Script Manager · 2026<br>
-  PUTRI — Objection & Resistance Handling · Draft v1
+  Chatting Wizard &middot; Script Manager &middot; 2026<br>
+  PUTRI &mdash; Objection & Resistance Handling &middot; v2 (with variants)
 </div>
 
 </div><!-- /page -->
 
-<button class="top-btn" id="top-btn">↑</button>
+<button class="top-btn" id="top-btn">&uarr;</button>
 
 <script>
 document.addEventListener('click', e => {
