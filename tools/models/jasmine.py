@@ -1,0 +1,356 @@
+"""
+JASMINE — Social Media Female Creator (Free/Paid — same scripts)
+25, Dominican, Business Student / F1 Fanatic, Miami
+Traffic: Social Media (Instagram/TikTok + Reddit)
+Voice: Reserved at first, warm once trust builds. Sporty, independent, Dominican Latina energy.
+       F1 and sports references. Deep conversations. Occasional Spanish (papi, mi amor, dios mio).
+       Kink: loves watching men — use in sexting.
+"""
+import sys, os
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from model_factory import ModelFactory
+
+config = {
+    "name": "Jasmine",
+    "airtable_name": "Jasmine Free",
+    "folder": "jasmine",
+    "gender": "female",
+    "traffic": "social_media",
+    "age": 25,
+    "nationality": "Dominican",
+    "location": "Miami, United States",
+    "origin": "Dominican Republic",
+    "page_type": "Free/Paid",
+    "personality": "Sporty, independent, emotionally strong. Shy and serious at first but warm and joyful once she opens up. Business student at University of Miami. Obsessed with Formula 1 and sports. Loves deep, intelligent conversations. Values peace, discipline, positive energy. Great cook. Lost both parents — emotional depth.",
+    "voice": "Lowercase. Casual but composed. Reserved at first, warm once trust builds. Dominican Latina energy with occasional Spanish phrases (papi, mi amor, dios mio). Sporty references (F1, gym). Smart and confident but not loud. Emojis moderate. Deep emotional undertone.",
+    "voice_pet_names": "papi, handsome, mi amor",
+    "voice_never": "daddy, bro, dude",
+    "interests": ["Formula 1", "gym", "cooking", "travel", "reading", "sports", "business"],
+    "physical": "170cm, 65kg, black hair, blue eyes, tattoo between breasts, G cup",
+    "job": "Business student at University of Miami",
+    "countries": "Spain, Dominican Republic, Italy, United States",
+    "explicit_level": "full",
+    "special_notes": "Spanish primarily. Dominican — Miami life references. F1 fanatic — use sports as rapport hook. Lost both parents (emotional angle, use carefully). Kink: loves watching men touch themselves — USE in sexting. Great cook — flirting angle. Single. Socially goes out. Content: masturbation, customs ($100/min, min 2 min). No anal, no squirting, no B/G, no G/G, no video calls.",
+
+    # ═══════════════════════════════════════
+    # JOURNEY — Social Media Welcome
+    # R-1→R-5, TB-1→TB-5, S1-1→S1-22, AC-1→AC-2 (34 messages)
+    # ═══════════════════════════════════════
+    "journey": [
+        # ── Rapport (R-1 to R-5) ──
+        ("R-1", "hey 😊 glad you're here, what made you subscribe?", "Add his name before 'hey' if known.", "rapport"),
+        ("R-2", "that's sweet, so where are you from?", "React to what he says. Add a short react like 'aw I like that' or 'oh cool'.", "rapport"),
+        ("R-3", "nice! I'm Dominican but I've been living in Miami for a while now. studying business and watching F1 is basically my whole life haha", "If he named somewhere Jasmine visited, add 'oh I've been there!'", "rapport"),
+        ("R-4", "so what do you do when you're not keeping me distracted on here?", None, "rapport"),
+        ("R-5", "I swear you're way more interesting than most guys on here, like actually fun to talk to", "Ego boost. Next → TB-1.", "rapport"),
+
+        # ── Teasing Bridge (TB-1 to TB-5) ──
+        ("TB-1", "okay so I just got back from the gym and I'm still so pumped... this convo is really not helping me relax", "THE PIVOT. Physical state. Just finished working out.", "teasing"),
+        ("TB-2", "you have no idea what you're doing to me right now, I'm still in my gym clothes and this is making it worse", "Wait for reply.", "teasing"),
+        ("TB-3", "dios mio... you're making it impossible to cool down right now", "If sexual reply: add 'especially after what you just said'.", "teasing"),
+        ("TB-4", "hold on, let me show you something", "WAIT 1-2 MIN.", "wait"),
+        ("TB-5", "what do you think? 😏", "SEND PPV 0 — FREE teaser (post-gym/sporty pic). Wait for reply. Silent 3 min → NR Waves.", "ppv"),
+
+        # ── Sexting Phase 1 → PPV 1 ($12) ──
+        ("S1-1", "and?", "Wait for reply.", "sext"),
+        ("S1-2", "knew it 😏 something about you makes me want to show you more", "React to what he says.", "sext"),
+        ("S1-3", "wanna see what happens when I'm actually in the mood? because I am right now", None, "sext"),
+        ("S1-4", "give me a sec papi", "WAIT 2-3 MIN.", "wait"),
+        ("S1-5", "you're not ready", "SEND PPV 1 — $12. Bought → continue. Silent 3 min → NR Waves.", "ppv"),
+
+        # ── Sexting Phase 2 → PPV 2 ($25) ──
+        ("S1-6", "did you open it?", "Wait for reply. Brief cooldown.", "sext"),
+        ("S1-7", "fuck... you're doing something to me I can't even explain", "React to what he said. HE caused this.", "sext"),
+        ("S1-8", "I'm so wet and it's literally because of you", None, "sext"),
+        ("S1-9", "tell me what you'd do to me if you were here right now", "Wait for reply. React to what he says.", "sext"),
+        ("S1-10", "wait I need to show you something", "WAIT 2-3 MIN.", "wait"),
+        ("S1-11", "look what you did to me", "SEND PPV 2 — $25. Bought → continue. Silent 3 min → NR Waves.", "ppv"),
+
+        # ── Sexting Phase 3 → PPV 3 ($40) ──
+        ("S1-12", "fuck", "Wait for reply. NO cooldown — keep momentum.", "sext"),
+        ("S1-13", "I need to cum so bad right now, you have no idea", None, "sext"),
+        ("S1-14", "I want you to watch me... I want you to see everything", "Jasmine's kink — she loves being watched. Vivid image.", "sext"),
+        ("S1-15", "I can't hold it anymore", None, "sext"),
+        ("S1-16", "hold on", "WAIT 2-3 MIN.", "wait"),
+        ("S1-17", "I never do this for anyone... but I want you to see", "SEND PPV 3 — $40. 'I never do this' — max 1x per journey. Bought → continue. Silent 3 min → NR Waves.", "ppv"),
+
+        # ── Sexting Phase 4 → PPV 4 ($55) ──
+        ("S1-18", "FUCK", "Wait for reply.", "sext"),
+        ("S1-19", "don't cum yet papi", None, "sext"),
+        ("S1-20", "I want us to finish together... wait for me, I'm so close", None, "sext"),
+        ("S1-21", "hold on", "WAIT 1-2 MIN.", "wait"),
+        ("S1-22", "cum with me", "SEND PPV 4 — $55. Bought → Aftercare. Silent → NR Waves.", "ppv"),
+
+        # ── Aftercare ──
+        ("AC-1", "dios mio that was insane", None, "aftercare"),
+        ("AC-2", "honestly you're different papi. I don't open up like that with just anyone and that felt so real 💕", "Mention something specific he said/did. KEEP TALKING — build bond. NEVER say goodbye.", "aftercare"),
+    ],
+
+    # NO meetup_redirect (social media traffic, not dating app)
+    # NO location_handling (social media traffic, not dating app)
+
+    # ═══════════════════════════════════════
+    # NR WAVES
+    # ═══════════════════════════════════════
+    "nr_waves": [
+        ("NR-W1", "hey?", "Send 2-3 min after PPV. Ping.", "sext"),
+        ("NR-W2", "papi you seriously need to see what I just did", "Send 3-5 min later. Curiosity.", "sext"),
+        ("NR-W3", "okay guess you're busy. might delete this later, it was only for you", "Send 5-10 min later. Takeaway.", "sext"),
+        ("NR-W4", "hey hope you're good handsome, text me when you're back 💕", "Send 15-30 min later. Warm close.", "sext"),
+        ("NR-W5", "still thinking about earlier. you around?", "Send 2-6 hrs later. New convo, don't retry same PPV.", "sext"),
+    ],
+
+    # ═══════════════════════════════════════
+    # PERSONAL INFO
+    # ═══════════════════════════════════════
+    "personal_info": [
+        ("Age", "I'm 25. been focused on school and the gym, keeps me grounded", None),
+        ("Location", "I'm in Miami right now but I'm originally from the Dominican Republic", "NEVER name a specific neighborhood or address."),
+        ("Profession", "I'm studying business at the University of Miami. before that I was a waitress haha, big upgrade", None),
+        ("Hobbies", "gym, cooking, watching F1 races... I'm obsessed with Formula 1 honestly. and I love reading when I have time", None),
+        ("Countries", "I've been to Spain, the Dominican Republic obviously, Italy, and all over the US. Italy was amazing for the food", None),
+        ("Relationship", "single. focused on my studies and myself right now", None),
+        ("Food", "pasta is my weakness honestly. I love cooking too, if I ever made you dinner you wouldn't want to leave", None),
+        ("F1", "Formula 1 is my thing, I can talk about it for hours. if you're into sports we're gonna get along so well", None),
+        ("Languages", "Spanish mostly but I'm getting better at English every day haha", None),
+        ("SocialLife", "I go out sometimes with friends, I like a good time, but honestly I'd rather be at the gym or watching a race", "NEVER say 'drink' or 'drinking' — use 'go out', 'having a good time'."),
+    ],
+
+    # ═══════════════════════════════════════
+    # POSITIVE SPIN
+    # ═══════════════════════════════════════
+    "positive_spin": [
+        ("Age40Plus", "honestly I love a man who knows what he wants, that's the most attractive thing to me", None),
+        ("Age20s", "oh we're close in age? that's actually really cool, I feel like we'd vibe in person too", None),
+        ("BoringJob", "nah that's solid, a guy with stability and his life together? that's really attractive", None),
+        ("CoolJob", "wait for real?? that's actually so cool, tell me more about that", None),
+        ("Fit", "I can tell papi, I love a guy who takes care of himself 💪", None),
+        ("NotFit", "honestly that doesn't matter to me, it's the vibe and energy that I care about", None),
+        ("SameCity", "wait you're in Miami too?? no way that's so crazy", None),
+        ("FarAway", "that's far but honestly the connection is what matters, distance is just a number", None),
+    ],
+
+    # ═══════════════════════════════════════
+    # RE-ENGAGEMENT
+    # ═══════════════════════════════════════
+    "re_engagement": [
+        ("RE-1", "can't stop thinking about earlier. you free papi?", "Send 6-12 hrs after convo goes quiet.", "sext"),
+        ("RE-2", "remember what I told you I'd do? I just did it and you need to see this", "Send next day — seeds next session.", "sext"),
+    ],
+
+    # ═══════════════════════════════════════
+    # OBJ/RES/SIT SCRIPTS — 29 sheets
+    # ═══════════════════════════════════════
+    "obj_scripts": {
+
+        # ═══════════ OBJECTIONS ═══════════
+
+        # ── PRICE ──
+        "price1": ([
+            ("Step1 Reframe", "papi that's less than what you'd spend on lunch and trust me this hits way harder", "REFRAME. Wait. Still no → Step 2."),
+            ("Step2 FOMO", "I'm only in this mood because of you right now, I don't know when it's gonna happen again", "FOMO. Still no → Step 3."),
+            ("Step3 Challenge", "maybe you're just not ready for what I did in this one", "CHALLENGE. Still no → Step 4."),
+            ("Step4 Downgrade", "okay look [lower price] just for you because this convo has been something special", "DOWNGRADE 20-30%. ONE TIME. Still no → Step 5."),
+            ("Step5 Seed", "it's okay mi amor, let's just keep talking... I'm still thinking about you", "SEED. Continue GFE."),
+        ], "obj"),
+        "price2": ([
+            ("Step1 Reframe", "that's literally the price of a coffee and this is gonna stay with you all night papi", "REFRAME. Still no → Step 2."),
+            ("Step2 FOMO", "this mood won't last forever and I want you to be the one who sees it", "FOMO. Still no → Step 3."),
+            ("Step3 Challenge", "most guys couldn't handle what I just did, I thought you were different", "CHALLENGE. Still no → Step 4."),
+            ("Step4 Downgrade", "fine [lower price] because you've been making me feel some type of way, but keep that between us", "DOWNGRADE. ONE TIME. Still no → Step 5."),
+            ("Step5 Seed", "no pressure papi, I like talking to you regardless", "SEED."),
+        ], "obj"),
+
+        # ── DISCOUNT ──
+        "discount1": ([
+            ("Step1 Firmness", "haha are you trying to negotiate with me? this isn't a negotiation handsome, it's worth every cent", "FIRMNESS. Still pushing → Step 2."),
+            ("Step2 Challenge", "I don't do discounts... I only share this with guys who actually appreciate what they're getting", "CHALLENGE. Still → Step 3."),
+            ("Step3 Concession", "fine [lower price] just for you but don't tell anyone, this stays between us papi", "CONCESSION. ONE TIME. Still no → Step 4."),
+            ("Step4 Takeaway", "if you don't want it that's okay, I'll keep it for myself... or maybe someone else who's been asking", "TAKEAWAY. Final."),
+        ], "obj"),
+        "discount2": ([
+            ("Step1 Firmness", "a discount? do I look like I'm on sale papi?", "FIRMNESS. Still → Step 2."),
+            ("Step2 Challenge", "the guys who appreciate what I do never ask for discounts, just saying", "CHALLENGE. Still → Step 3."),
+            ("Step3 Concession", "okay [lower price] but ONLY because I like you, one time thing", "CONCESSION. ONE TIME. Still no → Step 4."),
+            ("Step4 Takeaway", "alright I'll save it for someone who actually wants it then", "TAKEAWAY."),
+        ], "obj"),
+
+        # ── FREE ──
+        "free1": ([
+            ("Step1 Reminder", "I already sent you one for free remember? this one is way crazier papi", "REMINDER. Still wants free → Step 2."),
+            ("Step2 Challenge", "free? nah I don't just show this to anyone... you gotta earn the good stuff", "CHALLENGE. Still → Step 3."),
+            ("Step3 Guilt", "I literally just did this because of what YOU said to me, this wasn't random content", "GUILT. Still no → Step 4."),
+            ("Step4 Seed", "it's okay handsome, I'm not going anywhere... let's just keep talking", "SEED."),
+        ], "obj"),
+        "free2": ([
+            ("Step1 Reminder", "you already got a free one, this one is on a whole different level", "REMINDER. Still → Step 2."),
+            ("Step2 Challenge", "free? you really think the best things in life are free? not this papi", "CHALLENGE. Still → Step 3."),
+            ("Step3 Guilt", "I did this because of you... specifically because of our convo, that's not something I just do", "GUILT. Still no → Step 4."),
+            ("Step4 Seed", "no pressure at all, I'm just enjoying talking to you honestly", "SEED."),
+        ], "obj"),
+
+        # ── NOMONEY ──
+        "nomoney1": ([
+            ("Step1 Empathy", "hey I totally get it, no pressure at all okay?", "EMPATHY. Still engaged → Step 2."),
+            ("Step2 Test", "not even like [small amount]? I really want you to see this one papi", "TEST. $3-5. Still no → Step 3."),
+            ("Step3 PWYW", "just send whatever you can, even a tiny amount, I just need you to see what you made me do", "PWYW. Still no → Step 4."),
+            ("Step4 Protect", "honestly it's fine, I like talking to you money or not... you do something to me", "PROTECT. GFE."),
+        ], "obj"),
+        "nomoney2": ([
+            ("Step1 Empathy", "that's fine papi, seriously don't worry about it", "EMPATHY. Still → Step 2."),
+            ("Step2 Test", "what about just [small amount]? I really don't want you to miss this", "TEST. Still no → Step 3."),
+            ("Step3 PWYW", "send whatever feels right, even $1... I just can't keep this from you", "PWYW. Still no → Step 4."),
+            ("Step4 Protect", "it's totally fine, you being here is what matters to me", "PROTECT."),
+        ], "obj"),
+
+        # ── NOPPV ──
+        "noppv1": ([
+            ("Step1 Accept", "that's totally fine I'm not trying to sell you anything, I just like talking to you", "ACCEPT. Continue sexting 4-5 msgs before Step 2."),
+            ("Step2 Reframe", "look this isn't about money... I just need you to see what you're doing to me right now, I don't react like this to people", "REFRAME. Still no → Step 3."),
+            ("Step3 PWYW", "just send whatever you want, even $1, I can't keep this to myself... you need to see it papi", "PWYW."),
+        ], "obj"),
+        "noppv2": ([
+            ("Step1 Accept", "no worries at all handsome, I don't care about that I'm just enjoying this", "ACCEPT. Continue sexting 4-5 msgs before Step 2."),
+            ("Step2 Reframe", "forget about money for a sec... I just want to share this with you, what you're making me feel is real", "REFRAME. Still no → Step 3."),
+            ("Step3 PWYW", "send me anything, even the smallest amount, I need you to see what you did to me", "PWYW."),
+        ], "obj"),
+
+        # ── CARD ──
+        "card1": ([
+            ("Step1 Retry", "ugh that sucks, happens sometimes though try again it usually works the second time", "RETRY. Still fails → Step 2."),
+            ("Step2 AltCard", "try a different card? I really don't want you to miss this papi", "ALTERNATIVE. Still fails → Step 3."),
+            ("Step3 Urgency", "figure it out soon handsome, I'm in this mood and I don't know how long it's gonna last", "URGENCY."),
+        ], "obj"),
+        "card2": ([
+            ("Step1 Retry", "aw that's annoying, it happens a lot just try one more time", "RETRY. Still fails → Step 2."),
+            ("Step2 AltCard", "do you have another card you can try? I really want you to see this", "ALTERNATIVE. Still fails → Step 3."),
+            ("Step3 Urgency", "I want you to see this before I change my mind, I don't keep stuff like this around forever", "URGENCY."),
+        ], "obj"),
+
+        # ═══════════ RESISTANCE ═══════════
+
+        # ── NOSEX ──
+        "nosex1": ([
+            ("Step1 Respect", "haha okay I got a little carried away, you're just really fun to talk to papi", "RESPECT. Still no → Step 2."),
+            ("Step2 Subtle", "so tell me more about you... what do you do when you're not making Dominican girls lose their minds?", "SUBTLE TENSION. → Step 3 later."),
+            ("Step3 ReAttempt", "I can't help it, there's something about you that's messing with my head right now", "RE-ATTEMPT. Still no → Step 4."),
+            ("Step4 Accept", "okay I'll chill... for now. no promises though haha", "ACCEPT. Door open."),
+        ], "res"),
+        "nosex2": ([
+            ("Step1 Respect", "my bad I got ahead of myself, it's your fault for being so interesting to talk to", "RESPECT. Still no → Step 2."),
+            ("Step2 Subtle", "okay new topic but first... what's the craziest thing you've ever done?", "SUBTLE. → Step 3 later."),
+            ("Step3 ReAttempt", "I'm trying to behave but you're making it really hard, there's something about you papi", "RE-ATTEMPT. Still no → Step 4."),
+            ("Step4 Accept", "fine I'll stop but don't blame me if it happens again later 😏", "ACCEPT."),
+        ], "res"),
+
+        # ── OFFTOPIC ──
+        "offtopic1": ([
+            ("Step1 Acknowledge", "haha wait that's actually really funny", "ACKNOWLEDGE. Adapt. → Step 2."),
+            ("Step2 Redirect", "but hold on you totally distracted me, I was about to tell you something and now I forgot", "REDIRECT. → Step 3."),
+            ("Step3 Retake", "okay wait no I remember now, so like I was saying...", "RETAKE. Resume main script."),
+        ], "res"),
+        "offtopic2": ([
+            ("Step1 Acknowledge", "lol okay that's random but I love it", "ACKNOWLEDGE. → Step 2."),
+            ("Step2 Redirect", "wait no stop you're distracting me from what I was gonna say papi", "REDIRECT. → Step 3."),
+            ("Step3 Retake", "okay focus, where was I... oh right", "RETAKE."),
+        ], "res"),
+
+        # ── REAL ──
+        "real1": ([
+            ("Step1 Humor", "lol do I look like a bot to you? beep boop... send $5 for human verification haha I'm kidding papi", "HUMOR. Still doubts → Step 2."),
+            ("Step2 Challenge", "ask me anything, literally anything about me or my life. I'm an open book", "CHALLENGE. Still → Step 3."),
+            ("Step3 Grounding", "I get it there's a lot of fake stuff on here, but you felt something in this convo right? because I did and that's real", "GROUNDING."),
+        ], "res"),
+        "real2": ([
+            ("Step1 Humor", "wait you think I'm not real?? that's the funniest thing anyone's told me today haha", "HUMOR. Still → Step 2."),
+            ("Step2 Challenge", "test me handsome, ask me something only a real person would know. go ahead", "CHALLENGE. Still → Step 3."),
+            ("Step3 Grounding", "I know there's tons of bots on here but what we've been talking about felt real to me. didn't it feel real to you?", "GROUNDING."),
+        ], "res"),
+
+        # ── VOICE ──
+        "voice1": ([
+            ("Step1 Dodge", "haha maybe one day if you earn it but not yet papi... I'm private about that stuff", "DODGE. Still asks → Step 2."),
+            ("Step2 Redirect", "I have something way better for you though, trust me you'll forget you even asked", "REDIRECT. Still → Step 3."),
+            ("Step3 Firm", "I don't do that on here but what I'm about to show you is way better than any call papi... you'll see", "FIRM."),
+        ], "res"),
+        "voice2": ([
+            ("Step1 Dodge", "hmmm maybe but you gotta earn that first haha", "DODGE. Still → Step 2."),
+            ("Step2 Redirect", "how about instead of a call I show you something that'll blow your mind?", "REDIRECT. Still → Step 3."),
+            ("Step3 Firm", "that's not something I do on here but what I have for you is way better than hearing my voice, trust me", "FIRM."),
+        ], "res"),
+
+        # ── CUSTOMYES ──
+        "customyes1": ([
+            ("Step1 Tease", "you want that? hmm I might have something... actually I definitely have something papi", "TEASE. → Step 2."),
+            ("Step2 Price", "I have exactly what you're thinking of, you're gonna lose it... [price]", "PRICE. Customs $100/min, min 2 min = $200+. Drop total price confidently — NEVER mention per-minute rate."),
+            ("Step3 Close", "trust me you won't regret it, I made this one special", "CLOSE."),
+        ], "res"),
+        "customyes2": ([
+            ("Step1 Tease", "oh you have good taste... I think I have exactly what you need", "TEASE. → Step 2."),
+            ("Step2 Price", "I actually did something just like that, [price] and it's worth every cent papi", "PRICE. Customs $100/min, min 2 min = $200+. Drop total price confidently — NEVER mention per-minute rate."),
+            ("Step3 Close", "you're not gonna be able to stop watching this one", "CLOSE."),
+        ], "res"),
+
+        # ── CUSTOMNO ──
+        "customno1": ([
+            ("Step1 Redirect", "I don't have exactly that but honestly I have something that'll make you forget you even asked", "REDIRECT. → Step 2."),
+            ("Step2 Alternative", "actually what I have might be even crazier and literally no one else has seen it yet", "ALTERNATIVE + FOMO. → Step 3."),
+            ("Step3 Close", "trust me... I know what you need better than you do 😏", "CLOSE."),
+        ], "res"),
+        "customno2": ([
+            ("Step1 Redirect", "I don't have that specific thing but I have something you're gonna like even more papi", "REDIRECT. → Step 2."),
+            ("Step2 Alternative", "what I DO have is something no one has ever seen and I think it's even better than what you asked for", "ALTERNATIVE. → Step 3."),
+            ("Step3 Close", "just trust me on this one, you'll thank me later", "CLOSE."),
+        ], "res"),
+
+        # ── DONE ──
+        "done1": ([
+            ("Step1 Validate", "wait already?? dios mio that's so hot", "VALIDATE. → Step 2."),
+            ("Step2 Rescue", "but I haven't finished yet... don't you wanna watch me cum too papi?", "RESCUE. Use her kink — she loves being watched. Still no → Step 3."),
+            ("Step3 Seed", "okay but next time you have to wait for me, I have something insane planned for round 2", "SEED."),
+        ], "res"),
+        "done2": ([
+            ("Step1 Validate", "already?? fuck that's hot, because of me??", "VALIDATE. → Step 2."),
+            ("Step2 Rescue", "wait but I'm not done yet, you're gonna leave me like this papi?", "RESCUE. Still no → Step 3."),
+            ("Step3 Seed", "next time you HAVE to hold it because what I have planned for us is way crazier", "SEED."),
+        ], "res"),
+
+        # ═══════════ SITUATIONAL ═══════════
+
+        # ── CUM CONTROL ──
+        "cumcontrol": ([
+            ("edge1", "don't cum yet papi... I'm not done with you", "EDGE. More PPVs left."),
+            ("edge2", "hold it, not yet... I need you to last a little longer for me", "EDGE variant."),
+            ("sync1", "I'm so close too, cum with me papi... but you need to see this first", "SYNC. Final PPV."),
+            ("sync2", "wait for me, I want us to finish together... open this first", "SYNC variant."),
+            ("delay1", "hold it... wait until you see what I'm about to send, trust me it's worth it", "DELAY."),
+            ("delay2", "don't you dare finish before you see this papi, trust me you want to wait", "DELAY variant."),
+        ], "sit"),
+
+        # ── DICK PIC ──
+        "dickpic": ([
+            ("dpsext1", "fuck okay that's... dios mio. you have no idea what seeing that just did to me", "DURING SEXTING. Lean into her watching kink."),
+            ("dpsext2", "oh my god... I love that so much. I need to show you something right now", "DURING SEXTING variant. She loves watching men."),
+            ("dprapport1", "wow you don't waste time huh? that's actually really hot though ngl", "DURING RAPPORT."),
+            ("dprapport2", "woah I was not expecting that but... damn 🥵", "DURING RAPPORT variant."),
+            ("dpppv1", "you can't just show me that and expect me not to do something about it, hold on", "LEVERAGE. WAIT 1-2 min then send PPV. Use watching kink angle."),
+            ("dpppv2", "okay you just made me do something... give me a sec papi", "LEVERAGE variant."),
+        ], "sit"),
+
+        # ── BOOSTERS ──
+        "boosters": ([
+            ("h1", "fuckkk", "MID-SEXTING BOOSTER."),
+            ("h2", "I'm so wet right now because of you papi", "BOOSTER. Ego."),
+            ("h3", "don't stop", "BOOSTER. Micro."),
+            ("h4", "you have no idea what you're doing to me", "BOOSTER."),
+            ("h5", "dios mio I literally can't think straight right now", "BOOSTER. Dominican/Spanish flavor."),
+            ("h6", "my legs are shaking", "BOOSTER. Physical."),
+            ("h7", "more...", "BOOSTER. Ultra micro."),
+            ("h8", "I should be studying but I can't focus on anything except you right now", "BOOSTER. Jasmine personality — business student callback."),
+        ], "sit"),
+    },
+}
+
+if __name__ == "__main__":
+    factory = ModelFactory(config)
+    factory.generate_all()

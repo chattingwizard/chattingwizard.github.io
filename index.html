@@ -7,62 +7,37 @@
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { background: #0d1117; color: #e6edf3; font-family: 'Segoe UI', system-ui, sans-serif; min-height: 100vh; }
-
   .header { text-align: center; padding: 50px 20px 30px; }
   .header h1 { font-size: 2.2em; color: #58a6ff; margin-bottom: 8px; }
   .header p { color: #8b949e; font-size: 1em; max-width: 500px; margin: 0 auto; }
-
-  .container { max-width: 900px; margin: 0 auto; padding: 20px; }
-
+  .header .count { color: #3fb950; font-weight: 700; font-size: 1.1em; margin-top: 8px; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
   .section-title { font-size: 1.1em; color: #8b949e; text-transform: uppercase; letter-spacing: 1px; margin: 40px 0 16px 0; padding-bottom: 8px; border-bottom: 1px solid #21262d; }
-
   .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
-
-  .card { background: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 20px; transition: all 0.2s; text-decoration: none; color: inherit; display: block; }
+  .card { background: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 20px; transition: all 0.2s; }
   .card:hover { border-color: #58a6ff; box-shadow: 0 4px 20px rgba(88,166,255,0.1); }
-
   .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
   .card-name { font-size: 1.3em; font-weight: 700; }
-  .card-badge { font-size: 0.7em; padding: 3px 10px; border-radius: 20px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+  .card-badge { font-size: 0.7em; padding: 3px 10px; border-radius: 20px; font-weight: 600; text-transform: uppercase; }
   .badge-live { background: #3fb95022; color: #3fb950; border: 1px solid #3fb95044; }
-  .badge-soon { background: #d2992222; color: #d29922; border: 1px solid #d2992244; }
-
-  .card-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
-  .meta-tag { font-size: 0.8em; color: #8b949e; background: #1c2129; padding: 2px 8px; border-radius: 4px; }
-
+  .card-meta { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+  .meta-tag { font-size: 0.75em; color: #8b949e; background: #1c2129; padding: 2px 8px; border-radius: 4px; }
   .card-traffic { font-size: 0.85em; color: #8b949e; margin-bottom: 8px; }
   .card-traffic strong { color: #e6edf3; }
-
-  .card-stats { display: flex; gap: 16px; margin-top: 12px; padding-top: 12px; border-top: 1px solid #21262d; }
-  .stat { text-align: center; flex: 1; }
-  .stat-num { font-size: 1.2em; font-weight: 700; }
-  .stat-label { font-size: 0.7em; color: #8b949e; text-transform: uppercase; }
-  .stat-green { color: #3fb950; }
-  .stat-blue { color: #58a6ff; }
-  .stat-red { color: #f85149; }
-
-  .empty-card { background: #161b22; border: 1px dashed #30363d; border-radius: 12px; padding: 20px; text-align: center; color: #484f58; }
-  .empty-card .icon { font-size: 2em; margin-bottom: 8px; }
-  .empty-card p { font-size: 0.9em; }
-
-  .card-actions { display: flex; gap: 10px; margin-top: 12px; padding-top: 12px; border-top: 1px solid #21262d; }
-  .btn-guide, .btn-xlsx { flex: 1; text-align: center; padding: 8px 12px; border-radius: 8px; font-size: 0.8em; font-weight: 600; text-decoration: none; transition: all 0.2s; }
+  .card-actions { display: flex; gap: 8px; margin-top: 12px; padding-top: 12px; border-top: 1px solid #21262d; }
+  .btn-guide, .btn-xlsx { flex: 1; text-align: center; padding: 7px 10px; border-radius: 8px; font-size: 0.75em; font-weight: 600; text-decoration: none; transition: all 0.2s; }
   .btn-guide { background: #58a6ff22; color: #58a6ff; border: 1px solid #58a6ff44; }
   .btn-guide:hover { background: #58a6ff33; }
   .btn-xlsx { background: #3fb95022; color: #3fb950; border: 1px solid #3fb95044; }
   .btn-xlsx:hover { background: #3fb95033; }
-
-  .footer { text-align: center; padding: 50px 20px; color: #484f58; font-size: 0.8em; }
-
-  .alert-bar { background: #161b22; border: 1px solid #f8514933; border-radius: 10px; padding: 14px 20px; margin: 20px 0 30px 0; display: flex; align-items: center; gap: 12px; }
+  .empty-card { background: #161b22; border: 1px dashed #30363d; border-radius: 12px; padding: 20px; text-align: center; color: #484f58; }
+  .empty-card .icon { font-size: 2em; margin-bottom: 8px; }
+  .alert-bar { background: #161b22; border: 1px solid #f8514933; border-radius: 10px; padding: 14px 20px; margin: 0 0 16px 0; display: flex; align-items: center; gap: 12px; }
   .alert-bar .icon { font-size: 1.3em; }
   .alert-bar .text { font-size: 0.9em; color: #f85149; }
   .alert-bar .text strong { color: #e6edf3; }
-
-  @media (max-width: 600px) {
-    .grid { grid-template-columns: 1fr; }
-    .header h1 { font-size: 1.6em; }
-  }
+  .footer { text-align: center; padding: 50px 20px; color: #484f58; font-size: 0.8em; }
+  @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } .header h1 { font-size: 1.6em; } }
 </style>
 </head>
 <body>
@@ -70,12 +45,12 @@
 <div class="header">
   <h1>CW Scripts</h1>
   <p>Script guides for chatters — Chatting Wizard</p>
+  <div class="count">25 creators live</div>
 </div>
 
 <div class="container">
 
-  <!-- FEMALE CREATORS FIRST -->
-  <div class="section-title">Female Creators</div>
+  <div class="section-title">Female Creators (22)</div>
   <div class="grid">
 
     <div class="card">
@@ -87,30 +62,419 @@
         <span class="meta-tag">25 yrs</span>
         <span class="meta-tag">Indonesian</span>
         <span class="meta-tag">Free Page</span>
+        
       </div>
       <div class="card-traffic">Traffic: <strong>Social Media</strong></div>
-      <div class="card-stats">
-        <div class="stat"><div class="stat-num stat-green">$130</div><div class="stat-label">Revenue</div></div>
-        <div class="stat"><div class="stat-num stat-blue">43</div><div class="stat-label">Messages</div></div>
-        <div class="stat"><div class="stat-num stat-red">4</div><div class="stat-label">PPVs</div></div>
-      </div>
       <div class="card-actions">
-        <a href="putri/" class="btn-guide">📖 Chatter Guide</a>
+        <a href="putri/" class="btn-guide">📖 Guide</a>
         <a href="putri/objections.html" class="btn-guide" style="background:#f8514922;color:#f85149;border-color:#f8514944">🛡️ OBJ/RES</a>
-        <a href="putri/Putri_Complete_Infloww.xlsx" download class="btn-xlsx">📥 Download XLSX</a>
+        <a href="putri/Putri_Complete_Infloww.xlsx" download class="btn-xlsx">📥 XLSX</a>
       </div>
     </div>
 
-    <div class="empty-card">
-      <div class="icon">🔜</div>
-      <p>Irina, Jessica, Eva, Isabella...<br>Coming soon</p>
+    <div class="card">
+      <div class="card-header">
+        <span class="card-name">Riri VIP</span>
+        <span class="card-badge badge-live">LIVE</span>
+      </div>
+      <div class="card-meta">
+        <span class="meta-tag">22 yrs</span>
+        <span class="meta-tag">Italian</span>
+        <span class="meta-tag">Paid Page</span>
+        
+      </div>
+      <div class="card-traffic">Traffic: <strong>OFTV / Social</strong></div>
+      <div class="card-actions">
+        <a href="riri/" class="btn-guide">📖 Guide</a>
+        <a href="riri/objections.html" class="btn-guide" style="background:#f8514922;color:#f85149;border-color:#f8514944">🛡️ OBJ/RES</a>
+        <a href="riri/Riri_Complete_Infloww.xlsx" download class="btn-xlsx">📥 XLSX</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-name">Eva Martinez</span>
+        <span class="card-badge badge-live">LIVE</span>
+      </div>
+      <div class="card-meta">
+        <span class="meta-tag">24 yrs</span>
+        <span class="meta-tag">Colombian</span>
+        <span class="meta-tag">Paid Page</span>
+        
+      </div>
+      <div class="card-traffic">Traffic: <strong>IG/TikTok</strong></div>
+      <div class="card-actions">
+        <a href="eva/" class="btn-guide">📖 Guide</a>
+        <a href="eva/objections.html" class="btn-guide" style="background:#f8514922;color:#f85149;border-color:#f8514944">🛡️ OBJ/RES</a>
+        <a href="eva/Eva_Complete_Infloww.xlsx" download class="btn-xlsx">📥 XLSX</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-name">Antonella</span>
+        <span class="card-badge badge-live">LIVE</span>
+      </div>
+      <div class="card-meta">
+        <span class="meta-tag">19 yrs</span>
+        <span class="meta-tag">American</span>
+        <span class="meta-tag">Mixed</span>
+        
+      </div>
+      <div class="card-traffic">Traffic: <strong>Reddit</strong></div>
+      <div class="card-actions">
+        <a href="antonella/" class="btn-guide">📖 Guide</a>
+        <a href="antonella/objections.html" class="btn-guide" style="background:#f8514922;color:#f85149;border-color:#f8514944">🛡️ OBJ/RES</a>
+        <a href="antonella/Antonella_Complete_Infloww.xlsx" download class="btn-xlsx">📥 XLSX</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-name">Jasmine</span>
+        <span class="card-badge badge-live">LIVE</span>
+      </div>
+      <div class="card-meta">
+        <span class="meta-tag">25 yrs</span>
+        <span class="meta-tag">Dominican</span>
+        <span class="meta-tag">Free/Paid</span>
+        
+      </div>
+      <div class="card-traffic">Traffic: <strong>IG/TikTok + Reddit</strong></div>
+      <div class="card-actions">
+        <a href="jasmine/" class="btn-guide">📖 Guide</a>
+        <a href="jasmine/objections.html" class="btn-guide" style="background:#f8514922;color:#f85149;border-color:#f8514944">🛡️ OBJ/RES</a>
+        <a href="jasmine/Jasmine_Complete_Infloww.xlsx" download class="btn-xlsx">📥 XLSX</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-name">Fernanda</span>
+        <span class="card-badge badge-live">LIVE</span>
+      </div>
+      <div class="card-meta">
+        <span class="meta-tag">46 yrs</span>
+        <span class="meta-tag">Brazilian</span>
+        <span class="meta-tag">Paid Page</span>
+        
+      </div>
+      <div class="card-traffic">Traffic: <strong>IG/TikTok</strong></div>
+      <div class="card-actions">
+        <a href="fernanda/" class="btn-guide">📖 Guide</a>
+        <a href="fernanda/objections.html" class="btn-guide" style="background:#f8514922;color:#f85149;border-color:#f8514944">🛡️ OBJ/RES</a>
+        <a href="fernanda/Fernanda_Complete_Infloww.xlsx" download class="btn-xlsx">📥 XLSX</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-name">Isabella</span>
+        <span class="card-badge badge-live">LIVE</span>
+      </div>
+      <div class="card-meta">
+        <span class="meta-tag">25 yrs</span>
+        <span class="meta-tag">Colombian/Scottish</span>
+        <span class="meta-tag">Free/Paid</span>
+        
+      </div>
+      <div class="card-traffic">Traffic: <strong>Social Media</strong></div>
+      <div class="card-actions">
+        <a href="isabella/" class="btn-guide">📖 Guide</a>
+        <a href="isabella/objections.html" class="btn-guide" style="background:#f8514922;color:#f85149;border-color:#f8514944">🛡️ OBJ/RES</a>
+        <a href="isabella/Isabella_Complete_Infloww.xlsx" download class="btn-xlsx">📥 XLSX</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-name">Jessica</span>
+        <span class="card-badge badge-live">LIVE</span>
+      </div>
+      <div class="card-meta">
+        <span class="meta-tag">34 yrs</span>
+        <span class="meta-tag">American</span>
+        <span class="meta-tag">Mixed</span>
+        <span class="meta-tag" style="background:#f8514922;color:#f85149">NON-EXPLICIT</span>
+      </div>
+      <div class="card-traffic">Traffic: <strong>Reddit</strong></div>
+      <div class="card-actions">
+        <a href="jessica/" class="btn-guide">📖 Guide</a>
+        <a href="jessica/objections.html" class="btn-guide" style="background:#f8514922;color:#f85149;border-color:#f8514944">🛡️ OBJ/RES</a>
+        <a href="jessica/Jessica_Complete_Infloww.xlsx" download class="btn-xlsx">📥 XLSX</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-name">Jessica FP</span>
+        <span class="card-badge badge-live">LIVE</span>
+      </div>
+      <div class="card-meta">
+        <span class="meta-tag">36 yrs</span>
+        <span class="meta-tag">Argentinian</span>
+        <span class="meta-tag">Free/Paid</span>
+        
+      </div>
+      <div class="card-traffic">Traffic: <strong>Reddit + IG</strong></div>
+      <div class="card-actions">
+        <a href="jessica-fp/" class="btn-guide">📖 Guide</a>
+        <a href="jessica-fp/objections.html" class="btn-guide" style="background:#f8514922;color:#f85149;border-color:#f8514944">🛡️ OBJ/RES</a>
+        <a href="jessica-fp/JessicaFP_Complete_Infloww.xlsx" download class="btn-xlsx">📥 XLSX</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-name">Maddison</span>
+        <span class="card-badge badge-live">LIVE</span>
+      </div>
+      <div class="card-meta">
+        <span class="meta-tag">18 yrs</span>
+        <span class="meta-tag">American</span>
+        <span class="meta-tag">Paid Page</span>
+        
+      </div>
+      <div class="card-traffic">Traffic: <strong>Reddit</strong></div>
+      <div class="card-actions">
+        <a href="maddison/" class="btn-guide">📖 Guide</a>
+        <a href="maddison/objections.html" class="btn-guide" style="background:#f8514922;color:#f85149;border-color:#f8514944">🛡️ OBJ/RES</a>
+        <a href="maddison/Maddison_Complete_Infloww.xlsx" download class="btn-xlsx">📥 XLSX</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-name">Vera</span>
+        <span class="card-badge badge-live">LIVE</span>
+      </div>
+      <div class="card-meta">
+        <span class="meta-tag">19 yrs</span>
+        <span class="meta-tag">American</span>
+        <span class="meta-tag">Free Page</span>
+        
+      </div>
+      <div class="card-traffic">Traffic: <strong>Reddit</strong></div>
+      <div class="card-actions">
+        <a href="vera/" class="btn-guide">📖 Guide</a>
+        <a href="vera/objections.html" class="btn-guide" style="background:#f8514922;color:#f85149;border-color:#f8514944">🛡️ OBJ/RES</a>
+        <a href="vera/Vera_Complete_Infloww.xlsx" download class="btn-xlsx">📥 XLSX</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-name">Mia Luna</span>
+        <span class="card-badge badge-live">LIVE</span>
+      </div>
+      <div class="card-meta">
+        <span class="meta-tag">20 yrs</span>
+        <span class="meta-tag">Argentinian</span>
+        <span class="meta-tag">Free Page</span>
+        
+      </div>
+      <div class="card-traffic">Traffic: <strong>Reddit</strong></div>
+      <div class="card-actions">
+        <a href="mialuna/" class="btn-guide">📖 Guide</a>
+        <a href="mialuna/objections.html" class="btn-guide" style="background:#f8514922;color:#f85149;border-color:#f8514944">🛡️ OBJ/RES</a>
+        <a href="mialuna/MiaLuna_Complete_Infloww.xlsx" download class="btn-xlsx">📥 XLSX</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-name">Mia Brooks</span>
+        <span class="card-badge badge-live">LIVE</span>
+      </div>
+      <div class="card-meta">
+        <span class="meta-tag">23 yrs</span>
+        <span class="meta-tag">Spanish</span>
+        <span class="meta-tag">Free Page</span>
+        
+      </div>
+      <div class="card-traffic">Traffic: <strong>IG/TikTok</strong></div>
+      <div class="card-actions">
+        <a href="miabrooks/" class="btn-guide">📖 Guide</a>
+        <a href="miabrooks/objections.html" class="btn-guide" style="background:#f8514922;color:#f85149;border-color:#f8514944">🛡️ OBJ/RES</a>
+        <a href="miabrooks/MiaBrooks_Complete_Infloww.xlsx" download class="btn-xlsx">📥 XLSX</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-name">Ashley</span>
+        <span class="card-badge badge-live">LIVE</span>
+      </div>
+      <div class="card-meta">
+        <span class="meta-tag">26 yrs</span>
+        <span class="meta-tag">Spanish</span>
+        <span class="meta-tag">Free Page</span>
+        
+      </div>
+      <div class="card-traffic">Traffic: <strong>IG/TikTok</strong></div>
+      <div class="card-actions">
+        <a href="ashley/" class="btn-guide">📖 Guide</a>
+        <a href="ashley/objections.html" class="btn-guide" style="background:#f8514922;color:#f85149;border-color:#f8514944">🛡️ OBJ/RES</a>
+        <a href="ashley/Ashley_Complete_Infloww.xlsx" download class="btn-xlsx">📥 XLSX</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-name">Chayla Grey</span>
+        <span class="card-badge badge-live">LIVE</span>
+      </div>
+      <div class="card-meta">
+        <span class="meta-tag">24 yrs</span>
+        <span class="meta-tag">Brazilian</span>
+        <span class="meta-tag">Free Page</span>
+        
+      </div>
+      <div class="card-traffic">Traffic: <strong>IG/TikTok</strong></div>
+      <div class="card-actions">
+        <a href="chayla/" class="btn-guide">📖 Guide</a>
+        <a href="chayla/objections.html" class="btn-guide" style="background:#f8514922;color:#f85149;border-color:#f8514944">🛡️ OBJ/RES</a>
+        <a href="chayla/ChaylaGrey_Complete_Infloww.xlsx" download class="btn-xlsx">📥 XLSX</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-name">Emily Bell</span>
+        <span class="card-badge badge-live">LIVE</span>
+      </div>
+      <div class="card-meta">
+        <span class="meta-tag">21 yrs</span>
+        <span class="meta-tag">Argentinian</span>
+        <span class="meta-tag">Free Page</span>
+        
+      </div>
+      <div class="card-traffic">Traffic: <strong>IG/TikTok</strong></div>
+      <div class="card-actions">
+        <a href="emilybell/" class="btn-guide">📖 Guide</a>
+        <a href="emilybell/objections.html" class="btn-guide" style="background:#f8514922;color:#f85149;border-color:#f8514944">🛡️ OBJ/RES</a>
+        <a href="emilybell/EmilyBell_Complete_Infloww.xlsx" download class="btn-xlsx">📥 XLSX</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-name">Lana Monroe</span>
+        <span class="card-badge badge-live">LIVE</span>
+      </div>
+      <div class="card-meta">
+        <span class="meta-tag">18 yrs</span>
+        <span class="meta-tag">Argentinian</span>
+        <span class="meta-tag">Free Page</span>
+        
+      </div>
+      <div class="card-traffic">Traffic: <strong>IG/TikTok</strong></div>
+      <div class="card-actions">
+        <a href="lana/" class="btn-guide">📖 Guide</a>
+        <a href="lana/objections.html" class="btn-guide" style="background:#f8514922;color:#f85149;border-color:#f8514944">🛡️ OBJ/RES</a>
+        <a href="lana/Lana_Complete_Infloww.xlsx" download class="btn-xlsx">📥 XLSX</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-name">Lia Kuroki</span>
+        <span class="card-badge badge-live">LIVE</span>
+      </div>
+      <div class="card-meta">
+        <span class="meta-tag">22 yrs</span>
+        <span class="meta-tag">Japanese</span>
+        <span class="meta-tag">Free Page</span>
+        
+      </div>
+      <div class="card-traffic">Traffic: <strong>IG/TikTok</strong></div>
+      <div class="card-actions">
+        <a href="lia/" class="btn-guide">📖 Guide</a>
+        <a href="lia/objections.html" class="btn-guide" style="background:#f8514922;color:#f85149;border-color:#f8514944">🛡️ OBJ/RES</a>
+        <a href="lia/Lia_Complete_Infloww.xlsx" download class="btn-xlsx">📥 XLSX</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-name">Lina</span>
+        <span class="card-badge badge-live">LIVE</span>
+      </div>
+      <div class="card-meta">
+        <span class="meta-tag">24 yrs</span>
+        <span class="meta-tag">Spanish</span>
+        <span class="meta-tag">Free Page</span>
+        
+      </div>
+      <div class="card-traffic">Traffic: <strong>IG/TikTok</strong></div>
+      <div class="card-actions">
+        <a href="lina/" class="btn-guide">📖 Guide</a>
+        <a href="lina/objections.html" class="btn-guide" style="background:#f8514922;color:#f85149;border-color:#f8514944">🛡️ OBJ/RES</a>
+        <a href="lina/Lina_Complete_Infloww.xlsx" download class="btn-xlsx">📥 XLSX</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-name">Faby Monteiro</span>
+        <span class="card-badge badge-live">LIVE</span>
+      </div>
+      <div class="card-meta">
+        <span class="meta-tag">45 yrs</span>
+        <span class="meta-tag">Brazilian</span>
+        <span class="meta-tag">Paid Page</span>
+        
+      </div>
+      <div class="card-traffic">Traffic: <strong>Other</strong></div>
+      <div class="card-actions">
+        <a href="faby/" class="btn-guide">📖 Guide</a>
+        <a href="faby/objections.html" class="btn-guide" style="background:#f8514922;color:#f85149;border-color:#f8514944">🛡️ OBJ/RES</a>
+        <a href="faby/Faby_Complete_Infloww.xlsx" download class="btn-xlsx">📥 XLSX</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-name">Irina</span>
+        <span class="card-badge badge-live">LIVE</span>
+      </div>
+      <div class="card-meta">
+        <span class="meta-tag">23 yrs</span>
+        <span class="meta-tag">American/Russian</span>
+        <span class="meta-tag">Paid Page</span>
+        <span class="meta-tag" style="background:#f8514922;color:#f85149">NON-EXPLICIT</span>
+      </div>
+      <div class="card-traffic">Traffic: <strong>IG/TikTok</strong></div>
+      <div class="card-actions">
+        <a href="irina/" class="btn-guide">📖 Guide</a>
+        <a href="irina/objections.html" class="btn-guide" style="background:#f8514922;color:#f85149;border-color:#f8514944">🛡️ OBJ/RES</a>
+        <a href="irina/Irina_Complete_Infloww.xlsx" download class="btn-xlsx">📥 XLSX</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-name">Zansi</span>
+        <span class="card-badge badge-live">LIVE</span>
+      </div>
+      <div class="card-meta">
+        <span class="meta-tag">26 yrs</span>
+        <span class="meta-tag">American</span>
+        <span class="meta-tag">Free Page</span>
+        
+      </div>
+      <div class="card-traffic">Traffic: <strong>Social Media</strong></div>
+      <div class="card-actions">
+        <a href="zansi/" class="btn-guide">📖 Guide</a>
+        <a href="zansi/objections.html" class="btn-guide" style="background:#f8514922;color:#f85149;border-color:#f8514944">🛡️ OBJ/RES</a>
+        <a href="zansi/Zansi_Complete_Infloww.xlsx" download class="btn-xlsx">📥 XLSX</a>
+      </div>
     </div>
 
   </div>
 
-  <!-- MALE CREATORS SECOND -->
-  <div class="section-title">Male Creators — Dating App Traffic</div>
-  <div class="alert-bar" style="margin:0 0 16px 0">
+  <div class="section-title">Male Creators — Dating App Traffic (2)</div>
+  <div class="alert-bar">
     <div class="icon">⚠️</div>
     <div class="text"><strong>Dating App Traffic:</strong> These creators have the Meetup Redirect (MR) module. NEVER say "meet/meeting" on OnlyFans.</div>
   </div>
@@ -125,17 +489,13 @@
         <span class="meta-tag">20 yrs</span>
         <span class="meta-tag">Italian</span>
         <span class="meta-tag">Paid Page</span>
+        
       </div>
-      <div class="card-traffic">Traffic: <strong>Dating Apps (Gay Male)</strong></div>
-      <div class="card-stats">
-        <div class="stat"><div class="stat-num stat-green">$132</div><div class="stat-label">Revenue</div></div>
-        <div class="stat"><div class="stat-num stat-blue">73</div><div class="stat-label">Messages</div></div>
-        <div class="stat"><div class="stat-num stat-red">4</div><div class="stat-label">PPVs</div></div>
-      </div>
+      <div class="card-traffic">Traffic: <strong>Dating Apps (Gay)</strong></div>
       <div class="card-actions">
-        <a href="max/" class="btn-guide">📖 Chatter Guide</a>
+        <a href="max/" class="btn-guide">📖 Guide</a>
         <a href="max/objections.html" class="btn-guide" style="background:#f8514922;color:#f85149;border-color:#f8514944">🛡️ OBJ/RES</a>
-        <a href="max/Max_Complete_Infloww.xlsx" download class="btn-xlsx">📥 Download XLSX</a>
+        <a href="max/Max_Complete_Infloww.xlsx" download class="btn-xlsx">📥 XLSX</a>
       </div>
     </div>
 
@@ -148,23 +508,43 @@
         <span class="meta-tag">25 yrs</span>
         <span class="meta-tag">Turkish</span>
         <span class="meta-tag">Paid Page</span>
+        
       </div>
-      <div class="card-traffic">Traffic: <strong>Dating Apps (Gay Male)</strong></div>
-      <div class="card-stats">
-        <div class="stat"><div class="stat-num stat-green">$—</div><div class="stat-label">Revenue</div></div>
-        <div class="stat"><div class="stat-num stat-blue">—</div><div class="stat-label">Messages</div></div>
-        <div class="stat"><div class="stat-num stat-red">4</div><div class="stat-label">PPVs</div></div>
-      </div>
+      <div class="card-traffic">Traffic: <strong>Dating Apps (Gay)</strong></div>
       <div class="card-actions">
-        <a href="marco/" class="btn-guide">📖 Chatter Guide</a>
+        <a href="marco/" class="btn-guide">📖 Guide</a>
         <a href="marco/objections.html" class="btn-guide" style="background:#f8514922;color:#f85149;border-color:#f8514944">🛡️ OBJ/RES</a>
-        <a href="marco/Marco_Complete_Infloww.xlsx" download class="btn-xlsx">📥 Download XLSX</a>
+        <a href="marco/Marco_Complete_Infloww.xlsx" download class="btn-xlsx">📥 XLSX</a>
       </div>
     </div>
 
     <div class="empty-card">
       <div class="icon">🔜</div>
-      <p>More male creators coming soon<br>(Lucas, Liam, Peter, Damon, Stefan, Zack, Noah...)</p>
+      <p>Lucas, Liam, Peter, Damon, Stefan, Zack, Noah, Jack Hollywood<br>Coming soon</p>
+    </div>
+
+  </div>
+
+  <div class="section-title">Male Creators — Other Traffic (1)</div>
+  <div class="grid">
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-name">Jockurworld</span>
+        <span class="card-badge badge-live">LIVE</span>
+      </div>
+      <div class="card-meta">
+        <span class="meta-tag">26 yrs</span>
+        <span class="meta-tag">American</span>
+        <span class="meta-tag">Paid Page</span>
+        
+      </div>
+      <div class="card-traffic">Traffic: <strong>Twitter/X</strong></div>
+      <div class="card-actions">
+        <a href="jockurworld/" class="btn-guide">📖 Guide</a>
+        <a href="jockurworld/objections.html" class="btn-guide" style="background:#f8514922;color:#f85149;border-color:#f8514944">🛡️ OBJ/RES</a>
+        <a href="jockurworld/Jockurworld_Complete_Infloww.xlsx" download class="btn-xlsx">📥 XLSX</a>
+      </div>
     </div>
 
   </div>
