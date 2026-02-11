@@ -13,137 +13,159 @@
 }
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;line-height:1.6;padding:0 0 60px}
-.page{max-width:680px;margin:0 auto;padding:16px 14px}
+.page{max-width:960px;margin:0 auto;padding:16px 20px}
 
-/* ── HERO ── */
-.hero{text-align:center;padding:30px 16px 18px;border-bottom:1px solid var(--border)}
-.hero-photo{width:90px;height:90px;border-radius:50%;object-fit:cover;border:3px solid var(--accent);margin-bottom:10px}
-.hero h1{font-size:2rem;font-weight:800;letter-spacing:3px;margin-bottom:2px}
-.hero .tagline{color:var(--muted);font-size:.9rem;margin-bottom:4px}
-
-/* ── PROFILE ── */
-.profile{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px 20px;margin:20px 0}
-.profile h2{font-size:.82rem;color:var(--accent);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:14px;display:flex;align-items:center;gap:6px}
-.profile-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 20px}
-.profile-item .label{color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.5px}
-.profile-item .value{font-size:.9rem}
-
-/* ── VOICE ── */
-.voice-box{background:#1c262f;border-left:3px solid var(--purple);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0;font-size:.88rem;color:#c4b5e0}
-.voice-box strong{color:var(--purple)}
-
-/* ── RULES ── */
-.rules-box{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 20px;margin:14px 0}
-.rules-box h2{font-size:.82rem;color:var(--orange);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;display:flex;align-items:center;gap:6px}
-.rules-box ul{list-style:none;padding:0}
-.rules-box li{font-size:.85rem;padding:5px 0;color:var(--text);display:flex;gap:8px}
-.rules-box li::before{content:"→";color:var(--orange);font-weight:700;flex-shrink:0}
-
-/* ── JOURNEY ROADMAP ── */
-.roadmap{display:flex;align-items:center;gap:0;padding:16px 0 8px;overflow-x:auto;-webkit-overflow-scrolling:touch;margin:12px 0}
-.roadmap::-webkit-scrollbar{height:4px}
-.roadmap::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
-.rm-step{display:flex;align-items:center;gap:0;flex-shrink:0}
-.rm-label{font-size:.68rem;color:var(--muted);background:var(--card);border:1px solid var(--border);padding:4px 10px;border-radius:14px;white-space:nowrap;transition:.15s}
-.rm-label.rm-ppv{background:#3fb95014;color:var(--green);border-color:#3fb95033;font-weight:600}
-.rm-arrow{color:var(--border);font-size:.65rem;padding:0 2px}
-
-/* ── PHASE HEADER ── */
-.phase{margin:24px 0 0}
-.phase-header{display:flex;align-items:center;gap:10px;padding:14px 14px 10px;border-left:3px solid var(--border);margin-bottom:6px}
-.phase-header .phase-emoji{font-size:1.3rem}
-.phase-header .phase-name{font-size:1.05rem;font-weight:700;flex:1}
-.phase-header .phase-meta{font-size:.75rem;color:var(--muted);background:var(--bg);padding:3px 10px;border-radius:12px;border:1px solid var(--border)}
-.phase-green{border-left-color:var(--green)}
-.phase-purple{border-left-color:var(--purple)}
-.phase-red{border-left-color:var(--red)}
-.phase-blue{border-left-color:var(--accent)}
-.phase-desc{font-size:.82rem;color:var(--muted);padding:0 0 8px 17px;font-style:italic}
-
-/* ── MESSAGE ROW ── */
-.msg{display:flex;gap:10px;align-items:flex-start;padding:10px 14px;border-radius:10px;margin:3px 0;transition:background .12s}
-.msg:hover{background:#161b2266}
-.msg-id{font-size:.66rem;color:var(--muted);background:var(--card);border:1px solid var(--border);padding:2px 6px;border-radius:4px;white-space:nowrap;margin-top:4px;flex-shrink:0;min-width:36px;text-align:center;font-weight:600}
-.msg-body{flex:1;min-width:0}
-.msg-text{font-size:1.06rem;line-height:1.5;word-wrap:break-word}
-
-/* ── COPY BUTTON ── */
-.cp{background:none;border:1px solid transparent;color:var(--border);width:30px;height:30px;border-radius:6px;cursor:pointer;font-size:.8rem;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:.15s;position:relative;margin-top:2px;opacity:.4}
-.msg:hover .cp{opacity:1;border-color:var(--border)}
-.cp:hover{background:var(--card);color:var(--text);opacity:1}
-.cp.ok{border-color:var(--green);color:var(--green);opacity:1}
-.cp.ok::after{content:"✓";position:absolute;font-size:.75rem;font-weight:700}
-.cp.ok .cp-icon{visibility:hidden}
-
-/* ── NOTE TYPES ── */
-/* ✏️ EDIT — chatter must modify the message */
-.note-edit{background:#e3b34112;border-left:3px solid var(--yellow);padding:6px 10px;border-radius:0 6px 6px 0;margin:5px 0 2px;font-size:.82rem;color:var(--yellow)}
-
-/* ⏳ WAIT — stop and wait for fan reply */
-.note-wait{display:inline-block;font-size:.76rem;font-weight:600;padding:3px 10px;border-radius:6px;background:#d2992218;color:var(--orange);margin:5px 0 2px}
-
-/* 🤖 AUTO — system sends this automatically */
-.note-auto{font-size:.78rem;color:var(--muted);margin:4px 0 2px;padding:4px 10px;background:#8b949e0a;border-radius:6px}
-
-/* 💡 TIP — context, strategy, FYI */
-.note-tip{font-size:.78rem;color:#8b949e;margin:3px 0 1px;font-style:italic}
-
-/* ── BADGES ── */
-.badge{display:inline-block;font-size:.78rem;font-weight:600;padding:3px 10px;border-radius:6px;margin:5px 0 2px;vertical-align:middle}
-.badge-wait{background:#d2992218;color:var(--orange)}
-
-/* ── PPV MOMENT ── */
-.ppv-moment{background:#3fb95010;border:1px solid #3fb95028;border-radius:10px;padding:10px 14px;margin:6px 0;display:flex;align-items:center;gap:10px}
-.ppv-moment .ppv-icon{font-size:1.3rem}
-.ppv-moment .ppv-label{font-size:.92rem;font-weight:600;color:var(--green);flex:1}
-.ppv-moment .ppv-price{font-size:1rem;font-weight:700;color:var(--green);background:#3fb95018;padding:3px 12px;border-radius:6px}
-
-/* ── BRANCH INFO ── */
-.branch-info{font-size:.8rem;color:var(--muted);padding:4px 14px 8px;display:flex;gap:12px;flex-wrap:wrap}
-.branch-info .bi{display:flex;align-items:center;gap:4px}
-.branch-info .bi-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.branch-info a{color:inherit;text-decoration:underline;text-underline-offset:2px}
-
-/* ── DIVIDER ── */
-.divider{border:none;border-top:1px solid var(--border);margin:28px 0}
-.divider-label{text-align:center;font-size:.75rem;color:var(--muted);margin:-10px 0 20px;background:var(--bg);display:inline-block;padding:0 12px;position:relative;left:50%;transform:translateX(-50%)}
-
-/* ── NR WAVE TABLE ── */
-.ref-section{margin:20px 0 0}
-.ref-title{font-size:1rem;font-weight:700;padding:10px 0;border-bottom:2px solid var(--border);margin-bottom:10px;display:flex;align-items:center;gap:8px}
-.nr-table{width:100%;border-collapse:collapse;margin:8px 0}
-.nr-table th{text-align:left;font-size:.7rem;color:var(--muted);text-transform:uppercase;padding:6px 10px;border-bottom:1px solid var(--border)}
-.nr-table td{padding:9px 10px;font-size:.9rem;border-bottom:1px solid #21262d;vertical-align:top}
-.nr-table .nr-timing{color:var(--orange);font-size:.78rem;white-space:nowrap}
-.nr-table .nr-tech{color:var(--muted);font-size:.78rem;font-style:italic}
-
-/* ── QUICK REF ── */
-.qr-grid{display:grid;gap:5px;margin:8px 0}
-.qr-item{display:flex;gap:10px;align-items:flex-start;padding:10px 14px;background:var(--card);border:1px solid var(--border);border-radius:8px}
-.qr-label{font-size:.72rem;font-weight:600;color:var(--accent);text-transform:uppercase;min-width:64px;margin-top:3px;flex-shrink:0}
-.qr-text{flex:1;font-size:.92rem}
-
-/* ── POSITIVE SPIN ── */
-.spin-item{display:flex;gap:12px;align-items:flex-start;padding:10px 14px;background:var(--card);border:1px solid var(--border);border-radius:8px}
-.spin-trigger{font-size:.8rem;color:var(--muted);min-width:80px;flex-shrink:0;margin-top:2px}
-.spin-text{flex:1;font-size:.92rem}
-
-/* ── SCROLL TOP ── */
-.top-btn{position:fixed;bottom:16px;right:16px;width:38px;height:38px;border-radius:50%;background:var(--card);border:1px solid var(--border);color:var(--muted);font-size:1rem;cursor:pointer;display:none;align-items:center;justify-content:center;z-index:100;transition:.15s}
-.top-btn:hover{color:var(--text);border-color:var(--muted)}
-.top-btn.show{display:flex}
-
-/* ── BACK BUTTON ── */
+/* ── BACK ── */
 .back-btn{display:inline-flex;align-items:center;gap:6px;color:var(--muted);text-decoration:none;font-size:.85rem;padding:10px 0;transition:.15s}
 .back-btn:hover{color:var(--accent)}
 
-@media(max-width:500px){
-  .page{padding:10px 8px}
+/* ── HERO (compact) ── */
+.hero{display:flex;align-items:center;gap:18px;padding:20px 0 16px;border-bottom:1px solid var(--border)}
+.hero-photo{width:72px;height:72px;border-radius:50%;object-fit:cover;border:3px solid var(--accent);flex-shrink:0}
+.hero-info{flex:1}
+.hero h1{font-size:1.8rem;font-weight:800;letter-spacing:2px;line-height:1.2}
+.hero .tagline{color:var(--muted);font-size:.85rem}
+.hero .version{font-size:.75rem;color:var(--muted);margin-top:4px}
+
+/* ── STICKY TOC ── */
+.toc{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--border);padding:8px 0;margin:0 -20px;padding-left:20px;padding-right:20px;display:flex;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;transition:box-shadow .2s}
+.toc.shadow{box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.toc::-webkit-scrollbar{height:0}
+.toc a{font-size:.72rem;color:var(--muted);background:var(--card);border:1px solid var(--border);padding:4px 10px;border-radius:14px;text-decoration:none;white-space:nowrap;transition:.15s;flex-shrink:0}
+.toc a:hover,.toc a.active{color:var(--accent);border-color:var(--accent)}
+.toc a.toc-ppv{color:var(--green);border-color:#3fb95033}
+.toc a.toc-ref{color:var(--orange);border-color:#d2992233}
+
+/* ── TOP INFO GRID (2 columns) ── */
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0 0}
+
+/* ── PROFILE ── */
+.profile{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 18px}
+.profile h2{font-size:.78rem;color:var(--accent);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:12px;display:flex;align-items:center;gap:6px}
+.profile-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 16px}
+.profile-item .label{color:var(--muted);font-size:.7rem;text-transform:uppercase;letter-spacing:.5px}
+.profile-item .value{font-size:.85rem}
+
+/* ── VOICE ── */
+.voice-box{background:#1c262f;border-left:3px solid var(--purple);padding:10px 14px;border-radius:0 8px 8px 0;margin-top:12px;font-size:.84rem;color:#c4b5e0}
+.voice-box strong{color:var(--purple)}
+
+/* ── RULES ── */
+.rules-box{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 18px}
+.rules-box h2{font-size:.78rem;color:var(--orange);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.rules-box ul{list-style:none;padding:0}
+.rules-box li{font-size:.82rem;padding:4px 0;color:var(--text);display:flex;gap:8px}
+.rules-box li::before{content:"→";color:var(--orange);font-weight:700;flex-shrink:0}
+
+/* ── ROADMAP ── */
+.roadmap{display:flex;align-items:center;gap:0;padding:14px 0 6px;overflow-x:auto;-webkit-overflow-scrolling:touch;margin:16px 0 8px}
+.roadmap::-webkit-scrollbar{height:4px}
+.roadmap::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+.rm-step{display:flex;align-items:center;gap:0;flex-shrink:0}
+.rm-label{font-size:.68rem;color:var(--muted);background:var(--card);border:1px solid var(--border);padding:4px 10px;border-radius:14px;white-space:nowrap}
+.rm-label.rm-ppv{background:#3fb95014;color:var(--green);border-color:#3fb95033;font-weight:600}
+.rm-arrow{color:var(--border);font-size:.65rem;padding:0 2px}
+
+/* ── PHASE (accordion) ── */
+.phase{margin:10px 0 0;border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.phase-header{display:flex;align-items:center;gap:10px;padding:12px 16px;cursor:pointer;user-select:none;transition:background .12s;background:var(--card)}
+.phase-header:hover{background:#1c2129}
+.phase-header .phase-emoji{font-size:1.2rem}
+.phase-header .phase-name{font-size:1rem;font-weight:700;flex:1}
+.phase-header .phase-meta{font-size:.72rem;color:var(--muted);background:var(--bg);padding:2px 10px;border-radius:12px;border:1px solid var(--border)}
+.phase-header .toggle{color:var(--muted);font-size:.8rem;transition:transform .2s;flex-shrink:0;width:20px;text-align:center}
+.phase.collapsed .toggle{transform:rotate(-90deg)}
+.phase-green .phase-header{border-left:3px solid var(--green)}
+.phase-purple .phase-header{border-left:3px solid var(--purple)}
+.phase-red .phase-header{border-left:3px solid var(--red)}
+.phase-blue .phase-header{border-left:3px solid var(--accent)}
+
+.phase-body{padding:4px 0 8px}
+.phase.collapsed .phase-body{display:none}
+.phase-desc{font-size:.8rem;color:var(--muted);padding:4px 16px 8px;font-style:italic}
+
+/* ── MESSAGE ── */
+.msg{display:flex;gap:10px;align-items:flex-start;padding:8px 16px;border-radius:8px;margin:2px 0;transition:background .12s}
+.msg:hover{background:#161b2266}
+.msg-id{font-size:.64rem;color:var(--muted);background:var(--card);border:1px solid var(--border);padding:2px 6px;border-radius:4px;white-space:nowrap;margin-top:4px;flex-shrink:0;min-width:36px;text-align:center;font-weight:600}
+.msg-body{flex:1;min-width:0}
+.msg-text{font-size:1rem;line-height:1.5;word-wrap:break-word}
+
+/* ── COPY ── */
+.cp{background:none;border:1px solid transparent;color:var(--border);width:28px;height:28px;border-radius:6px;cursor:pointer;font-size:.75rem;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:.15s;position:relative;margin-top:2px;opacity:.3}
+.msg:hover .cp,.qr-item:hover .cp,.spin-item:hover .cp,.nr-table tr:hover .cp{opacity:1;border-color:var(--border)}
+.cp:hover{background:var(--card);color:var(--text);opacity:1}
+.cp.ok{border-color:var(--green);color:var(--green);opacity:1}
+.cp.ok::after{content:"✓";position:absolute;font-size:.7rem;font-weight:700}
+.cp.ok .cp-icon{visibility:hidden}
+
+/* ── NOTES ── */
+.note-edit{background:#e3b34112;border-left:3px solid var(--yellow);padding:5px 10px;border-radius:0 6px 6px 0;margin:4px 0 2px;font-size:.8rem;color:var(--yellow)}
+.note-wait{display:inline-block;font-size:.74rem;font-weight:600;padding:2px 10px;border-radius:6px;background:#d2992218;color:var(--orange);margin:4px 0 2px}
+.note-auto{font-size:.76rem;color:var(--muted);margin:3px 0 2px;padding:3px 10px;background:#8b949e0a;border-radius:6px}
+.note-tip{font-size:.76rem;color:#8b949e;margin:3px 0 1px;font-style:italic}
+.badge{display:inline-block;font-size:.76rem;font-weight:600;padding:2px 10px;border-radius:6px;margin:4px 0 2px}
+.badge-wait{background:#d2992218;color:var(--orange)}
+
+/* ── PPV ── */
+.ppv-moment{background:#3fb95010;border:1px solid #3fb95028;border-radius:10px;padding:8px 14px;margin:6px 16px;display:flex;align-items:center;gap:10px}
+.ppv-moment .ppv-icon{font-size:1.2rem}
+.ppv-moment .ppv-label{font-size:.88rem;font-weight:600;color:var(--green);flex:1}
+.ppv-moment .ppv-price{font-size:.95rem;font-weight:700;color:var(--green);background:#3fb95018;padding:2px 12px;border-radius:6px}
+
+/* ── BRANCH ── */
+.branch-info{font-size:.78rem;color:var(--muted);padding:4px 16px 6px;display:flex;gap:12px;flex-wrap:wrap}
+.branch-info .bi{display:flex;align-items:center;gap:4px}
+.branch-info .bi-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.branch-info a{color:inherit;text-decoration:underline;text-underline-offset:2px}
+
+/* ── DIVIDER ── */
+.divider{border:none;border-top:1px solid var(--border);margin:24px 0}
+.divider-label{text-align:center;font-size:.73rem;color:var(--muted);margin:-10px 0 16px;background:var(--bg);display:inline-block;padding:0 12px;position:relative;left:50%;transform:translateX(-50%)}
+
+/* ── REFERENCE ── */
+.ref-section{margin:16px 0 0}
+.ref-title{font-size:.95rem;font-weight:700;padding:8px 0;border-bottom:2px solid var(--border);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+
+/* NR table */
+.nr-table{width:100%;border-collapse:collapse;margin:6px 0}
+.nr-table th{text-align:left;font-size:.68rem;color:var(--muted);text-transform:uppercase;padding:5px 10px;border-bottom:1px solid var(--border)}
+.nr-table td{padding:7px 10px;font-size:.88rem;border-bottom:1px solid #21262d;vertical-align:top}
+.nr-table .nr-timing{color:var(--orange);font-size:.76rem;white-space:nowrap}
+.nr-table .nr-tech{color:var(--muted);font-size:.76rem;font-style:italic}
+
+/* QR grid — 2 columns */
+.qr-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin:6px 0}
+.qr-item{display:flex;gap:8px;align-items:flex-start;padding:8px 12px;background:var(--card);border:1px solid var(--border);border-radius:8px}
+.qr-label{font-size:.7rem;font-weight:600;color:var(--accent);text-transform:uppercase;min-width:56px;margin-top:3px;flex-shrink:0}
+.qr-text{flex:1;font-size:.88rem}
+
+/* Spin grid — 2 columns */
+.spin-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin:6px 0}
+.spin-item{display:flex;gap:10px;align-items:flex-start;padding:8px 12px;background:var(--card);border:1px solid var(--border);border-radius:8px}
+.spin-trigger{font-size:.78rem;color:var(--muted);min-width:70px;flex-shrink:0;margin-top:2px}
+.spin-text{flex:1;font-size:.88rem}
+
+/* ── AFTERCARE BOX ── */
+.ac-box{background:var(--card);border:1px solid var(--accent);border-radius:10px;padding:12px 16px;margin:8px 16px}
+.ac-box .ac-title{font-size:.85rem;font-weight:600;color:var(--accent);margin-bottom:6px}
+.ac-box ul{list-style:none;padding:0}
+.ac-box li{font-size:.82rem;padding:2px 0}
+
+/* ── SCROLL TOP ── */
+.top-btn{position:fixed;bottom:16px;right:16px;width:36px;height:36px;border-radius:50%;background:var(--card);border:1px solid var(--border);color:var(--muted);font-size:1rem;cursor:pointer;display:none;align-items:center;justify-content:center;z-index:100;transition:.15s}
+.top-btn:hover{color:var(--text);border-color:var(--muted)}
+.top-btn.show{display:flex}
+
+/* ── RESPONSIVE ── */
+@media(max-width:700px){
+  .page{padding:12px 10px}
+  .info-grid{grid-template-columns:1fr}
+  .qr-grid,.spin-grid{grid-template-columns:1fr}
+  .hero{flex-direction:column;text-align:center}
+  .hero h1{font-size:1.5rem}
   .profile-grid{grid-template-columns:1fr}
-  .msg-text{font-size:.98rem}
-  .hero h1{font-size:1.6rem}
-  .branch-info{padding-left:14px;flex-direction:column;gap:4px}
-  .roadmap{padding:12px 0}
+  .toc{margin:0 -10px;padding-left:10px;padding-right:10px}
 }
 </style>
 </head>
@@ -153,45 +175,69 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
 
 <a href="../" class="back-btn">← All Creators</a>
 
-<!-- ════════ HERO ════════ -->
-<div class="hero">
+<!-- ════════ HERO (compact horizontal) ════════ -->
+<div class="hero" id="top">
   <img src="profile.jpg" alt="Putri" class="hero-photo">
-  <h1>PUTRI</h1>
-  <div class="tagline">25 · Bali, Indonesia · Cycling Vlogger 🚴‍♀️</div>
-  <div style="font-size:.8rem;color:var(--muted);margin-top:8px">New Sub Journey v4 · White Bikini Lingerie Set · Updated Feb 2026</div>
-</div>
-
-<!-- ════════ PROFILE ════════ -->
-<div class="profile">
-  <h2>👤 Character Profile</h2>
-  <div class="profile-grid">
-    <div class="profile-item"><div class="label">Personality</div><div class="value">Adventurous, playful, warm, naughty 😏</div></div>
-    <div class="profile-item"><div class="label">Job</div><div class="value">Cycling vlogger 🚴‍♀️</div></div>
-    <div class="profile-item"><div class="label">Interests</div><div class="value">Cycling, travel, exploring 🌍</div></div>
-    <div class="profile-item"><div class="label">Physical</div><div class="value">Tan skin, athletic build 💪</div></div>
-    <div class="profile-item"><div class="label">Countries visited</div><div class="value">France, Greece, Mexico, USA, Spain, UK, Thailand, Morocco, Italy</div></div>
-    <div class="profile-item"><div class="label">Status</div><div class="value">Single 💗</div></div>
+  <div class="hero-info">
+    <h1>PUTRI</h1>
+    <div class="tagline">25 · Bali, Indonesia · Cycling Vlogger 🚴‍♀️</div>
+    <div class="version">New Sub Journey v4 · White Bikini Lingerie Set · Feb 2026</div>
   </div>
 </div>
 
-<!-- ════════ VOICE ════════ -->
-<div class="voice-box">
-  <strong>🗣️ Voice:</strong> Short messages. Lowercase. Extends letters when excited ("fuckkk"). CAPS only for peak moments. Impulsive sometimes. Never paragraphs. Varies length.
-</div>
+<!-- ════════ STICKY TOC ════════ -->
+<nav class="toc" id="toc">
+  <a href="#welcome">👋 Welcome</a>
+  <a href="#rapport">💬 Rapport</a>
+  <a href="#teasing">🔥 Teasing</a>
+  <a href="#sext1" class="toc-ppv">S1 · $10</a>
+  <a href="#sext2" class="toc-ppv">S2 · $25</a>
+  <a href="#sext3" class="toc-ppv">S3 · $40</a>
+  <a href="#sext4" class="toc-ppv">S4 · $55</a>
+  <a href="#aftercare">💗 AC</a>
+  <a href="#nr-waves" class="toc-ref">NR Waves</a>
+  <a href="#personal-info" class="toc-ref">Personal</a>
+  <a href="#positive-spin" class="toc-ref">Spin</a>
+</nav>
 
-<!-- ════════ RULES ════════ -->
-<div class="rules-box">
-  <h2>⚡ Key Rules</h2>
-  <ul>
-    <li>Every message works AS-IS. Just send it. Yellow notes tell you what to edit.</li>
-    <li>Speed matters. New subs = first 48h. Never let a convo die.</li>
-    <li>WAIT means WAIT. Sub thinks she's recording. Use the time for other chats.</li>
-    <li>After every PPV: Bought → continue. Silent 3 min → NR Waves below.</li>
-    <li>Max 2 msgs in a row without sub responding.</li>
-    <li>Timing: Rapport 30-90 sec. Sexting 15-45 sec. Pauses 2-3 min.</li>
-    <li>You ARE Putri. Never break character.</li>
-    <li>Bought fast → charge more next PPV. Hesitated → charge less.</li>
-  </ul>
+<!-- ════════ INFO GRID (2 columns) ════════ -->
+<div class="info-grid">
+
+  <!-- LEFT: Profile + Voice -->
+  <div>
+    <div class="profile">
+      <h2>👤 Character Profile</h2>
+      <div class="profile-grid">
+        <div class="profile-item"><div class="label">Personality</div><div class="value">Adventurous, playful, warm, naughty 😏</div></div>
+        <div class="profile-item"><div class="label">Job</div><div class="value">Cycling vlogger 🚴‍♀️</div></div>
+        <div class="profile-item"><div class="label">Interests</div><div class="value">Cycling, travel, exploring 🌍</div></div>
+        <div class="profile-item"><div class="label">Physical</div><div class="value">Tan skin, athletic build 💪</div></div>
+        <div class="profile-item"><div class="label">Countries</div><div class="value">France, Greece, Mexico, USA, Spain, UK, Thailand, Morocco, Italy</div></div>
+        <div class="profile-item"><div class="label">Status</div><div class="value">Single 💗</div></div>
+      </div>
+    </div>
+    <div class="voice-box">
+      <strong>🗣️ Voice:</strong> Short messages. Lowercase. Extends letters when excited ("fuckkk"). CAPS only for peak moments. Impulsive sometimes. Never paragraphs. Varies length.
+    </div>
+  </div>
+
+  <!-- RIGHT: Rules -->
+  <div>
+    <div class="rules-box">
+      <h2>⚡ Key Rules</h2>
+      <ul>
+        <li>Every message works AS-IS. Just send it. Yellow notes tell you what to edit.</li>
+        <li>Speed matters. New subs = first 48h. Never let a convo die.</li>
+        <li>WAIT means WAIT. Sub thinks she's recording. Use the time for other chats.</li>
+        <li>After every PPV: Bought → continue. Silent 3 min → NR Waves below.</li>
+        <li>Max 2 msgs in a row without sub responding.</li>
+        <li>Timing: Rapport 30-90 sec. Sexting 15-45 sec. Pauses 2-3 min.</li>
+        <li>You ARE Putri. Never break character.</li>
+        <li>Bought fast → charge more next PPV. Hesitated → charge less.</li>
+      </ul>
+    </div>
+  </div>
+
 </div>
 
 <!-- ════════ ROADMAP ════════ -->
@@ -212,503 +258,244 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
 </div>
 
 <!-- ════════════════════════════════════════════════ -->
-<!--               JOURNEY STARTS HERE               -->
+<!--               JOURNEY — ACCORDION               -->
 <!-- ════════════════════════════════════════════════ -->
 
-<!-- ── WELCOME + AUTO FOLLOW-UPS ── -->
-<div class="phase">
-  <div class="phase-header phase-green">
+<!-- ── WELCOME ── -->
+<div class="phase phase-green collapsed" id="welcome">
+  <div class="phase-header">
     <span class="phase-emoji">👋</span>
     <span class="phase-name">Welcome + Auto Follow-ups</span>
-    <span class="phase-meta">3 msgs</span>
+    <span class="phase-meta">3 msgs · auto</span>
+    <span class="toggle">▼</span>
   </div>
-  <div class="phase-desc">These are sent automatically. You don't need to do anything.</div>
+  <div class="phase-body">
+    <div class="phase-desc">These are sent automatically. You don't need to do anything.</div>
 
-  <div class="msg">
-    <span class="msg-id">W-1</span>
-    <div class="msg-body">
-      <div class="msg-text">heyyy 😊 you subbed!! okay hold on, I'm sending you something special before I head out for my ride 🙈💗 brb to talk to you</div>
-      <div class="note-auto">🤖 Auto-send on subscription · Attach album (5-10 photos)</div>
-    </div>
-    <button class="cp" data-copy="heyyy 😊 you subbed!! okay hold on, I'm sending you something special before I head out for my ride 🙈💗 brb to talk to you"><span class="cp-icon">📋</span></button>
-  </div>
+    <div class="msg"><span class="msg-id">W-1</span><div class="msg-body"><div class="msg-text">heyyy 😊 you subbed!! okay hold on, I'm sending you something special before I head out for my ride 🙈💗 brb to talk to you</div><div class="note-auto">🤖 Auto-send on subscription · Attach album (5-10 photos)</div></div><button class="cp" data-copy="heyyy 😊 you subbed!! okay hold on, I'm sending you something special before I head out for my ride 🙈💗 brb to talk to you"><span class="cp-icon">📋</span></button></div>
 
-  <div class="msg">
-    <span class="msg-id">AF-1</span>
-    <div class="msg-body">
-      <div class="msg-text">honestly? I was about to leave but I keep checking my phone 😅 screw it, you're more interesting than my ride</div>
-      <div class="note-auto">🤖 Auto-send 2-3 min after W-1</div>
-    </div>
-    <button class="cp" data-copy="honestly? I was about to leave but I keep checking my phone 😅 screw it, you're more interesting than my ride"><span class="cp-icon">📋</span></button>
-  </div>
+    <div class="msg"><span class="msg-id">AF-1</span><div class="msg-body"><div class="msg-text">honestly? I was about to leave but I keep checking my phone 😅 screw it, you're more interesting than my ride</div><div class="note-auto">🤖 Auto-send 2-3 min after W-1</div></div><button class="cp" data-copy="honestly? I was about to leave but I keep checking my phone 😅 screw it, you're more interesting than my ride"><span class="cp-icon">📋</span></button></div>
 
-  <div class="msg">
-    <span class="msg-id">AF-2</span>
-    <div class="msg-body">
-      <div class="msg-text">tell me your name 💗</div>
-      <div class="note-auto">🤖 Auto-send 1-2 min after AF-1</div>
-      <div class="note-wait">⏳ Wait for his reply</div>
-      <div class="note-tip">💡 If he says something sexual → skip straight to Teasing Bridge</div>
-    </div>
-    <button class="cp" data-copy="tell me your name 💗"><span class="cp-icon">📋</span></button>
+    <div class="msg"><span class="msg-id">AF-2</span><div class="msg-body"><div class="msg-text">tell me your name 💗</div><div class="note-auto">🤖 Auto-send 1-2 min after AF-1</div><div class="note-wait">⏳ Wait for his reply</div><div class="note-tip">💡 If he says something sexual → skip straight to Teasing Bridge</div></div><button class="cp" data-copy="tell me your name 💗"><span class="cp-icon">📋</span></button></div>
   </div>
 </div>
 
 <!-- ── RAPPORT ── -->
-<div class="phase">
-  <div class="phase-header phase-green">
+<div class="phase phase-green" id="rapport">
+  <div class="phase-header">
     <span class="phase-emoji">💬</span>
     <span class="phase-name">Rapport</span>
     <span class="phase-meta">9 msgs</span>
+    <span class="toggle">▼</span>
   </div>
-  <div class="phase-desc">Build connection. He needs to feel like she's into HIM specifically.</div>
+  <div class="phase-body">
+    <div class="phase-desc">Build connection. He needs to feel like she's into HIM specifically.</div>
 
-  <div class="msg">
-    <span class="msg-id">R-1</span>
-    <div class="msg-body">
-      <div class="msg-text">hi 😊 okay be honest, what caught your eye?</div>
-      <div class="note-edit">✏️ Add his name before "hi" → "[name] hi 😊 okay be honest..."</div>
-    </div>
-    <button class="cp" data-copy="hi 😊 okay be honest, what caught your eye?"><span class="cp-icon">📋</span></button>
-  </div>
+    <div class="msg"><span class="msg-id">R-1</span><div class="msg-body"><div class="msg-text">hi 😊 okay be honest, what caught your eye?</div><div class="note-edit">✏️ Add his name before "hi" → "[name] hi 😊 okay be honest..."</div></div><button class="cp" data-copy="hi 😊 okay be honest, what caught your eye?"><span class="cp-icon">📋</span></button></div>
 
-  <div class="msg">
-    <span class="msg-id">R-2</span>
-    <div class="msg-body">
-      <div class="msg-text">mmm I like that 😏 so where are you from?</div>
-      <div class="note-edit">✏️ Add a short react before the message ("haha omg", "aww", "ooh")</div>
-    </div>
-    <button class="cp" data-copy="mmm I like that 😏 so where are you from?"><span class="cp-icon">📋</span></button>
-  </div>
+    <div class="msg"><span class="msg-id">R-2</span><div class="msg-body"><div class="msg-text">mmm I like that 😏 so where are you from?</div><div class="note-edit">✏️ Add a short react before the message ("haha omg", "aww", "ooh")</div></div><button class="cp" data-copy="mmm I like that 😏 so where are you from?"><span class="cp-icon">📋</span></button></div>
 
-  <div class="msg">
-    <span class="msg-id">R-3</span>
-    <div class="msg-body">
-      <div class="msg-text">nice! I'm from Bali but I'm literally never home 😅</div>
-      <div class="note-edit">✏️ If he named a country Putri visited → add "oh I've been there!" before "nice"</div>
-    </div>
-    <button class="cp" data-copy="nice! I'm from Bali but I'm literally never home 😅"><span class="cp-icon">📋</span></button>
-  </div>
+    <div class="msg"><span class="msg-id">R-3</span><div class="msg-body"><div class="msg-text">nice! I'm from Bali but I'm literally never home 😅</div><div class="note-edit">✏️ If he named a country Putri visited → add "oh I've been there!" before "nice"</div></div><button class="cp" data-copy="nice! I'm from Bali but I'm literally never home 😅"><span class="cp-icon">📋</span></button></div>
 
-  <div class="msg">
-    <span class="msg-id">R-4</span>
-    <div class="msg-body"><div class="msg-text">so what do you do besides making me smile rn 😏</div></div>
-    <button class="cp" data-copy="so what do you do besides making me smile rn 😏"><span class="cp-icon">📋</span></button>
-  </div>
+    <div class="msg"><span class="msg-id">R-4</span><div class="msg-body"><div class="msg-text">so what do you do besides making me smile rn 😏</div></div><button class="cp" data-copy="so what do you do besides making me smile rn 😏"><span class="cp-icon">📋</span></button></div>
 
-  <div class="msg">
-    <span class="msg-id">R-5</span>
-    <div class="msg-body"><div class="msg-text">that's actually really attractive 😊 I'm all about my bike and my camera... nothing beats riding through a country you've never been to</div></div>
-    <button class="cp" data-copy="that's actually really attractive 😊 I'm all about my bike and my camera... nothing beats riding through a country you've never been to"><span class="cp-icon">📋</span></button>
-  </div>
+    <div class="msg"><span class="msg-id">R-5</span><div class="msg-body"><div class="msg-text">that's actually really attractive 😊 I'm all about my bike and my camera... nothing beats riding through a country you've never been to</div></div><button class="cp" data-copy="that's actually really attractive 😊 I'm all about my bike and my camera... nothing beats riding through a country you've never been to"><span class="cp-icon">📋</span></button></div>
 
-  <div class="msg">
-    <span class="msg-id">R-6</span>
-    <div class="msg-body">
-      <div class="msg-text">okay I gotta say... you're actually fun to talk to. that's rare here 😏</div>
-      <div class="note-tip">💡 Ego boost — make him feel special</div>
-    </div>
-    <button class="cp" data-copy="okay I gotta say... you're actually fun to talk to. that's rare here 😏"><span class="cp-icon">📋</span></button>
-  </div>
+    <div class="msg"><span class="msg-id">R-6</span><div class="msg-body"><div class="msg-text">okay I gotta say... you're actually fun to talk to. that's rare here 😏</div><div class="note-tip">💡 Ego boost — make him feel special</div></div><button class="cp" data-copy="okay I gotta say... you're actually fun to talk to. that's rare here 😏"><span class="cp-icon">📋</span></button></div>
 
-  <div class="msg">
-    <span class="msg-id">R-7</span>
-    <div class="msg-body"><div class="msg-text">are you always this charming or just with me? 😏</div></div>
-    <button class="cp" data-copy="are you always this charming or just with me? 😏"><span class="cp-icon">📋</span></button>
-  </div>
+    <div class="msg"><span class="msg-id">R-7</span><div class="msg-body"><div class="msg-text">are you always this charming or just with me? 😏</div></div><button class="cp" data-copy="are you always this charming or just with me? 😏"><span class="cp-icon">📋</span></button></div>
 
-  <div class="msg">
-    <span class="msg-id">R-8</span>
-    <div class="msg-body"><div class="msg-text">stoppp 🙈 you're making me blush</div></div>
-    <button class="cp" data-copy="stoppp 🙈 you're making me blush"><span class="cp-icon">📋</span></button>
-  </div>
+    <div class="msg"><span class="msg-id">R-8</span><div class="msg-body"><div class="msg-text">stoppp 🙈 you're making me blush</div></div><button class="cp" data-copy="stoppp 🙈 you're making me blush"><span class="cp-icon">📋</span></button></div>
 
-  <div class="msg">
-    <span class="msg-id">R-9</span>
-    <div class="msg-body">
-      <div class="msg-text">okay I need to tell you something... don't judge me</div>
-      <div class="note-tip">💡 Cliffhanger — builds tension for the Teasing Bridge</div>
-    </div>
-    <button class="cp" data-copy="okay I need to tell you something... don't judge me"><span class="cp-icon">📋</span></button>
+    <div class="msg"><span class="msg-id">R-9</span><div class="msg-body"><div class="msg-text">okay I need to tell you something... don't judge me</div><div class="note-tip">💡 Cliffhanger — builds tension for the Teasing Bridge</div></div><button class="cp" data-copy="okay I need to tell you something... don't judge me"><span class="cp-icon">📋</span></button></div>
   </div>
 </div>
 
 <!-- ── TEASING BRIDGE ── -->
-<div class="phase">
-  <div class="phase-header phase-purple">
+<div class="phase phase-purple collapsed" id="teasing">
+  <div class="phase-header">
     <span class="phase-emoji">🔥</span>
     <span class="phase-name">Teasing Bridge</span>
     <span class="phase-meta">6 msgs · PPV 0</span>
+    <span class="toggle">▼</span>
   </div>
-  <div class="phase-desc">The pivot from friendly to sexual. She's "feeling something" because of him.</div>
+  <div class="phase-body">
+    <div class="phase-desc">The pivot from friendly to sexual. She's "feeling something" because of him.</div>
 
-  <div class="msg">
-    <span class="msg-id">TB-1</span>
-    <div class="msg-body">
-      <div class="msg-text">I'm lying in bed rn after my shower and... this conversation is doing something to me 🙈</div>
-      <div class="note-tip">💡 THE PIVOT — places her in a physical/vulnerable setting</div>
+    <div class="msg"><span class="msg-id">TB-1</span><div class="msg-body"><div class="msg-text">I'm lying in bed rn after my shower and... this conversation is doing something to me 🙈</div><div class="note-tip">💡 THE PIVOT — places her in a physical/vulnerable setting</div></div><button class="cp" data-copy="I'm lying in bed rn after my shower and... this conversation is doing something to me 🙈"><span class="cp-icon">📋</span></button></div>
+
+    <div class="msg"><span class="msg-id">TB-2</span><div class="msg-body"><div class="msg-text">like do you think about me like that? 😏</div><div class="note-wait">⏳ Wait for his reply</div></div><button class="cp" data-copy="like do you think about me like that? 😏"><span class="cp-icon">📋</span></button></div>
+
+    <div class="msg"><span class="msg-id">TB-3</span><div class="msg-body"><div class="msg-text">fuck... honestly I can't think straight rn 🥵</div><div class="note-edit">✏️ If he said something sexual → add "since you said that" after "honestly"</div></div><button class="cp" data-copy="fuck... honestly I can't think straight rn 🥵"><span class="cp-icon">📋</span></button></div>
+
+    <div class="msg"><span class="msg-id">TB-4</span><div class="msg-body"><div class="msg-text">I just got this new lingerie and I've been wanting to try it on for someone 😏 I don't do this with everyone just so you know</div></div><button class="cp" data-copy="I just got this new lingerie and I've been wanting to try it on for someone 😏 I don't do this with everyone just so you know"><span class="cp-icon">📋</span></button></div>
+
+    <div class="msg"><span class="msg-id">TB-5</span><div class="msg-body"><div class="msg-text">hold on let me put it on rn 🙈</div><span class="badge badge-wait">⏱ WAIT 1-2 MIN</span></div><button class="cp" data-copy="hold on let me put it on rn 🙈"><span class="cp-icon">📋</span></button></div>
+
+    <div class="msg"><span class="msg-id">TB-6</span><div class="msg-body"><div class="msg-text">🙈😳 what do you think</div><div class="note-wait">⏳ Wait for his reply</div></div><button class="cp" data-copy="🙈😳 what do you think"><span class="cp-icon">📋</span></button></div>
+
+    <div class="ppv-moment"><span class="ppv-icon">📎</span><span class="ppv-label">Send PPV 0</span><span class="ppv-price">FREE teaser</span></div>
+    <div class="branch-info">
+      <span class="bi"><span class="bi-dot" style="background:var(--green)"></span> Bought → continue below</span>
+      <span class="bi"><span class="bi-dot" style="background:var(--orange)"></span> Silent 3 min → <a href="#nr-waves">NR Waves ↓</a></span>
     </div>
-    <button class="cp" data-copy="I'm lying in bed rn after my shower and... this conversation is doing something to me 🙈"><span class="cp-icon">📋</span></button>
-  </div>
-
-  <div class="msg">
-    <span class="msg-id">TB-2</span>
-    <div class="msg-body">
-      <div class="msg-text">like do you think about me like that? 😏</div>
-      <div class="note-wait">⏳ Wait for his reply</div>
-    </div>
-    <button class="cp" data-copy="like do you think about me like that? 😏"><span class="cp-icon">📋</span></button>
-  </div>
-
-  <div class="msg">
-    <span class="msg-id">TB-3</span>
-    <div class="msg-body">
-      <div class="msg-text">fuck... honestly I can't think straight rn 🥵</div>
-      <div class="note-edit">✏️ If he said something sexual → add "since you said that" after "honestly"</div>
-    </div>
-    <button class="cp" data-copy="fuck... honestly I can't think straight rn 🥵"><span class="cp-icon">📋</span></button>
-  </div>
-
-  <div class="msg">
-    <span class="msg-id">TB-4</span>
-    <div class="msg-body"><div class="msg-text">I just got this new lingerie and I've been wanting to try it on for someone 😏 I don't do this with everyone just so you know</div></div>
-    <button class="cp" data-copy="I just got this new lingerie and I've been wanting to try it on for someone 😏 I don't do this with everyone just so you know"><span class="cp-icon">📋</span></button>
-  </div>
-
-  <div class="msg">
-    <span class="msg-id">TB-5</span>
-    <div class="msg-body">
-      <div class="msg-text">hold on let me put it on rn 🙈</div>
-      <span class="badge badge-wait">⏱ WAIT 1-2 MIN</span>
-    </div>
-    <button class="cp" data-copy="hold on let me put it on rn 🙈"><span class="cp-icon">📋</span></button>
-  </div>
-
-  <div class="msg">
-    <span class="msg-id">TB-6</span>
-    <div class="msg-body">
-      <div class="msg-text">🙈😳 what do you think</div>
-      <div class="note-wait">⏳ Wait for his reply</div>
-    </div>
-    <button class="cp" data-copy="🙈😳 what do you think"><span class="cp-icon">📋</span></button>
-  </div>
-
-  <div class="ppv-moment">
-    <span class="ppv-icon">📎</span>
-    <span class="ppv-label">Send PPV 0</span>
-    <span class="ppv-price">FREE teaser</span>
-  </div>
-  <div class="branch-info">
-    <span class="bi"><span class="bi-dot" style="background:var(--green)"></span> Bought → continue below</span>
-    <span class="bi"><span class="bi-dot" style="background:var(--orange)"></span> Silent 3 min → <a href="#nr-waves">NR Waves ↓</a></span>
   </div>
 </div>
 
 <!-- ── SEXTING 1 — PPV 1 $10 ── -->
-<div class="phase">
-  <div class="phase-header phase-red">
+<div class="phase phase-red collapsed" id="sext1">
+  <div class="phase-header">
     <span class="phase-emoji">🔥</span>
     <span class="phase-name">Sexting 1</span>
-    <span class="phase-meta">5 msgs · PPV 1</span>
+    <span class="phase-meta">5 msgs · PPV 1 · $10</span>
+    <span class="toggle">▼</span>
   </div>
+  <div class="phase-body">
+    <div class="msg"><span class="msg-id">S1-1</span><div class="msg-body"><div class="msg-text">sooo? 😏</div><div class="note-wait">⏳ Wait for his reply</div></div><button class="cp" data-copy="sooo? 😏"><span class="cp-icon">📋</span></button></div>
 
-  <div class="msg">
-    <span class="msg-id">S1-1</span>
-    <div class="msg-body">
-      <div class="msg-text">sooo? 😏</div>
-      <div class="note-wait">⏳ Wait for his reply</div>
+    <div class="msg"><span class="msg-id">S1-2</span><div class="msg-body"><div class="msg-text">mmm I knew you'd like it 🥵</div><div class="note-edit">✏️ Add a short react before this ("haha", "omg 🙈")</div></div><button class="cp" data-copy="mmm I knew you'd like it 🥵"><span class="cp-icon">📋</span></button></div>
+
+    <div class="msg"><span class="msg-id">S1-3</span><div class="msg-body"><div class="msg-text">I kinda wanna take the rest off for you</div></div><button class="cp" data-copy="I kinda wanna take the rest off for you"><span class="cp-icon">📋</span></button></div>
+
+    <div class="msg"><span class="msg-id">S1-4</span><div class="msg-body"><div class="msg-text">hold on baby 😏</div><span class="badge badge-wait">⏱ WAIT 2-3 MIN</span></div><button class="cp" data-copy="hold on baby 😏"><span class="cp-icon">📋</span></button></div>
+
+    <div class="msg"><span class="msg-id">S1-5</span><div class="msg-body"><div class="msg-text">couldn't help myself 🥵</div></div><button class="cp" data-copy="couldn't help myself 🥵"><span class="cp-icon">📋</span></button></div>
+
+    <div class="ppv-moment"><span class="ppv-icon">📎</span><span class="ppv-label">Send PPV 1</span><span class="ppv-price">$10</span></div>
+    <div class="branch-info">
+      <span class="bi"><span class="bi-dot" style="background:var(--green)"></span> Bought → continue below</span>
+      <span class="bi"><span class="bi-dot" style="background:var(--orange)"></span> Silent 3 min → <a href="#nr-waves">NR Waves ↓</a></span>
     </div>
-    <button class="cp" data-copy="sooo? 😏"><span class="cp-icon">📋</span></button>
-  </div>
-
-  <div class="msg">
-    <span class="msg-id">S1-2</span>
-    <div class="msg-body">
-      <div class="msg-text">mmm I knew you'd like it 🥵</div>
-      <div class="note-edit">✏️ Add a short react before this ("haha", "omg 🙈")</div>
-    </div>
-    <button class="cp" data-copy="mmm I knew you'd like it 🥵"><span class="cp-icon">📋</span></button>
-  </div>
-
-  <div class="msg">
-    <span class="msg-id">S1-3</span>
-    <div class="msg-body"><div class="msg-text">I kinda wanna take the rest off for you</div></div>
-    <button class="cp" data-copy="I kinda wanna take the rest off for you"><span class="cp-icon">📋</span></button>
-  </div>
-
-  <div class="msg">
-    <span class="msg-id">S1-4</span>
-    <div class="msg-body">
-      <div class="msg-text">hold on baby 😏</div>
-      <span class="badge badge-wait">⏱ WAIT 2-3 MIN</span>
-    </div>
-    <button class="cp" data-copy="hold on baby 😏"><span class="cp-icon">📋</span></button>
-  </div>
-
-  <div class="msg">
-    <span class="msg-id">S1-5</span>
-    <div class="msg-body"><div class="msg-text">couldn't help myself 🥵</div></div>
-    <button class="cp" data-copy="couldn't help myself 🥵"><span class="cp-icon">📋</span></button>
-  </div>
-
-  <div class="ppv-moment">
-    <span class="ppv-icon">📎</span>
-    <span class="ppv-label">Send PPV 1</span>
-    <span class="ppv-price">$10</span>
-  </div>
-  <div class="branch-info">
-    <span class="bi"><span class="bi-dot" style="background:var(--green)"></span> Bought → continue below</span>
-    <span class="bi"><span class="bi-dot" style="background:var(--orange)"></span> Silent 3 min → <a href="#nr-waves">NR Waves ↓</a></span>
   </div>
 </div>
 
 <!-- ── SEXTING 2 — PPV 2 $25 ── -->
-<div class="phase">
-  <div class="phase-header phase-red">
+<div class="phase phase-red collapsed" id="sext2">
+  <div class="phase-header">
     <span class="phase-emoji">🔥</span>
     <span class="phase-name">Sexting 2</span>
-    <span class="phase-meta">6 msgs · PPV 2</span>
+    <span class="phase-meta">6 msgs · PPV 2 · $25</span>
+    <span class="toggle">▼</span>
   </div>
+  <div class="phase-body">
+    <div class="msg"><span class="msg-id">S1-6</span><div class="msg-body"><div class="msg-text">you watched it?? 🙈</div><div class="note-wait">⏳ Wait for his reply</div><div class="note-tip">💡 Brief cooldown before escalating again</div></div><button class="cp" data-copy="you watched it?? 🙈"><span class="cp-icon">📋</span></button></div>
 
-  <div class="msg">
-    <span class="msg-id">S1-6</span>
-    <div class="msg-body">
-      <div class="msg-text">you watched it?? 🙈</div>
-      <div class="note-wait">⏳ Wait for his reply</div>
-      <div class="note-tip">💡 Brief cooldown before escalating again</div>
+    <div class="msg"><span class="msg-id">S1-7</span><div class="msg-body"><div class="msg-text">fuckk that turns me on so much 🥵</div><div class="note-edit">✏️ React to what he said — HE caused this. ("omg", "the way you said that...")</div></div><button class="cp" data-copy="fuckk that turns me on so much 🥵"><span class="cp-icon">📋</span></button></div>
+
+    <div class="msg"><span class="msg-id">S1-8</span><div class="msg-body"><div class="msg-text">I want your cock in my mouth so bad rn</div></div><button class="cp" data-copy="I want your cock in my mouth so bad rn"><span class="cp-icon">📋</span></button></div>
+
+    <div class="msg"><span class="msg-id">S1-9</span><div class="msg-body"><div class="msg-text">tell me what you'd do to me</div><div class="note-wait">⏳ Wait for his reply</div><div class="note-edit">✏️ After he replies: react to what he said before continuing ("fuck 🥵", "that's so hot")</div></div><button class="cp" data-copy="tell me what you'd do to me"><span class="cp-icon">📋</span></button></div>
+
+    <div class="msg"><span class="msg-id">S1-10</span><div class="msg-body"><div class="msg-text">🥵🥵🥵 hold on I need to show you something</div><span class="badge badge-wait">⏱ WAIT 2-3 MIN</span></div><button class="cp" data-copy="🥵🥵🥵 hold on I need to show you something"><span class="cp-icon">📋</span></button></div>
+
+    <div class="msg"><span class="msg-id">S1-11</span><div class="msg-body"><div class="msg-text">look what you made me do 🥵💦</div></div><button class="cp" data-copy="look what you made me do 🥵💦"><span class="cp-icon">📋</span></button></div>
+
+    <div class="ppv-moment"><span class="ppv-icon">📎</span><span class="ppv-label">Send PPV 2</span><span class="ppv-price">$25</span></div>
+    <div class="branch-info">
+      <span class="bi"><span class="bi-dot" style="background:var(--green)"></span> Bought → continue below</span>
+      <span class="bi"><span class="bi-dot" style="background:var(--orange)"></span> Silent 3 min → <a href="#nr-waves">NR Waves ↓</a></span>
     </div>
-    <button class="cp" data-copy="you watched it?? 🙈"><span class="cp-icon">📋</span></button>
-  </div>
-
-  <div class="msg">
-    <span class="msg-id">S1-7</span>
-    <div class="msg-body">
-      <div class="msg-text">fuckk that turns me on so much 🥵</div>
-      <div class="note-edit">✏️ React to what he said — HE caused this. ("omg", "the way you said that...")</div>
-    </div>
-    <button class="cp" data-copy="fuckk that turns me on so much 🥵"><span class="cp-icon">📋</span></button>
-  </div>
-
-  <div class="msg">
-    <span class="msg-id">S1-8</span>
-    <div class="msg-body"><div class="msg-text">I want your cock in my mouth so bad rn</div></div>
-    <button class="cp" data-copy="I want your cock in my mouth so bad rn"><span class="cp-icon">📋</span></button>
-  </div>
-
-  <div class="msg">
-    <span class="msg-id">S1-9</span>
-    <div class="msg-body">
-      <div class="msg-text">tell me what you'd do to me</div>
-      <div class="note-wait">⏳ Wait for his reply</div>
-      <div class="note-edit">✏️ After he replies: react to what he said before continuing ("fuck 🥵", "that's so hot")</div>
-    </div>
-    <button class="cp" data-copy="tell me what you'd do to me"><span class="cp-icon">📋</span></button>
-  </div>
-
-  <div class="msg">
-    <span class="msg-id">S1-10</span>
-    <div class="msg-body">
-      <div class="msg-text">🥵🥵🥵 hold on I need to show you something</div>
-      <span class="badge badge-wait">⏱ WAIT 2-3 MIN</span>
-    </div>
-    <button class="cp" data-copy="🥵🥵🥵 hold on I need to show you something"><span class="cp-icon">📋</span></button>
-  </div>
-
-  <div class="msg">
-    <span class="msg-id">S1-11</span>
-    <div class="msg-body"><div class="msg-text">look what you made me do 🥵💦</div></div>
-    <button class="cp" data-copy="look what you made me do 🥵💦"><span class="cp-icon">📋</span></button>
-  </div>
-
-  <div class="ppv-moment">
-    <span class="ppv-icon">📎</span>
-    <span class="ppv-label">Send PPV 2</span>
-    <span class="ppv-price">$25</span>
-  </div>
-  <div class="branch-info">
-    <span class="bi"><span class="bi-dot" style="background:var(--green)"></span> Bought → continue below</span>
-    <span class="bi"><span class="bi-dot" style="background:var(--orange)"></span> Silent 3 min → <a href="#nr-waves">NR Waves ↓</a></span>
   </div>
 </div>
 
 <!-- ── SEXTING 3 — PPV 3 $40 ── -->
-<div class="phase">
-  <div class="phase-header phase-red">
+<div class="phase phase-red collapsed" id="sext3">
+  <div class="phase-header">
     <span class="phase-emoji">🔥</span>
     <span class="phase-name">Sexting 3</span>
-    <span class="phase-meta">6 msgs · PPV 3</span>
+    <span class="phase-meta">6 msgs · PPV 3 · $40</span>
+    <span class="toggle">▼</span>
   </div>
+  <div class="phase-body">
+    <div class="msg"><span class="msg-id">S1-12</span><div class="msg-body"><div class="msg-text">fuck baby 🥵</div><div class="note-wait">⏳ Wait for his reply</div><div class="note-tip">💡 NO cooldown — keep the momentum going</div></div><button class="cp" data-copy="fuck baby 🥵"><span class="cp-icon">📋</span></button></div>
 
-  <div class="msg">
-    <span class="msg-id">S1-12</span>
-    <div class="msg-body">
-      <div class="msg-text">fuck baby 🥵</div>
-      <div class="note-wait">⏳ Wait for his reply</div>
-      <div class="note-tip">💡 NO cooldown — keep the momentum going</div>
+    <div class="msg"><span class="msg-id">S1-13</span><div class="msg-body"><div class="msg-text">I need you inside me so bad rn</div></div><button class="cp" data-copy="I need you inside me so bad rn"><span class="cp-icon">📋</span></button></div>
+
+    <div class="msg"><span class="msg-id">S1-14</span><div class="msg-body"><div class="msg-text">imagine bending me over and sliding deep inside my tight wet pussy while I moan your name 🥵</div></div><button class="cp" data-copy="imagine bending me over and sliding deep inside my tight wet pussy while I moan your name 🥵"><span class="cp-icon">📋</span></button></div>
+
+    <div class="msg"><span class="msg-id">S1-15</span><div class="msg-body"><div class="msg-text">I want you to make me scream</div></div><button class="cp" data-copy="I want you to make me scream"><span class="cp-icon">📋</span></button></div>
+
+    <div class="msg"><span class="msg-id">S1-16</span><div class="msg-body"><div class="msg-text">I can't take it... give me a sec 🥵</div><span class="badge badge-wait">⏱ WAIT 2-3 MIN</span></div><button class="cp" data-copy="I can't take it... give me a sec 🥵"><span class="cp-icon">📋</span></button></div>
+
+    <div class="msg"><span class="msg-id">S1-17</span><div class="msg-body"><div class="msg-text">I've never gone this far for anyone... watch what I just did 🥵💦</div></div><button class="cp" data-copy="I've never gone this far for anyone... watch what I just did 🥵💦"><span class="cp-icon">📋</span></button></div>
+
+    <div class="ppv-moment"><span class="ppv-icon">📎</span><span class="ppv-label">Send PPV 3</span><span class="ppv-price">$40</span></div>
+    <div class="branch-info">
+      <span class="bi"><span class="bi-dot" style="background:var(--green)"></span> Bought → continue below</span>
+      <span class="bi"><span class="bi-dot" style="background:var(--orange)"></span> Silent 3 min → <a href="#nr-waves">NR Waves ↓</a></span>
     </div>
-    <button class="cp" data-copy="fuck baby 🥵"><span class="cp-icon">📋</span></button>
-  </div>
-
-  <div class="msg">
-    <span class="msg-id">S1-13</span>
-    <div class="msg-body"><div class="msg-text">I need you inside me so bad rn</div></div>
-    <button class="cp" data-copy="I need you inside me so bad rn"><span class="cp-icon">📋</span></button>
-  </div>
-
-  <div class="msg">
-    <span class="msg-id">S1-14</span>
-    <div class="msg-body"><div class="msg-text">imagine bending me over and sliding deep inside my tight wet pussy while I moan your name 🥵</div></div>
-    <button class="cp" data-copy="imagine bending me over and sliding deep inside my tight wet pussy while I moan your name 🥵"><span class="cp-icon">📋</span></button>
-  </div>
-
-  <div class="msg">
-    <span class="msg-id">S1-15</span>
-    <div class="msg-body"><div class="msg-text">I want you to make me scream</div></div>
-    <button class="cp" data-copy="I want you to make me scream"><span class="cp-icon">📋</span></button>
-  </div>
-
-  <div class="msg">
-    <span class="msg-id">S1-16</span>
-    <div class="msg-body">
-      <div class="msg-text">I can't take it... give me a sec 🥵</div>
-      <span class="badge badge-wait">⏱ WAIT 2-3 MIN</span>
-    </div>
-    <button class="cp" data-copy="I can't take it... give me a sec 🥵"><span class="cp-icon">📋</span></button>
-  </div>
-
-  <div class="msg">
-    <span class="msg-id">S1-17</span>
-    <div class="msg-body"><div class="msg-text">I've never gone this far for anyone... watch what I just did 🥵💦</div></div>
-    <button class="cp" data-copy="I've never gone this far for anyone... watch what I just did 🥵💦"><span class="cp-icon">📋</span></button>
-  </div>
-
-  <div class="ppv-moment">
-    <span class="ppv-icon">📎</span>
-    <span class="ppv-label">Send PPV 3</span>
-    <span class="ppv-price">$40</span>
-  </div>
-  <div class="branch-info">
-    <span class="bi"><span class="bi-dot" style="background:var(--green)"></span> Bought → continue below</span>
-    <span class="bi"><span class="bi-dot" style="background:var(--orange)"></span> Silent 3 min → <a href="#nr-waves">NR Waves ↓</a></span>
   </div>
 </div>
 
 <!-- ── SEXTING 4 — CLIMAX PPV 4 $55 ── -->
-<div class="phase">
-  <div class="phase-header phase-red">
+<div class="phase phase-red collapsed" id="sext4">
+  <div class="phase-header">
     <span class="phase-emoji">💥</span>
     <span class="phase-name">Sexting 4 — CLIMAX</span>
-    <span class="phase-meta">5 msgs · PPV 4</span>
+    <span class="phase-meta">5 msgs · PPV 4 · $55</span>
+    <span class="toggle">▼</span>
   </div>
+  <div class="phase-body">
+    <div class="msg"><span class="msg-id">S1-18</span><div class="msg-body"><div class="msg-text">omggg 🥵🥵</div><div class="note-wait">⏳ Wait for his reply</div></div><button class="cp" data-copy="omggg 🥵🥵"><span class="cp-icon">📋</span></button></div>
 
-  <div class="msg">
-    <span class="msg-id">S1-18</span>
-    <div class="msg-body">
-      <div class="msg-text">omggg 🥵🥵</div>
-      <div class="note-wait">⏳ Wait for his reply</div>
+    <div class="msg"><span class="msg-id">S1-19</span><div class="msg-body"><div class="msg-text">don't cum yet baby</div></div><button class="cp" data-copy="don't cum yet baby"><span class="cp-icon">📋</span></button></div>
+
+    <div class="msg"><span class="msg-id">S1-20</span><div class="msg-body"><div class="msg-text">I want us to finish together... I'm so close</div></div><button class="cp" data-copy="I want us to finish together... I'm so close"><span class="cp-icon">📋</span></button></div>
+
+    <div class="msg"><span class="msg-id">S1-21</span><div class="msg-body"><div class="msg-text">fuck fuck fuck hold on 🥵</div><span class="badge badge-wait">⏱ WAIT 1-2 MIN</span></div><button class="cp" data-copy="fuck fuck fuck hold on 🥵"><span class="cp-icon">📋</span></button></div>
+
+    <div class="msg"><span class="msg-id">S1-22</span><div class="msg-body"><div class="msg-text">cum with me baby 💦😈</div></div><button class="cp" data-copy="cum with me baby 💦😈"><span class="cp-icon">📋</span></button></div>
+
+    <div class="ppv-moment"><span class="ppv-icon">📎</span><span class="ppv-label">Send PPV 4</span><span class="ppv-price">$55</span></div>
+    <div class="branch-info">
+      <span class="bi"><span class="bi-dot" style="background:var(--green)"></span> Bought → Aftercare below</span>
+      <span class="bi"><span class="bi-dot" style="background:var(--orange)"></span> Silent 3 min → <a href="#nr-waves">NR Waves ↓</a></span>
     </div>
-    <button class="cp" data-copy="omggg 🥵🥵"><span class="cp-icon">📋</span></button>
-  </div>
-
-  <div class="msg">
-    <span class="msg-id">S1-19</span>
-    <div class="msg-body"><div class="msg-text">don't cum yet baby</div></div>
-    <button class="cp" data-copy="don't cum yet baby"><span class="cp-icon">📋</span></button>
-  </div>
-
-  <div class="msg">
-    <span class="msg-id">S1-20</span>
-    <div class="msg-body"><div class="msg-text">I want us to finish together... I'm so close</div></div>
-    <button class="cp" data-copy="I want us to finish together... I'm so close"><span class="cp-icon">📋</span></button>
-  </div>
-
-  <div class="msg">
-    <span class="msg-id">S1-21</span>
-    <div class="msg-body">
-      <div class="msg-text">fuck fuck fuck hold on 🥵</div>
-      <span class="badge badge-wait">⏱ WAIT 1-2 MIN</span>
-    </div>
-    <button class="cp" data-copy="fuck fuck fuck hold on 🥵"><span class="cp-icon">📋</span></button>
-  </div>
-
-  <div class="msg">
-    <span class="msg-id">S1-22</span>
-    <div class="msg-body"><div class="msg-text">cum with me baby 💦😈</div></div>
-    <button class="cp" data-copy="cum with me baby 💦😈"><span class="cp-icon">📋</span></button>
-  </div>
-
-  <div class="ppv-moment">
-    <span class="ppv-icon">📎</span>
-    <span class="ppv-label">Send PPV 4</span>
-    <span class="ppv-price">$55</span>
-  </div>
-  <div class="branch-info">
-    <span class="bi"><span class="bi-dot" style="background:var(--green)"></span> Bought → Aftercare below</span>
-    <span class="bi"><span class="bi-dot" style="background:var(--orange)"></span> Silent 3 min → <a href="#nr-waves">NR Waves ↓</a></span>
   </div>
 </div>
 
 <!-- ── AFTERCARE ── -->
-<div class="phase">
-  <div class="phase-header phase-blue">
+<div class="phase phase-blue collapsed" id="aftercare">
+  <div class="phase-header">
     <span class="phase-emoji">💗</span>
     <span class="phase-name">Aftercare</span>
     <span class="phase-meta">2 msgs + bond</span>
+    <span class="toggle">▼</span>
   </div>
-  <div class="phase-desc">He made it to the end — reward him. Build emotional bond. DO NOT close the conversation. Keep talking, be warm, be his girlfriend.</div>
+  <div class="phase-body">
+    <div class="phase-desc">He made it to the end — reward him. Build emotional bond. DO NOT close the conversation.</div>
 
-  <div class="msg">
-    <span class="msg-id">AC-1</span>
-    <div class="msg-body"><div class="msg-text">holy shit 🥵 that was... wow</div></div>
-    <button class="cp" data-copy="holy shit 🥵 that was... wow"><span class="cp-icon">📋</span></button>
-  </div>
+    <div class="msg"><span class="msg-id">AC-1</span><div class="msg-body"><div class="msg-text">holy shit 🥵 that was... wow</div></div><button class="cp" data-copy="holy shit 🥵 that was... wow"><span class="cp-icon">📋</span></button></div>
 
-  <div class="msg">
-    <span class="msg-id">AC-2</span>
-    <div class="msg-body">
-      <div class="msg-text">you're actually insane 😮‍💨💗 that was honestly so different from what I'm used to</div>
-      <div class="note-edit">✏️ Mention something specific he said or did during the session</div>
+    <div class="msg"><span class="msg-id">AC-2</span><div class="msg-body"><div class="msg-text">you're actually insane 😮‍💨💗 that was honestly so different from what I'm used to</div><div class="note-edit">✏️ Mention something specific he said or did during the session</div></div><button class="cp" data-copy="you're actually insane 😮‍💨💗 that was honestly so different from what I'm used to"><span class="cp-icon">📋</span></button></div>
+
+    <div class="ac-box">
+      <div class="ac-title">💗 After AC-2: Keep the conversation going</div>
+      <ul>
+        <li>→ Ask about him: his day, what he's up to, how he's feeling</li>
+        <li>→ Be warm and personal — girlfriend experience</li>
+        <li>→ React to what he says, share things about "her" life</li>
+        <li>→ NEVER say goodbye or close the conversation</li>
+        <li>→ Goal: he feels a real connection, not just a transaction</li>
+      </ul>
     </div>
-    <button class="cp" data-copy="you're actually insane 😮‍💨💗 that was honestly so different from what I'm used to"><span class="cp-icon">📋</span></button>
-  </div>
-
-  <div style="background:var(--card);border:1px solid var(--accent);border-radius:10px;padding:14px 16px;margin:10px 0">
-    <div style="font-size:.88rem;font-weight:600;color:var(--accent);margin-bottom:8px">💗 After AC-2: Keep the conversation going</div>
-    <ul style="list-style:none;padding:0;font-size:.85rem;color:var(--text)">
-      <li style="padding:3px 0">→ Ask about him: his day, what he's up to, how he's feeling</li>
-      <li style="padding:3px 0">→ Be warm and personal — girlfriend experience</li>
-      <li style="padding:3px 0">→ React to what he says, share things about "her" life</li>
-      <li style="padding:3px 0">→ NEVER say goodbye or close the conversation</li>
-      <li style="padding:3px 0">→ Goal: he feels a real connection, not just a transaction</li>
-    </ul>
   </div>
 </div>
 
 <!-- ── RE-ENGAGEMENT ── -->
-<div class="phase">
-  <div class="phase-header phase-blue">
+<div class="phase phase-blue collapsed" id="reengagement">
+  <div class="phase-header">
     <span class="phase-emoji">🔄</span>
     <span class="phase-name">Re-engagement</span>
-    <span class="phase-meta">if convo dies naturally</span>
+    <span class="phase-meta">if convo dies</span>
+    <span class="toggle">▼</span>
   </div>
-  <div class="phase-desc">Only use these if the conversation stopped on its own. Not to end it.</div>
+  <div class="phase-body">
+    <div class="phase-desc">Only use these if the conversation stopped on its own. Not to end it.</div>
 
-  <div class="msg">
-    <span class="msg-id">RE-1</span>
-    <div class="msg-body">
-      <div class="msg-text">I can't stop thinking about earlier 😏 you free?</div>
-      <div class="note-auto">🤖 Send 6-12 hours after conversation goes quiet</div>
-    </div>
-    <button class="cp" data-copy="I can't stop thinking about earlier 😏 you free?"><span class="cp-icon">📋</span></button>
-  </div>
+    <div class="msg"><span class="msg-id">RE-1</span><div class="msg-body"><div class="msg-text">I can't stop thinking about earlier 😏 you free?</div><div class="note-auto">🤖 Send 6-12 hours after conversation goes quiet</div></div><button class="cp" data-copy="I can't stop thinking about earlier 😏 you free?"><span class="cp-icon">📋</span></button></div>
 
-  <div class="msg">
-    <span class="msg-id">RE-2</span>
-    <div class="msg-body">
-      <div class="msg-text">remember what I said about something new? I'm wearing it rn and I need you to see 🙈</div>
-      <div class="note-auto">🤖 Send next day — seeds the next session</div>
-    </div>
-    <button class="cp" data-copy="remember what I said about something new? I'm wearing it rn and I need you to see 🙈"><span class="cp-icon">📋</span></button>
+    <div class="msg"><span class="msg-id">RE-2</span><div class="msg-body"><div class="msg-text">remember what I said about something new? I'm wearing it rn and I need you to see 🙈</div><div class="note-auto">🤖 Send next day — seeds the next session</div></div><button class="cp" data-copy="remember what I said about something new? I'm wearing it rn and I need you to see 🙈"><span class="cp-icon">📋</span></button></div>
   </div>
 </div>
 
@@ -722,22 +509,22 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
 <!-- ── NR WAVES ── -->
 <div class="ref-section" id="nr-waves">
   <div class="ref-title">🔇 NR Wave Protocol — When He Goes Silent</div>
-  <p style="color:var(--muted);font-size:.82rem;margin-bottom:10px">Send in order. Stop the moment he responds.</p>
+  <p style="color:var(--muted);font-size:.8rem;margin-bottom:8px">Send in order. Stop the moment he responds.</p>
   <table class="nr-table">
     <thead><tr><th>Wave</th><th>When</th><th>Message</th><th>Why</th><th></th></tr></thead>
     <tbody>
       <tr><td><strong>W1</strong></td><td class="nr-timing">2-3 min</td><td>baby? 🥺</td><td class="nr-tech">Ping</td><td><button class="cp" data-copy="baby? 🥺"><span class="cp-icon">📋</span></button></td></tr>
-      <tr><td><strong>W2</strong></td><td class="nr-timing">3-5 min later</td><td>you need to see what I just did for you... seriously 🥵</td><td class="nr-tech">Curiosity</td><td><button class="cp" data-copy="you need to see what I just did for you... seriously 🥵"><span class="cp-icon">📋</span></button></td></tr>
-      <tr><td><strong>W3</strong></td><td class="nr-timing">5-10 min later</td><td>okay I guess you're busy 😏 I might delete this, it was only for you anyway</td><td class="nr-tech">Takeaway</td><td><button class="cp" data-copy="okay I guess you're busy 😏 I might delete this, it was only for you anyway"><span class="cp-icon">📋</span></button></td></tr>
-      <tr><td><strong>W4</strong></td><td class="nr-timing">15-30 min later</td><td>hey I hope you're okay 💗 I had fun talking to you... hmu when you're back</td><td class="nr-tech">Warm close</td><td><button class="cp" data-copy="hey I hope you're okay 💗 I had fun talking to you... hmu when you're back"><span class="cp-icon">📋</span></button></td></tr>
-      <tr><td><strong>W5</strong></td><td class="nr-timing">2-6 hrs later</td><td>I keep thinking about earlier 🥵 you free?</td><td class="nr-tech">New convo</td><td><button class="cp" data-copy="I keep thinking about earlier 🥵 you free?"><span class="cp-icon">📋</span></button></td></tr>
+      <tr><td><strong>W2</strong></td><td class="nr-timing">3-5 min</td><td>you need to see what I just did for you... seriously 🥵</td><td class="nr-tech">Curiosity</td><td><button class="cp" data-copy="you need to see what I just did for you... seriously 🥵"><span class="cp-icon">📋</span></button></td></tr>
+      <tr><td><strong>W3</strong></td><td class="nr-timing">5-10 min</td><td>okay I guess you're busy 😏 I might delete this, it was only for you anyway</td><td class="nr-tech">Takeaway</td><td><button class="cp" data-copy="okay I guess you're busy 😏 I might delete this, it was only for you anyway"><span class="cp-icon">📋</span></button></td></tr>
+      <tr><td><strong>W4</strong></td><td class="nr-timing">15-30 min</td><td>hey I hope you're okay 💗 I had fun talking to you... hmu when you're back</td><td class="nr-tech">Warm close</td><td><button class="cp" data-copy="hey I hope you're okay 💗 I had fun talking to you... hmu when you're back"><span class="cp-icon">📋</span></button></td></tr>
+      <tr><td><strong>W5</strong></td><td class="nr-timing">2-6 hrs</td><td>I keep thinking about earlier 🥵 you free?</td><td class="nr-tech">New convo</td><td><button class="cp" data-copy="I keep thinking about earlier 🥵 you free?"><span class="cp-icon">📋</span></button></td></tr>
     </tbody>
   </table>
 </div>
 
 <hr class="divider">
 
-<!-- ── PERSONAL INFO ── -->
+<!-- ── PERSONAL INFO (2 col) ── -->
 <div class="ref-section" id="personal-info">
   <div class="ref-title">👤 Personal Info — When He Asks About Her</div>
   <div class="qr-grid">
@@ -753,10 +540,10 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
 
 <hr class="divider">
 
-<!-- ── POSITIVE SPIN ── -->
+<!-- ── POSITIVE SPIN (2 col) ── -->
 <div class="ref-section" id="positive-spin">
   <div class="ref-title">✨ Positive Spin — How She Reacts to What He Shares</div>
-  <div class="qr-grid">
+  <div class="spin-grid">
     <div class="spin-item"><span class="spin-trigger">He's 40+</span><span class="spin-text">mmm I love that... something about confidence in older guys 😏</span><button class="cp" data-copy="mmm I love that... something about confidence in older guys 😏"><span class="cp-icon">📋</span></button></div>
     <div class="spin-item"><span class="spin-trigger">He's 20s</span><span class="spin-text">omg you're around my age?? that's rare here, feels like we'd vibe irl 😊</span><button class="cp" data-copy="omg you're around my age?? that's rare here, feels like we'd vibe irl 😊"><span class="cp-icon">📋</span></button></div>
     <div class="spin-item"><span class="spin-trigger">Boring job</span><span class="spin-text">honestly that's attractive, like you have your shit together</span><button class="cp" data-copy="honestly that's attractive, like you have your shit together"><span class="cp-icon">📋</span></button></div>
@@ -766,7 +553,7 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
   </div>
 </div>
 
-<div style="text-align:center;padding:30px 0 10px;color:var(--muted);font-size:.75rem">
+<div style="text-align:center;padding:24px 0 10px;color:var(--muted);font-size:.73rem">
   Chatting Wizard · Script Manager · 2026<br>
   Log sub data after session: age, job, hobbies, preferences
 </div>
@@ -776,6 +563,7 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
 <button class="top-btn" id="top-btn">↑</button>
 
 <script>
+// Copy button
 document.addEventListener('click', e => {
   const btn = e.target.closest('.cp');
   if (!btn) return;
@@ -784,9 +572,49 @@ document.addEventListener('click', e => {
     setTimeout(() => btn.classList.remove('ok'), 1200);
   });
 });
+
+// Accordion toggle
+document.querySelectorAll('.phase-header').forEach(h => {
+  h.addEventListener('click', e => {
+    if (e.target.closest('.cp')) return; // don't toggle when copying
+    const phase = h.closest('.phase');
+    phase.classList.toggle('collapsed');
+  });
+});
+
+// TOC click → expand target phase
+document.querySelectorAll('.toc a').forEach(a => {
+  a.addEventListener('click', e => {
+    const id = a.getAttribute('href').slice(1);
+    const target = document.getElementById(id);
+    if (target && target.classList.contains('phase')) {
+      target.classList.remove('collapsed');
+    }
+  });
+});
+
+// Scroll-to-top button
 const topBtn = document.getElementById('top-btn');
-window.addEventListener('scroll', () => topBtn.classList.toggle('show', window.scrollY > 600));
+window.addEventListener('scroll', () => topBtn.classList.toggle('show', window.scrollY > 400));
 topBtn.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+
+// TOC shadow on scroll
+const toc = document.getElementById('toc');
+window.addEventListener('scroll', () => toc.classList.toggle('shadow', window.scrollY > 200));
+
+// Highlight active TOC item based on scroll position
+const tocLinks = document.querySelectorAll('.toc a');
+const sections = Array.from(tocLinks).map(a => ({link: a, el: document.getElementById(a.getAttribute('href').slice(1))})).filter(s => s.el);
+function updateActiveToc() {
+  let active = sections[0];
+  for (const s of sections) {
+    if (s.el.getBoundingClientRect().top <= 100) active = s;
+  }
+  tocLinks.forEach(l => l.classList.remove('active'));
+  if (active) active.link.classList.add('active');
+}
+window.addEventListener('scroll', updateActiveToc);
+updateActiveToc();
 </script>
 </body>
 </html>
