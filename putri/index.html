@@ -2,420 +2,672 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Putri — New Sub Journey v4</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PUTRI — Chatter Guide</title>
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { background: #0d1117; color: #e6edf3; font-family: 'Segoe UI', system-ui, sans-serif; padding: 40px 20px; max-width: 1100px; margin: 0 auto; line-height: 1.6; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d1117;--card:#161b22;--border:#30363d;--text:#e6edf3;--muted:#8b949e;
+  --accent:#58a6ff;--green:#3fb950;--red:#f85149;--orange:#d29922;--purple:#bc8cff;
+  --blue:#58a6ff;--yellow:#d29922;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;line-height:1.5;-webkit-tap-highlight-color:transparent;padding-bottom:80px}
 
-  h1 { font-size: 2em; text-align: center; margin-bottom: 5px; color: #58a6ff; }
-  .subtitle { text-align: center; color: #8b949e; margin-bottom: 30px; font-size: 0.95em; }
+/* ── HEADER ── */
+.header{position:sticky;top:0;z-index:100;background:var(--bg);border-bottom:1px solid var(--border);padding:12px 16px 0}
+.header h1{font-size:1.35rem;font-weight:700;letter-spacing:2px}
+.header .sub{font-size:.82rem;color:var(--muted);margin-bottom:10px}
+.tabs{display:flex;gap:0;border-bottom:2px solid var(--border)}
+.tab-btn{flex:1;background:none;border:none;color:var(--muted);font-size:.88rem;font-weight:600;padding:10px 0;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:.2s}
+.tab-btn.active{color:var(--accent);border-bottom-color:var(--accent)}
+.tab-btn:hover{color:var(--text)}
 
-  .info-bar { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px; }
-  .info-tag { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 8px 16px; font-size: 0.85em; }
-  .info-tag span { color: #8b949e; }
+/* ── CONTAINER ── */
+.container{max-width:700px;margin:0 auto;padding:12px}
+.tab-content{display:none}
+.tab-content.active{display:block}
 
-  h2 { font-size: 1.4em; margin: 40px 0 15px 0; padding-bottom: 8px; border-bottom: 2px solid #30363d; }
-  h3 { font-size: 1.1em; margin: 25px 0 10px 0; color: #8b949e; }
+/* ── ACCORDION ── */
+.acc-section{margin-bottom:8px;border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.acc-header{display:flex;align-items:center;gap:10px;padding:14px 16px;background:var(--card);cursor:pointer;user-select:none;transition:background .2s}
+.acc-header:hover{background:#1c2129}
+.acc-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.acc-title{flex:1;font-weight:600;font-size:.95rem}
+.acc-meta{font-size:.75rem;color:var(--muted);margin-right:4px}
+.acc-chevron{transition:transform .2s;font-size:.85rem;color:var(--muted)}
+.acc-section.open .acc-chevron{transform:rotate(90deg)}
+.acc-body{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.acc-section.open .acc-body{max-height:none}
 
-  .section { background: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 24px; margin-bottom: 24px; }
+/* ── MESSAGE CARD ── */
+.msg-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin:6px 10px}
+.msg-top{display:flex;align-items:flex-start;gap:10px}
+.msg-id{font-size:.7rem;color:var(--muted);background:var(--bg);padding:2px 7px;border-radius:4px;white-space:nowrap;margin-top:3px}
+.msg-text{flex:1;font-size:1.1em;line-height:1.55}
+.msg-actions{display:flex;gap:6px;flex-shrink:0;margin-top:2px}
+.copy-btn{background:#21262d;border:1px solid var(--border);color:var(--muted);border-radius:6px;padding:5px 9px;cursor:pointer;font-size:.78rem;transition:.2s;position:relative;display:flex;align-items:center;gap:4px}
+.copy-btn:hover{background:var(--border);color:var(--text)}
+.copy-btn .copied{display:none;position:absolute;top:-30px;left:50%;transform:translateX(-50%);background:var(--green);color:#fff;font-size:.7rem;padding:3px 8px;border-radius:4px;white-space:nowrap;pointer-events:none}
+.copy-btn.show-copied .copied{display:block}
+.info-btn{background:#21262d;border:1px solid var(--border);color:var(--accent);border-radius:6px;width:28px;height:28px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.82rem;font-weight:700;transition:.2s;flex-shrink:0}
+.info-btn:hover{background:var(--border)}
 
-  table { width: 100%; border-collapse: collapse; margin: 10px 0; }
-  th { text-align: left; padding: 10px 12px; background: #1c2129; border-bottom: 2px solid #30363d; font-size: 0.85em; color: #8b949e; text-transform: uppercase; letter-spacing: 0.5px; }
-  td { padding: 10px 12px; border-bottom: 1px solid #21262d; vertical-align: top; }
-  tr:hover td { background: #1c2129; }
-  .cmd { font-weight: 700; font-family: 'Cascadia Code', 'Fira Code', monospace; font-size: 0.9em; white-space: nowrap; }
-  .msg { font-size: 0.95em; }
-  .note { color: #8b949e; font-size: 0.85em; }
-  .technique { font-style: italic; }
+/* ── BADGES ── */
+.badges{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 2px 0;padding-left:0}
+.badge{font-size:.78rem;font-weight:600;padding:4px 10px;border-radius:6px;display:inline-flex;align-items:center;gap:4px}
+.badge-wait{background:#d2992222;color:var(--orange)}
+.badge-ppv{background:#3fb95022;color:var(--green)}
 
-  /* Colors per section */
-  .c-welcome .cmd { color: #f0f6fc; }
-  .c-rapport .cmd { color: #58a6ff; }
-  .c-tb .cmd { color: #bc8cff; }
-  .c-sexting .cmd { color: #3fb950; }
-  .c-nr .cmd { color: #d29922; }
-  .c-obj .cmd { color: #f778ba; }
-  .c-ac .cmd { color: #79c0ff; }
-  .c-pi .cmd { color: #d29922; }
-  .c-ps .cmd { color: #3fb950; }
+/* ── NOTE ── */
+.note-box{display:none;background:#1c262f;border-left:3px solid var(--accent);margin:8px 0 0;padding:10px 12px;border-radius:0 6px 6px 0;font-size:.85rem;color:#93b4d4}
+.note-box.visible{display:block}
 
-  .border-red { border-left: 4px solid #f85149; }
-  .border-blue { border-left: 4px solid #58a6ff; }
-  .border-purple { border-left: 4px solid #bc8cff; }
-  .border-green { border-left: 4px solid #3fb950; }
-  .border-yellow { border-left: 4px solid #d29922; }
-  .border-pink { border-left: 4px solid #f778ba; }
-  .border-cyan { border-left: 4px solid #79c0ff; }
-  .border-white { border-left: 4px solid #8b949e; }
+/* ── BRANCH BUTTONS ── */
+.branch-row{display:flex;gap:8px;margin:8px 10px 10px}
+.branch-btn{flex:1;height:42px;border:none;border-radius:8px;font-weight:600;font-size:.85rem;cursor:pointer;transition:.2s;display:flex;align-items:center;justify-content:center;gap:5px}
+.branch-bought{background:#23832a;color:#fff}.branch-bought:hover{background:#2ea136}
+.branch-silent{background:#6e5e1e;color:#fff}.branch-silent:hover{background:#836f24}
+.branch-obj{background:#8b2d2d;color:#fff}.branch-obj:hover{background:#a33535}
 
-  /* Intensity bar */
-  .bar { display: inline-flex; gap: 2px; align-items: center; }
-  .bar-fill { width: 10px; height: 14px; border-radius: 2px; }
-  .bar-empty { width: 10px; height: 14px; border-radius: 2px; background: #21262d; }
-  .bar-low { background: #3fb950; }
-  .bar-mid { background: #d29922; }
-  .bar-high { background: #f85149; }
-  .bar-max { background: #ff4444; box-shadow: 0 0 6px #ff444488; }
-  .bar-label { margin-left: 6px; font-size: 0.8em; color: #8b949e; font-family: monospace; }
+/* ── OBJECTION TAB / MODAL ── */
+.obj-btn-list{display:flex;flex-direction:column;gap:8px}
+.obj-trigger{width:100%;padding:16px;font-size:1rem;font-weight:600;background:var(--card);border:1px solid var(--border);border-radius:10px;color:var(--text);cursor:pointer;text-align:left;display:flex;align-items:center;gap:10px;transition:.2s}
+.obj-trigger:hover{background:#1c2129}
+.obj-trigger .chevron{margin-left:auto;transition:transform .2s;color:var(--muted);font-size:.85rem}
+.obj-trigger.open .chevron{transform:rotate(90deg)}
+.obj-body{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.obj-trigger.open+.obj-body{max-height:none}
+.obj-step{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px 14px;margin:6px 0}
+.obj-step-head{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.step-num{background:var(--accent);color:#000;font-weight:700;font-size:.72rem;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.technique{font-size:.75rem;color:var(--muted);font-style:italic}
+.obj-step .msg-text{font-size:1.05em}
 
-  /* Flow tree */
-  .flow { background: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 24px 30px; margin: 15px 0 30px 0; font-family: 'Cascadia Code', 'Fira Code', monospace; font-size: 0.88em; line-height: 2; }
-  .flow .step { color: #e6edf3; }
-  .flow .auto { color: #8b949e; }
-  .flow .branch { color: #d29922; font-weight: 700; }
-  .flow .path-sexual { color: #bc8cff; }
-  .flow .path-casual { color: #58a6ff; }
-  .flow .money { color: #3fb950; font-weight: 700; }
-  .flow .arrow { color: #484f58; }
+/* ── QUICK INFO ── */
+.qi-item{display:flex;align-items:flex-start;gap:10px;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px 14px;margin:6px 0}
+.qi-label{font-size:.75rem;font-weight:600;color:var(--accent);text-transform:uppercase;min-width:70px;margin-top:3px}
+.qi-text{flex:1;font-size:1rem}
 
-  /* Profile grid */
-  .profile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 24px; }
-  .profile-grid .item { display: flex; gap: 10px; padding: 6px 0; border-bottom: 1px solid #21262d; }
-  .profile-grid .label { color: #8b949e; min-width: 100px; font-size: 0.85em; }
-  .profile-grid .value { color: #e6edf3; font-size: 0.95em; }
+/* ── SOS BUTTON ── */
+.sos-btn{position:fixed;bottom:20px;right:20px;z-index:200;width:56px;height:56px;border-radius:50%;background:var(--red);color:#fff;border:none;font-weight:800;font-size:.95rem;cursor:pointer;box-shadow:0 4px 18px #f8514988;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 #f8514966}50%{box-shadow:0 0 0 14px #f8514900}}
 
-  /* Alert box */
-  .alert { border: 1px solid; border-radius: 10px; padding: 16px 20px; margin: 15px 0; }
-  .alert-red { border-color: #f8514966; background: #f8514911; }
-  .alert-yellow { border-color: #d2992266; background: #d2992211; }
-  .alert-green { border-color: #3fb95066; background: #3fb95011; }
-  .alert h4 { margin-bottom: 8px; }
-  .alert ul { padding-left: 20px; }
-  .alert li { margin: 4px 0; font-size: 0.9em; }
+/* ── MODAL ── */
+.modal-overlay{position:fixed;inset:0;z-index:300;background:#000b;display:none;align-items:flex-end;justify-content:center;padding:12px}
+.modal-overlay.visible{display:flex}
+.modal{background:var(--bg);border:1px solid var(--border);border-radius:14px 14px 0 0;width:100%;max-width:700px;max-height:85vh;overflow-y:auto;padding:20px 16px 30px;position:relative}
+.modal-close{position:absolute;top:12px;right:14px;background:none;border:none;color:var(--muted);font-size:1.4rem;cursor:pointer}
+.modal-close:hover{color:var(--text)}
+.modal h2{margin-bottom:14px;font-size:1.1rem}
 
-  /* PPV price tag */
-  .ppv-tag { display: inline-block; background: #3fb95022; color: #3fb950; border: 1px solid #3fb95044; border-radius: 6px; padding: 2px 8px; font-weight: 700; font-size: 0.85em; }
-  .ppv-free { background: #58a6ff22; color: #58a6ff; border-color: #58a6ff44; }
+/* ── NR MODAL ── */
+.nr-step{display:flex;align-items:flex-start;gap:10px;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px 14px;margin:8px 0}
+.nr-wave{background:var(--orange);color:#000;font-weight:700;font-size:.7rem;padding:3px 8px;border-radius:4px;white-space:nowrap;flex-shrink:0;margin-top:2px}
+.nr-timing{font-size:.72rem;color:var(--orange);margin-top:2px}
+.nr-tech{font-size:.72rem;color:var(--muted);font-style:italic}
+.nr-text{flex:1}
+.nr-msg{font-size:1.02em;margin-top:2px}
 
-  /* Phase header */
-  .phase-header { display: flex; align-items: center; gap: 12px; margin: 25px 0 10px 0; }
-  .phase-header h3 { margin: 0; color: #e6edf3; }
-  .phase-header .ppv-tag { font-size: 0.9em; padding: 4px 12px; }
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
 
-  /* Summary */
-  .summary-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 20px 0; }
-  .summary-card { background: #1c2129; border: 1px solid #30363d; border-radius: 10px; padding: 20px; text-align: center; }
-  .summary-card .num { font-size: 2em; font-weight: 700; }
-  .summary-card .label { color: #8b949e; font-size: 0.85em; margin-top: 4px; }
-  .summary-card.green .num { color: #3fb950; }
-  .summary-card.blue .num { color: #58a6ff; }
-  .summary-card.red .num { color: #f85149; }
-
-  /* Rules */
-  .rules-list { list-style: none; padding: 0; }
-  .rules-list li { padding: 8px 0; border-bottom: 1px solid #21262d; display: flex; gap: 10px; }
-  .rules-list .num { color: #f85149; font-weight: 700; min-width: 24px; }
-
-  /* Positive/negative tag */
-  .tag-pos { color: #3fb950; font-weight: 700; }
-  .tag-neg { color: #f85149; font-weight: 700; }
-
-  @media (max-width: 768px) {
-    .profile-grid { grid-template-columns: 1fr; }
-    .summary-grid { grid-template-columns: 1fr; }
-    body { padding: 20px 10px; }
-  }
+/* ── RESPONSIVE ── */
+@media(max-width:500px){
+  .msg-text{font-size:1rem}
+  .branch-btn{font-size:.78rem;height:38px}
+  .header h1{font-size:1.15rem}
+}
 </style>
 </head>
 <body>
 
-<h1>PUTRI — New Sub Journey v4</h1>
-<p class="subtitle">Female Creator — Social Media Traffic</p>
-
-<div class="info-bar">
-  <div class="info-tag"><span>Traffic:</span> Social Media</div>
-  <div class="info-tag"><span>Content:</span> White Bikini Lingerie (Sex1)</div>
-  <div class="info-tag"><span>Mode:</span> Autopilot-safe</div>
-  <div class="info-tag"><span>Updated:</span> Feb 10, 2026</div>
-</div>
-
-<!-- SUMMARY CARDS -->
-<div class="summary-grid">
-  <div class="summary-card green"><div class="num">$130</div><div class="label">Revenue per fan (PPV $10+$25+$40+$55)</div></div>
-  <div class="summary-card blue"><div class="num">43</div><div class="label">Total messages</div></div>
-  <div class="summary-card red"><div class="num">4</div><div class="label">PPVs in the funnel ($10→$25→$40→$55)</div></div>
-</div>
-
-<!-- CHARACTER PROFILE -->
-<h2 style="color: #d29922;">Character Profile</h2>
-<div class="section">
-  <div class="profile-grid">
-    <div class="item"><div class="label">Name</div><div class="value"><strong>Putri</strong></div></div>
-    <div class="item"><div class="label">Age</div><div class="value">25</div></div>
-    <div class="item"><div class="label">Origin</div><div class="value">Bali, Indonesia</div></div>
-    <div class="item"><div class="label">Personality</div><div class="value">Adventurous, free-spirited, warm, playful, confident with a naughty side</div></div>
-    <div class="item"><div class="label">Occupation</div><div class="value">Cycling vlogger</div></div>
-    <div class="item"><div class="label">Interests</div><div class="value">Cycling, travel, exploring new countries</div></div>
-    <div class="item"><div class="label">Physical</div><div class="value">Tan skin, athletic build</div></div>
-    <div class="item"><div class="label">Voice</div><div class="value">Short messages. Lowercase. Extends letters when excited ("fuckkk"). CAPS only for peak moments. Uses "baby", "babe". Never writes paragraphs.</div></div>
+<!-- ===== HEADER ===== -->
+<div class="header">
+  <h1>PUTRI</h1>
+  <div class="sub">25 · Bali · Cycling Vlogger 🚴‍♀️</div>
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="journey">Journey</button>
+    <button class="tab-btn" data-tab="objections">Objections</button>
+    <button class="tab-btn" data-tab="quickinfo">Quick Info</button>
   </div>
 </div>
 
-<!-- JOURNEY FLOW -->
-<h2 style="color: #3fb950;">Journey Flow</h2>
-<div class="flow">
-  <div><span class="step">📥 FAN SUBSCRIBES</span></div>
-  <div><span class="arrow">&nbsp;&nbsp;│</span></div>
-  <div><span class="arrow">&nbsp;&nbsp;├── </span><span class="step"><strong>W-1</strong> Welcome + photos</span> <span class="auto">(auto)</span></div>
-  <div><span class="arrow">&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;</span><span class="auto">⏱️ 2-3 min</span></div>
-  <div><span class="arrow">&nbsp;&nbsp;├── </span><span class="step"><strong>AF-1 → AF-2</strong> Auto follow-ups</span> <span class="auto">(auto, ask name)</span></div>
-  <div><span class="arrow">&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;</span><span class="auto">⏱️ Wait for response</span></div>
-  <div><span class="arrow">&nbsp;&nbsp;│</span></div>
-  <div><span class="arrow">&nbsp;&nbsp;├── </span><span class="step"><strong>R-1 to R-9</strong> Rapport</span> <span class="auto">(9 msgs)</span></div>
-  <div><span class="arrow">&nbsp;&nbsp;├── </span><span class="step"><strong>TB-1 to TB-6</strong> Teasing Bridge</span> <span class="auto">(PPV 0)</span></div>
-  <div><span class="arrow">&nbsp;&nbsp;├── </span><span class="step"><strong>S1-1 to S1-22</strong> Sexting Sequence</span> <span class="money">$10 → $25 → $40 → $55 = $130</span></div>
-  <div><span class="arrow">&nbsp;&nbsp;└── </span><span class="step"><strong>AC-1 to AC-3</strong> Aftercare + Seed</span></div>
-  <div><span class="arrow">&nbsp;&nbsp;</span></div>
-  <div><span class="branch">&nbsp;&nbsp;⚡ FAST-TRACK:</span> <span class="auto">If sub is sexual in first 3 msgs → skip to TB-1</span></div>
+<div class="container">
+
+<!-- ████████████████████████  TAB 1: JOURNEY  ████████████████████████ -->
+<div class="tab-content active" id="tab-journey">
+
+<!-- ── Welcome + Auto Follow-ups ── -->
+<div class="acc-section" data-section="welcome">
+  <div class="acc-header">
+    <span class="acc-dot" style="background:var(--green)"></span>
+    <span class="acc-title">Welcome + Auto Follow-ups</span>
+    <span class="acc-meta">3 msgs</span>
+    <span class="acc-chevron">▶</span>
+  </div>
+  <div class="acc-body">
+    <!-- W-1 -->
+    <div class="msg-card">
+      <div class="msg-top">
+        <span class="msg-id">W-1</span>
+        <span class="msg-text">heyyy 😊 you subbed!! okay hold on, I'm sending you something special before I head out for my ride 🙈💗 brb to talk to you</span>
+        <div class="msg-actions">
+          <button class="info-btn" data-note="note-w1">i</button>
+          <button class="copy-btn" data-copy="heyyy 😊 you subbed!! okay hold on, I'm sending you something special before I head out for my ride 🙈💗 brb to talk to you">📋<span class="copied">Copied!</span></button>
+        </div>
+      </div>
+      <div class="note-box" id="note-w1">Auto-send on subscription + Album (5-10 photos)</div>
+    </div>
+    <!-- AF-1 -->
+    <div class="msg-card">
+      <div class="msg-top">
+        <span class="msg-id">AF-1</span>
+        <span class="msg-text">honestly? I was about to leave but I keep checking my phone 😅 screw it, you're more interesting than my ride</span>
+        <div class="msg-actions">
+          <button class="info-btn" data-note="note-af1">i</button>
+          <button class="copy-btn" data-copy="honestly? I was about to leave but I keep checking my phone 😅 screw it, you're more interesting than my ride">📋<span class="copied">Copied!</span></button>
+        </div>
+      </div>
+      <div class="note-box" id="note-af1">Auto-send 2-3 min after W-1</div>
+    </div>
+    <!-- AF-2 -->
+    <div class="msg-card">
+      <div class="msg-top">
+        <span class="msg-id">AF-2</span>
+        <span class="msg-text">tell me your name 💗</span>
+        <div class="msg-actions">
+          <button class="info-btn" data-note="note-af2">i</button>
+          <button class="copy-btn" data-copy="tell me your name 💗">📋<span class="copied">Copied!</span></button>
+        </div>
+      </div>
+      <div class="note-box" id="note-af2">Auto-send 1-2 min after AF-1. WAIT for response. If sexual → skip to Teasing Bridge</div>
+    </div>
+  </div>
 </div>
 
-<!-- WELCOME + AUTO FOLLOW-UPS -->
-<h2>Welcome + Auto Follow-ups</h2>
-<div class="section border-white">
-  <table class="c-welcome">
-    <tr><th width="60">Cmd</th><th>Message</th><th width="280">Note</th></tr>
-    <tr><td class="cmd">W-1</td><td class="msg">heyyy 😊 you subbed!! okay hold on, I'm sending you something special before I head out for my ride 🙈💗 brb to talk to you</td><td class="note">Auto-send on subscription + Album (5-10 photos)</td></tr>
-    <tr><td class="cmd">AF-1</td><td class="msg">honestly? I was about to leave but I keep checking my phone 😅 screw it, you're more interesting than my ride</td><td class="note">Auto 2-3 min after W-1</td></tr>
-    <tr><td class="cmd">AF-2</td><td class="msg">tell me your name 💗</td><td class="note">Auto 1-2 min after AF-1. <strong>WAIT.</strong><br>Sexual → TB-1 | Normal → R-1</td></tr>
-  </table>
+<!-- ── Rapport ── -->
+<div class="acc-section" data-section="rapport">
+  <div class="acc-header">
+    <span class="acc-dot" style="background:var(--green)"></span>
+    <span class="acc-title">Rapport</span>
+    <span class="acc-meta">9 msgs</span>
+    <span class="acc-chevron">▶</span>
+  </div>
+  <div class="acc-body">
+    <div class="msg-card"><div class="msg-top"><span class="msg-id">R-1</span><span class="msg-text">hi 😊 okay be honest, what caught your eye?</span><div class="msg-actions"><button class="info-btn" data-note="note-r1">i</button><button class="copy-btn" data-copy="hi 😊 okay be honest, what caught your eye?">📋<span class="copied">Copied!</span></button></div></div><div class="note-box" id="note-r1">Add his name before 'hi'</div></div>
+    <div class="msg-card"><div class="msg-top"><span class="msg-id">R-2</span><span class="msg-text">mmm I like that 😏 so where are you from?</span><div class="msg-actions"><button class="info-btn" data-note="note-r2">i</button><button class="copy-btn" data-copy="mmm I like that 😏 so where are you from?">📋<span class="copied">Copied!</span></button></div></div><div class="note-box" id="note-r2">Add a short react before this ('haha omg', 'aww', 'ooh')</div></div>
+    <div class="msg-card"><div class="msg-top"><span class="msg-id">R-3</span><span class="msg-text">nice! I'm from Bali but I'm literally never home 😅</span><div class="msg-actions"><button class="info-btn" data-note="note-r3">i</button><button class="copy-btn" data-copy="nice! I'm from Bali but I'm literally never home 😅">📋<span class="copied">Copied!</span></button></div></div><div class="note-box" id="note-r3">If he named a country Putri visited, add 'oh I've been there!' before 'nice'</div></div>
+    <div class="msg-card"><div class="msg-top"><span class="msg-id">R-4</span><span class="msg-text">so what do you do besides making me smile rn 😏</span><div class="msg-actions"><button class="copy-btn" data-copy="so what do you do besides making me smile rn 😏">📋<span class="copied">Copied!</span></button></div></div></div>
+    <div class="msg-card"><div class="msg-top"><span class="msg-id">R-5</span><span class="msg-text">that's actually really attractive 😊 I'm all about my bike and my camera... nothing beats riding through a country you've never been to</span><div class="msg-actions"><button class="copy-btn" data-copy="that's actually really attractive 😊 I'm all about my bike and my camera... nothing beats riding through a country you've never been to">📋<span class="copied">Copied!</span></button></div></div></div>
+    <div class="msg-card"><div class="msg-top"><span class="msg-id">R-6</span><span class="msg-text">okay I gotta say... you're actually fun to talk to. that's rare here 😏</span><div class="msg-actions"><button class="info-btn" data-note="note-r6">i</button><button class="copy-btn" data-copy="okay I gotta say... you're actually fun to talk to. that's rare here 😏">📋<span class="copied">Copied!</span></button></div></div><div class="note-box" id="note-r6">Ego boost</div></div>
+    <div class="msg-card"><div class="msg-top"><span class="msg-id">R-7</span><span class="msg-text">are you always this charming or just with me? 😏</span><div class="msg-actions"><button class="copy-btn" data-copy="are you always this charming or just with me? 😏">📋<span class="copied">Copied!</span></button></div></div></div>
+    <div class="msg-card"><div class="msg-top"><span class="msg-id">R-8</span><span class="msg-text">stoppp 🙈 you're making me blush</span><div class="msg-actions"><button class="copy-btn" data-copy="stoppp 🙈 you're making me blush">📋<span class="copied">Copied!</span></button></div></div></div>
+    <div class="msg-card"><div class="msg-top"><span class="msg-id">R-9</span><span class="msg-text">okay I need to tell you something... don't judge me</span><div class="msg-actions"><button class="info-btn" data-note="note-r9">i</button><button class="copy-btn" data-copy="okay I need to tell you something... don't judge me">📋<span class="copied">Copied!</span></button></div></div><div class="note-box" id="note-r9">Next → Teasing Bridge</div></div>
+  </div>
 </div>
 
-<!-- RAPPORT -->
-<h2 style="color: #58a6ff;">Rapport (9 msgs)</h2>
-
-<h3>Block A: Ice-break</h3>
-<div class="section border-blue">
-  <table class="c-rapport">
-    <tr><th width="60">Cmd</th><th>Message</th><th width="280">Note</th></tr>
-    <tr><td class="cmd">R-1</td><td class="msg">hi 😊 okay be honest, what caught your eye?</td><td class="note">Add his name before "hi"</td></tr>
-    <tr><td class="cmd">R-2</td><td class="msg">mmm I like that 😏 so where are you from?</td><td class="note">React before ("haha omg", "aww")</td></tr>
-    <tr><td class="cmd">R-3</td><td class="msg">nice! I'm from Bali but I'm literally never home 😅</td><td class="note">If country Putri visited, add "oh I've been there!"</td></tr>
-  </table>
+<!-- ── Teasing Bridge ── -->
+<div class="acc-section" data-section="teasing">
+  <div class="acc-header">
+    <span class="acc-dot" style="background:var(--purple)"></span>
+    <span class="acc-title">Teasing Bridge</span>
+    <span class="acc-meta">6 msgs · PPV 0 FREE</span>
+    <span class="acc-chevron">▶</span>
+  </div>
+  <div class="acc-body">
+    <div class="msg-card"><div class="msg-top"><span class="msg-id">TB-1</span><span class="msg-text">I'm lying in bed rn after my shower and... this conversation is doing something to me 🙈</span><div class="msg-actions"><button class="info-btn" data-note="note-tb1">i</button><button class="copy-btn" data-copy="I'm lying in bed rn after my shower and... this conversation is doing something to me 🙈">📋<span class="copied">Copied!</span></button></div></div><div class="note-box" id="note-tb1">THE PIVOT — physical context</div></div>
+    <div class="msg-card"><div class="msg-top"><span class="msg-id">TB-2</span><span class="msg-text">like do you think about me like that? 😏</span><div class="msg-actions"><button class="info-btn" data-note="note-tb2">i</button><button class="copy-btn" data-copy="like do you think about me like that? 😏">📋<span class="copied">Copied!</span></button></div></div><div class="note-box" id="note-tb2">Wait for response</div></div>
+    <div class="msg-card"><div class="msg-top"><span class="msg-id">TB-3</span><span class="msg-text">fuck... honestly I can't think straight rn 🥵</span><div class="msg-actions"><button class="info-btn" data-note="note-tb3">i</button><button class="copy-btn" data-copy="fuck... honestly I can't think straight rn 🥵">📋<span class="copied">Copied!</span></button></div></div><div class="note-box" id="note-tb3">If he said something sexual, add 'since you said that' after 'honestly'</div></div>
+    <div class="msg-card"><div class="msg-top"><span class="msg-id">TB-4</span><span class="msg-text">I just got this new lingerie and I've been wanting to try it on for someone 😏 I don't do this with everyone just so you know</span><div class="msg-actions"><button class="copy-btn" data-copy="I just got this new lingerie and I've been wanting to try it on for someone 😏 I don't do this with everyone just so you know">📋<span class="copied">Copied!</span></button></div></div></div>
+    <div class="msg-card">
+      <div class="msg-top"><span class="msg-id">TB-5</span><span class="msg-text">hold on let me put it on rn 🙈</span><div class="msg-actions"><button class="copy-btn" data-copy="hold on let me put it on rn 🙈">📋<span class="copied">Copied!</span></button></div></div>
+      <div class="badges"><span class="badge badge-wait">⏱ WAIT 1-2 MIN</span></div>
+    </div>
+    <div class="msg-card">
+      <div class="msg-top"><span class="msg-id">TB-6</span><span class="msg-text">🙈😳 what do you think</span><div class="msg-actions"><button class="copy-btn" data-copy="🙈😳 what do you think">📋<span class="copied">Copied!</span></button></div></div>
+      <div class="badges"><span class="badge badge-ppv">📎 PPV 0 — FREE teaser</span></div>
+    </div>
+    <div class="branch-row">
+      <button class="branch-btn branch-bought" data-next="sext1">✅ Bought</button>
+      <button class="branch-btn branch-silent" data-nr="true">🔇 Silent</button>
+      <button class="branch-btn branch-obj">❌ Objection</button>
+    </div>
+  </div>
 </div>
 
-<h3>Block B: Vibe</h3>
-<div class="section border-blue">
-  <table class="c-rapport">
-    <tr><th width="60">Cmd</th><th>Message</th><th width="280">Note</th></tr>
-    <tr><td class="cmd">R-4</td><td class="msg">so what do you do besides making me smile rn 😏</td><td class="note"></td></tr>
-    <tr><td class="cmd">R-5</td><td class="msg">that's actually really attractive 😊 I'm all about my bike and my camera... nothing beats riding through a country you've never been to</td><td class="note"></td></tr>
-    <tr><td class="cmd">R-6</td><td class="msg">okay I gotta say... you're actually fun to talk to. that's rare here 😏</td><td class="note">Ego boost</td></tr>
-  </table>
+<!-- ── Sexting Phase 1 — PPV 1 $10 ── -->
+<div class="acc-section" data-section="sext1">
+  <div class="acc-header">
+    <span class="acc-dot" style="background:var(--red)"></span>
+    <span class="acc-title">Sexting 1 — PPV 1</span>
+    <span class="acc-meta">5 msgs · $10</span>
+    <span class="acc-chevron">▶</span>
+  </div>
+  <div class="acc-body">
+    <div class="msg-card"><div class="msg-top"><span class="msg-id">S1-1</span><span class="msg-text">sooo? 😏</span><div class="msg-actions"><button class="info-btn" data-note="note-s11">i</button><button class="copy-btn" data-copy="sooo? 😏">📋<span class="copied">Copied!</span></button></div></div><div class="note-box" id="note-s11">Wait for response</div></div>
+    <div class="msg-card"><div class="msg-top"><span class="msg-id">S1-2</span><span class="msg-text">mmm I knew you'd like it 🥵</span><div class="msg-actions"><button class="info-btn" data-note="note-s12">i</button><button class="copy-btn" data-copy="mmm I knew you'd like it 🥵">📋<span class="copied">Copied!</span></button></div></div><div class="note-box" id="note-s12">Add a short react ('haha', 'omg 🙈')</div></div>
+    <div class="msg-card"><div class="msg-top"><span class="msg-id">S1-3</span><span class="msg-text">I kinda wanna take the rest off for you</span><div class="msg-actions"><button class="copy-btn" data-copy="I kinda wanna take the rest off for you">📋<span class="copied">Copied!</span></button></div></div></div>
+    <div class="msg-card">
+      <div class="msg-top"><span class="msg-id">S1-4</span><span class="msg-text">hold on baby 😏</span><div class="msg-actions"><button class="copy-btn" data-copy="hold on baby 😏">📋<span class="copied">Copied!</span></button></div></div>
+      <div class="badges"><span class="badge badge-wait">⏱ WAIT 2-3 MIN</span></div>
+    </div>
+    <div class="msg-card">
+      <div class="msg-top"><span class="msg-id">S1-5</span><span class="msg-text">couldn't help myself 🥵</span><div class="msg-actions"><button class="copy-btn" data-copy="couldn't help myself 🥵">📋<span class="copied">Copied!</span></button></div></div>
+      <div class="badges"><span class="badge badge-ppv">📎 PPV 1 — $10</span></div>
+    </div>
+    <div class="branch-row">
+      <button class="branch-btn branch-bought" data-next="sext2">✅ Bought</button>
+      <button class="branch-btn branch-silent" data-nr="true">🔇 Silent</button>
+      <button class="branch-btn branch-obj">❌ Objection</button>
+    </div>
+  </div>
 </div>
 
-<h3>Block C: Heat</h3>
-<div class="section border-blue">
-  <table class="c-rapport">
-    <tr><th width="60">Cmd</th><th>Message</th><th width="280">Note</th></tr>
-    <tr><td class="cmd">R-7</td><td class="msg">are you always this charming or just with me? 😏</td><td class="note"></td></tr>
-    <tr><td class="cmd">R-8</td><td class="msg">stoppp 🙈 you're making me blush</td><td class="note"></td></tr>
-    <tr><td class="cmd">R-9</td><td class="msg">okay I need to tell you something... don't judge me</td><td class="note">Next → TB-1</td></tr>
-  </table>
+<!-- ── Sexting Phase 2 — PPV 2 $25 ── -->
+<div class="acc-section" data-section="sext2">
+  <div class="acc-header">
+    <span class="acc-dot" style="background:var(--red)"></span>
+    <span class="acc-title">Sexting 2 — PPV 2</span>
+    <span class="acc-meta">6 msgs · $25</span>
+    <span class="acc-chevron">▶</span>
+  </div>
+  <div class="acc-body">
+    <div class="msg-card"><div class="msg-top"><span class="msg-id">S1-6</span><span class="msg-text">you watched it?? 🙈</span><div class="msg-actions"><button class="info-btn" data-note="note-s16">i</button><button class="copy-btn" data-copy="you watched it?? 🙈">📋<span class="copied">Copied!</span></button></div></div><div class="note-box" id="note-s16">Wait for response. Brief cooldown.</div></div>
+    <div class="msg-card"><div class="msg-top"><span class="msg-id">S1-7</span><span class="msg-text">fuckk that turns me on so much 🥵</span><div class="msg-actions"><button class="info-btn" data-note="note-s17">i</button><button class="copy-btn" data-copy="fuckk that turns me on so much 🥵">📋<span class="copied">Copied!</span></button></div></div><div class="note-box" id="note-s17">React to what he said. HE caused this.</div></div>
+    <div class="msg-card"><div class="msg-top"><span class="msg-id">S1-8</span><span class="msg-text">I want your cock in my mouth so bad rn</span><div class="msg-actions"><button class="copy-btn" data-copy="I want your cock in my mouth so bad rn">📋<span class="copied">Copied!</span></button></div></div></div>
+    <div class="msg-card"><div class="msg-top"><span class="msg-id">S1-9</span><span class="msg-text">tell me what you'd do to me</span><div class="msg-actions"><button class="info-btn" data-note="note-s19">i</button><button class="copy-btn" data-copy="tell me what you'd do to me">📋<span class="copied">Copied!</span></button></div></div><div class="note-box" id="note-s19">Wait for response. REACTION SLOT</div></div>
+    <div class="msg-card">
+      <div class="msg-top"><span class="msg-id">S1-10</span><span class="msg-text">🥵🥵🥵 hold on I need to show you something</span><div class="msg-actions"><button class="copy-btn" data-copy="🥵🥵🥵 hold on I need to show you something">📋<span class="copied">Copied!</span></button></div></div>
+      <div class="badges"><span class="badge badge-wait">⏱ WAIT 2-3 MIN</span></div>
+    </div>
+    <div class="msg-card">
+      <div class="msg-top"><span class="msg-id">S1-11</span><span class="msg-text">look what you made me do 🥵💦</span><div class="msg-actions"><button class="copy-btn" data-copy="look what you made me do 🥵💦">📋<span class="copied">Copied!</span></button></div></div>
+      <div class="badges"><span class="badge badge-ppv">📎 PPV 2 — $25</span></div>
+    </div>
+    <div class="branch-row">
+      <button class="branch-btn branch-bought" data-next="sext3">✅ Bought</button>
+      <button class="branch-btn branch-silent" data-nr="true">🔇 Silent</button>
+      <button class="branch-btn branch-obj">❌ Objection</button>
+    </div>
+  </div>
 </div>
 
-<!-- TEASING BRIDGE -->
-<h2 style="color: #bc8cff;">Teasing Bridge (6 msgs — PPV 0)</h2>
-<div class="section border-purple">
-  <table class="c-tb">
-    <tr><th width="60">Cmd</th><th>Message</th><th width="300">Note</th></tr>
-    <tr><td class="cmd">TB-1</td><td class="msg">I'm lying in bed rn after my shower and... this conversation is doing something to me 🙈</td><td class="note">⚡ THE PIVOT</td></tr>
-    <tr><td class="cmd">TB-2</td><td class="msg">like do you think about me like that? 😏</td><td class="note">Wait for response</td></tr>
-    <tr><td class="cmd">TB-3</td><td class="msg">fuck... honestly I can't think straight rn 🥵</td><td class="note">If sexual, add "since you said that" after "honestly"</td></tr>
-    <tr><td class="cmd">TB-4</td><td class="msg">I just got this new lingerie and I've been wanting to try it on for someone 😏 I don't do this with everyone just so you know</td><td class="note"></td></tr>
-    <tr><td class="cmd">TB-5</td><td class="msg">hold on let me put it on rn 🙈</td><td class="note">⏱️ WAIT 1-2 MIN</td></tr>
-    <tr><td class="cmd">TB-6</td><td class="msg">🙈😳 what do you think</td><td class="note">📎 Send PPV 0 — FREE. Wait response.</td></tr>
-  </table>
+<!-- ── Sexting Phase 3 — PPV 3 $40 ── -->
+<div class="acc-section" data-section="sext3">
+  <div class="acc-header">
+    <span class="acc-dot" style="background:var(--red)"></span>
+    <span class="acc-title">Sexting 3 — PPV 3</span>
+    <span class="acc-meta">6 msgs · $40</span>
+    <span class="acc-chevron">▶</span>
+  </div>
+  <div class="acc-body">
+    <div class="msg-card"><div class="msg-top"><span class="msg-id">S1-12</span><span class="msg-text">fuck baby 🥵</span><div class="msg-actions"><button class="info-btn" data-note="note-s112">i</button><button class="copy-btn" data-copy="fuck baby 🥵">📋<span class="copied">Copied!</span></button></div></div><div class="note-box" id="note-s112">Wait for response. NO cooldown.</div></div>
+    <div class="msg-card"><div class="msg-top"><span class="msg-id">S1-13</span><span class="msg-text">I need you inside me so bad rn</span><div class="msg-actions"><button class="copy-btn" data-copy="I need you inside me so bad rn">📋<span class="copied">Copied!</span></button></div></div></div>
+    <div class="msg-card"><div class="msg-top"><span class="msg-id">S1-14</span><span class="msg-text">imagine bending me over and sliding deep inside my tight wet pussy while I moan your name 🥵</span><div class="msg-actions"><button class="copy-btn" data-copy="imagine bending me over and sliding deep inside my tight wet pussy while I moan your name 🥵">📋<span class="copied">Copied!</span></button></div></div></div>
+    <div class="msg-card"><div class="msg-top"><span class="msg-id">S1-15</span><span class="msg-text">I want you to make me scream</span><div class="msg-actions"><button class="copy-btn" data-copy="I want you to make me scream">📋<span class="copied">Copied!</span></button></div></div></div>
+    <div class="msg-card">
+      <div class="msg-top"><span class="msg-id">S1-16</span><span class="msg-text">I can't take it... give me a sec 🥵</span><div class="msg-actions"><button class="copy-btn" data-copy="I can't take it... give me a sec 🥵">📋<span class="copied">Copied!</span></button></div></div>
+      <div class="badges"><span class="badge badge-wait">⏱ WAIT 2-3 MIN</span></div>
+    </div>
+    <div class="msg-card">
+      <div class="msg-top"><span class="msg-id">S1-17</span><span class="msg-text">I've never gone this far for anyone... watch what I just did 🥵💦</span><div class="msg-actions"><button class="copy-btn" data-copy="I've never gone this far for anyone... watch what I just did 🥵💦">📋<span class="copied">Copied!</span></button></div></div>
+      <div class="badges"><span class="badge badge-ppv">📎 PPV 3 — $40</span></div>
+    </div>
+    <div class="branch-row">
+      <button class="branch-btn branch-bought" data-next="sext4">✅ Bought</button>
+      <button class="branch-btn branch-silent" data-nr="true">🔇 Silent</button>
+      <button class="branch-btn branch-obj">❌ Objection</button>
+    </div>
+  </div>
 </div>
 
-<!-- SEXTING SEQUENCE -->
-<h2 style="color: #3fb950;">🔥 Sexting Sequence — PPV 1 to PPV 4</h2>
-
-<!-- Phase 1 -->
-<div class="phase-header"><h3>Phase 1: Build to PPV 1</h3><span class="ppv-tag">$10</span></div>
-<div class="section border-green">
-  <table class="c-sexting">
-    <tr><th width="60">Cmd</th><th>Message</th><th width="250">Note</th><th width="160">Intensity</th></tr>
-    <tr><td class="cmd">S1-1</td><td class="msg">sooo? 😏</td><td class="note">Wait for response</td><td><div class="bar"><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-empty"></div><div class="bar-empty"></div><div class="bar-empty"></div><div class="bar-empty"></div><span class="bar-label">6/10</span></div></td></tr>
-    <tr><td class="cmd">S1-2</td><td class="msg">mmm I knew you'd like it 🥵</td><td class="note">React</td><td><div class="bar"><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-empty"></div><div class="bar-empty"></div><div class="bar-empty"></div><div class="bar-empty"></div><span class="bar-label">6/10</span></div></td></tr>
-    <tr><td class="cmd">S1-3</td><td class="msg">I kinda wanna take the rest off for you</td><td class="note"></td><td><div class="bar"><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-empty"></div><div class="bar-empty"></div><div class="bar-empty"></div><span class="bar-label">7/10</span></div></td></tr>
-    <tr><td class="cmd">S1-4</td><td class="msg">hold on baby 😏</td><td class="note">⏱️ WAIT 2-3 MIN</td><td><div class="bar"><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-empty"></div><div class="bar-empty"></div><span class="bar-label">8/10</span></div></td></tr>
-    <tr><td class="cmd">S1-5</td><td class="msg">couldn't help myself 🥵</td><td class="note">📎 PPV 1 — $10<br>✅→S1-6 | 🔇→NR | ❌→OBJ</td><td><div class="bar"><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-empty"></div><div class="bar-empty"></div><span class="bar-label">8/10</span></div></td></tr>
-  </table>
+<!-- ── Sexting Phase 4 — CLIMAX PPV 4 $55 ── -->
+<div class="acc-section" data-section="sext4">
+  <div class="acc-header">
+    <span class="acc-dot" style="background:var(--red)"></span>
+    <span class="acc-title">Sexting 4 — CLIMAX PPV 4</span>
+    <span class="acc-meta">5 msgs · $55</span>
+    <span class="acc-chevron">▶</span>
+  </div>
+  <div class="acc-body">
+    <div class="msg-card"><div class="msg-top"><span class="msg-id">S1-18</span><span class="msg-text">omggg 🥵🥵</span><div class="msg-actions"><button class="info-btn" data-note="note-s118">i</button><button class="copy-btn" data-copy="omggg 🥵🥵">📋<span class="copied">Copied!</span></button></div></div><div class="note-box" id="note-s118">Wait for response</div></div>
+    <div class="msg-card"><div class="msg-top"><span class="msg-id">S1-19</span><span class="msg-text">don't cum yet baby</span><div class="msg-actions"><button class="copy-btn" data-copy="don't cum yet baby">📋<span class="copied">Copied!</span></button></div></div></div>
+    <div class="msg-card"><div class="msg-top"><span class="msg-id">S1-20</span><span class="msg-text">I want us to finish together... I'm so close</span><div class="msg-actions"><button class="copy-btn" data-copy="I want us to finish together... I'm so close">📋<span class="copied">Copied!</span></button></div></div></div>
+    <div class="msg-card">
+      <div class="msg-top"><span class="msg-id">S1-21</span><span class="msg-text">fuck fuck fuck hold on 🥵</span><div class="msg-actions"><button class="copy-btn" data-copy="fuck fuck fuck hold on 🥵">📋<span class="copied">Copied!</span></button></div></div>
+      <div class="badges"><span class="badge badge-wait">⏱ WAIT 1-2 MIN</span></div>
+    </div>
+    <div class="msg-card">
+      <div class="msg-top"><span class="msg-id">S1-22</span><span class="msg-text">cum with me baby 💦😈</span><div class="msg-actions"><button class="copy-btn" data-copy="cum with me baby 💦😈">📋<span class="copied">Copied!</span></button></div></div>
+      <div class="badges"><span class="badge badge-ppv">📎 PPV 4 — $55</span></div>
+    </div>
+    <div class="branch-row">
+      <button class="branch-btn branch-bought" data-next="aftercare">✅ Bought</button>
+      <button class="branch-btn branch-silent" data-nr="true">🔇 Silent</button>
+      <button class="branch-btn branch-obj">❌ Objection</button>
+    </div>
+  </div>
 </div>
 
-<!-- Phase 2 -->
-<div class="phase-header"><h3>Phase 2: Build to PPV 2</h3><span class="ppv-tag">$25</span></div>
-<div class="section border-green">
-  <table class="c-sexting">
-    <tr><th width="60">Cmd</th><th>Message</th><th width="250">Note</th><th width="160">Intensity</th></tr>
-    <tr><td class="cmd">S1-6</td><td class="msg">you watched it?? 🙈</td><td class="note">Wait response. Brief cooldown.</td><td><div class="bar"><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-empty"></div><div class="bar-empty"></div><div class="bar-empty"></div><div class="bar-empty"></div><span class="bar-label">6/10</span></div></td></tr>
-    <tr><td class="cmd">S1-7</td><td class="msg">fuckk that turns me on so much 🥵</td><td class="note">React. Sexual vulnerability.</td><td><div class="bar"><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-empty"></div><div class="bar-empty"></div><span class="bar-label">8/10</span></div></td></tr>
-    <tr><td class="cmd">S1-8</td><td class="msg">I want your cock in my mouth so bad rn</td><td class="note"></td><td><div class="bar"><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-empty"></div><div class="bar-empty"></div><span class="bar-label">8/10</span></div></td></tr>
-    <tr><td class="cmd">S1-9</td><td class="msg">tell me what you'd do to me</td><td class="note">Wait response. 🎯 REACTION SLOT</td><td><div class="bar"><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-empty"></div><div class="bar-empty"></div><span class="bar-label">8/10</span></div></td></tr>
-    <tr><td class="cmd">S1-10</td><td class="msg">🥵🥵🥵 hold on I need to show you something</td><td class="note">⏱️ WAIT 2-3 MIN</td><td><div class="bar"><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-empty"></div><span class="bar-label">9/10</span></div></td></tr>
-    <tr><td class="cmd">S1-11</td><td class="msg">look what you made me do 🥵💦</td><td class="note">📎 PPV 2 — $25<br>✅→S1-12 | 🔇→NR | ❌→OBJ</td><td><div class="bar"><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-empty"></div><span class="bar-label">9/10</span></div></td></tr>
-  </table>
+<!-- ── Aftercare + Re-engagement ── -->
+<div class="acc-section" data-section="aftercare">
+  <div class="acc-header">
+    <span class="acc-dot" style="background:var(--blue)"></span>
+    <span class="acc-title">Aftercare + Re-engagement</span>
+    <span class="acc-meta">5 msgs</span>
+    <span class="acc-chevron">▶</span>
+  </div>
+  <div class="acc-body">
+    <div class="msg-card"><div class="msg-top"><span class="msg-id">AC-1</span><span class="msg-text">holy shit 🥵 that was... wow</span><div class="msg-actions"><button class="copy-btn" data-copy="holy shit 🥵 that was... wow">📋<span class="copied">Copied!</span></button></div></div></div>
+    <div class="msg-card"><div class="msg-top"><span class="msg-id">AC-2</span><span class="msg-text">you're actually insane 😮‍💨💗 that was honestly so different from what I'm used to</span><div class="msg-actions"><button class="info-btn" data-note="note-ac2">i</button><button class="copy-btn" data-copy="you're actually insane 😮‍💨💗 that was honestly so different from what I'm used to">📋<span class="copied">Copied!</span></button></div></div><div class="note-box" id="note-ac2">Mention something specific he said or did</div></div>
+    <div class="msg-card"><div class="msg-top"><span class="msg-id">AC-3</span><span class="msg-text">I need to sleep but next time? I got something new and you're not ready 😈 gn baby 💗</span><div class="msg-actions"><button class="info-btn" data-note="note-ac3">i</button><button class="copy-btn" data-copy="I need to sleep but next time? I got something new and you're not ready 😈 gn baby 💗">📋<span class="copied">Copied!</span></button></div></div><div class="note-box" id="note-ac3">END. Seed for next session.</div></div>
+    <div class="msg-card"><div class="msg-top"><span class="msg-id">RE-1</span><span class="msg-text">I can't stop thinking about earlier 😏 you free?</span><div class="msg-actions"><button class="info-btn" data-note="note-re1">i</button><button class="copy-btn" data-copy="I can't stop thinking about earlier 😏 you free?">📋<span class="copied">Copied!</span></button></div></div><div class="note-box" id="note-re1">Send 6-12 hours later</div></div>
+    <div class="msg-card"><div class="msg-top"><span class="msg-id">RE-2</span><span class="msg-text">remember what I said about something new? I'm wearing it rn and I need you to see 🙈</span><div class="msg-actions"><button class="info-btn" data-note="note-re2">i</button><button class="copy-btn" data-copy="remember what I said about something new? I'm wearing it rn and I need you to see 🙈">📋<span class="copied">Copied!</span></button></div></div><div class="note-box" id="note-re2">Send next day</div></div>
+  </div>
 </div>
 
-<!-- Phase 3 -->
-<div class="phase-header"><h3>Phase 3: Build to PPV 3 ⚡ NO COOLDOWN</h3><span class="ppv-tag">$40</span></div>
-<div class="section border-green">
-  <table class="c-sexting">
-    <tr><th width="60">Cmd</th><th>Message</th><th width="250">Note</th><th width="160">Intensity</th></tr>
-    <tr><td class="cmd">S1-12</td><td class="msg">fuck baby 🥵</td><td class="note">Wait response. NO cooldown.</td><td><div class="bar"><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-empty"></div><span class="bar-label">9/10</span></div></td></tr>
-    <tr><td class="cmd">S1-13</td><td class="msg">I need you inside me so bad rn</td><td class="note"></td><td><div class="bar"><div class="bar-fill bar-low"></div><div class="bar-fill bar-low"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-empty"></div><span class="bar-label">9/10</span></div></td></tr>
-    <tr><td class="cmd">S1-14</td><td class="msg">imagine bending me over and sliding deep inside my tight wet pussy while I moan your name 🥵</td><td class="note"></td><td><div class="bar"><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-max"></div><div class="bar-fill bar-max"></div><div class="bar-fill bar-max"></div><div class="bar-fill bar-max"></div><span class="bar-label">10/10</span></div></td></tr>
-    <tr><td class="cmd">S1-15</td><td class="msg">I want you to make me scream</td><td class="note"></td><td><div class="bar"><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-max"></div><div class="bar-fill bar-max"></div><div class="bar-fill bar-max"></div><div class="bar-fill bar-max"></div><span class="bar-label">10/10</span></div></td></tr>
-    <tr><td class="cmd">S1-16</td><td class="msg">I can't take it... give me a sec 🥵</td><td class="note">⏱️ WAIT 2-3 MIN</td><td><div class="bar"><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-max"></div><div class="bar-fill bar-max"></div><div class="bar-fill bar-max"></div><div class="bar-fill bar-max"></div><span class="bar-label">10/10</span></div></td></tr>
-    <tr><td class="cmd">S1-17</td><td class="msg">I've never gone this far for anyone... watch what I just did 🥵💦</td><td class="note">📎 PPV 3 — $40<br>✅→S1-18 | 🔇→NR</td><td><div class="bar"><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-max"></div><div class="bar-fill bar-max"></div><div class="bar-fill bar-max"></div><div class="bar-fill bar-max"></div><span class="bar-label">10/10</span></div></td></tr>
-  </table>
+</div><!-- /tab-journey -->
+
+<!-- ████████████████████████  TAB 2: OBJECTIONS  ████████████████████████ -->
+<div class="tab-content" id="tab-objections">
+<div class="obj-btn-list" id="obj-list">
+
+<!-- Too Expensive -->
+<button class="obj-trigger" data-obj="obj-expensive">💰 Too Expensive<span class="chevron">▶</span></button>
+<div class="obj-body" id="obj-expensive">
+  <div class="obj-step"><div class="obj-step-head"><span class="step-num">1</span><span class="technique">Reframe</span></div><div class="msg-top"><span class="msg-text">baby this is literally 3 min of something I never do... you spend more than this on coffee ☕😏</span><div class="msg-actions"><button class="copy-btn" data-copy="baby this is literally 3 min of something I never do... you spend more than this on coffee ☕😏">📋<span class="copied">Copied!</span></button></div></div></div>
+  <div class="obj-step"><div class="obj-step-head"><span class="step-num">2</span><span class="technique">Discount 20-30% ONE TIME</span></div><div class="msg-top"><span class="msg-text">okay honestly? I'll do $[price] but ONLY for you and only this once 🥺</span><div class="msg-actions"><button class="copy-btn" data-copy="okay honestly? I'll do $[price] but ONLY for you and only this once 🥺">📋<span class="copied">Copied!</span></button></div></div></div>
+  <div class="obj-step"><div class="obj-step-head"><span class="step-num">3</span><span class="technique">FOMO</span></div><div class="msg-top"><span class="msg-text">I'm only in this mood rn tho... idk if I'll feel like this again anytime soon 😏</span><div class="msg-actions"><button class="copy-btn" data-copy="I'm only in this mood rn tho... idk if I'll feel like this again anytime soon 😏">📋<span class="copied">Copied!</span></button></div></div></div>
+  <div class="obj-step"><div class="obj-step-head"><span class="step-num">4</span><span class="technique">Challenge</span></div><div class="msg-top"><span class="msg-text">hmm maybe you're not ready for what I did in this one anyway 😏 it IS pretty intense</span><div class="msg-actions"><button class="copy-btn" data-copy="hmm maybe you're not ready for what I did in this one anyway 😏 it IS pretty intense">📋<span class="copied">Copied!</span></button></div></div></div>
+  <div class="obj-step"><div class="obj-step-head"><span class="step-num">5</span><span class="technique">Takeaway</span></div><div class="msg-top"><span class="msg-text">okay fine 😏 I'll keep it for someone who actually wants it</span><div class="msg-actions"><button class="copy-btn" data-copy="okay fine 😏 I'll keep it for someone who actually wants it">📋<span class="copied">Copied!</span></button></div></div></div>
+  <div class="obj-step"><div class="obj-step-head"><span class="step-num">6</span><span class="technique">Seed + Return</span></div><div class="msg-top"><span class="msg-text">btw that video? I just watched it again and fuck 🥵 last chance before I delete it... you sure?</span><div class="msg-actions"><button class="copy-btn" data-copy="btw that video? I just watched it again and fuck 🥵 last chance before I delete it... you sure?">📋<span class="copied">Copied!</span></button></div></div></div>
 </div>
 
-<!-- Phase 4 -->
-<div class="phase-header"><h3 style="color: #ff4444;">Phase 4: CLIMAX</h3><span class="ppv-tag">$55</span></div>
-<div class="section border-green" style="border-left-color: #ff4444;">
-  <table class="c-sexting">
-    <tr><th width="60">Cmd</th><th>Message</th><th width="250">Note</th><th width="160">Intensity</th></tr>
-    <tr><td class="cmd">S1-18</td><td class="msg">omggg 🥵🥵</td><td class="note">Wait response</td><td><div class="bar"><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-max"></div><div class="bar-fill bar-max"></div><div class="bar-fill bar-max"></div><div class="bar-fill bar-max"></div><span class="bar-label">10/10</span></div></td></tr>
-    <tr><td class="cmd">S1-19</td><td class="msg">don't cum yet baby</td><td class="note"></td><td><div class="bar"><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-max"></div><div class="bar-fill bar-max"></div><div class="bar-fill bar-max"></div><div class="bar-fill bar-max"></div><span class="bar-label">10/10</span></div></td></tr>
-    <tr><td class="cmd">S1-20</td><td class="msg">I want us to finish together... I'm so close</td><td class="note"></td><td><div class="bar"><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-max"></div><div class="bar-fill bar-max"></div><div class="bar-fill bar-max"></div><div class="bar-fill bar-max"></div><span class="bar-label">10/10</span></div></td></tr>
-    <tr><td class="cmd">S1-21</td><td class="msg">fuck fuck fuck hold on 🥵</td><td class="note">⏱️ WAIT 1-2 MIN</td><td><div class="bar"><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-max"></div><div class="bar-fill bar-max"></div><div class="bar-fill bar-max"></div><div class="bar-fill bar-max"></div><span class="bar-label">10/10</span></div></td></tr>
-    <tr><td class="cmd">S1-22</td><td class="msg">cum with me baby 💦😈</td><td class="note">📎 PPV 4 — $55<br>✅→AC-1 | 🔇→NR</td><td><div class="bar"><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-mid"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-high"></div><div class="bar-fill bar-max"></div><div class="bar-fill bar-max"></div><div class="bar-fill bar-max"></div><div class="bar-fill bar-max"></div><span class="bar-label">10/10</span></div></td></tr>
-  </table>
+<!-- Send Free First -->
+<button class="obj-trigger" data-obj="obj-free">🆓 Send Free First<span class="chevron">▶</span></button>
+<div class="obj-body" id="obj-free">
+  <div class="obj-step"><div class="obj-step-head"><span class="step-num">1</span><span class="technique">Reminder</span></div><div class="msg-top"><span class="msg-text">I already sent you something free remember? 😏 this one is WAY more... trust me</span><div class="msg-actions"><button class="copy-btn" data-copy="I already sent you something free remember? 😏 this one is WAY more... trust me">📋<span class="copied">Copied!</span></button></div></div></div>
+  <div class="obj-step"><div class="obj-step-head"><span class="step-num">2</span><span class="technique">Downgrade</span></div><div class="msg-top"><span class="msg-text">tell you what... $[price]. but you gotta promise you'll actually watch it 😏</span><div class="msg-actions"><button class="copy-btn" data-copy="tell you what... $[price]. but you gotta promise you'll actually watch it 😏">📋<span class="copied">Copied!</span></button></div></div></div>
+  <div class="obj-step"><div class="obj-step-head"><span class="step-num">3</span><span class="technique">Challenge</span></div><div class="msg-top"><span class="msg-text">hmm okay, maybe you're not ready to see what I really do 😏 it's intense</span><div class="msg-actions"><button class="copy-btn" data-copy="hmm okay, maybe you're not ready to see what I really do 😏 it's intense">📋<span class="copied">Copied!</span></button></div></div></div>
+  <div class="obj-step"><div class="obj-step-head"><span class="step-num">4</span><span class="technique">Seed + Return</span></div><div class="msg-top"><span class="msg-text">baby what I did in that video? it's worth every penny 🥵 just saying</span><div class="msg-actions"><button class="copy-btn" data-copy="baby what I did in that video? it's worth every penny 🥵 just saying">📋<span class="copied">Copied!</span></button></div></div></div>
 </div>
 
-<!-- NO RESPONSE -->
-<h2 style="color: #d29922;">No Response — Wave System</h2>
-<div class="section border-yellow">
-  <table class="c-nr">
-    <tr><th width="60">Wave</th><th width="130">Timing</th><th>Message</th><th width="130">Technique</th></tr>
-    <tr><td class="cmd">W1</td><td class="note">2-3 min</td><td class="msg">baby? 🥺</td><td class="technique">Ping</td></tr>
-    <tr><td class="cmd">W2</td><td class="note">3-5 min later</td><td class="msg">you need to see what I just did for you... seriously 🥵</td><td class="technique">Curiosity</td></tr>
-    <tr><td class="cmd">W3</td><td class="note">5-10 min later</td><td class="msg">okay I guess you're busy 😏 I might delete this, it was only for you anyway</td><td class="technique">Takeaway</td></tr>
-    <tr><td class="cmd">W4</td><td class="note">15-30 min later</td><td class="msg">hey I hope you're okay 💗 I had fun talking to you... hmu when you're back</td><td class="technique">Warm close</td></tr>
-    <tr><td class="cmd">W5</td><td class="note">2-6 hrs later</td><td class="msg">I keep thinking about earlier 🥵 you free?</td><td class="technique">New convo</td></tr>
-  </table>
+<!-- I Don't Buy PPVs -->
+<button class="obj-trigger" data-obj="obj-noppv">🚫 I Don't Buy PPVs<span class="chevron">▶</span></button>
+<div class="obj-body" id="obj-noppv">
+  <div class="obj-step"><div class="obj-step-head"><span class="step-num">1</span><span class="technique">Accept</span></div><div class="msg-top"><span class="msg-text">that's okay baby 😊 I won't force you</span><div class="msg-actions"><button class="copy-btn" data-copy="that's okay baby 😊 I won't force you">📋<span class="copied">Copied!</span></button></div></div></div>
+  <div class="obj-step"><div class="obj-step-head"><span class="step-num">2</span><span class="technique">Build tension</span></div><div class="msg-top"><span class="msg-text">[Continue explicit text sexting 4-5 msgs]</span><div class="msg-actions"><button class="copy-btn" data-copy="[Continue explicit text sexting 4-5 msgs]">📋<span class="copied">Copied!</span></button></div></div></div>
+  <div class="obj-step"><div class="obj-step-head"><span class="step-num">3</span><span class="technique">Emotional reframe</span></div><div class="msg-top"><span class="msg-text">fuck... okay I need to show you something. this isn't about money, I literally need you to see what you're doing to me rn 🥵</span><div class="msg-actions"><button class="copy-btn" data-copy="fuck... okay I need to show you something. this isn't about money, I literally need you to see what you're doing to me rn 🥵">📋<span class="copied">Copied!</span></button></div></div></div>
+  <div class="obj-step"><div class="obj-step-head"><span class="step-num">4</span><span class="technique">Pay what you want</span></div><div class="msg-top"><span class="msg-text">I'll send it for whatever you want to pay, I don't care about the price rn, I just need you to watch 🥵</span><div class="msg-actions"><button class="copy-btn" data-copy="I'll send it for whatever you want to pay, I don't care about the price rn, I just need you to watch 🥵">📋<span class="copied">Copied!</span></button></div></div></div>
 </div>
 
-<!-- OBJECTION PROTOCOLS -->
-<h2 style="color: #f778ba;">Objection Protocols</h2>
-
-<h3>"TOO EXPENSIVE" <span style="color:#8b949e;">(max 6 steps)</span></h3>
-<div class="section border-pink">
-  <table class="c-obj">
-    <tr><th width="40">#</th><th>Message</th><th width="160">Technique</th><th width="40">+/−</th></tr>
-    <tr><td class="cmd">1</td><td class="msg">baby this is literally 3 min of something I never do... you spend more than this on coffee ☕😏</td><td class="technique">Reframe</td><td class="tag-pos">+</td></tr>
-    <tr><td class="cmd">2</td><td class="msg">okay honestly? I'll do $[price] but ONLY for you and only this once 🥺</td><td class="technique">Discount (1x)</td><td class="tag-pos">+</td></tr>
-    <tr><td class="cmd">3</td><td class="msg">I'm only in this mood rn tho... idk if I'll feel like this again anytime soon 😏</td><td class="technique">FOMO temporal</td><td class="tag-neg">−</td></tr>
-    <tr><td class="cmd">4</td><td class="msg">hmm maybe you're not ready for what I did in this one anyway 😏 it IS pretty intense</td><td class="technique">Challenge</td><td class="tag-neg">−</td></tr>
-    <tr><td class="cmd">5</td><td class="msg">okay fine 😏 I'll keep it for someone who actually wants it</td><td class="technique">Takeaway</td><td class="tag-neg">−</td></tr>
-    <tr><td class="cmd">6</td><td class="msg">btw that video? I just watched it again and fuck 🥵 last chance before I delete it... you sure?</td><td class="technique">Seed + Return</td><td class="tag-neg">−</td></tr>
-  </table>
+<!-- Are You Real? -->
+<button class="obj-trigger" data-obj="obj-real">🤖 Are You Real?<span class="chevron">▶</span></button>
+<div class="obj-body" id="obj-real">
+  <div class="obj-step"><div class="obj-step-head"><span class="step-num">1</span><span class="technique">Humor</span></div><div class="msg-top"><span class="msg-text">haha babe 😂 you think a bot gets this wet? come on</span><div class="msg-actions"><button class="copy-btn" data-copy="haha babe 😂 you think a bot gets this wet? come on">📋<span class="copied">Copied!</span></button></div></div></div>
+  <div class="obj-step"><div class="obj-step-head"><span class="step-num">2</span><span class="technique">Challenge</span></div><div class="msg-top"><span class="msg-text">okay fine, ask me something only a real person would know 😏</span><div class="msg-actions"><button class="copy-btn" data-copy="okay fine, ask me something only a real person would know 😏">📋<span class="copied">Copied!</span></button></div></div></div>
+  <div class="obj-step"><div class="obj-step-head"><span class="step-num">3</span><span class="technique">Grounding</span></div><div class="msg-top"><span class="msg-text">baby I get it, there's a lot of fake shit on here. but you felt that right? 💗 let's not overthink this</span><div class="msg-actions"><button class="copy-btn" data-copy="baby I get it, there's a lot of fake shit on here. but you felt that right? 💗 let's not overthink this">📋<span class="copied">Copied!</span></button></div></div></div>
 </div>
 
-<h3>"SEND FREE FIRST" <span style="color:#8b949e;">(max 4 steps)</span></h3>
-<div class="section border-pink">
-  <table class="c-obj">
-    <tr><th width="40">#</th><th>Message</th><th width="160">Technique</th></tr>
-    <tr><td class="cmd">1</td><td class="msg">I already sent you something free remember? 😏 this one is WAY more... trust me</td><td class="technique">Reminder</td></tr>
-    <tr><td class="cmd">2</td><td class="msg">tell you what... $[price]. but you gotta promise you'll actually watch it 😏</td><td class="technique">Downgrade</td></tr>
-    <tr><td class="cmd">3</td><td class="msg">hmm okay, maybe you're not ready to see what I really do 😏 it's intense</td><td class="technique">Challenge</td></tr>
-    <tr><td class="cmd">4</td><td class="msg">baby what I did in that video? it's worth every penny 🥵 just saying</td><td class="technique">Seed + Return</td></tr>
-  </table>
+<!-- Chat-Only Sub -->
+<button class="obj-trigger" data-obj="obj-chatonly">💬 Won't Open PPV<span class="chevron">▶</span></button>
+<div class="obj-body" id="obj-chatonly">
+  <div class="obj-step"><div class="obj-step-head"><span class="step-num">1</span><span class="technique">Guilt</span></div><div class="msg-top"><span class="msg-text">baby I made this just for you, it would mean so much if you watched it 🥺</span><div class="msg-actions"><button class="copy-btn" data-copy="baby I made this just for you, it would mean so much if you watched it 🥺">📋<span class="copied">Copied!</span></button></div></div></div>
+  <div class="obj-step"><div class="obj-step-head"><span class="step-num">2</span><span class="technique">Investment</span></div><div class="msg-top"><span class="msg-text">I spent like 10 min recording that thinking about YOU... at least open it? 🙈</span><div class="msg-actions"><button class="copy-btn" data-copy="I spent like 10 min recording that thinking about YOU... at least open it? 🙈">📋<span class="copied">Copied!</span></button></div></div></div>
+  <div class="obj-step"><div class="obj-step-head"><span class="step-num">3</span><span class="technique">Social proof</span></div><div class="msg-top"><span class="msg-text">are you sure you don't wanna see? most guys who watch it come back telling me it's the best thing they've seen on here 😏</span><div class="msg-actions"><button class="copy-btn" data-copy="are you sure you don't wanna see? most guys who watch it come back telling me it's the best thing they've seen on here 😏">📋<span class="copied">Copied!</span></button></div></div></div>
+  <div class="obj-step"><div class="obj-step-head"><span class="step-num">4</span><span class="technique">Challenge</span></div><div class="msg-top"><span class="msg-text">hmm I guess you just can't handle what I have 😏 that's okay, not everyone can</span><div class="msg-actions"><button class="copy-btn" data-copy="hmm I guess you just can't handle what I have 😏 that's okay, not everyone can">📋<span class="copied">Copied!</span></button></div></div></div>
 </div>
 
-<h3>"I DON'T BUY PPVs" <span style="color:#8b949e;">(max 4 steps)</span></h3>
-<div class="section border-pink">
-  <table class="c-obj">
-    <tr><th width="40">#</th><th>Message</th><th width="160">Technique</th></tr>
-    <tr><td class="cmd">1</td><td class="msg">that's okay baby 😊 I won't force you</td><td class="technique">Accept</td></tr>
-    <tr><td class="cmd">2</td><td class="msg" style="color:#8b949e; font-style:italic;">[Continue explicit text sexting 4-5 msgs — build tension]</td><td class="technique">Build tension</td></tr>
-    <tr><td class="cmd">3</td><td class="msg">fuck... okay I need to show you something. this isn't about money, I literally need you to see what you're doing to me rn 🥵</td><td class="technique">Emotional reframe</td></tr>
-    <tr><td class="cmd">4</td><td class="msg">I'll send it for whatever you want to pay, I don't care about the price rn, I just need you to watch 🥵</td><td class="technique">Pay what you want</td></tr>
-  </table>
+</div>
+</div><!-- /tab-objections -->
+
+<!-- ████████████████████████  TAB 3: QUICK INFO  ████████████████████████ -->
+<div class="tab-content" id="tab-quickinfo">
+
+<!-- Personal Info -->
+<div class="acc-section open" data-qi="personal">
+  <div class="acc-header" data-qi-toggle="personal">
+    <span class="acc-dot" style="background:var(--accent)"></span>
+    <span class="acc-title">Personal Info</span>
+    <span class="acc-chevron" style="transform:rotate(90deg)">▶</span>
+  </div>
+  <div class="acc-body" style="max-height:none">
+    <div class="qi-item"><span class="qi-label">Age</span><span class="qi-text">I'm 25, still figuring life out one adventure at a time 😅</span><button class="copy-btn" data-copy="I'm 25, still figuring life out one adventure at a time 😅">📋<span class="copied">Copied!</span></button></div>
+    <div class="qi-item"><span class="qi-label">Location</span><span class="qi-text">from Bali 🌴 but honestly I'm never home, I just go wherever</span><button class="copy-btn" data-copy="from Bali 🌴 but honestly I'm never home, I just go wherever">📋<span class="copied">Copied!</span></button></div>
+    <div class="qi-item"><span class="qi-label">Job</span><span class="qi-text">cycling vlogger! I record my rides and random moments from the road 🚴‍♀️</span><button class="copy-btn" data-copy="cycling vlogger! I record my rides and random moments from the road 🚴‍♀️">📋<span class="copied">Copied!</span></button></div>
+    <div class="qi-item"><span class="qi-label">Hobbies</span><span class="qi-text">cycling is my obsession 😅 that and exploring new places, trying food, meeting people</span><button class="copy-btn" data-copy="cycling is my obsession 😅 that and exploring new places, trying food, meeting people">📋<span class="copied">Copied!</span></button></div>
+    <div class="qi-item"><span class="qi-label">Countries</span><span class="qi-text">I've been everywhere... France, Greece, Mexico, US, Spain, UK, Thailand, Morocco, Italy 💗</span><button class="copy-btn" data-copy="I've been everywhere... France, Greece, Mexico, US, Spain, UK, Thailand, Morocco, Italy 💗">📋<span class="copied">Copied!</span></button></div>
+    <div class="qi-item"><span class="qi-label">Status</span><span class="qi-text">single 😊 married to my bike and my freedom haha</span><button class="copy-btn" data-copy="single 😊 married to my bike and my freedom haha">📋<span class="copied">Copied!</span></button></div>
+    <div class="qi-item"><span class="qi-label">Favorite</span><span class="qi-text">Bali is home but Greece stole my heart... the sunsets there 🌅</span><button class="copy-btn" data-copy="Bali is home but Greece stole my heart... the sunsets there 🌅">📋<span class="copied">Copied!</span></button></div>
+  </div>
 </div>
 
-<h3>"ARE YOU REAL?" <span style="color:#8b949e;">(max 3 steps)</span></h3>
-<div class="section border-pink">
-  <table class="c-obj">
-    <tr><th width="40">#</th><th>Message</th><th width="160">Technique</th></tr>
-    <tr><td class="cmd">1</td><td class="msg">haha babe 😂 you think a bot gets this wet? come on</td><td class="technique">Humor</td></tr>
-    <tr><td class="cmd">2</td><td class="msg">okay fine, ask me something only a real person would know 😏</td><td class="technique">Challenge</td></tr>
-    <tr><td class="cmd">3</td><td class="msg">baby I get it, there's a lot of fake shit on here. but you felt that right? 💗 let's not overthink this</td><td class="technique">Grounding</td></tr>
-  </table>
+<!-- Positive Spin -->
+<div class="acc-section" data-qi="spin">
+  <div class="acc-header" data-qi-toggle="spin">
+    <span class="acc-dot" style="background:var(--green)"></span>
+    <span class="acc-title">Positive Spin</span>
+    <span class="acc-chevron">▶</span>
+  </div>
+  <div class="acc-body">
+    <div class="qi-item"><span class="qi-label">Age 40+</span><span class="qi-text">mmm I love that... something about confidence in older guys 😏</span><button class="copy-btn" data-copy="mmm I love that... something about confidence in older guys 😏">📋<span class="copied">Copied!</span></button></div>
+    <div class="qi-item"><span class="qi-label">Age 20s</span><span class="qi-text">omg you're around my age?? that's rare here, feels like we'd vibe irl 😊</span><button class="copy-btn" data-copy="omg you're around my age?? that's rare here, feels like we'd vibe irl 😊">📋<span class="copied">Copied!</span></button></div>
+    <div class="qi-item"><span class="qi-label">Boring job</span><span class="qi-text">honestly that's attractive, like you have your shit together</span><button class="copy-btn" data-copy="honestly that's attractive, like you have your shit together">📋<span class="copied">Copied!</span></button></div>
+    <div class="qi-item"><span class="qi-label">Cool job</span><span class="qi-text">wait really?? okay that's hot 🥵</span><button class="copy-btn" data-copy="wait really?? okay that's hot 🥵">📋<span class="copied">Copied!</span></button></div>
+    <div class="qi-item"><span class="qi-label">Fit</span><span class="qi-text">I can tell 😏 I love a guy who takes care of himself</span><button class="copy-btn" data-copy="I can tell 😏 I love a guy who takes care of himself">📋<span class="copied">Copied!</span></button></div>
+    <div class="qi-item"><span class="qi-label">Not fit</span><span class="qi-text">I don't care about that honestly, it's the vibe that matters to me 😊</span><button class="copy-btn" data-copy="I don't care about that honestly, it's the vibe that matters to me 😊">📋<span class="copied">Copied!</span></button></div>
+  </div>
 </div>
 
-<h3>CHAT-ONLY SUB <span style="color:#8b949e;">(max 4 steps)</span></h3>
-<div class="section border-pink">
-  <table class="c-obj">
-    <tr><th width="40">#</th><th>Message</th><th width="160">Technique</th></tr>
-    <tr><td class="cmd">1</td><td class="msg">baby I made this just for you, it would mean so much if you watched it 🥺</td><td class="technique">Guilt/investment</td></tr>
-    <tr><td class="cmd">2</td><td class="msg">I spent like 10 min recording that thinking about YOU... at least open it? 🙈</td><td class="technique">Investment amplif.</td></tr>
-    <tr><td class="cmd">3</td><td class="msg">are you sure you don't wanna see? most guys who watch it come back telling me it's the best thing they've seen on here 😏</td><td class="technique">Social proof</td></tr>
-    <tr><td class="cmd">4</td><td class="msg">hmm I guess you just can't handle what I have 😏 that's okay, not everyone can</td><td class="technique">Challenge</td></tr>
-  </table>
+</div><!-- /tab-quickinfo -->
+
+</div><!-- /container -->
+
+<!-- ===== SOS BUTTON ===== -->
+<button class="sos-btn" id="sos-btn">SOS</button>
+
+<!-- ===== SOS / OBJECTION MODAL ===== -->
+<div class="modal-overlay" id="sos-modal">
+  <div class="modal">
+    <button class="modal-close" id="sos-close">✕</button>
+    <h2>⚡ Objection Handler</h2>
+    <div class="obj-btn-list" id="modal-obj-list">
+
+      <button class="obj-trigger" data-obj="m-obj-expensive">💰 Too Expensive<span class="chevron">▶</span></button>
+      <div class="obj-body" id="m-obj-expensive">
+        <div class="obj-step"><div class="obj-step-head"><span class="step-num">1</span><span class="technique">Reframe</span></div><div class="msg-top"><span class="msg-text">baby this is literally 3 min of something I never do... you spend more than this on coffee ☕😏</span><div class="msg-actions"><button class="copy-btn" data-copy="baby this is literally 3 min of something I never do... you spend more than this on coffee ☕😏">📋<span class="copied">Copied!</span></button></div></div></div>
+        <div class="obj-step"><div class="obj-step-head"><span class="step-num">2</span><span class="technique">Discount 20-30% ONE TIME</span></div><div class="msg-top"><span class="msg-text">okay honestly? I'll do $[price] but ONLY for you and only this once 🥺</span><div class="msg-actions"><button class="copy-btn" data-copy="okay honestly? I'll do $[price] but ONLY for you and only this once 🥺">📋<span class="copied">Copied!</span></button></div></div></div>
+        <div class="obj-step"><div class="obj-step-head"><span class="step-num">3</span><span class="technique">FOMO</span></div><div class="msg-top"><span class="msg-text">I'm only in this mood rn tho... idk if I'll feel like this again anytime soon 😏</span><div class="msg-actions"><button class="copy-btn" data-copy="I'm only in this mood rn tho... idk if I'll feel like this again anytime soon 😏">📋<span class="copied">Copied!</span></button></div></div></div>
+        <div class="obj-step"><div class="obj-step-head"><span class="step-num">4</span><span class="technique">Challenge</span></div><div class="msg-top"><span class="msg-text">hmm maybe you're not ready for what I did in this one anyway 😏 it IS pretty intense</span><div class="msg-actions"><button class="copy-btn" data-copy="hmm maybe you're not ready for what I did in this one anyway 😏 it IS pretty intense">📋<span class="copied">Copied!</span></button></div></div></div>
+        <div class="obj-step"><div class="obj-step-head"><span class="step-num">5</span><span class="technique">Takeaway</span></div><div class="msg-top"><span class="msg-text">okay fine 😏 I'll keep it for someone who actually wants it</span><div class="msg-actions"><button class="copy-btn" data-copy="okay fine 😏 I'll keep it for someone who actually wants it">📋<span class="copied">Copied!</span></button></div></div></div>
+        <div class="obj-step"><div class="obj-step-head"><span class="step-num">6</span><span class="technique">Seed + Return</span></div><div class="msg-top"><span class="msg-text">btw that video? I just watched it again and fuck 🥵 last chance before I delete it... you sure?</span><div class="msg-actions"><button class="copy-btn" data-copy="btw that video? I just watched it again and fuck 🥵 last chance before I delete it... you sure?">📋<span class="copied">Copied!</span></button></div></div></div>
+      </div>
+
+      <button class="obj-trigger" data-obj="m-obj-free">🆓 Send Free First<span class="chevron">▶</span></button>
+      <div class="obj-body" id="m-obj-free">
+        <div class="obj-step"><div class="obj-step-head"><span class="step-num">1</span><span class="technique">Reminder</span></div><div class="msg-top"><span class="msg-text">I already sent you something free remember? 😏 this one is WAY more... trust me</span><div class="msg-actions"><button class="copy-btn" data-copy="I already sent you something free remember? 😏 this one is WAY more... trust me">📋<span class="copied">Copied!</span></button></div></div></div>
+        <div class="obj-step"><div class="obj-step-head"><span class="step-num">2</span><span class="technique">Downgrade</span></div><div class="msg-top"><span class="msg-text">tell you what... $[price]. but you gotta promise you'll actually watch it 😏</span><div class="msg-actions"><button class="copy-btn" data-copy="tell you what... $[price]. but you gotta promise you'll actually watch it 😏">📋<span class="copied">Copied!</span></button></div></div></div>
+        <div class="obj-step"><div class="obj-step-head"><span class="step-num">3</span><span class="technique">Challenge</span></div><div class="msg-top"><span class="msg-text">hmm okay, maybe you're not ready to see what I really do 😏 it's intense</span><div class="msg-actions"><button class="copy-btn" data-copy="hmm okay, maybe you're not ready to see what I really do 😏 it's intense">📋<span class="copied">Copied!</span></button></div></div></div>
+        <div class="obj-step"><div class="obj-step-head"><span class="step-num">4</span><span class="technique">Seed + Return</span></div><div class="msg-top"><span class="msg-text">baby what I did in that video? it's worth every penny 🥵 just saying</span><div class="msg-actions"><button class="copy-btn" data-copy="baby what I did in that video? it's worth every penny 🥵 just saying">📋<span class="copied">Copied!</span></button></div></div></div>
+      </div>
+
+      <button class="obj-trigger" data-obj="m-obj-noppv">🚫 I Don't Buy PPVs<span class="chevron">▶</span></button>
+      <div class="obj-body" id="m-obj-noppv">
+        <div class="obj-step"><div class="obj-step-head"><span class="step-num">1</span><span class="technique">Accept</span></div><div class="msg-top"><span class="msg-text">that's okay baby 😊 I won't force you</span><div class="msg-actions"><button class="copy-btn" data-copy="that's okay baby 😊 I won't force you">📋<span class="copied">Copied!</span></button></div></div></div>
+        <div class="obj-step"><div class="obj-step-head"><span class="step-num">2</span><span class="technique">Build tension</span></div><div class="msg-top"><span class="msg-text">[Continue explicit text sexting 4-5 msgs]</span><div class="msg-actions"><button class="copy-btn" data-copy="[Continue explicit text sexting 4-5 msgs]">📋<span class="copied">Copied!</span></button></div></div></div>
+        <div class="obj-step"><div class="obj-step-head"><span class="step-num">3</span><span class="technique">Emotional reframe</span></div><div class="msg-top"><span class="msg-text">fuck... okay I need to show you something. this isn't about money, I literally need you to see what you're doing to me rn 🥵</span><div class="msg-actions"><button class="copy-btn" data-copy="fuck... okay I need to show you something. this isn't about money, I literally need you to see what you're doing to me rn 🥵">📋<span class="copied">Copied!</span></button></div></div></div>
+        <div class="obj-step"><div class="obj-step-head"><span class="step-num">4</span><span class="technique">Pay what you want</span></div><div class="msg-top"><span class="msg-text">I'll send it for whatever you want to pay, I don't care about the price rn, I just need you to watch 🥵</span><div class="msg-actions"><button class="copy-btn" data-copy="I'll send it for whatever you want to pay, I don't care about the price rn, I just need you to watch 🥵">📋<span class="copied">Copied!</span></button></div></div></div>
+      </div>
+
+      <button class="obj-trigger" data-obj="m-obj-real">🤖 Are You Real?<span class="chevron">▶</span></button>
+      <div class="obj-body" id="m-obj-real">
+        <div class="obj-step"><div class="obj-step-head"><span class="step-num">1</span><span class="technique">Humor</span></div><div class="msg-top"><span class="msg-text">haha babe 😂 you think a bot gets this wet? come on</span><div class="msg-actions"><button class="copy-btn" data-copy="haha babe 😂 you think a bot gets this wet? come on">📋<span class="copied">Copied!</span></button></div></div></div>
+        <div class="obj-step"><div class="obj-step-head"><span class="step-num">2</span><span class="technique">Challenge</span></div><div class="msg-top"><span class="msg-text">okay fine, ask me something only a real person would know 😏</span><div class="msg-actions"><button class="copy-btn" data-copy="okay fine, ask me something only a real person would know 😏">📋<span class="copied">Copied!</span></button></div></div></div>
+        <div class="obj-step"><div class="obj-step-head"><span class="step-num">3</span><span class="technique">Grounding</span></div><div class="msg-top"><span class="msg-text">baby I get it, there's a lot of fake shit on here. but you felt that right? 💗 let's not overthink this</span><div class="msg-actions"><button class="copy-btn" data-copy="baby I get it, there's a lot of fake shit on here. but you felt that right? 💗 let's not overthink this">📋<span class="copied">Copied!</span></button></div></div></div>
+      </div>
+
+      <button class="obj-trigger" data-obj="m-obj-chatonly">💬 Won't Open PPV<span class="chevron">▶</span></button>
+      <div class="obj-body" id="m-obj-chatonly">
+        <div class="obj-step"><div class="obj-step-head"><span class="step-num">1</span><span class="technique">Guilt</span></div><div class="msg-top"><span class="msg-text">baby I made this just for you, it would mean so much if you watched it 🥺</span><div class="msg-actions"><button class="copy-btn" data-copy="baby I made this just for you, it would mean so much if you watched it 🥺">📋<span class="copied">Copied!</span></button></div></div></div>
+        <div class="obj-step"><div class="obj-step-head"><span class="step-num">2</span><span class="technique">Investment</span></div><div class="msg-top"><span class="msg-text">I spent like 10 min recording that thinking about YOU... at least open it? 🙈</span><div class="msg-actions"><button class="copy-btn" data-copy="I spent like 10 min recording that thinking about YOU... at least open it? 🙈">📋<span class="copied">Copied!</span></button></div></div></div>
+        <div class="obj-step"><div class="obj-step-head"><span class="step-num">3</span><span class="technique">Social proof</span></div><div class="msg-top"><span class="msg-text">are you sure you don't wanna see? most guys who watch it come back telling me it's the best thing they've seen on here 😏</span><div class="msg-actions"><button class="copy-btn" data-copy="are you sure you don't wanna see? most guys who watch it come back telling me it's the best thing they've seen on here 😏">📋<span class="copied">Copied!</span></button></div></div></div>
+        <div class="obj-step"><div class="obj-step-head"><span class="step-num">4</span><span class="technique">Challenge</span></div><div class="msg-top"><span class="msg-text">hmm I guess you just can't handle what I have 😏 that's okay, not everyone can</span><div class="msg-actions"><button class="copy-btn" data-copy="hmm I guess you just can't handle what I have 😏 that's okay, not everyone can">📋<span class="copied">Copied!</span></button></div></div></div>
+      </div>
+
+    </div>
+  </div>
 </div>
 
-<!-- AFTERCARE -->
-<h2 style="color: #79c0ff;">Aftercare + Re-engagement</h2>
-<div class="section border-cyan">
-  <table class="c-ac">
-    <tr><th width="60">Cmd</th><th>Message</th><th width="280">Note</th></tr>
-    <tr><td class="cmd">AC-1</td><td class="msg">holy shit 🥵 that was... wow</td><td class="note"></td></tr>
-    <tr><td class="cmd">AC-2</td><td class="msg">you're actually insane 😮‍💨💗 that was honestly so different from what I'm used to</td><td class="note">Mention something specific</td></tr>
-    <tr><td class="cmd">AC-3</td><td class="msg">I need to sleep but next time? I got something new and you're not ready 😈 gn baby 💗</td><td class="note">END. Seed next session.</td></tr>
-    <tr><td colspan="3" style="border-bottom: 2px solid #30363d;"></td></tr>
-    <tr><td class="cmd">RE-1</td><td class="msg">I can't stop thinking about earlier 😏 you free?</td><td class="note">6-12 hours later</td></tr>
-    <tr><td class="cmd">RE-2</td><td class="msg">remember what I said about something new? I'm wearing it rn and I need you to see 🙈</td><td class="note">Next day</td></tr>
-  </table>
+<!-- ===== NR WAVE MODAL ===== -->
+<div class="modal-overlay" id="nr-modal">
+  <div class="modal">
+    <button class="modal-close" id="nr-close">✕</button>
+    <h2>🔇 NR Wave Protocol</h2>
+    <p style="color:var(--muted);font-size:.85rem;margin-bottom:12px">Send in order. Stop if they respond at any wave.</p>
+
+    <div class="nr-step">
+      <div><span class="nr-wave">W1</span></div>
+      <div class="nr-text"><div class="nr-timing">⏱ 2-3 min after PPV</div><div class="nr-msg">baby? 🥺</div><div class="nr-tech">Ping</div></div>
+      <button class="copy-btn" data-copy="baby? 🥺">📋<span class="copied">Copied!</span></button>
+    </div>
+    <div class="nr-step">
+      <div><span class="nr-wave">W2</span></div>
+      <div class="nr-text"><div class="nr-timing">⏱ 3-5 min later</div><div class="nr-msg">you need to see what I just did for you... seriously 🥵</div><div class="nr-tech">Curiosity</div></div>
+      <button class="copy-btn" data-copy="you need to see what I just did for you... seriously 🥵">📋<span class="copied">Copied!</span></button>
+    </div>
+    <div class="nr-step">
+      <div><span class="nr-wave">W3</span></div>
+      <div class="nr-text"><div class="nr-timing">⏱ 5-10 min later</div><div class="nr-msg">okay I guess you're busy 😏 I might delete this, it was only for you anyway</div><div class="nr-tech">Takeaway</div></div>
+      <button class="copy-btn" data-copy="okay I guess you're busy 😏 I might delete this, it was only for you anyway">📋<span class="copied">Copied!</span></button>
+    </div>
+    <div class="nr-step">
+      <div><span class="nr-wave">W4</span></div>
+      <div class="nr-text"><div class="nr-timing">⏱ 15-30 min later</div><div class="nr-msg">hey I hope you're okay 💗 I had fun talking to you... hmu when you're back</div><div class="nr-tech">Warm close</div></div>
+      <button class="copy-btn" data-copy="hey I hope you're okay 💗 I had fun talking to you... hmu when you're back">📋<span class="copied">Copied!</span></button>
+    </div>
+    <div class="nr-step">
+      <div><span class="nr-wave">W5</span></div>
+      <div class="nr-text"><div class="nr-timing">⏱ 2-6 hrs later</div><div class="nr-msg">I keep thinking about earlier 🥵 you free?</div><div class="nr-tech">New convo</div></div>
+      <button class="copy-btn" data-copy="I keep thinking about earlier 🥵 you free?">📋<span class="copied">Copied!</span></button>
+    </div>
+
+  </div>
 </div>
 
-<!-- PERSONAL INFO -->
-<h2 style="color: #d29922;">Personal Info (Quick Answers)</h2>
-<div class="section border-yellow">
-  <table class="c-pi">
-    <tr><th width="120">Topic</th><th>Response</th></tr>
-    <tr><td class="cmd">Age</td><td class="msg">I'm 25, still figuring life out one adventure at a time 😅</td></tr>
-    <tr><td class="cmd">Location</td><td class="msg">from Bali 🌴 but honestly I'm never home, I just go wherever</td></tr>
-    <tr><td class="cmd">Profession</td><td class="msg">cycling vlogger! I record my rides and random moments from the road 🚴‍♀️</td></tr>
-    <tr><td class="cmd">Hobbies</td><td class="msg">cycling is my obsession 😅 that and exploring new places, trying food, meeting people</td></tr>
-    <tr><td class="cmd">Countries</td><td class="msg">I've been everywhere... France, Greece, Mexico, US, Spain, UK, Thailand, Morocco, Italy 💗</td></tr>
-    <tr><td class="cmd">Relationship</td><td class="msg">single 😊 married to my bike and my freedom haha</td></tr>
-    <tr><td class="cmd">Favorite</td><td class="msg">Bali is home but Greece stole my heart... the sunsets there 🌅</td></tr>
-  </table>
-</div>
+<script>
+/* ── TABS ── */
+const tabBtns = document.querySelectorAll('.tab-btn');
+const tabContents = document.querySelectorAll('.tab-content');
+tabBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    tabBtns.forEach(b => b.classList.remove('active'));
+    tabContents.forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+  });
+});
 
-<!-- POSITIVE SPIN -->
-<h2 style="color: #3fb950;">Positive Spin (Adaptive Reactions)</h2>
-<div class="section border-green">
-  <table class="c-ps">
-    <tr><th width="120">Trigger</th><th>Response</th></tr>
-    <tr><td class="cmd">Age 40+</td><td class="msg">mmm I love that... something about confidence in older guys 😏</td></tr>
-    <tr><td class="cmd">Age 20s</td><td class="msg">omg you're around my age?? that's rare here, feels like we'd vibe irl 😊</td></tr>
-    <tr><td class="cmd">Boring job</td><td class="msg">honestly that's attractive, like you have your shit together</td></tr>
-    <tr><td class="cmd">Cool job</td><td class="msg">wait really?? okay that's hot 🥵</td></tr>
-    <tr><td class="cmd">Fit</td><td class="msg">I can tell 😏 I love a guy who takes care of himself</td></tr>
-    <tr><td class="cmd">Not fit</td><td class="msg">I don't care about that honestly, it's the vibe that matters to me 😊</td></tr>
-  </table>
-</div>
+/* ── JOURNEY ACCORDION (only one open) ── */
+document.querySelectorAll('#tab-journey .acc-header').forEach(header => {
+  header.addEventListener('click', () => {
+    const section = header.parentElement;
+    const wasOpen = section.classList.contains('open');
+    // close all
+    document.querySelectorAll('#tab-journey .acc-section').forEach(s => s.classList.remove('open'));
+    if (!wasOpen) section.classList.add('open');
+  });
+});
 
-<!-- CRITICAL RULES -->
-<h2 style="color: #f85149;">⚠️ Critical Rules</h2>
-<div class="alert alert-red">
-  <ul class="rules-list">
-    <li><span class="num">1.</span> Every message works AS-IS. Just send it.</li>
-    <li><span class="num">2.</span> Speed > perfection. New subs = first 48h.</li>
-    <li><span class="num">3.</span> WAIT means WAIT. Sub thinks she's recording.</li>
-    <li><span class="num">4.</span> After every PPV: Bought → continue. Silent 3 min → NR-W1. Objection → OBJ protocol.</li>
-    <li><span class="num">5.</span> Max 2 msgs in a row without sub responding.</li>
-    <li><span class="num">6.</span> You ARE Putri. Never break character.</li>
-    <li><span class="num">7.</span> Adaptive pricing: Bought fast → higher next PPV. Hesitated → lower.</li>
-    <li><span class="num">8.</span> "I never do this" max 2 times total.</li>
-    <li><span class="num">9.</span> Log sub data after session.</li>
-  </ul>
-</div>
+/* ── QUICK INFO ACCORDION (independent toggle) ── */
+document.querySelectorAll('#tab-quickinfo .acc-header').forEach(header => {
+  header.addEventListener('click', () => {
+    const section = header.parentElement;
+    section.classList.toggle('open');
+    const chev = header.querySelector('.acc-chevron');
+    if (section.classList.contains('open')) {
+      chev.style.transform = 'rotate(90deg)';
+      section.querySelector('.acc-body').style.maxHeight = 'none';
+    } else {
+      chev.style.transform = '';
+      section.querySelector('.acc-body').style.maxHeight = '0';
+    }
+  });
+});
 
-<p style="text-align:center; color:#484f58; margin-top:40px; font-size:0.85em;">Chatting Wizard — Script Manager — Putri New Sub Journey v4 — Feb 2026</p>
+/* ── COPY TO CLIPBOARD ── */
+document.addEventListener('click', e => {
+  const btn = e.target.closest('.copy-btn');
+  if (!btn) return;
+  const text = btn.dataset.copy;
+  navigator.clipboard.writeText(text).then(() => {
+    btn.classList.add('show-copied');
+    setTimeout(() => btn.classList.remove('show-copied'), 1500);
+  });
+});
 
+/* ── NOTE TOGGLE ── */
+document.addEventListener('click', e => {
+  const btn = e.target.closest('.info-btn');
+  if (!btn) return;
+  const noteId = btn.dataset.note;
+  const note = document.getElementById(noteId);
+  if (note) note.classList.toggle('visible');
+});
+
+/* ── OBJECTION ACCORDION (Tab 2 + Modal) ── */
+document.addEventListener('click', e => {
+  const trigger = e.target.closest('.obj-trigger');
+  if (!trigger) return;
+  const parent = trigger.parentElement;
+  // close siblings
+  parent.querySelectorAll('.obj-trigger').forEach(t => {
+    if (t !== trigger) t.classList.remove('open');
+  });
+  trigger.classList.toggle('open');
+});
+
+/* ── SOS MODAL ── */
+const sosModal = document.getElementById('sos-modal');
+document.getElementById('sos-btn').addEventListener('click', () => sosModal.classList.add('visible'));
+document.getElementById('sos-close').addEventListener('click', () => sosModal.classList.remove('visible'));
+sosModal.addEventListener('click', e => { if (e.target === sosModal) sosModal.classList.remove('visible'); });
+
+/* ── NR MODAL ── */
+const nrModal = document.getElementById('nr-modal');
+document.getElementById('nr-close').addEventListener('click', () => nrModal.classList.remove('visible'));
+nrModal.addEventListener('click', e => { if (e.target === nrModal) nrModal.classList.remove('visible'); });
+
+/* ── BRANCH BUTTONS ── */
+document.addEventListener('click', e => {
+  // BOUGHT — scroll to next section
+  const bought = e.target.closest('.branch-bought');
+  if (bought) {
+    const nextKey = bought.dataset.next;
+    const next = document.querySelector(`.acc-section[data-section="${nextKey}"]`);
+    if (next) {
+      // close all, open next
+      document.querySelectorAll('#tab-journey .acc-section').forEach(s => s.classList.remove('open'));
+      next.classList.add('open');
+      setTimeout(() => next.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+    }
+    return;
+  }
+  // SILENT — open NR modal
+  const silent = e.target.closest('.branch-silent');
+  if (silent) {
+    nrModal.classList.add('visible');
+    return;
+  }
+  // OBJECTION — open SOS modal
+  const obj = e.target.closest('.branch-obj');
+  if (obj) {
+    sosModal.classList.add('visible');
+    return;
+  }
+});
+</script>
 </body>
 </html>
