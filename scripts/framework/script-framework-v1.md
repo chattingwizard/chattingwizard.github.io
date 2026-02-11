@@ -298,11 +298,17 @@ PPV 0 delivered in teasing bridge
 | Sex4 | Game/challenge | "earn the next one... if you can turn me on with words" |
 | Sex5+ | Mix | Combine dynamics based on model |
 
-### Objection Handling System
+### Objection & Resistance System
 
-**Philosophy**: Objection handling is NOT begging. It's a structured psychological sequence that alternates between positive and negative motivation, using different angles each step. The goal is to convert — but never at the cost of destroying the relationship for future sessions.
+**Philosophy**: Objection handling is NOT begging. It's a structured psychological system that alternates between positive and negative motivation, using different angles each step. The goal is to convert — but never at the cost of destroying the relationship for future sessions.
 
-#### The 10 Techniques
+**Three categories** — the chatter must understand WHEN to use each:
+
+- **A. Objection Handling (OBJ)** — Fan pushes back on buying PPV. Goal: convert the sale.
+- **B. Resistance Handling (RES)** — Fan resists the direction of the conversation. Goal: redirect.
+- **C. Situational Scripts (SIT)** — Not objections. Specific moments that need prepared responses. Goal: maintain momentum.
+
+#### The 12 Techniques
 
 | # | Technique | What it is | When to use | Tone |
 |---|-----------|-----------|-------------|------|
@@ -319,6 +325,16 @@ PPV 0 delivered in teasing bridge
 | 11 | **Seed + Return** | Accept the no, continue sexting, then casually retry later | After 2+ hard rejections | Neutral |
 | 12 | **Pay What You Want** | "send me whatever you want, I just need you to see this" | "I don't buy PPVs" | Positive |
 
+#### Core Psychological Principles
+
+1. **Never argue, always redirect.** "No it's not expensive" = lost. "Wait until you see it" = redirected.
+2. **Loss aversion > Gain framing.** People fear losing 2x more than they desire gaining. "You'll miss this" > "You'll love this."
+3. **Ego is the most powerful lever.** "I thought you were different" / "Most guys can't handle this" → makes the purchase about HIS identity, not money.
+4. **Reciprocity creates obligation.** "I spent 10 min recording this FOR YOU" → psychological debt.
+5. **Commitment & consistency.** He already bought PPV 0 and 1 → "You've come this far... you can't stop now."
+6. **Alternate positive/negative.** Never 3 negatives in a row. Ego → Takeaway → Ego → FOMO.
+7. **Every "no" is information.** Price? Identity? Trust? Each reveals the real resistance and needs a different angle.
+
 #### Wave System (No Response)
 
 When the sub goes silent after a PPV, do NOT spam the same type of message. Use escalating waves with DIFFERENT psychological angles.
@@ -333,39 +349,99 @@ When the sub goes silent after a PPV, do NOT spam the same type of message. Use 
 
 **Hard limit: 5 waves.** After W4 with no response, only W5 as re-engagement. Never insist further.
 
-#### Objection Protocols
+#### A. Objection Handling Protocols (OBJ)
 
-**"TOO EXPENSIVE"** (max 6 steps):
-1. Reframe value
-2. Downgrade (one-time 20-30% discount)
-3. FOMO temporal
-4. Challenge competence
-5. Takeaway
-6. Seed + Return (continue sexting, retry later)
+**OBJ-PRICE: "Too expensive"** (max 5 steps — standalone scripts, NOT a sequence):
+1. Reframe value (positive)
+2. FOMO temporal (negative)
+3. Challenge competence (negative)
+4. Downgrade — one-time 20-30% discount (positive)
+5. Seed + Return — accept, continue sexting, retry later (neutral)
 
-**"SEND FREE FIRST"** (max 4 steps):
-1. Reminder (PPV 0 was free) + tease value
-2. Downgrade price (not free)
-3. Challenge
-4. Seed + Return
+**OBJ-DISCOUNT: "Give me a discount"** (max 4 steps):
+1. Firmness + value statement (positive)
+2. Challenge worthiness (negative)
+3. Concession — one-time small discount, frame as EXCLUSIVE not cheap (positive)
+4. Takeaway if still pushing (negative)
 
-**"I DON'T BUY PPVs"** (max 4 steps):
-1. Accept (disarms) — "that's okay baby"
-2. Continue text sexting 4-5 msgs, build tension
-3. Emotional reframe — "this isn't about money, I need you to see what you're doing to me"
-4. Pay what you want — breaks the "no PPV" identity
+**OBJ-FREE: "Send it for free"** (max 4 steps):
+1. Reminder PPV 0 was free + tease value (positive)
+2. Challenge worthiness (negative)
+3. Guilt/investment — "I recorded this FOR you" (positive)
+4. Seed + Return (neutral)
 
-**"ARE YOU REAL?"** (max 3 steps):
-1. Humor + redirect
-2. Challenge (inverts power — "ask me anything")
-3. Emotional grounding — "I get it, but you felt that right?"
+**OBJ-NOMONEY: "I don't have money"** (max 4 steps):
+1. Empathy — disarm, don't judge (positive)
+2. Test sincerity — "not even [small amount]?" (neutral)
+3. Mini-offer — lowest viable price or "pay what you want" (positive)
+4. Protect relationship — accept, continue GFE, tag for re-engagement (neutral)
 
-**CHAT-ONLY SUB** (ignores PPVs without objecting, max 5 steps):
-1. Guilt/investment
-2. Investment amplification
-3. Social proof
-4. Challenge (ego)
-5. Accept + protect relationship, log for re-engagement
+**OBJ-NOPPV: "I don't buy PPVs"** (max 4 steps):
+1. Accept — disarm the identity stance: "that's okay" (positive)
+2. Continue text sexting 4-5 msgs, build tension (neutral)
+3. Emotional reframe — "this isn't about money, I need you to see what you did to me" (positive)
+4. Pay what you want — breaks the "no PPV" identity (positive)
+
+**OBJ-CARD: "Card doesn't work"** (max 3 steps):
+1. Empathy + suggest retry: "aww try again, it happens sometimes" (positive)
+2. Suggest alternative: "try a different card?" (neutral)
+3. Soft urgency: "I really want you to see this before I change my mind 😏" (positive)
+
+**OBJ-IGNORE: Fan ignores PPV sent** (max 5 steps — use NR Wave system):
+Uses the Wave System above. Each wave is a standalone script, NOT a sequence (timing gaps between each).
+
+#### B. Resistance Handling Protocols (RES)
+
+**RES-NOSEX: Doesn't want to go sexual** (max 4 steps):
+1. Respect — "haha okay okay" (positive)
+2. Build subtle tension — flirt without being explicit (neutral)
+3. Re-attempt pivot — create natural opening (positive)
+4. Accept — if still no, continue GFE, never force it. They may convert in a future session. (neutral)
+
+**RES-OFFTOPIC: Goes off-topic / doesn't follow the flow** (max 3 steps):
+1. Acknowledge what they said (positive)
+2. Redirect with a hook — "haha wait but you haven't heard what I was about to say..." (positive)
+3. Retake control — model leads back to the flow (neutral)
+
+**RES-REAL: "Are you real?" / "Is this pre-recorded?"** (max 3 steps):
+1. Humor + redirect — "lol do I sound like a robot to you? 😏" (positive)
+2. Challenge — invert power: "ask me anything, I'll prove it" (negative)
+3. Emotional grounding — "I get why you'd think that, but you felt that connection right?" (positive)
+
+**RES-VOICE: "Send me a voice note" / "Let's video call"** (max 3 steps):
+1. Playful dodge — "haha maybe if you're lucky 😏" (positive)
+2. Redirect to content — "I have something better for you..." (positive)
+3. Firm if they insist — "I don't do that here but trust me what I have is way better 😈" (negative)
+
+**RES-CUSTOM-YES: Asks for content the model HAS** (max 3 steps — can be a 2-msg sequence):
+1. Tease — "mmm you want that? 😏 I might have something..." (positive)
+2. Price + build anticipation (neutral)
+3. Deliver (positive)
+
+**RES-CUSTOM-NO: Asks for content the model DOESN'T have** (max 3 steps):
+1. Redirect — "I don't have exactly that but I have something even better..." (positive)
+2. Offer alternative + FOMO (positive)
+3. If insists — "trust me, what I'm about to show you will make you forget you asked 😏" (positive)
+
+**RES-DONE: "I already came" / he finished before final PPV** (max 3 steps):
+1. Validate — "fuck that's hot 🥵" (positive)
+2. Rescue — "but I haven't finished yet... don't you wanna see me cum?" (positive/challenge)
+3. Soft seed — if no, continue GFE, seed next session (neutral)
+
+#### C. Situational Scripts (SIT)
+
+**SIT-CUM: He's close to cumming** (3 standalone scripts — pick based on moment):
+- Slow down: control pacing to extend session and sell more PPVs
+- Sync: time his orgasm with the final PPV delivery
+- Edge: tease delay — "don't cum yet... I'm not done with you"
+
+**SIT-DICKPIC: He sends a dick pic** (2-3 standalone scripts):
+- React positively → use as leverage for PPV ("fuck 🥵 now you NEED to see what I just did")
+- Never ignore it. Always acknowledge. It's an opportunity, not a problem.
+
+**SIT-HORNY: Mid-sexting intensity boosters** (pool of 6-8 standalone scripts):
+- NOT a sequence. Chatter picks from a pool of messages to maintain sexting energy between PPVs.
+- These are NOT objection responses — they're filler messages for when the conversation needs fuel.
 
 #### Rules
 - **Alternate positive/negative** motivation. Never 3 negatives in a row.
@@ -375,6 +451,7 @@ When the sub goes silent after a PPV, do NOT spam the same type of message. Use 
 - **FOMO must be credible.** If she says "I'll delete it" — the chatter must follow through (or at least not send it again for free later).
 - **Challenge sales must stay playful.** Aggressive challenge + high pressure = sub feels attacked and leaves.
 - **After protocol exhausted:** Accept. Continue text sexting or go to aftercare. Tag sub for re-engagement in next session. The relationship is worth more than one PPV.
+- **Script vs Sequence:** Each OBJ step is typically a standalone script (chatter waits for sub response between steps). Only use sequences when 2+ messages go together without needing sub response in between.
 
 ### Aftercare
 - 2 validation messages. NOT a goodbye.
@@ -450,22 +527,57 @@ Before finalizing any script:
 
 When exporting scripts to xlsx for Infloww import:
 
-**1 sheet = 1 sequence.** Each sheet/tab in the xlsx represents a single sequence that the chatter follows from start to finish. The sheet name becomes the tag in Infloww.
+**1 file = 1 creator.** Each xlsx file contains all sequences for one creator. Each sheet/tab becomes a separate folder/tag in Infloww.
 
 **Structure:**
-- Columns: **Name** (command, max 64 chars) | **Text** (script content, max 1000 chars) | **Note** (chatter instructions, max 246 chars)
+- Row 1 (header): `Name` | `Text` | `Note` | `*Guidelines` (col D is reference only, not imported)
+- Data rows: columns A (Name), B (Text), C (Note)
 - Tag/sheet name: max 32 chars
 
-**Customer Journey = 1 sheet.** The entire flow from the first chatter message (W-1) through Aftercare (AC-3) goes in a single sheet, in sequential order. This way the chatter follows one continuous sequence without jumping between tabs.
+**CRITICAL — Row order is REVERSED.** Infloww places the first row as the LAST message in the sequence. So the LAST message of the sequence goes in row 2 (first data row), and the FIRST message goes in the last data row. Always build the Excel bottom-to-top.
 
-**What goes in the journey sheet:** W → AF → R → TB → S → AC (all in order)
-**What does NOT go in the journey sheet:** Objection handlers, No Response waves, Personal Info, Positive Spin, Re-engagement — these are separate utility sequences if needed.
+**Automated messages are NOT included.** W-1 (welcome), AF-1, and AF-2 (auto follow-ups) are all automated — they are NOT sent by the chatter. These are configured separately inside Infloww. The Excel only contains messages the chatter actually sends, starting from R-1 (first rapport message).
+
+**Customer Journey = 1 sheet.** The entire chatter flow (R → TB → S → AC) goes in a single sheet. Do NOT separate rapport and sexting into different sheets.
+
+**What goes in the journey sheet:** AF → R → TB → S → AC (all in one sheet, reversed order)
+**Separate sheets for:** NR Waves, Personal Info, Positive Spin, Re-engagement, Objection Handling, and any model-specific utilities (e.g., Meetup Redirect for dating app creators, Location Handling).
 
 **Character limits:**
 - Name: up to 64 characters
 - Tag (sheet name): up to 32 characters
 - Text: up to 1000 characters
 - Note: up to 246 characters
+
+**Color coding (optional but recommended):**
+- PPV send rows: orange background (#F6B26B) on Text column — makes it easy to spot where media needs to be attached after import
+- Alternating row colors in sexting phases for readability
+- WAIT rows can use a distinct color too
+
+**Reference template:** `c:\Users\34683\Downloads\LiaScriptsINFLOWW2.xlsx` (Lia — working import confirmed)
+
+### Scripts vs Sequences in Infloww
+
+**Script** = A single standalone message. The chatter picks it and sends it manually when they decide it's the right moment.
+
+**Sequence** = A chain of scripts that activate in order. When the chatter sends the first script in a sequence, Infloww automatically queues the next message in the chatbox. The chatter can still edit each message before sending, but the flow is pre-loaded.
+
+**When to use a sequence:**
+- The customer journey (R → TB → S → AC) is ONE sequence — messages flow one after another
+- Any multi-message flow where the chatter sends 2+ messages in a row WITHOUT waiting for a sub response (e.g., "hold on" + [wait 2 min] + "look what I just did" = 3-message sequence)
+- NR Waves can be a sequence (send W1, if no reply W2 is queued, etc.)
+
+**When to use standalone scripts (NOT a sequence):**
+- Objection handling steps that require WAITING for the sub's response between each step — each step is a standalone script the chatter picks manually based on what the sub said
+- Personal Info responses (chatter picks the relevant one based on what sub asked)
+- Positive Spin responses (chatter picks based on what sub shared)
+- Situational scripts (dickpic response, cum management, etc.)
+
+**When to use a SHORT sequence within OBJ handling:**
+- If an objection response naturally needs 2 quick messages together (e.g., react + redirect), make it a 2-message sequence
+- Example: OBJ step where you acknowledge + pivot: "haha I get it 😏" → "but seriously wait until you see this" = sequence of 2
+
+**Rule of thumb:** If the chatter needs to READ the sub's response before deciding the next move → standalone scripts. If the chatter sends 2+ messages in a row regardless of sub response → sequence.
 
 ---
 
@@ -478,9 +590,10 @@ When exporting scripts to xlsx for Infloww import:
 | Rapport | `R-` | `R-1` through `R-9` |
 | Teasing Bridge | `TB-` | `TB-1` through `TB-7` |
 | Sexting Sequence | `S[N]-` | `S1-1`, `S1-PPV1` |
-| Objection Handler | `OBJ-` | `OBJ-P1` (price), `OBJ-F1` (free), `OBJ-N1` (no ppv), `OBJ-R1` (real), `OBJ-C1` (chat-only) |
+| Objection Handler | `OBJ-` | `OBJ-PRICE1`, `OBJ-FREE1`, `OBJ-NOMONEY1`, `OBJ-NOPPV1`, `OBJ-CARD1`, `OBJ-DISCOUNT1` |
+| Resistance Handler | `RES-` | `RES-NOSEX1`, `RES-REAL1`, `RES-VOICE1`, `RES-OFFTOPIC1`, `RES-CUSTOM1`, `RES-DONE1` |
+| Situational Script | `SIT-` | `SIT-CUM1`, `SIT-DICKPIC1`, `SIT-HORNY1` |
 | No Response Wave | `NR-W` | `NR-W1` through `NR-W5` |
-| Aftercare | `AC-` | `AC-1` through `AC-3` |
+| Aftercare | `AC-` | `AC-1`, `AC-2` (NEVER close conversation) |
 | Re-engagement | `RE-` | `RE-1`, `RE-2` |
 | Mass Message | `MM-` | `MM-AM`, `MM-PM`, `MM-NIGHT` |
-| Utility | `UT-` | `UT-DICKPIC`, `UT-MEETUP` |

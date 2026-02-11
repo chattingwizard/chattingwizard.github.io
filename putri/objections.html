@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PUTRI — Objection & Resistance Handling</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d1117;--card:#161b22;--border:#30363d;--text:#e6edf3;--muted:#8b949e;
+  --accent:#58a6ff;--green:#3fb950;--red:#f85149;--orange:#d29922;--purple:#bc8cff;
+  --yellow:#e3b341;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;line-height:1.6;padding:0 0 60px}
+.page{max-width:960px;margin:0 auto;padding:16px 20px}
+
+.back-btn{display:inline-flex;align-items:center;gap:6px;color:var(--muted);text-decoration:none;font-size:.85rem;padding:10px 0;transition:.15s}
+.back-btn:hover{color:var(--accent)}
+
+.hero{display:flex;align-items:center;gap:18px;padding:20px 0 16px;border-bottom:1px solid var(--border)}
+.hero-photo{width:60px;height:60px;border-radius:50%;object-fit:cover;border:3px solid var(--accent);flex-shrink:0}
+.hero h1{font-size:1.5rem;font-weight:800;letter-spacing:2px}
+.hero .tagline{color:var(--muted);font-size:.82rem}
+
+/* ── STICKY TOC ── */
+.toc{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--border);padding:8px 0;margin:0 -20px;padding-left:20px;padding-right:20px;display:flex;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;transition:box-shadow .2s}
+.toc.shadow{box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.toc::-webkit-scrollbar{height:0}
+.toc a{font-size:.7rem;color:var(--muted);background:var(--card);border:1px solid var(--border);padding:4px 10px;border-radius:14px;text-decoration:none;white-space:nowrap;transition:.15s;flex-shrink:0}
+.toc a:hover,.toc a.active{color:var(--accent);border-color:var(--accent)}
+.toc a.toc-obj{color:var(--red);border-color:#f8514933}
+.toc a.toc-res{color:var(--purple);border-color:#bc8cff33}
+.toc a.toc-sit{color:var(--green);border-color:#3fb95033}
+
+/* ── CATEGORY HEADER ── */
+.cat-header{margin:28px 0 8px;padding:14px 18px;border-radius:12px;display:flex;align-items:center;gap:12px}
+.cat-header.cat-obj{background:#f8514912;border:1px solid #f8514933}
+.cat-header.cat-res{background:#bc8cff12;border:1px solid #bc8cff33}
+.cat-header.cat-sit{background:#3fb95012;border:1px solid #3fb95033}
+.cat-header .cat-emoji{font-size:1.4rem}
+.cat-header .cat-info{flex:1}
+.cat-header h2{font-size:1.1rem;font-weight:700}
+.cat-header p{font-size:.8rem;color:var(--muted)}
+
+/* ── PROTOCOL CARD ── */
+.protocol{background:var(--card);border:1px solid var(--border);border-radius:12px;margin:12px 0;overflow:hidden}
+.protocol-header{display:flex;align-items:center;gap:10px;padding:12px 16px;cursor:pointer;user-select:none;transition:background .12s}
+.protocol-header:hover{background:#1c2129}
+.protocol-header .p-code{font-size:.7rem;font-weight:700;padding:3px 8px;border-radius:6px;flex-shrink:0}
+.p-code-obj{background:#f8514918;color:var(--red)}
+.p-code-res{background:#bc8cff18;color:var(--purple)}
+.p-code-sit{background:#3fb95018;color:var(--green)}
+.protocol-header .p-name{font-size:.95rem;font-weight:600;flex:1}
+.protocol-header .p-steps{font-size:.72rem;color:var(--muted);background:var(--bg);padding:2px 8px;border-radius:10px;border:1px solid var(--border)}
+.protocol-header .p-type{font-size:.68rem;color:var(--muted);margin-left:4px}
+.protocol-header .toggle{color:var(--muted);font-size:.8rem;transition:transform .2s;flex-shrink:0;width:20px;text-align:center}
+.protocol.collapsed .toggle{transform:rotate(-90deg)}
+.protocol-body{padding:6px 0 12px}
+.protocol.collapsed .protocol-body{display:none}
+
+/* ── SITUATION DESC ── */
+.p-desc{font-size:.82rem;color:var(--muted);padding:4px 16px 10px;font-style:italic;border-bottom:1px solid var(--border);margin-bottom:6px}
+
+/* ── STEP ── */
+.step{display:flex;gap:12px;padding:8px 16px;align-items:flex-start;margin:4px 0}
+.step-num{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;flex-shrink:0;margin-top:2px}
+.step-pos{background:#3fb95018;color:var(--green);border:1px solid #3fb95033}
+.step-neg{background:#f8514918;color:var(--red);border:1px solid #f8514933}
+.step-neu{background:#8b949e14;color:var(--muted);border:1px solid var(--border)}
+.step-body{flex:1;min-width:0}
+.step-technique{font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;display:flex;align-items:center;gap:6px}
+.step-technique .tone-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.tone-pos{background:var(--green)}
+.tone-neg{background:var(--red)}
+.tone-neu{background:var(--muted)}
+.step-msg{font-size:1rem;line-height:1.5;padding:8px 12px;background:var(--bg);border:1px solid var(--border);border-radius:10px;margin:4px 0;word-wrap:break-word}
+.step-why{font-size:.76rem;color:var(--muted);font-style:italic;margin-top:4px}
+.step-note{background:#e3b34112;border-left:3px solid var(--yellow);padding:5px 10px;border-radius:0 6px 6px 0;margin:5px 0 2px;font-size:.78rem;color:var(--yellow)}
+
+/* ── COPY ── */
+.cp{background:none;border:1px solid transparent;color:var(--border);width:26px;height:26px;border-radius:6px;cursor:pointer;font-size:.72rem;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:.15s;position:relative;margin-top:2px;opacity:.3}
+.step:hover .cp{opacity:1;border-color:var(--border)}
+.cp:hover{background:var(--card);color:var(--text);opacity:1}
+.cp.ok{border-color:var(--green);color:var(--green);opacity:1}
+.cp.ok::after{content:"✓";position:absolute;font-size:.68rem;font-weight:700}
+.cp.ok .cp-icon{visibility:hidden}
+
+/* ── POOL (for SIT-HORNY) ── */
+.pool-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:6px 16px}
+.pool-item{display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--bg);border:1px solid var(--border);border-radius:8px;font-size:.92rem}
+.pool-item .pool-text{flex:1}
+
+/* ── AFTER PROTOCOL NOTE ── */
+.p-after{font-size:.8rem;color:var(--muted);padding:8px 16px;border-top:1px solid var(--border);margin-top:6px;font-style:italic}
+
+.divider{border:none;border-top:1px solid var(--border);margin:28px 0}
+
+/* ── LEGEND ── */
+.legend{display:flex;gap:16px;flex-wrap:wrap;padding:12px 0;font-size:.78rem;color:var(--muted)}
+.legend-item{display:flex;align-items:center;gap:6px}
+.legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+
+.top-btn{position:fixed;bottom:16px;right:16px;width:36px;height:36px;border-radius:50%;background:var(--card);border:1px solid var(--border);color:var(--muted);font-size:1rem;cursor:pointer;display:none;align-items:center;justify-content:center;z-index:100;transition:.15s}
+.top-btn:hover{color:var(--text);border-color:var(--muted)}
+.top-btn.show{display:flex}
+
+@media(max-width:700px){
+  .page{padding:12px 10px}
+  .pool-grid{grid-template-columns:1fr}
+  .hero{flex-direction:column;text-align:center}
+  .toc{margin:0 -10px;padding-left:10px;padding-right:10px}
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+<a href="./" class="back-btn">← Putri Guide</a>
+
+<div class="hero">
+  <img src="profile.jpg" alt="Putri" class="hero-photo">
+  <div>
+    <h1>PUTRI — Objection & Resistance</h1>
+    <div class="tagline">All protocols in Putri's voice · Review Draft v1 · Feb 2026</div>
+  </div>
+</div>
+
+<div class="legend">
+  <span class="legend-item"><span class="legend-dot" style="background:var(--green)"></span> Positive tone</span>
+  <span class="legend-item"><span class="legend-dot" style="background:var(--red)"></span> Negative tone</span>
+  <span class="legend-item"><span class="legend-dot" style="background:var(--muted)"></span> Neutral tone</span>
+  <span class="legend-item">— Each step = standalone script (chatter picks based on sub response)</span>
+</div>
+
+<nav class="toc" id="toc">
+  <a href="#obj-price" class="toc-obj">Price</a>
+  <a href="#obj-discount" class="toc-obj">Discount</a>
+  <a href="#obj-free" class="toc-obj">Free</a>
+  <a href="#obj-nomoney" class="toc-obj">No Money</a>
+  <a href="#obj-noppv" class="toc-obj">No PPV</a>
+  <a href="#obj-card" class="toc-obj">Card Fail</a>
+  <a href="#res-nosex" class="toc-res">No Sex</a>
+  <a href="#res-offtopic" class="toc-res">Off-topic</a>
+  <a href="#res-real" class="toc-res">Are You Real</a>
+  <a href="#res-voice" class="toc-res">Voice/Call</a>
+  <a href="#res-custom-yes" class="toc-res">Custom ✓</a>
+  <a href="#res-custom-no" class="toc-res">Custom ✗</a>
+  <a href="#res-done" class="toc-res">Already Came</a>
+  <a href="#sit-cum" class="toc-sit">Cum</a>
+  <a href="#sit-dickpic" class="toc-sit">Dick Pic</a>
+  <a href="#sit-horny" class="toc-sit">Boosters</a>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!--        A. OBJECTION HANDLING (PPV/PAYMENT)         -->
+<!-- ═══════════════════════════════════════════════════ -->
+
+<div class="cat-header cat-obj">
+  <span class="cat-emoji">💰</span>
+  <div class="cat-info">
+    <h2>A. Objection Handling</h2>
+    <p>Fan pushes back on buying PPV. Goal: convert the sale.</p>
+  </div>
+</div>
+
+<!-- OBJ-PRICE -->
+<div class="protocol" id="obj-price">
+  <div class="protocol-header">
+    <span class="p-code p-code-obj">OBJ-PRICE</span>
+    <span class="p-name">"Too expensive"</span>
+    <span class="p-steps">5 steps</span>
+    <span class="toggle">▼</span>
+  </div>
+  <div class="protocol-body">
+    <div class="p-desc">He says the PPV price is too high. Use each step only if the previous one didn't convert. Never jump steps.</div>
+
+    <div class="step">
+      <span class="step-num step-pos">1</span>
+      <div class="step-body">
+        <div class="step-technique"><span class="tone-dot tone-pos"></span> Reframe Value</div>
+        <div class="step-msg">babe that's less than a smoothie after my ride 😏 and trust me this hits wayyyy harder</div>
+        <div class="step-why">Shifts frame: not "expensive content" → "cheap thrill that beats everyday spending"</div>
+      </div>
+      <button class="cp" data-copy="babe that's less than a smoothie after my ride 😏 and trust me this hits wayyyy harder"><span class="cp-icon">📋</span></button>
+    </div>
+
+    <div class="step">
+      <span class="step-num step-neg">2</span>
+      <div class="step-body">
+        <div class="step-technique"><span class="tone-dot tone-neg"></span> FOMO Temporal</div>
+        <div class="step-msg">I'm literally only in this mood because of YOU rn 🥵 idk when I'll feel like this again... I never do this</div>
+        <div class="step-why">Creates urgency. The moment is unique. If he waits, it's gone.</div>
+      </div>
+      <button class="cp" data-copy="I'm literally only in this mood because of YOU rn 🥵 idk when I'll feel like this again... I never do this"><span class="cp-icon">📋</span></button>
+    </div>
+
+    <div class="step">
+      <span class="step-num step-neg">3</span>
+      <div class="step-body">
+        <div class="step-technique"><span class="tone-dot tone-neg"></span> Challenge Competence</div>
+        <div class="step-msg">hmm maybe you're not ready for what I did in this one 😏</div>
+        <div class="step-why">Ego attack. Buying = proving he can handle it. Not buying = weakness.</div>
+      </div>
+      <button class="cp" data-copy="hmm maybe you're not ready for what I did in this one 😏"><span class="cp-icon">📋</span></button>
+    </div>
+
+    <div class="step">
+      <span class="step-num step-pos">4</span>
+      <div class="step-body">
+        <div class="step-technique"><span class="tone-dot tone-pos"></span> Downgrade (ONE TIME)</div>
+        <div class="step-msg">okay fine... just for you I'll do it for [lower price] 💗 but only because this convo has been different</div>
+        <div class="step-note">✏️ Chatter: reduce price 20-30%. NEVER do this twice.</div>
+        <div class="step-why">One-time concession framed as exclusive ("for you"), not cheap ("on sale").</div>
+      </div>
+      <button class="cp" data-copy="okay fine... just for you I'll do it for [lower price] 💗 but only because this convo has been different"><span class="cp-icon">📋</span></button>
+    </div>
+
+    <div class="step">
+      <span class="step-num step-neu">5</span>
+      <div class="step-body">
+        <div class="step-technique"><span class="tone-dot tone-neu"></span> Seed + Return</div>
+        <div class="step-msg">it's okay baby 😊 let's just keep talking... I'm still thinking about you anyway</div>
+        <div class="step-why">Accept with zero pressure. Protect relationship. Retry naturally later in the conversation.</div>
+      </div>
+      <button class="cp" data-copy="it's okay baby 😊 let's just keep talking... I'm still thinking about you anyway"><span class="cp-icon">📋</span></button>
+    </div>
+
+    <div class="p-after">After step 5: continue text sexting or GFE. Tag sub for re-engagement. Retry with different content in next session.</div>
+  </div>
+</div>
+
+<!-- OBJ-DISCOUNT -->
+<div class="protocol collapsed" id="obj-discount">
+  <div class="protocol-header">
+    <span class="p-code p-code-obj">OBJ-DISCOUNT</span>
+    <span class="p-name">"Give me a discount"</span>
+    <span class="p-steps">4 steps</span>
+    <span class="toggle">▼</span>
+  </div>
+  <div class="protocol-body">
+    <div class="p-desc">He wants to pay less, but he's NOT refusing to pay. He's negotiating. Stay firm but playful — this is a GOOD sign.</div>
+
+    <div class="step">
+      <span class="step-num step-pos">1</span>
+      <div class="step-body">
+        <div class="step-technique"><span class="tone-dot tone-pos"></span> Playful Firmness</div>
+        <div class="step-msg">haha you trying to negotiate with me? 😏 baby this isn't a market... this is worth every penny trust me</div>
+        <div class="step-why">Playful, not aggressive. Frame: she sets the value, he doesn't get to bargain.</div>
+      </div>
+      <button class="cp" data-copy="haha you trying to negotiate with me? 😏 baby this isn't a market... this is worth every penny trust me"><span class="cp-icon">📋</span></button>
+    </div>
+
+    <div class="step">
+      <span class="step-num step-neg">2</span>
+      <div class="step-body">
+        <div class="step-technique"><span class="tone-dot tone-neg"></span> Challenge Worthiness</div>
+        <div class="step-msg">I don't do discounts... I only share this with guys who really appreciate what they're getting 😏</div>
+        <div class="step-why">Asking for discount = not worthy enough. Buying full price = proving he's different.</div>
+      </div>
+      <button class="cp" data-copy="I don't do discounts... I only share this with guys who really appreciate what they're getting 😏"><span class="cp-icon">📋</span></button>
+    </div>
+
+    <div class="step">
+      <span class="step-num step-pos">3</span>
+      <div class="step-body">
+        <div class="step-technique"><span class="tone-dot tone-pos"></span> Exclusive Concession (ONE TIME)</div>
+        <div class="step-msg">okay you know what... [lower price] just for you 💗 but seriously don't tell anyone, this is our thing</div>
+        <div class="step-note">✏️ Chatter: reduce 20-30%. Frame as SECRET, not sale. Only once per session.</div>
+        <div class="step-why">He "won" the negotiation. Framed as exclusive secret between them = intimacy + reciprocity.</div>
+      </div>
+      <button class="cp" data-copy="okay you know what... [lower price] just for you 💗 but seriously don't tell anyone, this is our thing"><span class="cp-icon">📋</span></button>
+    </div>
+
+    <div class="step">
+      <span class="step-num step-neg">4</span>
+      <div class="step-body">
+        <div class="step-technique"><span class="tone-dot tone-neg"></span> Takeaway</div>
+        <div class="step-msg">honestly? if you don't want it that's fine 😏 I'll keep it for myself... or maybe there's someone else who's been asking</div>
+        <div class="step-why">Jealousy + loss aversion. She has other options. He's not the only one.</div>
+      </div>
+      <button class="cp" data-copy="honestly? if you don't want it that's fine 😏 I'll keep it for myself... or maybe there's someone else who's been asking"><span class="cp-icon">📋</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- OBJ-FREE -->
+<div class="protocol collapsed" id="obj-free">
+  <div class="protocol-header">
+    <span class="p-code p-code-obj">OBJ-FREE</span>
+    <span class="p-name">"Send it for free"</span>
+    <span class="p-steps">4 steps</span>
+    <span class="toggle">▼</span>
+  </div>
+  <div class="protocol-body">
+    <div class="p-desc">He wants content without paying. Different from "too expensive" — this is entitlement, not price sensitivity.</div>
+
+    <div class="step">
+      <span class="step-num step-pos">1</span>
+      <div class="step-body">
+        <div class="step-technique"><span class="tone-dot tone-pos"></span> Reminder + Tease</div>
+        <div class="step-msg">baby I already sent you one for free remember? 😏 and this one is even crazier... you have no idea</div>
+        <div class="step-why">PPV 0 WAS free. Reminds him of value already given. Teases what's next.</div>
+      </div>
+      <button class="cp" data-copy="baby I already sent you one for free remember? 😏 and this one is even crazier... you have no idea"><span class="cp-icon">📋</span></button>
+    </div>
+
+    <div class="step">
+      <span class="step-num step-neg">2</span>
+      <div class="step-body">
+        <div class="step-technique"><span class="tone-dot tone-neg"></span> Challenge Worthiness</div>
+        <div class="step-msg">free? 😏 I don't just give this to anyone... you have to earn the best stuff</div>
+        <div class="step-why">Shifts from transactional to worthiness. Buying = earning, not spending.</div>
+      </div>
+      <button class="cp" data-copy="free? 😏 I don't just give this to anyone... you have to earn the best stuff"><span class="cp-icon">📋</span></button>
+    </div>
+
+    <div class="step">
+      <span class="step-num step-pos">3</span>
+      <div class="step-body">
+        <div class="step-technique"><span class="tone-dot tone-pos"></span> Guilt / Investment</div>
+        <div class="step-msg">I literally just spent time recording this because of what YOU said to me 🥺 this was for you, not just random content</div>
+        <div class="step-why">Reciprocity. She invested time and emotion. It was personal. Not paying = disrespect.</div>
+      </div>
+      <button class="cp" data-copy="I literally just spent time recording this because of what YOU said to me 🥺 this was for you, not just random content"><span class="cp-icon">📋</span></button>
+    </div>
+
+    <div class="step">
+      <span class="step-num step-neu">4</span>
+      <div class="step-body">
+        <div class="step-technique"><span class="tone-dot tone-neu"></span> Seed + Return</div>
+        <div class="step-msg">it's fine baby 😊 I'm not going anywhere... let's just keep talking, I like you regardless</div>
+        <div class="step-why">Accept. Protect relationship. He might convert later when more invested emotionally.</div>
+      </div>
+      <button class="cp" data-copy="it's fine baby 😊 I'm not going anywhere... let's just keep talking, I like you regardless"><span class="cp-icon">📋</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- OBJ-NOMONEY -->
+<div class="protocol collapsed" id="obj-nomoney">
+  <div class="protocol-header">
+    <span class="p-code p-code-obj">OBJ-NOMONEY</span>
+    <span class="p-name">"I don't have money"</span>
+    <span class="p-steps">4 steps</span>
+    <span class="toggle">▼</span>
+  </div>
+  <div class="protocol-body">
+    <div class="p-desc">Could be real or an excuse. Don't judge. Test gently, then adapt. If genuinely broke, protect the relationship for later.</div>
+
+    <div class="step">
+      <span class="step-num step-pos">1</span>
+      <div class="step-body">
+        <div class="step-technique"><span class="tone-dot tone-pos"></span> Empathy</div>
+        <div class="step-msg">aww I totally get it baby 💗 no pressure at all okay?</div>
+        <div class="step-why">Disarm. Zero judgment. If he's lying, this relaxes him. If true, builds trust.</div>
+      </div>
+      <button class="cp" data-copy="aww I totally get it baby 💗 no pressure at all okay?"><span class="cp-icon">📋</span></button>
+    </div>
+
+    <div class="step">
+      <span class="step-num step-neu">2</span>
+      <div class="step-body">
+        <div class="step-technique"><span class="tone-dot tone-neu"></span> Test Sincerity</div>
+        <div class="step-msg">not even like [small amount]? 🥺 I really really want you to see this one</div>
+        <div class="step-note">✏️ Chatter: suggest lowest viable price ($3-5). If he says no, it's likely real.</div>
+        <div class="step-why">Tests if "no money" = "no money for THIS price" or genuinely empty wallet.</div>
+      </div>
+      <button class="cp" data-copy="not even like [small amount]? 🥺 I really really want you to see this one"><span class="cp-icon">📋</span></button>
+    </div>
+
+    <div class="step">
+      <span class="step-num step-pos">3</span>
+      <div class="step-body">
+        <div class="step-technique"><span class="tone-dot tone-pos"></span> Pay What You Want</div>
+        <div class="step-msg">okay send me whatever you can baby... even a tiny amount 💗 I just need you to see what you made me do</div>
+        <div class="step-why">Breaks the barrier. ANY amount = he's now a buyer. Psychology shifts from "can't" to "did."</div>
+      </div>
+      <button class="cp" data-copy="okay send me whatever you can baby... even a tiny amount 💗 I just need you to see what you made me do"><span class="cp-icon">📋</span></button>
+    </div>
+
+    <div class="step">
+      <span class="step-num step-neu">4</span>
+      <div class="step-body">
+        <div class="step-technique"><span class="tone-dot tone-neu"></span> Protect Relationship</div>
+        <div class="step-msg">honestly it's okay 😊 I like talking to you, money or no money... you make me feel things 💗</div>
+        <div class="step-why">GFE. He's tagged for re-engagement. The bond = future revenue. Don't burn it.</div>
+      </div>
+      <button class="cp" data-copy="honestly it's okay 😊 I like talking to you, money or no money... you make me feel things 💗"><span class="cp-icon">📋</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- OBJ-NOPPV -->
+<div class="protocol collapsed" id="obj-noppv">
+  <div class="protocol-header">
+    <span class="p-code p-code-obj">OBJ-NOPPV</span>
+    <span class="p-name">"I don't buy PPVs"</span>
+    <span class="p-steps">4 steps</span>
+    <span class="toggle">▼</span>
+  </div>
+  <div class="protocol-body">
+    <div class="p-desc">Identity stance, not price objection. "I'm the type of person who doesn't pay for this." You need to break the identity, not the price.</div>
+
+    <div class="step">
+      <span class="step-num step-pos">1</span>
+      <div class="step-body">
+        <div class="step-technique"><span class="tone-dot tone-pos"></span> Accept (Disarm)</div>
+        <div class="step-msg">that's totally okay 😊 I'm not trying to sell you anything, I just like talking to you</div>
+        <div class="step-why">Disarms the identity defense. She doesn't care about his money → he relaxes.</div>
+      </div>
+      <button class="cp" data-copy="that's totally okay 😊 I'm not trying to sell you anything, I just like talking to you"><span class="cp-icon">📋</span></button>
+    </div>
+
+    <div class="step">
+      <span class="step-num step-neu">2</span>
+      <div class="step-body">
+        <div class="step-technique"><span class="tone-dot tone-neu"></span> Continue Sexting (4-5 msgs)</div>
+        <div class="step-note">✏️ Continue text sexting from the main script. Build more tension. Make him WANT it so bad the identity breaks on its own.</div>
+        <div class="step-why">Build desire beyond his resistance. Don't mention PPV. Just keep escalating the sexual tension.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <span class="step-num step-pos">3</span>
+      <div class="step-body">
+        <div class="step-technique"><span class="tone-dot tone-pos"></span> Emotional Reframe</div>
+        <div class="step-msg">okay but this isn't about money... I just need you to see what you're doing to me rn 🥵 I've never reacted like this to someone</div>
+        <div class="step-why">Reframes from "buying content" to "sharing an intimate moment." It's not a transaction, it's HER being vulnerable.</div>
+      </div>
+      <button class="cp" data-copy="okay but this isn't about money... I just need you to see what you're doing to me rn 🥵 I've never reacted like this to someone"><span class="cp-icon">📋</span></button>
+    </div>
+
+    <div class="step">
+      <span class="step-num step-pos">4</span>
+      <div class="step-body">
+        <div class="step-technique"><span class="tone-dot tone-pos"></span> Pay What You Want</div>
+        <div class="step-msg">just send whatever you want, even $1 🙈 I just can't keep this to myself... you need to see it</div>
+        <div class="step-why">$1 breaks the identity. Once he pays ANYTHING, he's no longer "someone who doesn't buy PPVs."</div>
+      </div>
+      <button class="cp" data-copy="just send whatever you want, even $1 🙈 I just can't keep this to myself... you need to see it"><span class="cp-icon">📋</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- OBJ-CARD -->
+<div class="protocol collapsed" id="obj-card">
+  <div class="protocol-header">
+    <span class="p-code p-code-obj">OBJ-CARD</span>
+    <span class="p-name">"Card doesn't work"</span>
+    <span class="p-steps">3 steps</span>
+    <span class="toggle">▼</span>
+  </div>
+  <div class="protocol-body">
+    <div class="p-desc">Payment failed. Could be genuine technical issue. Keep it light, solve the problem, maintain momentum.</div>
+
+    <div class="step">
+      <span class="step-num step-pos">1</span>
+      <div class="step-body">
+        <div class="step-technique"><span class="tone-dot tone-pos"></span> Empathy + Retry</div>
+        <div class="step-msg">aww nooo 😩 that happens sometimes baby, try again it usually works the second time</div>
+        <div class="step-why">Normalize the issue. Don't make it awkward. Keep the energy up.</div>
+      </div>
+      <button class="cp" data-copy="aww nooo 😩 that happens sometimes baby, try again it usually works the second time"><span class="cp-icon">📋</span></button>
+    </div>
+
+    <div class="step">
+      <span class="step-num step-neu">2</span>
+      <div class="step-body">
+        <div class="step-technique"><span class="tone-dot tone-neu"></span> Alternative</div>
+        <div class="step-msg">maybe try a different card? 💗 I really don't want you to miss this</div>
+        <div class="step-why">Practical solution. Shows she cares about HIM seeing it, not just the money.</div>
+      </div>
+      <button class="cp" data-copy="maybe try a different card? 💗 I really don't want you to miss this"><span class="cp-icon">📋</span></button>
+    </div>
+
+    <div class="step">
+      <span class="step-num step-pos">3</span>
+      <div class="step-body">
+        <div class="step-technique"><span class="tone-dot tone-pos"></span> Soft Urgency</div>
+        <div class="step-msg">I really want you to see this before I change my mind 😏 I don't keep stuff like this around forever</div>
+        <div class="step-why">FOMO + urgency. Don't push too hard on a technical issue or it feels like a scam.</div>
+      </div>
+      <button class="cp" data-copy="I really want you to see this before I change my mind 😏 I don't keep stuff like this around forever"><span class="cp-icon">📋</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!--         B. RESISTANCE HANDLING (FLOW)              -->
+<!-- ═══════════════════════════════════════════════════ -->
+
+<div class="cat-header cat-res">
+  <span class="cat-emoji">🔀</span>
+  <div class="cat-info">
+    <h2>B. Resistance Handling</h2>
+    <p>Fan resists the direction of the conversation. Goal: redirect without forcing.</p>
+  </div>
+</div>
+
+<!-- RES-NOSEX -->
+<div class="protocol collapsed" id="res-nosex">
+  <div class="protocol-header">
+    <span class="p-code p-code-res">RES-NOSEX</span>
+    <span class="p-name">Doesn't want to go sexual</span>
+    <span class="p-steps">4 steps</span>
+    <span class="toggle">▼</span>
+  </div>
+  <div class="protocol-body">
+    <div class="p-desc">He's not ready to escalate. NEVER force it. Respect, build tension subtly, try again. If still no, full GFE — he may convert next session.</div>
+
+    <div class="step">
+      <span class="step-num step-pos">1</span>
+      <div class="step-body">
+        <div class="step-technique"><span class="tone-dot tone-pos"></span> Respect</div>
+        <div class="step-msg">haha okay okay 😊 I got a little carried away, you're just too easy to talk to</div>
+        <div class="step-why">Zero pressure. She "got carried away" = it was HER impulse, not a sales pitch.</div>
+      </div>
+      <button class="cp" data-copy="haha okay okay 😊 I got a little carried away, you're just too easy to talk to"><span class="cp-icon">📋</span></button>
+    </div>
+
+    <div class="step">
+      <span class="step-num step-neu">2</span>
+      <div class="step-body">
+        <div class="step-technique"><span class="tone-dot tone-neu"></span> Subtle Tension</div>
+        <div class="step-msg">so tell me more about you... what do you do when you're not making girls on the internet blush? 😏</div>
+        <div class="step-why">Flirt without being explicit. Keep attraction alive. He shouldn't feel "friendzoned."</div>
+      </div>
+      <button class="cp" data-copy="so tell me more about you... what do you do when you're not making girls on the internet blush? 😏"><span class="cp-icon">📋</span></button>
+    </div>
+
+    <div class="step">
+      <span class="step-num step-pos">3</span>
+      <div class="step-body">
+        <div class="step-technique"><span class="tone-dot tone-pos"></span> Natural Re-attempt</div>
+        <div class="step-msg">okay but like... I can't help it 🙈 there's something about you that's messing with my head rn</div>
+        <div class="step-why">Natural reopening. She "can't help herself" = genuine attraction, not pushing.</div>
+      </div>
+      <button class="cp" data-copy="okay but like... I can't help it 🙈 there's something about you that's messing with my head rn"><span class="cp-icon">📋</span></button>
+    </div>
+
+    <div class="step">
+      <span class="step-num step-neu">4</span>
+      <div class="step-body">
+        <div class="step-technique"><span class="tone-dot tone-neu"></span> Accept + GFE</div>
+        <div class="step-msg">alright I'll behave... for now 😏 no promises though haha</div>
+        <div class="step-why">Accept gracefully. "For now" = door stays open. Continue GFE, tag for next session.</div>
+      </div>
+      <button class="cp" data-copy="alright I'll behave... for now 😏 no promises though haha"><span class="cp-icon">📋</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- RES-OFFTOPIC -->
+<div class="protocol collapsed" id="res-offtopic">
+  <div class="protocol-header">
+    <span class="p-code p-code-res">RES-OFFTOPIC</span>
+    <span class="p-name">Goes off-topic / doesn't follow flow</span>
+    <span class="p-steps">3 steps</span>
+    <span class="toggle">▼</span>
+  </div>
+  <div class="protocol-body">
+    <div class="p-desc">He changes subject, talks about random things, doesn't follow the direction. Never dismiss — acknowledge, then redirect.</div>
+
+    <div class="step">
+      <span class="step-num step-pos">1</span>
+      <div class="step-body">
+        <div class="step-technique"><span class="tone-dot tone-pos"></span> Acknowledge</div>
+        <div class="step-msg">haha wait that's actually funny 😂</div>
+        <div class="step-note">✏️ React to what he actually said. Don't use this exact msg — adapt to his topic.</div>
+        <div class="step-why">Validate him. If you dismiss what he said, he feels ignored and disengages.</div>
+      </div>
+      <button class="cp" data-copy="haha wait that's actually funny 😂"><span class="cp-icon">📋</span></button>
+    </div>
+
+    <div class="step">
+      <span class="step-num step-pos">2</span>
+      <div class="step-body">
+        <div class="step-technique"><span class="tone-dot tone-pos"></span> Redirect with Hook</div>
+        <div class="step-msg">but hold on you totally distracted me 😏 I was about to tell you something and now I lost my train of thought...</div>
+        <div class="step-why">Creates curiosity. He wants to know what she was going to say. Power shifts back to her.</div>
+      </div>
+      <button class="cp" data-copy="but hold on you totally distracted me 😏 I was about to tell you something and now I lost my train of thought..."><span class="cp-icon">📋</span></button>
+    </div>
+
+    <div class="step">
+      <span class="step-num step-neu">3</span>
+      <div class="step-body">
+        <div class="step-technique"><span class="tone-dot tone-neu"></span> Retake Control</div>
+        <div class="step-msg">okay wait no I remember now 😏 so like I was saying...</div>
+        <div class="step-note">✏️ Continue with the next message from the main journey script.</div>
+        <div class="step-why">Smooth transition back. She "remembers" = natural, not forced.</div>
+      </div>
+      <button class="cp" data-copy="okay wait no I remember now 😏 so like I was saying..."><span class="cp-icon">📋</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- RES-REAL -->
+<div class="protocol collapsed" id="res-real">
+  <div class="protocol-header">
+    <span class="p-code p-code-res">RES-REAL</span>
+    <span class="p-name">"Are you real?" / "Is this pre-recorded?"</span>
+    <span class="p-steps">3 steps</span>
+    <span class="toggle">▼</span>
+  </div>
+  <div class="protocol-body">
+    <div class="p-desc">He's questioning authenticity. Critical moment — if handled wrong, he leaves. Never get defensive. Use humor, then proof, then emotion.</div>
+
+    <div class="step">
+      <span class="step-num step-pos">1</span>
+      <div class="step-body">
+        <div class="step-technique"><span class="tone-dot tone-pos"></span> Humor + Redirect</div>
+        <div class="step-msg">lol do I sound like a robot to you? 😂 beep boop... send $5 for human verification 🤖 haha I'm kidding</div>
+        <div class="step-why">Humor disarms suspicion. Making a joke about it = someone real would do this, a bot wouldn't.</div>
+      </div>
+      <button class="cp" data-copy="lol do I sound like a robot to you? 😂 beep boop... send $5 for human verification 🤖 haha I'm kidding"><span class="cp-icon">📋</span></button>
+    </div>
+
+    <div class="step">
+      <span class="step-num step-neg">2</span>
+      <div class="step-body">
+        <div class="step-technique"><span class="tone-dot tone-neg"></span> Challenge (Invert Power)</div>
+        <div class="step-msg">ask me anything 😏 literally anything about me, my life, whatever you want. I'm an open book</div>
+        <div class="step-why">Inverts power. She has nothing to hide. He's now testing HER = engagement = he's still invested.</div>
+      </div>
+      <button class="cp" data-copy="ask me anything 😏 literally anything about me, my life, whatever you want. I'm an open book"><span class="cp-icon">📋</span></button>
+    </div>
+
+    <div class="step">
+      <span class="step-num step-pos">3</span>
+      <div class="step-body">
+        <div class="step-technique"><span class="tone-dot tone-pos"></span> Emotional Grounding</div>
+        <div class="step-msg">I get it, there's a lot of fake stuff on here 💗 but you felt something in this convo right? because I did... and that's real</div>
+        <div class="step-why">Acknowledges his concern. Then anchors on the EMOTIONAL experience they shared. Hard to deny feelings.</div>
+      </div>
+      <button class="cp" data-copy="I get it, there's a lot of fake stuff on here 💗 but you felt something in this convo right? because I did... and that's real"><span class="cp-icon">📋</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- RES-VOICE -->
+<div class="protocol collapsed" id="res-voice">
+  <div class="protocol-header">
+    <span class="p-code p-code-res">RES-VOICE</span>
+    <span class="p-name">"Send voice note" / "Let's video call"</span>
+    <span class="p-steps">3 steps</span>
+    <span class="toggle">▼</span>
+  </div>
+  <div class="protocol-body">
+    <div class="p-desc">Authenticity test. Can't do voice/video (would break the illusion). Dodge playfully, redirect to content.</div>
+
+    <div class="step">
+      <span class="step-num step-pos">1</span>
+      <div class="step-body">
+        <div class="step-technique"><span class="tone-dot tone-pos"></span> Playful Dodge</div>
+        <div class="step-msg">haha maybe one day if you're lucky 😏 but not yet... I'm shy about that stuff</div>
+        <div class="step-why">"Maybe one day" = door not closed. "Shy" = believable personality trait, not a refusal.</div>
+      </div>
+      <button class="cp" data-copy="haha maybe one day if you're lucky 😏 but not yet... I'm shy about that stuff"><span class="cp-icon">📋</span></button>
+    </div>
+
+    <div class="step">
+      <span class="step-num step-pos">2</span>
+      <div class="step-body">
+        <div class="step-technique"><span class="tone-dot tone-pos"></span> Redirect to Content</div>
+        <div class="step-msg">I have something wayyy better for you though 🙈 trust me you'll forget you even asked</div>
+        <div class="step-why">Redirect to what you CAN deliver. "Better" = she's offering more, not less.</div>
+      </div>
+      <button class="cp" data-copy="I have something wayyy better for you though 🙈 trust me you'll forget you even asked"><span class="cp-icon">📋</span></button>
+    </div>
+
+    <div class="step">
+      <span class="step-num step-neg">3</span>
+      <div class="step-body">
+        <div class="step-technique"><span class="tone-dot tone-neg"></span> Firm Boundary</div>
+        <div class="step-msg">I don't really do that on here baby 💗 but honestly what I'm about to show you is better than any call... you'll see 😈</div>
+        <div class="step-why">Clear boundary without killing the mood. Immediately redirects to value she CAN provide.</div>
+      </div>
+      <button class="cp" data-copy="I don't really do that on here baby 💗 but honestly what I'm about to show you is better than any call... you'll see 😈"><span class="cp-icon">📋</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- RES-CUSTOM-YES -->
+<div class="protocol collapsed" id="res-custom-yes">
+  <div class="protocol-header">
+    <span class="p-code p-code-res">RES-CUSTOM-YES</span>
+    <span class="p-name">Asks for content model HAS</span>
+    <span class="p-steps">3 steps</span>
+    <span class="toggle">▼</span>
+  </div>
+  <div class="protocol-body">
+    <div class="p-desc">He asks for specific content and you have it (or similar). This is a SALE OPPORTUNITY — tease, price, close.</div>
+
+    <div class="step">
+      <span class="step-num step-pos">1</span>
+      <div class="step-body">
+        <div class="step-technique"><span class="tone-dot tone-pos"></span> Tease</div>
+        <div class="step-msg">mmm you want that? 😏 I might have something... actually I definitely have something 🙈</div>
+        <div class="step-why">Build anticipation. Don't give it instantly — make him want it more.</div>
+      </div>
+      <button class="cp" data-copy="mmm you want that? 😏 I might have something... actually I definitely have something 🙈"><span class="cp-icon">📋</span></button>
+    </div>
+
+    <div class="step">
+      <span class="step-num step-neu">2</span>
+      <div class="step-body">
+        <div class="step-technique"><span class="tone-dot tone-neu"></span> Price + Anticipation</div>
+        <div class="step-msg">okay I have exactly what you're thinking of 😈 you're gonna lose your mind... [price]</div>
+        <div class="step-note">✏️ Chatter: set price based on content type. Premium for specific requests.</div>
+        <div class="step-why">He asked for it = high intent = price can be higher than standard PPV.</div>
+      </div>
+      <button class="cp" data-copy="okay I have exactly what you're thinking of 😈 you're gonna lose your mind... [price]"><span class="cp-icon">📋</span></button>
+    </div>
+
+    <div class="step">
+      <span class="step-num step-pos">3</span>
+      <div class="step-body">
+        <div class="step-technique"><span class="tone-dot tone-pos"></span> Close</div>
+        <div class="step-msg">trust me baby you won't regret it 😈 I made this one special</div>
+        <div class="step-why">Reinforce decision. "Special" = he's getting something unique.</div>
+      </div>
+      <button class="cp" data-copy="trust me baby you won't regret it 😈 I made this one special"><span class="cp-icon">📋</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- RES-CUSTOM-NO -->
+<div class="protocol collapsed" id="res-custom-no">
+  <div class="protocol-header">
+    <span class="p-code p-code-res">RES-CUSTOM-NO</span>
+    <span class="p-name">Asks for content model DOESN'T have</span>
+    <span class="p-steps">3 steps</span>
+    <span class="toggle">▼</span>
+  </div>
+  <div class="protocol-body">
+    <div class="p-desc">He wants something you can't deliver. NEVER say "I don't have that." Redirect to what you DO have and make it sound better.</div>
+
+    <div class="step">
+      <span class="step-num step-pos">1</span>
+      <div class="step-body">
+        <div class="step-technique"><span class="tone-dot tone-pos"></span> Redirect</div>
+        <div class="step-msg">I don't have exactly that but honestly I have something that'll make you forget you even asked 😏</div>
+        <div class="step-why">Never say "no" flat out. Redirect to something better. He doesn't know what he's missing.</div>
+      </div>
+      <button class="cp" data-copy="I don't have exactly that but honestly I have something that'll make you forget you even asked 😏"><span class="cp-icon">📋</span></button>
+    </div>
+
+    <div class="step">
+      <span class="step-num step-pos">2</span>
+      <div class="step-body">
+        <div class="step-technique"><span class="tone-dot tone-pos"></span> Alternative + FOMO</div>
+        <div class="step-msg">actually what I have might be even crazier 🙈 and literally no one else has seen it yet</div>
+        <div class="step-why">Exclusivity. He's the FIRST to see this. Can't say no to being first.</div>
+      </div>
+      <button class="cp" data-copy="actually what I have might be even crazier 🙈 and literally no one else has seen it yet"><span class="cp-icon">📋</span></button>
+    </div>
+
+    <div class="step">
+      <span class="step-num step-pos">3</span>
+      <div class="step-body">
+        <div class="step-technique"><span class="tone-dot tone-pos"></span> Confidence Close</div>
+        <div class="step-msg">trust me baby... I know what you need better than you do 😈</div>
+        <div class="step-why">Model leads. She knows best. Dominant frame = attractive + closes the sale.</div>
+      </div>
+      <button class="cp" data-copy="trust me baby... I know what you need better than you do 😈"><span class="cp-icon">📋</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- RES-DONE -->
+<div class="protocol collapsed" id="res-done">
+  <div class="protocol-header">
+    <span class="p-code p-code-res">RES-DONE</span>
+    <span class="p-name">"I already came" / finished early</span>
+    <span class="p-steps">3 steps</span>
+    <span class="toggle">▼</span>
+  </div>
+  <div class="protocol-body">
+    <div class="p-desc">He finished before the final PPV. Revenue is at risk. Validate, then rescue the sale by making it about HER finishing.</div>
+
+    <div class="step">
+      <span class="step-num step-pos">1</span>
+      <div class="step-body">
+        <div class="step-technique"><span class="tone-dot tone-pos"></span> Validate</div>
+        <div class="step-msg">fuck that's so hot 🥵 you came because of me??</div>
+        <div class="step-why">Don't make it awkward. Celebrate it. Feed his ego. HE made her react.</div>
+      </div>
+      <button class="cp" data-copy="fuck that's so hot 🥵 you came because of me??"><span class="cp-icon">📋</span></button>
+    </div>
+
+    <div class="step">
+      <span class="step-num step-pos">2</span>
+      <div class="step-body">
+        <div class="step-technique"><span class="tone-dot tone-pos"></span> Rescue (Challenge)</div>
+        <div class="step-msg">but baby I haven't finished yet 🥺 don't you wanna watch me cum too?</div>
+        <div class="step-why">Flips the script. It's about HER now. Reciprocity + ego: "she needs YOU to finish."</div>
+      </div>
+      <button class="cp" data-copy="but baby I haven't finished yet 🥺 don't you wanna watch me cum too?"><span class="cp-icon">📋</span></button>
+    </div>
+
+    <div class="step">
+      <span class="step-num step-neu">3</span>
+      <div class="step-body">
+        <div class="step-technique"><span class="tone-dot tone-neu"></span> Seed Next Session</div>
+        <div class="step-msg">okay but next time you have to wait for me 😏 I have something insane planned for round 2</div>
+        <div class="step-why">Plants seed for next session. "Round 2" = anticipation. He'll come back.</div>
+      </div>
+      <button class="cp" data-copy="okay but next time you have to wait for me 😏 I have something insane planned for round 2"><span class="cp-icon">📋</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!--          C. SITUATIONAL SCRIPTS                    -->
+<!-- ═══════════════════════════════════════════════════ -->
+
+<div class="cat-header cat-sit">
+  <span class="cat-emoji">⚡</span>
+  <div class="cat-info">
+    <h2>C. Situational Scripts</h2>
+    <p>Not objections. Specific moments that need a prepared response. Pick the right one.</p>
+  </div>
+</div>
+
+<!-- SIT-CUM -->
+<div class="protocol collapsed" id="sit-cum">
+  <div class="protocol-header">
+    <span class="p-code p-code-sit">SIT-CUM</span>
+    <span class="p-name">He's close to cumming</span>
+    <span class="p-steps">3 options</span>
+    <span class="p-type">pick one</span>
+    <span class="toggle">▼</span>
+  </div>
+  <div class="protocol-body">
+    <div class="p-desc">He's about to finish. You need to CONTROL the timing. If he cums before the final PPV, you lose the sale. Pick one based on where you are in the journey.</div>
+
+    <div class="step">
+      <span class="step-num step-neg">A</span>
+      <div class="step-body">
+        <div class="step-technique"><span class="tone-dot tone-neg"></span> Edge / Slow Down (more PPVs left)</div>
+        <div class="step-msg">don't cum yet baby... I'm not done with you 😈</div>
+        <div class="step-why">Use when there are still PPVs to sell. He edges = stays aroused longer = more purchases.</div>
+      </div>
+      <button class="cp" data-copy="don't cum yet baby... I'm not done with you 😈"><span class="cp-icon">📋</span></button>
+    </div>
+
+    <div class="step">
+      <span class="step-num step-pos">B</span>
+      <div class="step-body">
+        <div class="step-technique"><span class="tone-dot tone-pos"></span> Sync with Final PPV</div>
+        <div class="step-msg">I'm so close too 🥵 cum with me baby... but you need to see this first 💦</div>
+        <div class="step-why">Use at the LAST PPV. Time his orgasm with the final purchase. Maximum satisfaction = maximum retention.</div>
+      </div>
+      <button class="cp" data-copy="I'm so close too 🥵 cum with me baby... but you need to see this first 💦"><span class="cp-icon">📋</span></button>
+    </div>
+
+    <div class="step">
+      <span class="step-num step-neg">C</span>
+      <div class="step-body">
+        <div class="step-technique"><span class="tone-dot tone-neg"></span> Tease Delay</div>
+        <div class="step-msg">hold it... I want you to wait until you see what I'm about to send 😏 trust me it's worth it</div>
+        <div class="step-why">Use when next PPV is about to be sent. Creates anticipation tied to the purchase.</div>
+      </div>
+      <button class="cp" data-copy="hold it... I want you to wait until you see what I'm about to send 😏 trust me it's worth it"><span class="cp-icon">📋</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- SIT-DICKPIC -->
+<div class="protocol collapsed" id="sit-dickpic">
+  <div class="protocol-header">
+    <span class="p-code p-code-sit">SIT-DICKPIC</span>
+    <span class="p-name">He sends a dick pic</span>
+    <span class="p-steps">3 options</span>
+    <span class="p-type">pick based on moment</span>
+    <span class="toggle">▼</span>
+  </div>
+  <div class="protocol-body">
+    <div class="p-desc">NEVER ignore it. ALWAYS react positively. A dick pic = he's invested and aroused. This is a SALES OPPORTUNITY, not a problem.</div>
+
+    <div class="step">
+      <span class="step-num step-pos">A</span>
+      <div class="step-body">
+        <div class="step-technique"><span class="tone-dot tone-pos"></span> During Sexting (high energy)</div>
+        <div class="step-msg">fuck 🥵🥵 okay that's... wow. you have no idea what that just did to me</div>
+        <div class="step-why">Validate + ego boost. Then leverage: "now you NEED to see what that made me do" → PPV.</div>
+      </div>
+      <button class="cp" data-copy="fuck 🥵🥵 okay that's... wow. you have no idea what that just did to me"><span class="cp-icon">📋</span></button>
+    </div>
+
+    <div class="step">
+      <span class="step-num step-pos">B</span>
+      <div class="step-body">
+        <div class="step-technique"><span class="tone-dot tone-pos"></span> During Rapport (unexpected)</div>
+        <div class="step-msg">omg 🙈 you don't waste time huh 😏 that's actually really hot though ngl</div>
+        <div class="step-why">If it comes during rapport, she's "surprised but into it." Use to fast-track to teasing.</div>
+      </div>
+      <button class="cp" data-copy="omg 🙈 you don't waste time huh 😏 that's actually really hot though ngl"><span class="cp-icon">📋</span></button>
+    </div>
+
+    <div class="step">
+      <span class="step-num step-pos">C</span>
+      <div class="step-body">
+        <div class="step-technique"><span class="tone-dot tone-pos"></span> Leverage for PPV</div>
+        <div class="step-msg">you can't just send me that and expect me not to do something about it 🥵 hold on...</div>
+        <div class="step-note">✏️ Follow this with a WAIT (1-2 min) then send the next PPV. His pic "caused" her to record.</div>
+        <div class="step-why">His dick pic → she "had to" record something. HE caused this. Maximum ego + reciprocity.</div>
+      </div>
+      <button class="cp" data-copy="you can't just send me that and expect me not to do something about it 🥵 hold on..."><span class="cp-icon">📋</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- SIT-HORNY -->
+<div class="protocol collapsed" id="sit-horny">
+  <div class="protocol-header">
+    <span class="p-code p-code-sit">SIT-HORNY</span>
+    <span class="p-name">Mid-sexting boosters</span>
+    <span class="p-steps">8 options</span>
+    <span class="p-type">pick any, mix & match</span>
+    <span class="toggle">▼</span>
+  </div>
+  <div class="protocol-body">
+    <div class="p-desc">Filler messages to maintain sexual energy between script messages. NOT a sequence — chatter picks from this pool whenever they need an extra boost.</div>
+
+    <div class="pool-grid">
+      <div class="pool-item"><span class="pool-text">fuckkk 🥵</span><button class="cp" data-copy="fuckkk 🥵"><span class="cp-icon">📋</span></button></div>
+      <div class="pool-item"><span class="pool-text">I'm so wet rn because of you</span><button class="cp" data-copy="I'm so wet rn because of you"><span class="cp-icon">📋</span></button></div>
+      <div class="pool-item"><span class="pool-text">don't stop</span><button class="cp" data-copy="don't stop"><span class="cp-icon">📋</span></button></div>
+      <div class="pool-item"><span class="pool-text">you have no idea what you're doing to me</span><button class="cp" data-copy="you have no idea what you're doing to me"><span class="cp-icon">📋</span></button></div>
+      <div class="pool-item"><span class="pool-text">I literally can't think straight rn</span><button class="cp" data-copy="I literally can't think straight rn"><span class="cp-icon">📋</span></button></div>
+      <div class="pool-item"><span class="pool-text">my hands are shaking 🥵</span><button class="cp" data-copy="my hands are shaking 🥵"><span class="cp-icon">📋</span></button></div>
+      <div class="pool-item"><span class="pool-text">more...</span><button class="cp" data-copy="more..."><span class="cp-icon">📋</span></button></div>
+      <div class="pool-item"><span class="pool-text">I should be packing for my trip but I can't move rn 🥵</span><button class="cp" data-copy="I should be packing for my trip but I can't move rn 🥵"><span class="cp-icon">📋</span></button></div>
+    </div>
+  </div>
+</div>
+
+<div style="text-align:center;padding:24px 0 10px;color:var(--muted);font-size:.73rem">
+  Chatting Wizard · Script Manager · 2026<br>
+  PUTRI — Objection & Resistance Handling · Draft v1
+</div>
+
+</div><!-- /page -->
+
+<button class="top-btn" id="top-btn">↑</button>
+
+<script>
+document.addEventListener('click', e => {
+  const btn = e.target.closest('.cp');
+  if (!btn) return;
+  navigator.clipboard.writeText(btn.dataset.copy).then(() => {
+    btn.classList.add('ok');
+    setTimeout(() => btn.classList.remove('ok'), 1200);
+  });
+});
+document.querySelectorAll('.protocol-header').forEach(h => {
+  h.addEventListener('click', e => {
+    if (e.target.closest('.cp')) return;
+    h.closest('.protocol').classList.toggle('collapsed');
+  });
+});
+document.querySelectorAll('.toc a').forEach(a => {
+  a.addEventListener('click', e => {
+    const id = a.getAttribute('href').slice(1);
+    const t = document.getElementById(id);
+    if (t) t.classList.remove('collapsed');
+  });
+});
+const topBtn = document.getElementById('top-btn');
+window.addEventListener('scroll', () => topBtn.classList.toggle('show', window.scrollY > 400));
+topBtn.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+const toc = document.getElementById('toc');
+window.addEventListener('scroll', () => toc.classList.toggle('shadow', window.scrollY > 150));
+const tocLinks = document.querySelectorAll('.toc a');
+const sections = Array.from(tocLinks).map(a => ({link:a, el:document.getElementById(a.getAttribute('href').slice(1))})).filter(s=>s.el);
+function updateToc(){let a=sections[0];for(const s of sections)if(s.el.getBoundingClientRect().top<=100)a=s;tocLinks.forEach(l=>l.classList.remove('active'));if(a)a.link.classList.add('active')}
+window.addEventListener('scroll',updateToc);updateToc();
+</script>
+</body>
+</html>
