@@ -18,8 +18,8 @@
 
   .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
 
-  .card { background: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 20px; transition: all 0.2s; cursor: pointer; text-decoration: none; color: inherit; display: block; }
-  .card:hover { border-color: #58a6ff; transform: translateY(-2px); box-shadow: 0 4px 20px rgba(88,166,255,0.1); }
+  .card { background: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 20px; transition: all 0.2s; text-decoration: none; color: inherit; display: block; }
+  .card:hover { border-color: #58a6ff; box-shadow: 0 4px 20px rgba(88,166,255,0.1); }
 
   .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
   .card-name { font-size: 1.3em; font-weight: 700; }
@@ -44,6 +44,13 @@
   .empty-card { background: #161b22; border: 1px dashed #30363d; border-radius: 12px; padding: 20px; text-align: center; color: #484f58; }
   .empty-card .icon { font-size: 2em; margin-bottom: 8px; }
   .empty-card p { font-size: 0.9em; }
+
+  .card-actions { display: flex; gap: 10px; margin-top: 12px; padding-top: 12px; border-top: 1px solid #21262d; }
+  .btn-guide, .btn-xlsx { flex: 1; text-align: center; padding: 8px 12px; border-radius: 8px; font-size: 0.8em; font-weight: 600; text-decoration: none; transition: all 0.2s; }
+  .btn-guide { background: #58a6ff22; color: #58a6ff; border: 1px solid #58a6ff44; }
+  .btn-guide:hover { background: #58a6ff33; }
+  .btn-xlsx { background: #3fb95022; color: #3fb950; border: 1px solid #3fb95044; }
+  .btn-xlsx:hover { background: #3fb95033; }
 
   .footer { text-align: center; padding: 50px 20px; color: #484f58; font-size: 0.8em; }
 
@@ -76,7 +83,7 @@
   <div class="section-title">Female Creators</div>
   <div class="grid">
 
-    <a href="putri/" class="card">
+    <div class="card">
       <div class="card-header">
         <span class="card-name">Putri</span>
         <span class="card-badge badge-live">LIVE</span>
@@ -92,7 +99,11 @@
         <div class="stat"><div class="stat-num stat-blue">43</div><div class="stat-label">Messages</div></div>
         <div class="stat"><div class="stat-num stat-red">4</div><div class="stat-label">PPVs</div></div>
       </div>
-    </a>
+      <div class="card-actions">
+        <a href="putri/" class="btn-guide">📖 Chatter Guide</a>
+        <a href="putri/Putri_New_Sub_Journey_Infloww.xlsx" download class="btn-xlsx">📥 Download XLSX</a>
+      </div>
+    </div>
 
     <div class="empty-card">
       <div class="icon">🔜</div>
@@ -105,7 +116,7 @@
   <div class="section-title">Male Creators — Dating App Traffic</div>
   <div class="grid">
 
-    <a href="max/" class="card">
+    <div class="card">
       <div class="card-header">
         <span class="card-name">Max</span>
         <span class="card-badge badge-live">LIVE</span>
@@ -121,7 +132,11 @@
         <div class="stat"><div class="stat-num stat-blue">73</div><div class="stat-label">Messages</div></div>
         <div class="stat"><div class="stat-num stat-red">4</div><div class="stat-label">PPVs</div></div>
       </div>
-    </a>
+      <div class="card-actions">
+        <a href="max/" class="btn-guide">📖 Chatter Guide</a>
+        <a href="max/Max_DatingApp_Journey_Infloww.xlsx" download class="btn-xlsx">📥 Download XLSX</a>
+      </div>
+    </div>
 
     <div class="empty-card">
       <div class="icon">🔜</div>
