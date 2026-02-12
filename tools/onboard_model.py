@@ -1,26 +1,28 @@
 """
 ONBOARDING AUTOMATION — New Model Pipeline
 =============================================
-Detects new onboarding requests from Slack, creates model config,
-generates all scripts, updates dashboard, and notifies Rei.
+Detects new onboardings from Monday.com, reads model info from Airtable,
+creates scripts, generates XLSX/HTML, updates dashboard, notifies Rei.
 
 Usage:
-    # Check Slack for new onboarding requests
+    # Check Monday.com + Slack for new onboardings
     python tools/onboard_model.py check
 
-    # Create a new model from Slack onboarding data (interactive)
-    python tools/onboard_model.py create
+    # Full pipeline: Airtable → config → generate → deploy → notify Rei
+    python tools/onboard_model.py onboard --name "Claudia"
 
-    # Create directly with args (non-interactive)
-    python tools/onboard_model.py create --name "Luna" --gender female --traffic reddit \\
-        --page mixed --age 22 --nationality American --location "LA, California" \\
-        --personality "Chill surfer girl" --explicit yes
+    # Manual config creation (fallback, no Airtable)
+    python tools/onboard_model.py create --name "Luna" --gender female --traffic reddit ...
 
-    # Generate all outputs for an existing model config
+    # Generate outputs for an existing model config
     python tools/onboard_model.py generate <model_folder>
 
-    # Full pipeline: create + generate + notify
-    python tools/onboard_model.py full --name "Luna" ...
+Flow:
+    1. Angeles creates onboarding in Monday → detected by `check`
+    2. Script Manager reads Creator name → fetches full info from Airtable
+    3. Creates personalized config + scripts based on model data
+    4. Generates XLSX (Infloww), HTML guides, objections page
+    5. Updates dashboard, notifies Rei on Slack
 """
 
 import argparse
@@ -598,15 +600,174 @@ def update_dashboard():
 # CLI
 # ═══════════════════════════════════════════════════════════════
 
+def cmd_check_monday(args):
+    """Check Monday.com for new onboardings."""
+    try:
+        from monday_cli import query as monday_query
+    except ImportError:
+        print("[ERROR] monday_cli.py not found")
+        return []
+
+    # Find the onboarding board
+    data = monday_query("""{boards(limit: 50) {id name}}""")
+    board_id = None
+    for b in data.get("boards", []):
+        name_lower = b["name"].lower()
+        # Skip subitems boards
+        if name_lower.startswith("subitems") or name_lower.startswith("subelementos"):
+            continue
+        if "clientonoffboarding" in name_lower.replace(" ", "").replace("\u200d", ""):
+            board_id = b["id"]
+            break
+    
+    if not board_id:
+        print("[ERROR] Onboarding board not found in Monday")
+        return []
+
+    # Get items from the board
+    data = monday_query("""
+    query ($boardId: [ID!]!, $limit: Int!) {
+        boards(ids: $boardId) {
+            name
+            items_page(limit: $limit) {
+                items {
+                    id
+                    name
+                    group {
+                        title
+                    }
+                    column_values {
+                        id
+                        text
+                        value
+                        type
+                    }
+                }
+            }
+        }
+    }
+    """, {"boardId": [board_id], "limit": 100})
+
+    items = data.get("boards", [{}])[0].get("items_page", {}).get("items", [])
+    
+    new_onboardings = []
+    for item in items:
+        group = item.get("group", {})
+        group_title = group.get("title", "").lower()
+        
+        cols = {cv["id"]: cv.get("text", "") for cv in item.get("column_values", [])}
+        status = cols.get("status", "").lower()
+        creator = cols.get("text_mkw8gpsd", "")  # Creator column
+        
+        # Must have a real Creator name that differs from item name (filters out subtasks)
+        if not creator or creator.strip() == item["name"].strip():
+            continue
+        
+        # Only "Onboardings in Progress" group
+        if "progress" not in group_title and "onboarding" not in group_title:
+            # Also accept items without group if they have "in progress" status
+            if "progress" not in status:
+                continue
+        
+        # Not Live and not Cancelled = new onboarding
+        if "live" not in status and "cancel" not in status:
+            new_onboardings.append({
+                "monday_id": item["id"],
+                "client": item["name"],
+                "creator": creator,
+                "status": cols.get("status", ""),
+                "start_date": cols.get("date4", ""),
+                "go_live": cols.get("date_mkw899c7", ""),
+                "infloww_done": cols.get("boolean_mkw8y1px", "") == "v",
+            })
+
+    if new_onboardings:
+        print(f"\n[MONDAY] {len(new_onboardings)} new onboarding(s) detected:\n")
+        for ob in new_onboardings:
+            print(f"  Client: {ob['client']}")
+            print(f"  Creator: {ob['creator']}")
+            print(f"  Status: {ob['status']}")
+            print(f"  Start: {ob['start_date']}")
+            print(f"  Go-live: {ob['go_live']}")
+            print(f"  Infloww: {'Yes' if ob['infloww_done'] else 'No'}")
+            print()
+    else:
+        print("[OK] No new onboardings in Monday")
+    
+    return new_onboardings
+
+
 def cmd_check(args):
-    """Check Slack for new onboarding requests."""
+    """Check Monday + Slack for new onboarding requests."""
+    print("=== Checking Monday.com ===")
+    monday_results = cmd_check_monday(args)
+    
+    print("\n=== Checking Slack ===")
     days = getattr(args, "days", 7)
-    results = check_slack_onboarding(days_back=days)
-    return results
+    slack_results = check_slack_onboarding(days_back=days)
+    
+    return monday_results
+
+
+def cmd_onboard(args):
+    """
+    Full onboarding pipeline using Airtable data.
+    1. Read model info from Airtable
+    2. Create model config
+    3. Generate all scripts
+    4. Update dashboard
+    5. Notify Rei
+    """
+    model_name = args.name
+    
+    # Step 1: Fetch from Airtable
+    print(f"\n[AIRTABLE] Fetching info for '{model_name}'...")
+    try:
+        from airtable_cli import get_model_info
+    except ImportError:
+        print("[ERROR] airtable_cli.py not found")
+        return
+
+    info = get_model_info(model_name)
+    if not info:
+        print(f"[ERROR] Model '{model_name}' not found in Airtable.")
+        print("Make sure the model exists in the Model Info table with that exact name.")
+        return
+
+    print(f"  Found: {info['name']}, {info['age']}, {info['nationality']}")
+    print(f"  Traffic: {info['traffic_display']} → {info['traffic']}")
+    print(f"  Gender: {info['gender']}")
+    print(f"  Explicit: {info['explicit_level']}")
+
+    # Step 2: Create config
+    print(f"\n[CONFIG] Creating model config...")
+    filepath, folder = create_model_config(info)
+
+    # Step 3: Generate
+    print(f"\n[GENERATING] {model_name}...")
+    success = generate_model(folder)
+
+    if success:
+        # Step 4: Update dashboard
+        update_dashboard()
+
+        # Step 5: Notify Rei
+        if not args.no_notify:
+            notify_slack(model_name)
+
+        print(f"\n{'='*60}")
+        print(f"[DONE] {model_name} fully onboarded!")
+        print(f"  Config: tools/models/{folder}.py")
+        print(f"  Web: {folder}/")
+        print(f"  XLSX: {folder}/{model_name}_Complete_Infloww.xlsx")
+        print(f"  Objections: {folder}/objections.html")
+        print(f"{'='*60}")
+    else:
+        print(f"[ERROR] Generation failed for {model_name}")
 
 
 def cmd_create(args):
-    """Create a new model config."""
+    """Create a new model config (manual args, no Airtable)."""
     info = {
         "name": args.name,
         "gender": args.gender,
@@ -641,61 +802,34 @@ def cmd_generate(args):
     return success
 
 
-def cmd_full(args):
-    """Full pipeline: create + generate + deploy + notify."""
-    # Step 1: Create config
-    filepath, folder = cmd_create(args)
-
-    # Step 2: Generate
-    print(f"\n[GENERATING] {args.name}...")
-    success = generate_model(folder)
-
-    if success:
-        # Step 3: Update dashboard
-        update_dashboard()
-
-        # Step 4: Notify
-        if not args.no_notify:
-            notify_slack(args.name)
-
-        print(f"\n{'='*60}")
-        print(f"[DONE] {args.name} fully onboarded!")
-        print(f"  Config: tools/models/{folder}.py")
-        print(f"  Web: {folder}/")
-        print(f"  XLSX: {folder}/{args.name}_Complete_Infloww.xlsx")
-        print(f"{'='*60}")
-    else:
-        print(f"[ERROR] Generation failed for {args.name}")
-
-
 def main():
     parser = argparse.ArgumentParser(description="Onboarding Automation — New Model Pipeline")
     sub = parser.add_subparsers(dest="command")
 
-    # Check
-    p = sub.add_parser("check", help="Check Slack for new onboarding requests")
-    p.add_argument("--days", type=int, default=7, help="Days to look back")
+    # Check Monday + Slack
+    p = sub.add_parser("check", help="Check Monday + Slack for new onboardings")
+    p.add_argument("--days", type=int, default=7, help="Days to look back in Slack")
 
-    # Create
-    p = sub.add_parser("create", help="Create a new model config")
+    # Onboard from Airtable (recommended)
+    p = sub.add_parser("onboard", help="Full pipeline: Airtable → config → generate → deploy → notify")
+    p.add_argument("--name", required=True, help="Model name (must exist in Airtable)")
+    p.add_argument("--no-notify", action="store_true", help="Skip Slack notification")
+
+    # Create manually (fallback)
+    p = sub.add_parser("create", help="Create model config manually (no Airtable)")
     _add_model_args(p)
 
     # Generate
-    p = sub.add_parser("generate", help="Generate outputs for existing model")
+    p = sub.add_parser("generate", help="Generate outputs for existing model config")
     p.add_argument("folder", help="Model folder name")
-
-    # Full pipeline
-    p = sub.add_parser("full", help="Full pipeline: create + generate + deploy + notify")
-    _add_model_args(p)
-    p.add_argument("--no-notify", action="store_true", help="Skip Slack notification")
 
     args = parser.parse_args()
 
     cmds = {
         "check": cmd_check,
+        "onboard": cmd_onboard,
         "create": cmd_create,
         "generate": cmd_generate,
-        "full": cmd_full,
     }
 
     if args.command in cmds:
