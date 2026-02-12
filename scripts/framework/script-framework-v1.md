@@ -536,7 +536,7 @@ When exporting scripts to xlsx for Infloww import:
 
 **CRITICAL — Row order is REVERSED.** Infloww places the first row as the LAST message in the sequence. So the LAST message of the sequence goes in row 2 (first data row), and the FIRST message goes in the last data row. Always build the Excel bottom-to-top.
 
-**Automated messages are NOT included.** W-1 (welcome), AF-1, and AF-2 (auto follow-ups) are all automated — they are NOT sent by the chatter. These are configured separately inside Infloww. The Excel only contains messages the chatter actually sends, starting from R-1 (first rapport message).
+**Automated messages are NOT included.** W-1 (welcome), AF-1, and AF-2 (auto follow-ups) are all automated — they are NOT sent by the chatter. These are configured separately inside Infloww as Smart Messages. The Excel only contains messages the chatter actually sends, starting from R-1 (first rapport message). For the full Smart Messages strategy (nudges, welcome, post-purchase, retention, etc.), see `smart-messages-strategy.md`.
 
 **Customer Journey = 1 sheet.** The entire chatter flow (R → TB → S → AC) goes in a single sheet. Do NOT separate rapport and sexting into different sheets.
 
