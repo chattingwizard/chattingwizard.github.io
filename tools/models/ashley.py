@@ -91,10 +91,10 @@ config = {
     # ═══════════════════════════════════════
     "nr_waves": [
         ("NR-W1", "hey? 😊", "Send 2-3 min after PPV.", "sext"),
-        ("NR-W2", "you really need to see what I just did... trust me it's worth it 💕", "3-5 min later. Curiosity.", "sext"),
-        ("NR-W3", "okay I guess you're busy... I might delete this though, it was only for you 🙈", "5-10 min later. Takeaway.", "sext"),
-        ("NR-W4", "hey hope you're okay, text me when you're back 💕", "15-30 min later. Warm close.", "sext"),
-        ("NR-W5", "can't stop thinking about what happened earlier... are you around? 😊", "2-6 hrs later. New topic if re-engage.", "sext"),
+        ("NR-W2", "you seriously need to see what I just did... 💕", "3-5 min later. Curiosity.", "sext"),
+        ("NR-W3", "okay I guess you're busy... might delete this later, it was only for you", "5-10 min later. Takeaway.", "sext"),
+        ("NR-W4", "hey hope you're good, text me when you're back 💕", "15-30 min later. Warm close.", "sext"),
+        ("NR-W5", "can't stop thinking about earlier... you around? 😊", "2-6 hrs later. New topic if re-engage.", "sext"),
     ],
 
     # ═══════════════════════════════════════
@@ -316,11 +316,11 @@ config = {
         "boosters": ([
             ("h1", "oh my god 💕", "MID-SEXTING BOOSTER."),
             ("h2", "I'm so wet right now because of you 🙈", "BOOSTER. Ego."),
-            ("h3", "don't stop", "BOOSTER. Micro."),
-            ("h4", "you have no idea what you're doing to me right now", "BOOSTER."),
+            ("h3", "yes", "BOOSTER. Micro."),
+            ("h4", "you're driving me crazy right now", "BOOSTER."),
             ("h5", "I literally can't think about anything else 💕", "BOOSTER."),
             ("h6", "my whole body is on fire right now 🙈", "BOOSTER. Physical."),
-            ("h7", "more...", "BOOSTER. Ultra micro."),
+            ("h7", "don't stop...", "BOOSTER. Ultra micro."),
             ("h8", "the good girl in me is screaming to stop but the rest of me never wants this to end 😊", "BOOSTER. Ashley personality — good girl gone wild."),
         ], "sit"),
     },

@@ -91,11 +91,11 @@ config = {
     # NR WAVES
     # ═══════════════════════════════════════
     "nr_waves": [
-        ("NR-W1", "heyy? 🥺", "Send 2-3 min after PPV. Ping.", "sext"),
-        ("NR-W2", "you really need to see what I just did for you... trust me 🖤", "Send 3-5 min later. Curiosity.", "sext"),
-        ("NR-W3", "okay I guess you're busy. I might delete this later, it was only for you 💜", "Send 5-10 min later. Takeaway.", "sext"),
-        ("NR-W4", "hey hope you're good cutie, text me when you're back 🖤", "Send 15-30 min later. Warm close.", "sext"),
-        ("NR-W5", "can't stop thinking about earlier. you around? 💜", "Send 2-6 hrs later. New convo, don't retry same PPV.", "sext"),
+        ("NR-W1", "helloooo 🥺", "Send 2-3 min after PPV. Ping.", "sext"),
+        ("NR-W2", "I have something to show you but you're leaving me on read... 🖤", "Send 3-5 min later. Curiosity.", "sext"),
+        ("NR-W3", "fine I'll just keep this to myself then 😏", "Send 5-10 min later. Takeaway.", "sext"),
+        ("NR-W4", "miss talking to you cutie, where'd you go? 🖤", "Send 15-30 min later. Warm close.", "sext"),
+        ("NR-W5", "I made something special and you're the only one I want to show it to 💜", "Send 2-6 hrs later. New convo, don't retry same PPV.", "sext"),
     ],
 
     # ═══════════════════════════════════════
@@ -320,11 +320,11 @@ config = {
         "boosters": ([
             ("h1", "fuckkk 🖤", "MID-SEXTING BOOSTER."),
             ("h2", "I'm so wet right now because of you", "BOOSTER. Ego."),
-            ("h3", "don't stop", "BOOSTER. Micro."),
-            ("h4", "you have no idea what you're doing to me omg", "BOOSTER."),
+            ("h3", "keep going", "BOOSTER. Micro."),
+            ("h4", "I literally can't handle this right now", "BOOSTER."),
             ("h5", "I literally can't think straight right now 💜", "BOOSTER."),
             ("h6", "my legs are shaking", "BOOSTER. Physical."),
-            ("h7", "more...", "BOOSTER. Ultra micro."),
+            ("h7", "again...", "BOOSTER. Ultra micro."),
             ("h8", "I should be gaming rn but I can't even hold my controller 🖤", "BOOSTER. Antonella personality — gaming reference."),
         ], "sit"),
     },

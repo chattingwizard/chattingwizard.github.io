@@ -91,11 +91,11 @@ config = {
     # NR WAVES — 5
     # ═══════════════════════════════════════
     "nr_waves": [
-        ("NR-W1", "yo?", "Send 2-3 min after PPV. Ping.", "sext"),
-        ("NR-W2", "you need to see what I just did... seriously", "Send 3-5 min later. Curiosity.", "sext"),
-        ("NR-W3", "aight I guess you're busy. might delete this, it was only for you", "Send 5-10 min later. Takeaway.", "sext"),
-        ("NR-W4", "hey hope you're good man. hit me up when you're back", "Send 15-30 min later. Warm close.", "sext"),
-        ("NR-W5", "can't stop thinking about earlier. you around?", "Send 2-6 hrs later. New convo, don't retry same PPV.", "sext"),
+        ("NR-W1", "yo", "Send 2-3 min after PPV. Ping.", "sext"),
+        ("NR-W2", "you're really going to miss out on what I just recorded...", "Send 3-5 min later. Curiosity.", "sext"),
+        ("NR-W3", "your loss... this was your exclusive", "Send 5-10 min later. Takeaway.", "sext"),
+        ("NR-W4", "hey man, don't be a stranger", "Send 15-30 min later. Warm close.", "sext"),
+        ("NR-W5", "I've got something that's going to blow your mind when you get back", "Send 2-6 hrs later. New convo, don't retry same PPV.", "sext"),
     ],
 
     # ═══════════════════════════════════════
@@ -316,11 +316,11 @@ config = {
         "boosters": ([
             ("h1", "fuckkk", "MID-SEXTING BOOSTER."),
             ("h2", "I'm so hard rn because of you", "BOOSTER. Ego."),
-            ("h3", "don't stop", "BOOSTER. Micro."),
-            ("h4", "you have no idea what you're doing to me", "BOOSTER."),
+            ("h3", "yes", "BOOSTER. Micro."),
+            ("h4", "you're driving me crazy right now", "BOOSTER."),
             ("h5", "I literally can't think straight rn", "BOOSTER."),
             ("h6", "my hands are shaking", "BOOSTER. Physical."),
-            ("h7", "more...", "BOOSTER. Ultra micro."),
+            ("h7", "don't stop...", "BOOSTER. Ultra micro."),
             ("h8", "I should be at practice but I can't move because of you rn", "BOOSTER. Jockurworld personality — volleyball reference."),
         ], "sit"),
     },

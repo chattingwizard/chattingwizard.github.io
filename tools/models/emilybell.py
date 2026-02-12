@@ -88,11 +88,11 @@ config = {
     # NR WAVES
     # ═══════════════════════════════════════
     "nr_waves": [
-        ("NR-W1", "hey? 😏", "Send 2-3 min after PPV.", "sext"),
-        ("NR-W2", "you seriously need to see what I just did... I promise it's worth it 💋", "3-5 min later. Curiosity.", "sext"),
-        ("NR-W3", "okay I guess you're busy... might delete this later, it was only for you anyway", "5-10 min later. Takeaway.", "sext"),
-        ("NR-W4", "hey hope you're good handsome, text me when you're back 😏", "15-30 min later. Warm close.", "sext"),
-        ("NR-W5", "I literally can't stop thinking about earlier... are you around? 🔥", "2-6 hrs later. New convo, don't retry same PPV.", "sext"),
+        ("NR-W1", "hey you 😏", "Send 2-3 min after PPV.", "sext"),
+        ("NR-W2", "literally just took something crazy and you're not even here to see it 💋", "3-5 min later. Curiosity.", "sext"),
+        ("NR-W3", "I'm starting to think you forgot about me...", "5-10 min later. Takeaway.", "sext"),
+        ("NR-W4", "hey handsome, just checking in on you 😏", "15-30 min later. Warm close.", "sext"),
+        ("NR-W5", "still thinking about our conversation... come back when you can 🔥", "2-6 hrs later. New convo, don't retry same PPV.", "sext"),
     ],
 
     # ═══════════════════════════════════════
@@ -314,11 +314,11 @@ config = {
         "boosters": ([
             ("h1", "fuckk 😩", "MID-SEXTING BOOSTER."),
             ("h2", "I'm so wet right now and it's entirely your fault 🔥", "BOOSTER. Ego."),
-            ("h3", "don't stop", "BOOSTER. Micro."),
-            ("h4", "you have no idea what you're doing to me right now 😏", "BOOSTER."),
+            ("h3", "oh my god", "BOOSTER. Micro."),
+            ("h4", "I'm losing my mind because of you", "BOOSTER."),
             ("h5", "I literally can't think about anything else", "BOOSTER."),
             ("h6", "my hands are shaking 💋", "BOOSTER. Physical."),
-            ("h7", "more...", "BOOSTER. Ultra micro."),
+            ("h7", "I need more", "BOOSTER. Ultra micro."),
             ("h8", "I should be studying for my business exam but the only business I can think about right now is yours 😂", "BOOSTER. Emily personality — student/humor reference."),
         ], "sit"),
     },

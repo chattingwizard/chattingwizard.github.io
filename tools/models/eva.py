@@ -93,11 +93,11 @@ config = {
     # NR WAVES
     # ═══════════════════════════════════════
     "nr_waves": [
-        ("NR-W1", "hey?", "Send 2-3 min after PPV. Ping.", "sext"),
-        ("NR-W2", "papi you seriously need to see what I just did", "Send 3-5 min later. Curiosity.", "sext"),
-        ("NR-W3", "okay guess you're busy. might delete this later, it was only for you", "Send 5-10 min later. Takeaway.", "sext"),
-        ("NR-W4", "hey hope you're good handsome, text me when you're back 💕", "Send 15-30 min later. Warm close. NEVER say 'baby/babe'.", "sext"),
-        ("NR-W5", "can't stop thinking about earlier. you around?", "Send 2-6 hrs later. New convo, don't retry same PPV.", "sext"),
+        ("NR-W1", "hi", "Send 2-3 min after PPV. Ping.", "sext"),
+        ("NR-W2", "I wish you could see what I'm wearing right now...", "Send 3-5 min later. Curiosity.", "sext"),
+        ("NR-W3", "okay you're definitely busy... I'll save this for when you're back", "Send 5-10 min later. Takeaway.", "sext"),
+        ("NR-W4", "hope everything's okay with you handsome, I'm here whenever 💕", "Send 15-30 min later. Warm close. NEVER say 'baby/babe'.", "sext"),
+        ("NR-W5", "been thinking about you all day... text me back?", "Send 2-6 hrs later. New convo, don't retry same PPV.", "sext"),
     ],
 
     # ═══════════════════════════════════════
@@ -341,11 +341,11 @@ config = {
         "boosters": ([
             ("h1", "fuckkk", "MID-SEXTING BOOSTER."),
             ("h2", "I'm so wet right now because of you papi", "BOOSTER. Ego."),
-            ("h3", "don't stop", "BOOSTER. Micro."),
-            ("h4", "you have no idea what you're doing to me", "BOOSTER."),
+            ("h3", "right there", "BOOSTER. Micro."),
+            ("h4", "what are you doing to me", "BOOSTER."),
             ("h5", "dios mio I literally can't think straight right now", "BOOSTER. Spanish flavor."),
             ("h6", "my legs are shaking", "BOOSTER. Physical."),
-            ("h7", "more...", "BOOSTER. Ultra micro."),
+            ("h7", "please...", "BOOSTER. Ultra micro."),
             ("h8", "I should be at yoga but I can't move right now because of you", "BOOSTER. Eva personality — flexibility/yoga callback."),
         ], "sit"),
     },

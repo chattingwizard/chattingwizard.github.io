@@ -36,46 +36,46 @@ config = {
     # ═══════════════════════════════════════
     "journey": [
         # ── Rapport (R-1 to R-5) ──
-        ("R-1", "heyyy 💕 thanks for subscribing! you just made my day honestly. what brought you here?", "Add his name if known", "rapport"),
-        ("R-2", "aww that's so sweet haha. so where are you from? 😊", "React to his answer naturally", "rapport"),
-        ("R-3", "niceee! I'm in Dallas right now, originally from Brazil. I miss the beaches but I love it here too ✨", "If he named somewhere Chayla visited, add 'wait I've been there!' or 'omg I love that place'", "rapport"),
-        ("R-4", "so tell me about you, what do you like to do? I wanna know everything 😏", None, "rapport"),
+        ("R-1", "heyyy papi 💕 thanks for subscribing! you just made my day honestly. what brought you here?", "Add his name if known", "rapport"),
+        ("R-2", "aww that's so sweet haha. so where are you from?", "React to his answer naturally", "rapport"),
+        ("R-3", "niceee! I'm in Dallas right now, originally from Brazil. I miss the beaches but I love it here too", "If he named somewhere Chayla visited, add 'wait I've been there!' or 'omg I love that place'", "rapport"),
+        ("R-4", "so tell me about you, what do you like to do? I wanna know everything", None, "rapport"),
         ("R-5", "okay wow I really like you already. you have this vibe that just makes me feel so comfortable, I love it 💕", "Ego boost. Transition to teasing.", "rapport"),
 
         # ── Teasing Bridge (TB-1 to TB-5) ──
         ("TB-1", "okay so I need to be honest... I just got back from the gym and I'm lying in bed and this convo is giving me butterflies 🔥", "THE PIVOT. Physical state. Post-gym, lying in bed.", "teasing"),
         ("TB-2", "like I don't know what it is about you but you're making me feel some type of way right now 😏", "Wait for reply.", "teasing"),
-        ("TB-3", "ugh stop I'm literally blushing and I never blush. you're dangerous 💕", None, "teasing"),
+        ("TB-3", "ugh stop I'm literally blushing and I never blush. you're dangerous", None, "teasing"),
         ("TB-4", "hold on let me show you something real quick", "WAIT 1-2 MIN. Build anticipation.", "wait"),
         ("TB-5", "okay be honest with me... what do you think? 🔥", "SEND PPV 0 — FREE teaser (cute/approachable selfie, post-gym vibe). Wait for reply. Silent 3 min → NR Waves.", "ppv"),
 
         # ── Sexting Phase 1 → PPV 1 ($12) ──
-        ("S1-1", "sooo? 😏", "Wait for reply.", "sext"),
-        ("S1-2", "haha I knew you'd like that. you have good taste babe 💕", "React to compliment.", "sext"),
+        ("S1-1", "sooo?", "Wait for reply.", "sext"),
+        ("S1-2", "haha I knew you'd like that. you have good taste babe", "React to compliment.", "sext"),
         ("S1-3", "I'm feeling really wild right now... wanna see what happens when I let go? 🔥", None, "sext"),
         ("S1-4", "give me a sec", "WAIT 2-3 MIN", "wait"),
         ("S1-5", "I seriously never do this but there's something about you that makes me want to 😏", "SEND PPV 1 — $12. Bought → continue. Silent → NR Waves. 'I never do this' — ONE TIME per journey.", "ppv"),
 
         # ── Sexting Phase 2 → PPV 2 ($25) ──
-        ("S1-6", "did you watch it? 🔥", "Wait for reply.", "sext"),
-        ("S1-7", "okay you're actually doing things to me right now and it's 100% your fault 💕", "React to what he said. HE caused this.", "sext"),
+        ("S1-6", "did you watch it?", "Wait for reply.", "sext"),
+        ("S1-7", "okay you're actually doing things to me right now and it's 100% your fault", "React to what he said. HE caused this.", "sext"),
         ("S1-8", "I'm so turned on right now I can barely think straight, my body is reacting to everything you say", None, "sext"),
-        ("S1-9", "tell me what you want me to do right now... I'll do anything you say 😏", "Wait for reply. React to what he says.", "sext"),
+        ("S1-9", "tell me what you want me to do right now papi... I'll do anything you say 😏", "Wait for reply. React to what he says.", "sext"),
         ("S1-10", "fuck okay hold on", "WAIT 2-3 MIN", "wait"),
         ("S1-11", "look what you made me do 🔥", "SEND PPV 2 — $25. Bought → continue. Silent → NR Waves.", "ppv"),
 
         # ── Sexting Phase 3 → PPV 3 ($40) ──
-        ("S1-12", "omg 🔥", "Wait for reply. NO cooldown — keep momentum.", "sext"),
+        ("S1-12", "omg", "Wait for reply. NO cooldown — keep momentum.", "sext"),
         ("S1-13", "I need to cum so bad right now you have no idea", None, "sext"),
         ("S1-14", "I keep imagining you here with me and it's making everything so much more intense", None, "sext"),
         ("S1-15", "I can't hold back anymore", None, "sext"),
-        ("S1-16", "give me a sec 😏", "WAIT 2-3 MIN", "wait"),
+        ("S1-16", "give me a sec", "WAIT 2-3 MIN", "wait"),
         ("S1-17", "this is the craziest thing I've ever done for someone online... watch 🔥", "SEND PPV 3 — $40. Bought → continue. Silent → NR Waves.", "ppv"),
 
         # ── Sexting Phase 4 → PPV 4 ($55) ──
         ("S1-18", "oh my god", "Wait for reply.", "sext"),
         ("S1-19", "don't cum yet I swear 😏", None, "sext"),
-        ("S1-20", "I wanna finish with you... I'm so close right now", None, "sext"),
+        ("S1-20", "I wanna finish with you papi... I'm so close right now", None, "sext"),
         ("S1-21", "hold on", "WAIT 1-2 MIN", "wait"),
         ("S1-22", "cum with me 🔥", "SEND PPV 4 — $55. Bought → Aftercare. Silent → NR Waves.", "ppv"),
 
@@ -90,11 +90,11 @@ config = {
     # NR WAVES
     # ═══════════════════════════════════════
     "nr_waves": [
-        ("NR-W1", "heyy? 😏", "Send 2-3 min after PPV.", "sext"),
-        ("NR-W2", "you really need to see what I just did for you... trust me it's worth it 🔥", "3-5 min later. Curiosity.", "sext"),
-        ("NR-W3", "okay I guess you're busy... I might delete this later, it was only for you 😏", "5-10 min later. Takeaway.", "sext"),
-        ("NR-W4", "hey hope you're good babe, text me when you're back 💕", "15-30 min later. Warm close.", "sext"),
-        ("NR-W5", "can't stop thinking about earlier... you around? 🔥", "2-6 hrs later. New topic if re-engage.", "sext"),
+        ("NR-W1", "yo 😏", "Send 2-3 min after PPV.", "sext"),
+        ("NR-W2", "you're really going to miss out on what I just recorded... 🔥", "3-5 min later. Curiosity.", "sext"),
+        ("NR-W3", "your loss... this was your exclusive", "5-10 min later. Takeaway.", "sext"),
+        ("NR-W4", "hey babe, don't be a stranger 💕", "15-30 min later. Warm close.", "sext"),
+        ("NR-W5", "I've got something that's going to blow your mind when you get back 🔥", "2-6 hrs later. New topic if re-engage.", "sext"),
     ],
 
     # ═══════════════════════════════════════
@@ -317,7 +317,7 @@ config = {
             ("h1", "fuckkk 🔥", "MID-SEXTING BOOSTER."),
             ("h2", "I'm so wet right now because of you 😏", "BOOSTER. Ego."),
             ("h3", "don't stop", "BOOSTER. Micro."),
-            ("h4", "you have no idea what you're doing to me right now", "BOOSTER."),
+            ("h4", "you have no idea what you're doing to me", "BOOSTER."),
             ("h5", "I literally can't think straight right now 🔥", "BOOSTER."),
             ("h6", "meu deus my whole body is on fire 💕", "BOOSTER. Physical + Portuguese flavor."),
             ("h7", "more...", "BOOSTER. Ultra micro."),

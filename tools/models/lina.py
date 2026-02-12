@@ -89,10 +89,10 @@ config = {
     # ═══════════════════════════════════════
     "nr_waves": [
         ("NR-W1", "hey? 💕", "Send 2-3 min after PPV.", "sext"),
-        ("NR-W2", "you really need to see what I just did for you... I promise it's worth it ✨", "3-5 min later. Curiosity.", "sext"),
-        ("NR-W3", "I guess you're busy... might take this down, it was only for you 🎶", "5-10 min later. Takeaway.", "sext"),
-        ("NR-W4", "hey hope you're okay, text me when you're back 💕", "15-30 min later. Warm close.", "sext"),
-        ("NR-W5", "can't stop thinking about earlier... are you around? ✨", "2-6 hrs later. New topic, don't retry same PPV.", "sext"),
+        ("NR-W2", "you seriously need to see what I just did... ✨", "3-5 min later. Curiosity.", "sext"),
+        ("NR-W3", "okay I guess you're busy... might delete this later, it was only for you 🎶", "5-10 min later. Takeaway.", "sext"),
+        ("NR-W4", "hey hope you're good, text me when you're back 💕", "15-30 min later. Warm close.", "sext"),
+        ("NR-W5", "can't stop thinking about earlier... you around? ✨", "2-6 hrs later. New topic, don't retry same PPV.", "sext"),
     ],
 
     # ═══════════════════════════════════════
@@ -314,11 +314,11 @@ config = {
         "boosters": ([
             ("h1", "oh my god ✨", "MID-SEXTING BOOSTER."),
             ("h2", "I'm so wet right now because of you 💕", "BOOSTER. Ego."),
-            ("h3", "don't stop", "BOOSTER. Micro."),
-            ("h4", "you have no idea what you're doing to me right now 🎶", "BOOSTER."),
+            ("h3", "yes", "BOOSTER. Micro."),
+            ("h4", "you're driving me crazy right now", "BOOSTER."),
             ("h5", "I've never felt this intensity before ✨", "BOOSTER. Adventurous angle."),
             ("h6", "my whole body is on fire 💕", "BOOSTER. Physical."),
-            ("h7", "more...", "BOOSTER. Ultra micro."),
+            ("h7", "don't stop...", "BOOSTER. Ultra micro."),
             ("h8", "I should be practicing my vocals but the only sound I can think about is your name 🎶", "BOOSTER. Lina personality — singer."),
         ], "sit"),
     },

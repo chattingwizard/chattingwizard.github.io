@@ -56,7 +56,7 @@ config = {
         ("S1-2", "really? you like it? oh my god that makes me feel so much braver 🫶", "React to compliment. Shy but pleased.", "sext"),
         ("S1-3", "you make me want to show you more of the side of me that nobody gets to see", None, "sext"),
         ("S1-4", "give me a second... I need to work up the courage 😊", "WAIT 2-3 MIN", "wait"),
-        ("S1-5", "I can't believe I'm doing this... but something about you makes me feel safe", "SEND PPV 1 — $12. Lingerie tease. Bought → continue. Silent → NR Waves.", "ppv"),
+        ("S1-5", "my heart won't stop racing... but something about you makes me feel safe", "SEND PPV 1 — $12. Lingerie tease. Bought → continue. Silent → NR Waves.", "ppv"),
 
         # ── Sexting Phase 2 → PPV 2 ($25) — More revealing lingerie ──
         ("S1-6", "did you see it? 😳", "Wait for reply.", "sext"),
@@ -64,7 +64,7 @@ config = {
         ("S1-8", "I keep thinking about what it would feel like if you were here with me right now", "Suggestive NOT explicit. Let his imagination work.", "sext"),
         ("S1-9", "what would you want me to do...?", "Wait for reply. React to what he says. Stay suggestive, NOT explicit.", "sext"),
         ("S1-10", "hold on... I need to show you something", "WAIT 2-3 MIN", "wait"),
-        ("S1-11", "I've never been this brave for anyone before... you're the reason I'm doing this 💗", "SEND PPV 2 — $25. More revealing lingerie/implied tease. Bought → continue. Silent → NR Waves.", "ppv"),
+        ("S1-11", "you're the only one who makes me feel this way... you're the reason I'm doing this 💗", "SEND PPV 2 — $25. More revealing lingerie/implied tease. Bought → continue. Silent → NR Waves.", "ppv"),
 
         # ── Sexting Phase 3 → PPV 3 ($40) — Maximum tease, almost showing ──
         ("S1-12", "oh my god", "Wait for reply. Keep momentum.", "sext"),
@@ -72,14 +72,14 @@ config = {
         ("S1-14", "I'm lying here barely wearing anything and all I can think about is you... just you", "Suggestive, NOT explicit. Let his imagination fill in the rest.", "sext"),
         ("S1-15", "I want to show you how I look right now but I'm scared it's too much", None, "sext"),
         ("S1-16", "okay give me a minute", "WAIT 2-3 MIN", "wait"),
-        ("S1-17", "nobody has ever seen me like this... you're the only one I trust enough 💗", "SEND PPV 3 — $40. Most revealing yet (sheer/see-through, touching over fabric). Bought → continue. Silent → NR Waves.", "ppv"),
+        ("S1-17", "I feel so safe with you... you're the only one I trust enough to see me like this 💗", "SEND PPV 3 — $40. Most revealing yet (sheer/see-through, touching over fabric). Bought → continue. Silent → NR Waves.", "ppv"),
 
         # ── Sexting Phase 4 → PPV 4 ($55) — Peak tease ──
         ("S1-18", "oh god 🥺", "Wait for reply.", "sext"),
-        ("S1-19", "I can't stop... you make me feel things I've never felt before in my life", None, "sext"),
+        ("S1-19", "I can't stop... something about you makes me lose all my boundaries", None, "sext"),
         ("S1-20", "I want to finish this with you... stay with me please", None, "sext"),
         ("S1-21", "hold on... one more", "WAIT 1-2 MIN", "wait"),
-        ("S1-22", "this is the most I've ever shown anyone... it's all for you 💗", "SEND PPV 4 — $55. Peak content (most suggestive, implied). Bought → Aftercare. Silent → NR Waves.", "ppv"),
+        ("S1-22", "this one is only for you... nobody else gets to see me like this 💗", "SEND PPV 4 — $55. Peak content (most suggestive, implied). Bought → Aftercare. Silent → NR Waves.", "ppv"),
 
         # ── Aftercare ──
         ("AC-1", "wow... that was... I don't even have words 😊", None, "aftercare"),
@@ -90,11 +90,11 @@ config = {
     # NR WAVES
     # ═══════════════════════════════════════
     "nr_waves": [
-        ("NR-W1", "hey...? 😊", "Send 2-3 min after PPV.", "sext"),
-        ("NR-W2", "you need to see what I just did for you... I promise it's worth it 🥺", "3-5 min later. Curiosity.", "sext"),
-        ("NR-W3", "okay I guess you're busy... I might delete this honestly, it was only for you", "5-10 min later. Takeaway.", "sext"),
-        ("NR-W4", "hey I hope everything is okay 😊 come back when you can", "15-30 min later. Warm close.", "sext"),
-        ("NR-W5", "I can't stop thinking about what happened earlier... are you around? 💗", "2-6 hrs later. New topic if re-engage.", "sext"),
+        ("NR-W1", "hi 😊", "Send 2-3 min after PPV.", "sext"),
+        ("NR-W2", "I wish you could see what I'm wearing right now... 🥺", "3-5 min later. Curiosity.", "sext"),
+        ("NR-W3", "okay you're definitely busy... I'll save this for when you're back", "5-10 min later. Takeaway.", "sext"),
+        ("NR-W4", "hope everything's okay with you, I'm here whenever 😊", "15-30 min later. Warm close.", "sext"),
+        ("NR-W5", "been thinking about you all day... text me back? 💗", "2-6 hrs later. New topic if re-engage.", "sext"),
     ],
 
     # ═══════════════════════════════════════
@@ -132,7 +132,7 @@ config = {
     # ═══════════════════════════════════════
     "re_engagement": [
         ("RE-1", "hey... I've been thinking about you. are you free? 😊", "Send 6-12 hrs after convo goes quiet.", "sext"),
-        ("RE-2", "so I did something I've never done before and you're the only person I want to show... when you're ready 💗", "Next day. Seeds next session.", "sext"),
+        ("RE-2", "so I did something really special and you're the only person I want to show... when you're ready 💗", "Next day. Seeds next session.", "sext"),
     ],
 
     # ═══════════════════════════════════════
@@ -298,12 +298,12 @@ config = {
 
         # ── SITUATIONAL ──
         "cumcontrol": ([
-            ("edge1", "not yet... I'm not done with you 😊", "EDGE. More PPVs left."),
-            ("edge2", "hold on, not yet... stay with me a little longer please 💗", "EDGE variant."),
-            ("sync1", "I'm almost there too, stay with me... but you need to see this first 🥺", "SYNC. Final PPV."),
-            ("sync2", "wait for me, let's finish this together... open this first 💗", "SYNC variant."),
-            ("delay1", "hold on... wait until you see what I'm about to send, trust me it's worth the wait 😊", "DELAY."),
-            ("delay2", "don't finish before you see this 💗 trust me you want to wait", "DELAY variant."),
+            ("tease1", "not yet... I want to build this up more first 🥺", "TEASE. More PPVs left. She controls the pace of revealing."),
+            ("tease2", "don't rush... I want you to enjoy every single moment of this 💗", "TEASE variant."),
+            ("buildup1", "you want to see more...? then you have to wait for it", "BUILDUP. Final PPV."),
+            ("buildup2", "I'm taking my time... good things come to those who wait 😊", "BUILDUP variant."),
+            ("reveal1", "hold on... the next one is worth the wait, I promise 🥺", "REVEAL. Send next PPV."),
+            ("reveal2", "patience... I'm not showing you everything at once 😳 the best part is still coming", "REVEAL variant."),
         ], "sit"),
         "dickpic": ([
             ("dpsext1", "oh wow... okay that's... you have no idea what that just made me feel 🥺", "DURING SEXTING."),
@@ -316,11 +316,11 @@ config = {
         "boosters": ([
             ("h1", "oh my god", "MID-SEXTING BOOSTER."),
             ("h2", "my heart is racing so fast right now because of you 💗", "BOOSTER. Ego. NON-EXPLICIT: use heart/body feelings, not sexual."),
-            ("h3", "don't stop", "BOOSTER. Micro."),
-            ("h4", "you have no idea what you're doing to me right now", "BOOSTER."),
+            ("h3", "right there", "BOOSTER. Micro."),
+            ("h4", "what are you doing to me", "BOOSTER."),
             ("h5", "I literally can't think about anything else 🥺", "BOOSTER."),
             ("h6", "my whole body is tingling", "BOOSTER. Physical."),
-            ("h7", "more...", "BOOSTER. Ultra micro."),
+            ("h7", "please...", "BOOSTER. Ultra micro."),
             ("h8", "if my parents knew what I was doing right now... but I don't care because you make me feel alive 😊", "BOOSTER. Irina personality — strict Russian family context."),
         ], "sit"),
     },

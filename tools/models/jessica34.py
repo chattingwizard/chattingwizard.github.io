@@ -87,11 +87,11 @@ config = {
     # NR WAVES
     # ═══════════════════════════════════════
     "nr_waves": [
-        ("NR-W1", "hey? 😊", "Send 2-3 min after PPV.", "sext"),
-        ("NR-W2", "you need to see what I just did... you're gonna love it", "3-5 min later.", "sext"),
-        ("NR-W3", "okay I guess you're busy... might delete this honestly it was only for you", "5-10 min later. Takeaway.", "sext"),
-        ("NR-W4", "hey hope everything is okay 😊 come back when you can", "15-30 min later.", "sext"),
-        ("NR-W5", "can't stop thinking about earlier... are you around?", "2-6 hrs later. New topic if re-engage.", "sext"),
+        ("NR-W1", "hey you 😊", "Send 2-3 min after PPV.", "sext"),
+        ("NR-W2", "literally just took something crazy and you're not even here to see it", "3-5 min later.", "sext"),
+        ("NR-W3", "I'm starting to think you forgot about me...", "5-10 min later. Takeaway.", "sext"),
+        ("NR-W4", "hey, just checking in on you 😊", "15-30 min later.", "sext"),
+        ("NR-W5", "still thinking about our conversation... come back when you can", "2-6 hrs later. New topic if re-engage.", "sext"),
     ],
 
     # ═══════════════════════════════════════
@@ -277,12 +277,12 @@ config = {
             ("Step3 Seed", "next time you HAVE to hold on because what I have planned is on another level", "SEED."),
         ], "res"),
         "cumcontrol": ([
-            ("edge1", "not yet... I'm not done with you 😊", "EDGE. More PPVs left."),
-            ("edge2", "hold on, not yet... I need you to stay with me a little longer", "EDGE variant."),
-            ("sync1", "I'm almost there too, stay with me... but you need to see this first", "SYNC. Final PPV."),
-            ("sync2", "wait for me, let's finish this together... open this first", "SYNC variant."),
-            ("delay1", "hold on... wait until you see what I'm about to send, trust me it's worth the wait", "DELAY."),
-            ("delay2", "don't you dare finish before you see this 😊 trust me you want to wait", "DELAY variant."),
+            ("tease1", "not yet babe... I want to build this up more first 😊", "TEASE. More PPVs left. She controls the pace of revealing."),
+            ("tease2", "don't rush... I want you to enjoy every single moment of this", "TEASE variant."),
+            ("buildup1", "you want to see more? then you have to wait for it... 😊", "BUILDUP. Final PPV."),
+            ("buildup2", "I'm taking my time... good things come to those who wait babe", "BUILDUP variant."),
+            ("reveal1", "hold on... the next one is worth waiting for, trust me", "REVEAL. Send next PPV."),
+            ("reveal2", "patience babe... I'm not showing you everything at once 😊 the best part is coming", "REVEAL variant."),
         ], "sit"),
         "dickpic": ([
             ("dpsext1", "oh wow... okay that's really hot. you have no idea what that just did to me", "DURING SEXTING."),
@@ -295,11 +295,11 @@ config = {
         "boosters": ([
             ("h1", "oh my god", "MID-SEXTING BOOSTER."),
             ("h2", "I'm so turned on right now because of you", "BOOSTER. Ego."),
-            ("h3", "don't stop", "BOOSTER. Micro."),
-            ("h4", "you have no idea what you're doing to me", "BOOSTER."),
+            ("h3", "oh my god", "BOOSTER. Micro."),
+            ("h4", "I'm losing my mind because of you", "BOOSTER."),
             ("h5", "I literally can't think straight right now", "BOOSTER."),
             ("h6", "my heart is racing", "BOOSTER. Physical."),
-            ("h7", "more...", "BOOSTER. Ultra micro."),
+            ("h7", "I need more", "BOOSTER. Ultra micro."),
             ("h8", "I should be working but I can't focus on anything except you right now", "BOOSTER. Jessica personality."),
         ], "sit"),
     },

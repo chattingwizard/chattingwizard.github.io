@@ -358,7 +358,9 @@ class ModelFactory:
             if need_new:
                 if cat == "sext":
                     sext_count += 1
-                    meta = ("Sexting Phase %d" % sext_count, "#f85149", "\U0001f525")
+                    # Non-explicit models use "Intimate Phase" instead of "Sexting Phase"
+                    phase_label = "Intimate Phase" if self.c.get("explicit_level") in ("non_explicit", "soft") else "Sexting Phase"
+                    meta = ("%s %d" % (phase_label, sext_count), "#f85149", "\U0001f525")
                 else:
                     meta = PHASE_META.get(cat, (cat.title(), "#8b949e", "\U0001f4ac"))
                 current = {
@@ -387,6 +389,7 @@ class ModelFactory:
             tcls = ' class="toc-ppv"' if phase["cat"] == "sext" else ''
             toc_links.append('<a href="#%s"%s>%s %s</a>' % (pid, tcls, phase["emoji"], h(phase["name"])))
             msg_count = sum(1 for m in phase["msgs"] if m[3] != "ppv")
+            ppv_count = sum(1 for m in phase["msgs"] if m[3] == "ppv")
             rows = []
             for mid, txt, note, mtype in phase["msgs"]:
                 et = h(txt)
@@ -404,17 +407,26 @@ class ModelFactory:
                         '<span class="cp-icon">\U0001f4cb</span></button></div>'
                         % (wcls, h(mid), et, note_h, et))
             collapsed = ' collapsed' if i > 0 else ''
+            # Build smart meta label: "X msgs" or "PPV" or "X msgs + PPV"
+            if msg_count > 0 and ppv_count > 0:
+                meta_label = "%d msgs + %d PPV" % (msg_count, ppv_count)
+            elif msg_count > 0:
+                meta_label = "%d msgs" % msg_count
+            elif ppv_count > 0:
+                meta_label = "%d PPV" % ppv_count
+            else:
+                meta_label = "0 msgs"
             journey_parts.append(
                 '<div class="phase%s" id="%s" style="--phase-color:%s">\n'
                 '  <div class="phase-header">\n'
                 '    <span class="phase-emoji">%s</span>\n'
                 '    <span class="phase-name">%s</span>\n'
-                '    <span class="phase-meta">%d msgs</span>\n'
+                '    <span class="phase-meta">%s</span>\n'
                 '    <span class="toggle">\u25bc</span>\n'
                 '  </div>\n'
                 '  <div class="phase-body">\n%s\n  </div>\n</div>'
                 % (collapsed, pid, phase["color"], phase["emoji"],
-                   h(phase["name"]), msg_count, '\n'.join(rows)))
+                   h(phase["name"]), meta_label, '\n'.join(rows)))
 
         # \u2500\u2500 NR Waves \u2500\u2500
         nr_html = ''
@@ -718,7 +730,43 @@ class ModelFactory:
             '      <div class="profile-grid">%s</div>\n'
             '    </div>\n' % profile_grid
             + voice_html
-            + '  </div>\n  <div></div>\n</div>\n\n'
+            + '  </div>\n')
+        # Right column: special notes, key phrases, explicit level
+        right_content = ''
+        if c.get('special_notes') or c.get('key_phrases') or c.get('explicit_level'):
+            right_parts = []
+            if c.get('explicit_level'):
+                level_map = {'full': ('Full Explicit', 'var(--red)'),
+                             'non_explicit': ('Non-Explicit (Lingerie/Tease)', 'var(--orange)'),
+                             'soft': ('Soft (No Hardcore)', 'var(--yellow)')}
+                lbl, clr = level_map.get(c['explicit_level'], (c['explicit_level'], 'var(--muted)'))
+                right_parts.append(
+                    '<div class="content-level" style="background:%s12;border:1px solid %s33;'
+                    'padding:8px 14px;border-radius:8px;margin-bottom:10px;font-size:.84rem">'
+                    '<strong style="color:%s">Content Level:</strong> %s</div>'
+                    % (clr, clr, clr, h(lbl)))
+            if c.get('special_notes'):
+                right_parts.append(
+                    '<div style="background:#e3b34112;border-left:3px solid var(--yellow);'
+                    'padding:10px 14px;border-radius:0 8px 8px 0;margin-bottom:10px;'
+                    'font-size:.84rem;color:var(--yellow)"><strong>Notes:</strong> %s</div>'
+                    % h(c['special_notes']))
+            if c.get('key_phrases'):
+                phrases = ''.join('<span style="background:var(--card);border:1px solid var(--border);'
+                                  'padding:3px 8px;border-radius:6px;font-size:.8rem;display:inline-block;'
+                                  'margin:2px 3px">%s</span>' % h(p) for p in c['key_phrases'][:8])
+                right_parts.append(
+                    '<div style="margin-top:4px"><strong style="font-size:.78rem;color:var(--muted);'
+                    'text-transform:uppercase;letter-spacing:.5px">Key Phrases:</strong><div style="'
+                    'margin-top:6px;line-height:2">%s</div></div>' % phrases)
+            right_content = (
+                '  <div>\n    <div class="profile" style="border-color:var(--border)">\n'
+                '      <h2>Quick Reference</h2>\n      %s\n    </div>\n  </div>\n'
+                % '\n      '.join(right_parts))
+        else:
+            right_content = '  <div></div>\n'
+        page += right_content + '</div>\n\n'
+        page += (
             '<a href="objections.html" class="obj-link">\n'
             '  <span style="font-size:1.4rem">\U0001f6e1\ufe0f</span>\n'
             '  <div style="flex:1">\n'

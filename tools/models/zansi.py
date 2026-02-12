@@ -62,21 +62,21 @@ config = {
         ("S1-6", "did you watch it? 😏", "Wait for reply.", "sext"),
         ("S1-7", "talking to you has me feeling some type of way rn... like my whole body is reacting", "HE caused this feeling.", "sext"),
         ("S1-8", "I'm lying here imagining your hands all over me and I literally cannot sit still", None, "sext"),
-        ("S1-9", "what would you do if you had me right now?", "Wait for reply. React to what he says.", "sext"),
+        ("S1-9", "what would you do if you had me right now daddy?", "Wait for reply. React to what he says.", "sext"),
         ("S1-10", "hold on... I need to show you what you're doing to me", "WAIT 2-3 MIN", "wait"),
         ("S1-11", "look what you did 😏", "SEND PPV 2 — $25. Bought → continue. Silent → NR Waves.", "ppv"),
 
         # ── Sexting Phase 3 → PPV 3 ($40) ──
         ("S1-12", "fuckk", "Wait for reply. NO cooldown — keep momentum.", "sext"),
         ("S1-13", "I need you so bad rn it's embarrassing", None, "sext"),
-        ("S1-14", "imagine me on top of you, taking exactly what I want while you just watch", None, "sext"),
+        ("S1-14", "imagine me on top of you daddy, taking exactly what I want while you just watch", None, "sext"),
         ("S1-15", "I can't hold back anymore", None, "sext"),
         ("S1-16", "wait", "WAIT 2-3 MIN", "wait"),
         ("S1-17", "every inch of this is yours 😏", "SEND PPV 3 — $40. Bought → continue. Silent → NR Waves.", "ppv"),
 
         # ── Sexting Phase 4 → PPV 4 ($55) ──
         ("S1-18", "oh my god", "Wait for reply.", "sext"),
-        ("S1-19", "not yet... I'm not done with you", None, "sext"),
+        ("S1-19", "not yet daddy... I'm not done with you", None, "sext"),
         ("S1-20", "I wanna finish with you... stay right here", None, "sext"),
         ("S1-21", "one more sec", "WAIT 1-2 MIN", "wait"),
         ("S1-22", "finish with me 😏", "SEND PPV 4 — $55. Bought → Aftercare. Silent → NR Waves.", "ppv"),
@@ -90,11 +90,11 @@ config = {
     # NR WAVES — 5
     # ═══════════════════════════════════════
     "nr_waves": [
-        ("NR-W1", "hello? 😏", "Send 2-3 min after PPV.", "sext"),
-        ("NR-W2", "you really need to see what I just did... trust me it's worth it", "3-5 min later. Curiosity.", "sext"),
-        ("NR-W3", "okay I guess you're busy... might delete this, it was only meant for you", "5-10 min later. Takeaway.", "sext"),
-        ("NR-W4", "hey hope you're good, text me when you're back 💕", "15-30 min later. Warm close.", "sext"),
-        ("NR-W5", "can't stop thinking about what we did... you around? 😏", "2-6 hrs later. New topic if re-engage.", "sext"),
+        ("NR-W1", "yo 😏", "Send 2-3 min after PPV.", "sext"),
+        ("NR-W2", "you're really going to miss out on what I just recorded...", "3-5 min later. Curiosity.", "sext"),
+        ("NR-W3", "your loss... this was your exclusive", "5-10 min later. Takeaway.", "sext"),
+        ("NR-W4", "hey, don't be a stranger 💕", "15-30 min later. Warm close.", "sext"),
+        ("NR-W5", "I've got something that's going to blow your mind when you get back 😏", "2-6 hrs later. New topic if re-engage.", "sext"),
     ],
 
     # ═══════════════════════════════════════
@@ -316,11 +316,11 @@ config = {
         "boosters": ([
             ("h1", "fuckk", "MID-SEXTING BOOSTER."),
             ("h2", "I'm so wet rn because of you 😏", "BOOSTER. Ego."),
-            ("h3", "don't stop", "BOOSTER. Micro."),
-            ("h4", "you have no idea what you're doing to me right now", "BOOSTER."),
+            ("h3", "yes", "BOOSTER. Micro."),
+            ("h4", "you're driving me crazy right now", "BOOSTER."),
             ("h5", "I literally can't think about anything else", "BOOSTER."),
             ("h6", "my whole body is on fire 😏", "BOOSTER. Physical."),
-            ("h7", "more...", "BOOSTER. Ultra micro."),
+            ("h7", "don't stop...", "BOOSTER. Ultra micro."),
             ("h8", "I should be at the gym but the only workout I want rn involves you 😏", "BOOSTER. Zansi personality."),
         ], "sit"),
     },

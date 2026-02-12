@@ -88,11 +88,11 @@ config = {
     # NR WAVES
     # ═══════════════════════════════════════
     "nr_waves": [
-        ("NR-W1", "hey? 🌸", "Send 2-3 min after PPV.", "sext"),
-        ("NR-W2", "you really need to see what I just did for you... I promise it's worth it 💕", "3-5 min later. Curiosity.", "sext"),
-        ("NR-W3", "I guess you're busy... I might take this down, it was only meant for you 🌸", "5-10 min later. Takeaway.", "sext"),
-        ("NR-W4", "hey hope you're okay, text me when you're back 💕", "15-30 min later. Warm close.", "sext"),
-        ("NR-W5", "I can't stop thinking about earlier... are you around? 🌸", "2-6 hrs later. New topic, don't retry same PPV.", "sext"),
+        ("NR-W1", "helloooo 🌸", "Send 2-3 min after PPV.", "sext"),
+        ("NR-W2", "I have something to show you but you're leaving me on read... 💕", "3-5 min later. Curiosity.", "sext"),
+        ("NR-W3", "fine I'll just keep this to myself then 😏", "5-10 min later. Takeaway.", "sext"),
+        ("NR-W4", "miss talking to you, where'd you go? 💕", "15-30 min later. Warm close.", "sext"),
+        ("NR-W5", "I made something special and you're the only one I want to show it to 🌸", "2-6 hrs later. New topic, don't retry same PPV.", "sext"),
     ],
 
     # ═══════════════════════════════════════
@@ -314,11 +314,11 @@ config = {
         "boosters": ([
             ("h1", "oh my god 🌸", "MID-SEXTING BOOSTER."),
             ("h2", "I'm so wet right now because of you 💕", "BOOSTER. Ego."),
-            ("h3", "don't stop", "BOOSTER. Micro."),
-            ("h4", "you have no idea what you're doing to me right now 🌸", "BOOSTER."),
+            ("h3", "keep going", "BOOSTER. Micro."),
+            ("h4", "I literally can't handle this right now", "BOOSTER."),
             ("h5", "I've never felt anything like this before 😊", "BOOSTER. Shy angle."),
             ("h6", "my whole body is trembling 💕", "BOOSTER. Physical."),
-            ("h7", "more...", "BOOSTER. Ultra micro."),
+            ("h7", "again...", "BOOSTER. Ultra micro."),
             ("h8", "I should be painting right now but the only thing I can picture is you 🌸", "BOOSTER. Lia personality — artistic student."),
         ], "sit"),
     },

@@ -88,10 +88,10 @@ config = {
     # ═══════════════════════════════════════
     "nr_waves": [
         ("NR-W1", "hey? 😏", "Send 2-3 min after PPV.", "sext"),
-        ("NR-W2", "you need to see what I just did... seriously", "3-5 min later.", "sext"),
-        ("NR-W3", "okay I guess you're busy. might delete this, it was only for you", "5-10 min later. Takeaway.", "sext"),
-        ("NR-W4", "hey hope you're good. come back when you can 😊", "15-30 min later.", "sext"),
-        ("NR-W5", "can't stop thinking about earlier. you around?", "2-6 hrs later.", "sext"),
+        ("NR-W2", "you seriously need to see what I just did...", "3-5 min later.", "sext"),
+        ("NR-W3", "okay I guess you're busy... might delete this later, it was only for you", "5-10 min later. Takeaway.", "sext"),
+        ("NR-W4", "hey hope you're good, text me when you're back 😊", "15-30 min later.", "sext"),
+        ("NR-W5", "can't stop thinking about earlier... you around?", "2-6 hrs later.", "sext"),
     ],
 
     # ═══════════════════════════════════════
@@ -296,11 +296,11 @@ config = {
         "boosters": ([
             ("h1", "fuck", "BOOSTER."),
             ("h2", "I'm so wet right now because of you", "BOOSTER. Ego."),
-            ("h3", "don't stop", "BOOSTER. Micro."),
-            ("h4", "you have no idea what you're doing to me", "BOOSTER."),
+            ("h3", "keep going", "BOOSTER. Micro."),
+            ("h4", "I literally can't handle this right now", "BOOSTER."),
             ("h5", "I can't think straight right now", "BOOSTER."),
             ("h6", "my legs are shaking", "BOOSTER. Physical."),
-            ("h7", "more...", "BOOSTER. Ultra micro."),
+            ("h7", "again...", "BOOSTER. Ultra micro."),
             ("h8", "I should be at the gym but I literally can't move right now", "BOOSTER. Jessica personality."),
         ], "sit"),
     },

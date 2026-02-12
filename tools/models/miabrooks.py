@@ -89,11 +89,11 @@ config = {
     # NR WAVES
     # ═══════════════════════════════════════
     "nr_waves": [
-        ("NR-W1", "hey? 🥺", "Send 2-3 min after PPV. Ping.", "sext"),
-        ("NR-W2", "you really need to see what I just did for you... trust me 💋", "Send 3-5 min later. Curiosity.", "sext"),
-        ("NR-W3", "I guess you're busy. I might delete this later, it was only meant for you 💼", "Send 5-10 min later. Takeaway.", "sext"),
-        ("NR-W4", "hey hope you're doing well handsome, text me when you're back 💋", "Send 15-30 min later. Warm close.", "sext"),
-        ("NR-W5", "can't stop thinking about earlier. you around? 😏", "Send 2-6 hrs later. New convo, don't retry same PPV.", "sext"),
+        ("NR-W1", "hey you 🥺", "Send 2-3 min after PPV. Ping.", "sext"),
+        ("NR-W2", "literally just took something crazy and you're not even here to see it 💋", "Send 3-5 min later. Curiosity.", "sext"),
+        ("NR-W3", "I'm starting to think you forgot about me...", "Send 5-10 min later. Takeaway.", "sext"),
+        ("NR-W4", "hey handsome, just checking in on you 💋", "Send 15-30 min later. Warm close.", "sext"),
+        ("NR-W5", "still thinking about our conversation... come back when you can 😏", "Send 2-6 hrs later. New convo, don't retry same PPV.", "sext"),
     ],
 
     # ═══════════════════════════════════════
@@ -315,11 +315,11 @@ config = {
         "boosters": ([
             ("h1", "fuck 😩", "MID-SEXTING BOOSTER."),
             ("h2", "I'm so wet right now because of you", "BOOSTER. Ego."),
-            ("h3", "don't stop", "BOOSTER. Micro."),
-            ("h4", "you have no idea what you're doing to me right now", "BOOSTER."),
+            ("h3", "keep going", "BOOSTER. Micro."),
+            ("h4", "I literally can't handle this right now", "BOOSTER."),
             ("h5", "I literally can't focus on anything else 🥺", "BOOSTER."),
             ("h6", "my hands are shaking", "BOOSTER. Physical."),
-            ("h7", "more...", "BOOSTER. Ultra micro."),
+            ("h7", "again...", "BOOSTER. Ultra micro."),
             ("h8", "my boss would never believe what his secretary is doing right now 💼", "BOOSTER. Mia Brooks personality — secretary reference."),
         ], "sit"),
     },

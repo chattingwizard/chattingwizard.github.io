@@ -93,11 +93,11 @@ config = {
     # NR WAVES
     # ═══════════════════════════════════════
     "nr_waves": [
-        ("NR-W1", "hey?", "Send 2-3 min after PPV. Ping.", "sext"),
-        ("NR-W2", "papi you seriously need to see what I just did", "Send 3-5 min later. Curiosity.", "sext"),
-        ("NR-W3", "okay guess you're busy. might delete this later, it was only for you", "Send 5-10 min later. Takeaway.", "sext"),
-        ("NR-W4", "hey hope you're good handsome, text me when you're back 💕", "Send 15-30 min later. Warm close.", "sext"),
-        ("NR-W5", "still thinking about earlier. you around?", "Send 2-6 hrs later. New convo, don't retry same PPV.", "sext"),
+        ("NR-W1", "hey you", "Send 2-3 min after PPV. Ping.", "sext"),
+        ("NR-W2", "literally just took something crazy and you're not even here to see it", "Send 3-5 min later. Curiosity.", "sext"),
+        ("NR-W3", "I'm starting to think you forgot about me...", "Send 5-10 min later. Takeaway.", "sext"),
+        ("NR-W4", "hey handsome, just checking in on you 💕", "Send 15-30 min later. Warm close.", "sext"),
+        ("NR-W5", "still thinking about our conversation... come back when you can", "Send 2-6 hrs later. New convo, don't retry same PPV.", "sext"),
     ],
 
     # ═══════════════════════════════════════
@@ -341,11 +341,11 @@ config = {
         "boosters": ([
             ("h1", "fuckkk", "MID-SEXTING BOOSTER."),
             ("h2", "I'm so wet right now because of you papi", "BOOSTER. Ego."),
-            ("h3", "don't stop", "BOOSTER. Micro."),
-            ("h4", "you have no idea what you're doing to me", "BOOSTER."),
+            ("h3", "oh my god", "BOOSTER. Micro."),
+            ("h4", "I'm losing my mind because of you", "BOOSTER."),
             ("h5", "dios mio I literally can't think straight right now", "BOOSTER. Dominican/Spanish flavor."),
             ("h6", "my legs are shaking", "BOOSTER. Physical."),
-            ("h7", "more...", "BOOSTER. Ultra micro."),
+            ("h7", "I need more", "BOOSTER. Ultra micro."),
             ("h8", "I should be studying but I can't focus on anything except you right now", "BOOSTER. Jasmine personality — business student callback."),
         ], "sit"),
     },

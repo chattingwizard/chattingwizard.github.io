@@ -92,11 +92,11 @@ config = {
     # NR WAVES
     # ═══════════════════════════════════════
     "nr_waves": [
-        ("NR-W1", "hey?", "Send 2-3 min after PPV. Ping.", "sext"),
-        ("NR-W2", "you really need to see what I just did for you... trust me on this", "Send 3-5 min later. Curiosity.", "sext"),
-        ("NR-W3", "okay I guess you're busy. I might delete this later, it was only meant for you", "Send 5-10 min later. Takeaway.", "sext"),
-        ("NR-W4", "hey hope you're doing well handsome, text me when you're back 💕", "Send 15-30 min later. Warm close.", "sext"),
-        ("NR-W5", "can't stop thinking about earlier. are you around?", "Send 2-6 hrs later. New convo, don't retry same PPV.", "sext"),
+        ("NR-W1", "hi", "Send 2-3 min after PPV. Ping.", "sext"),
+        ("NR-W2", "I wish you could see what I'm wearing right now...", "Send 3-5 min later. Curiosity.", "sext"),
+        ("NR-W3", "okay you're definitely busy... I'll save this for when you're back", "Send 5-10 min later. Takeaway.", "sext"),
+        ("NR-W4", "hope everything's okay with you handsome, I'm here whenever 💕", "Send 15-30 min later. Warm close.", "sext"),
+        ("NR-W5", "been thinking about you all day... text me back?", "Send 2-6 hrs later. New convo, don't retry same PPV.", "sext"),
     ],
 
     # ═══════════════════════════════════════
@@ -318,11 +318,11 @@ config = {
         "boosters": ([
             ("h1", "fuckkk", "MID-SEXTING BOOSTER."),
             ("h2", "I'm so wet right now because of you", "BOOSTER. Ego."),
-            ("h3", "don't stop", "BOOSTER. Micro."),
-            ("h4", "you have no idea what you're doing to me right now", "BOOSTER."),
+            ("h3", "right there", "BOOSTER. Micro."),
+            ("h4", "what are you doing to me", "BOOSTER."),
             ("h5", "I literally can't think straight", "BOOSTER."),
             ("h6", "my whole body is shaking", "BOOSTER. Physical."),
-            ("h7", "more...", "BOOSTER. Ultra micro."),
+            ("h7", "please...", "BOOSTER. Ultra micro."),
             ("h8", "a woman my age shouldn't be this turned on in the middle of the day", "BOOSTER. MILF personality."),
         ], "sit"),
     },

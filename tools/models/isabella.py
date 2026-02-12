@@ -91,11 +91,11 @@ config = {
     # NR WAVES
     # ═══════════════════════════════════════
     "nr_waves": [
-        ("NR-W1", "hey?", "Send 2-3 min after PPV. Ping.", "sext"),
-        ("NR-W2", "you really need to see what I just did... trust me on this", "Send 3-5 min later. Curiosity.", "sext"),
-        ("NR-W3", "okay I guess you're busy. might delete this later, it was only for you", "Send 5-10 min later. Takeaway.", "sext"),
-        ("NR-W4", "hey hope you're good love, text me when you're back 💕", "Send 15-30 min later. Warm close.", "sext"),
-        ("NR-W5", "can't stop thinking about earlier. you around?", "Send 2-6 hrs later. New convo, don't retry same PPV.", "sext"),
+        ("NR-W1", "helloooo", "Send 2-3 min after PPV. Ping.", "sext"),
+        ("NR-W2", "I have something to show you but you're leaving me on read...", "Send 3-5 min later. Curiosity.", "sext"),
+        ("NR-W3", "fine I'll just keep this to myself then 😏", "Send 5-10 min later. Takeaway.", "sext"),
+        ("NR-W4", "miss talking to you love, where'd you go? 💕", "Send 15-30 min later. Warm close.", "sext"),
+        ("NR-W5", "I made something special and you're the only one I want to show it to", "Send 2-6 hrs later. New convo, don't retry same PPV.", "sext"),
     ],
 
     # ═══════════════════════════════════════

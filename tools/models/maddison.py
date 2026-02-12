@@ -86,10 +86,10 @@ config = {
     # NR WAVES
     "nr_waves": [
         ("NR-W1", "Daddy?", "Send 2-3 min after PPV.", "sext"),
-        ("NR-W2", "you need to see what I just did for you... please", "3-5 min later. Curiosity.", "sext"),
-        ("NR-W3", "okay I guess you're busy... I might delete this, it was only for you", "5-10 min later. Takeaway.", "sext"),
-        ("NR-W4", "hey hope you're okay, come back when you can", "15-30 min later.", "sext"),
-        ("NR-W5", "can't stop thinking about earlier... are you around?", "2-6 hrs later. New topic if re-engage.", "sext"),
+        ("NR-W2", "you're really going to miss out on what I just recorded...", "3-5 min later. Curiosity.", "sext"),
+        ("NR-W3", "your loss... this was your exclusive", "5-10 min later. Takeaway.", "sext"),
+        ("NR-W4", "hey Daddy, don't be a stranger", "15-30 min later.", "sext"),
+        ("NR-W5", "I've got something that's going to blow your mind when you get back", "2-6 hrs later. New topic if re-engage.", "sext"),
     ],
 
     # PERSONAL INFO
@@ -301,11 +301,11 @@ config = {
         "boosters": ([
             ("h1", "oh my god Daddy", "MID-SEXTING BOOSTER."),
             ("h2", "I'm so wet right now because of you", "BOOSTER. Ego."),
-            ("h3", "don't stop", "BOOSTER. Micro."),
-            ("h4", "you have no idea what you're doing to me", "BOOSTER."),
+            ("h3", "yes", "BOOSTER. Micro."),
+            ("h4", "you're driving me crazy right now", "BOOSTER."),
             ("h5", "I literally can't think straight right now", "BOOSTER."),
             ("h6", "my legs are shaking", "BOOSTER. Physical."),
-            ("h7", "more...", "BOOSTER. Ultra micro."),
+            ("h7", "don't stop...", "BOOSTER. Ultra micro."),
             ("h8", "I can't believe I'm doing this for the first time and it feels this good", "BOOSTER. Maddison personality -- virgin discovery."),
         ], "sit"),
     },

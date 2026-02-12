@@ -89,11 +89,11 @@ config = {
     # NR WAVES
     # ═══════════════════════════════════════
     "nr_waves": [
-        ("NR-W1", "hey? 😏", "Send 2-3 min after PPV.", "sext"),
-        ("NR-W2", "you really need to see what I just did... trust me amor", "3-5 min later. Curiosity.", "sext"),
-        ("NR-W3", "okay I guess you're busy... might delete this, it was only meant for you", "5-10 min later. Takeaway.", "sext"),
-        ("NR-W4", "hey hope you're good handsome, come back when you can 💕", "15-30 min later. Warm close.", "sext"),
-        ("NR-W5", "can't stop thinking about what we did earlier... are you around?", "2-6 hrs later. New topic if re-engage.", "sext"),
+        ("NR-W1", "yo 😏", "Send 2-3 min after PPV.", "sext"),
+        ("NR-W2", "you're really going to miss out on what I just recorded...", "3-5 min later. Curiosity.", "sext"),
+        ("NR-W3", "your loss... this was your exclusive", "5-10 min later. Takeaway.", "sext"),
+        ("NR-W4", "hey handsome, don't be a stranger 💕", "15-30 min later. Warm close.", "sext"),
+        ("NR-W5", "I've got something that's going to blow your mind when you get back", "2-6 hrs later. New topic if re-engage.", "sext"),
     ],
 
     # ═══════════════════════════════════════
@@ -316,7 +316,7 @@ config = {
             ("h1", "fuckkk", "MID-SEXTING BOOSTER."),
             ("h2", "I'm so wet right now because of you", "BOOSTER. Ego."),
             ("h3", "don't stop", "BOOSTER. Micro."),
-            ("h4", "you have no idea what you're doing to me right now", "BOOSTER."),
+            ("h4", "you have no idea what you're doing to me", "BOOSTER."),
             ("h5", "I literally can't concentrate on anything", "BOOSTER."),
             ("h6", "meu deus my whole body is trembling", "BOOSTER. Physical + Portuguese."),
             ("h7", "more...", "BOOSTER. Ultra micro."),

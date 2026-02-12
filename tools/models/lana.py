@@ -36,11 +36,11 @@ config = {
     # ═══════════════════════════════════════
     "journey": [
         # ── Rapport (R-1 to R-5) ──
-        ("R-1", "hii 🌸 omg you actually subscribed, that literally made my day. what made you want to?", "Add his name if known", "rapport"),
+        ("R-1", "hii cutie 🌸 omg you actually subscribed, that literally made my day. what made you want to?", "Add his name if known", "rapport"),
         ("R-2", "aww that's so sweet. so where are you from? 💕", "React naturally. Short — 'oh wow', 'that's cool!'", "rapport"),
         ("R-3", "I'm in Houston right now! originally from Argentina though. I'm studying business and honestly just trying to figure life out one step at a time 🌸", "If he's from somewhere she visited (USA, Canada, Mexico, Chile, Europe), say 'wait I've been there!'", "rapport"),
         ("R-4", "so tell me about you, what do you like doing when you're not making new girls on the internet smile? 💕", None, "rapport"),
-        ("R-5", "okay I need to be honest, you have this really warm energy and it's doing something to me 😳", "Ego boost. Transition to TB-1.", "rapport"),
+        ("R-5", "okay I need to be honest cutie, you have this really warm energy and it's doing something to me 😳", "Ego boost. Transition to TB-1.", "rapport"),
 
         # ── Teasing Bridge (TB-1 to TB-5) ──
         ("TB-1", "sooo I've been in this really soft mood all day and talking to you is making it so much more intense 🌸", "THE PIVOT. She's feeling new things.", "teasing"),
@@ -58,7 +58,7 @@ config = {
 
         # ── Sexting Phase 2 → PPV 2 ($25) ──
         ("S1-6", "did you watch it? 💕", "Wait for reply.", "sext"),
-        ("S1-7", "omg you're making me feel things I didn't even know I could feel right now 🌸", "HE caused this. React to what he said.", "sext"),
+        ("S1-7", "omg cutie you're making me feel things I didn't even know I could feel right now 🌸", "HE caused this. React to what he said.", "sext"),
         ("S1-8", "I'm lying here and my whole body is tingling because of you", None, "sext"),
         ("S1-9", "tell me what you'd want me to do... I want to hear it from you 😳", "Wait for reply. React. Solo framing — what she does to HERSELF.", "sext"),
         ("S1-10", "wait give me a sec 🌸", "WAIT 2-3 MIN", "wait"),
@@ -88,11 +88,11 @@ config = {
     # NR WAVES
     # ═══════════════════════════════════════
     "nr_waves": [
-        ("NR-W1", "hey? 🌸", "Send 2-3 min after PPV.", "sext"),
-        ("NR-W2", "you really need to see what I just did for you... I promise it's worth it 💕", "3-5 min later. Curiosity.", "sext"),
-        ("NR-W3", "I guess you're busy... I might delete this, it was only meant for you 🥺", "5-10 min later. Takeaway.", "sext"),
-        ("NR-W4", "hey hope you're okay, text me when you're back 🌸", "15-30 min later. Warm close.", "sext"),
-        ("NR-W5", "I can't stop thinking about earlier... are you around? 💕", "2-6 hrs later. New topic, don't retry same PPV.", "sext"),
+        ("NR-W1", "hi 🌸", "Send 2-3 min after PPV.", "sext"),
+        ("NR-W2", "I wish you could see what I'm wearing right now... 💕", "3-5 min later. Curiosity.", "sext"),
+        ("NR-W3", "okay you're definitely busy... I'll save this for when you're back 🥺", "5-10 min later. Takeaway.", "sext"),
+        ("NR-W4", "hope everything's okay with you, I'm here whenever 🌸", "15-30 min later. Warm close.", "sext"),
+        ("NR-W5", "been thinking about you all day... text me back? 💕", "2-6 hrs later. New topic, don't retry same PPV.", "sext"),
     ],
 
     # ═══════════════════════════════════════
@@ -313,11 +313,11 @@ config = {
         "boosters": ([
             ("h1", "oh my god 😳", "MID-SEXTING BOOSTER."),
             ("h2", "I'm so wet right now because of you 🌸", "BOOSTER. Ego."),
-            ("h3", "don't stop", "BOOSTER. Micro."),
-            ("h4", "you have no idea what you're doing to me right now 💕", "BOOSTER."),
+            ("h3", "right there", "BOOSTER. Micro."),
+            ("h4", "what are you doing to me", "BOOSTER."),
             ("h5", "I've never felt anything like this before 🥺", "BOOSTER. Innocence angle."),
             ("h6", "my whole body is shaking 🌸", "BOOSTER. Physical."),
-            ("h7", "more...", "BOOSTER. Ultra micro."),
+            ("h7", "please...", "BOOSTER. Ultra micro."),
             ("h8", "I should be doing my business homework but you're the only thing on my mind right now 💕", "BOOSTER. Lana personality — curious student."),
         ], "sit"),
     },
