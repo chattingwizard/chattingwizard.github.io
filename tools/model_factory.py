@@ -416,17 +416,23 @@ class ModelFactory:
                 meta_label = "%d PPV" % ppv_count
             else:
                 meta_label = "0 msgs"
+            # Collect all copyable texts for Copy All button
+            all_texts = [txt for mid, txt, note, mtype in phase["msgs"] if mtype not in ("ppv", "wait")]
+            copy_all_data = '\\n\\n'.join(t.replace('"', '&quot;') for t in all_texts)
+            copy_all_btn = ('<button class="copy-all" data-copy-all="%s">'
+                           'Copy All</button>' % copy_all_data) if all_texts else ''
             journey_parts.append(
                 '<div class="phase%s" id="%s" style="--phase-color:%s">\n'
                 '  <div class="phase-header">\n'
                 '    <span class="phase-emoji">%s</span>\n'
                 '    <span class="phase-name">%s</span>\n'
                 '    <span class="phase-meta">%s</span>\n'
+                '    %s\n'
                 '    <span class="toggle">\u25bc</span>\n'
                 '  </div>\n'
                 '  <div class="phase-body">\n%s\n  </div>\n</div>'
                 % (collapsed, pid, phase["color"], phase["emoji"],
-                   h(phase["name"]), meta_label, '\n'.join(rows)))
+                   h(phase["name"]), meta_label, copy_all_btn, '\n'.join(rows)))
 
         # \u2500\u2500 NR Waves \u2500\u2500
         nr_html = ''
@@ -678,6 +684,21 @@ class ModelFactory:
             'background:var(--card);border:1px solid var(--border);color:var(--muted);font-size:1rem;'
             'cursor:pointer;display:none;align-items:center;justify-content:center;z-index:100;transition:.15s}\n'
             '.top-btn:hover{color:var(--text);border-color:var(--muted)}.top-btn.show{display:flex}\n'
+            # Search box styles
+            '.search-wrap{margin:12px 0 4px;position:relative}\n'
+            '.search-input{width:100%;background:var(--card);border:1px solid var(--border);color:var(--text);'
+            'padding:8px 14px 8px 36px;border-radius:8px;font-size:.85rem;outline:none;transition:.15s}\n'
+            '.search-input:focus{border-color:var(--accent);box-shadow:0 0 0 2px #58a6ff22}\n'
+            '.search-input::placeholder{color:var(--muted)}\n'
+            '.search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:.8rem;pointer-events:none}\n'
+            '.search-count{position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:.72rem}\n'
+            '.msg.search-hide,.phase.search-hide{display:none}\n'
+            '.msg.search-match .msg-text{background:#58a6ff12;border-radius:4px}\n'
+            # Copy-all button styles
+            '.copy-all{background:none;border:1px solid var(--border);color:var(--muted);padding:2px 8px;'
+            'border-radius:6px;font-size:.64rem;cursor:pointer;transition:.15s;margin-left:auto;margin-right:8px}\n'
+            '.copy-all:hover{border-color:var(--accent);color:var(--accent)}\n'
+            '.copy-all.ok{border-color:var(--green);color:var(--green)}\n'
             '@media(max-width:700px){.page{padding:12px 10px}.info-grid,.qi-grid{grid-template-columns:1fr}'
             '.hero{flex-direction:column;text-align:center}.hero h1{font-size:1.5rem}'
             '.profile-grid{grid-template-columns:1fr}.toc{margin:0 -10px;padding-left:10px;padding-right:10px}}\n'
@@ -686,19 +707,35 @@ class ModelFactory:
         # \u2500\u2500 JS \u2500\u2500
         JS = (
             '<script>\n'
-            "document.addEventListener('click',e=>{const b=e.target.closest('.cp');if(!b)return;"
+            # Copy individual message
+            "document.addEventListener('click',e=>{"
+            "const b=e.target.closest('.cp');if(b){"
             "navigator.clipboard.writeText(b.dataset.copy).then(()=>{b.classList.add('ok');"
-            "setTimeout(()=>b.classList.remove('ok'),1200)})});\n"
+            "setTimeout(()=>b.classList.remove('ok'),1200)});return;}"
+            # Copy All button
+            "const ca=e.target.closest('.copy-all');if(ca){"
+            "e.stopPropagation();"
+            "const txt=ca.dataset.copyAll.replace(/\\\\n/g,'\\n');"
+            "navigator.clipboard.writeText(txt).then(()=>{ca.classList.add('ok');"
+            "ca.textContent='Copied!';"
+            "setTimeout(()=>{ca.classList.remove('ok');ca.textContent='Copy All'},1500)});"
+            "return;}});\n"
+            # Collapse/expand phases
             "document.querySelectorAll('.phase-header').forEach(h=>{h.addEventListener('click',e=>{"
-            "if(e.target.closest('.cp'))return;h.closest('.phase').classList.toggle('collapsed')})});\n"
+            "if(e.target.closest('.cp')||e.target.closest('.copy-all'))return;"
+            "h.closest('.phase').classList.toggle('collapsed')})});\n"
+            # TOC expand on click
             'document.querySelectorAll(\'.toc a[href^="#"]\').forEach(a=>{a.addEventListener(\'click\',()=>{'
             "const t=document.getElementById(a.getAttribute('href').slice(1));"
             "if(t&&t.classList.contains('phase'))t.classList.remove('collapsed')})});\n"
+            # Scroll to top
             "const topBtn=document.getElementById('top-btn');\n"
             "window.addEventListener('scroll',()=>topBtn.classList.toggle('show',window.scrollY>400));\n"
             "topBtn.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));\n"
+            # TOC shadow
             "const toc=document.getElementById('toc');\n"
             "window.addEventListener('scroll',()=>toc.classList.toggle('shadow',window.scrollY>200));\n"
+            # Active TOC tracking
             'const tocLinks=document.querySelectorAll(\'.toc a[href^="#"]\');\n'
             "const sections=Array.from(tocLinks).map(a=>({link:a,"
             "el:document.getElementById(a.getAttribute('href').slice(1))})).filter(s=>s.el);\n"
@@ -706,6 +743,31 @@ class ModelFactory:
             "if(s.el.getBoundingClientRect().top<=100)a=s;"
             "tocLinks.forEach(l=>l.classList.remove('active'));if(a)a.link.classList.add('active')}\n"
             "window.addEventListener('scroll',updateToc);updateToc();\n"
+            # Search functionality
+            "const searchInput=document.getElementById('search');\n"
+            "const searchCount=document.getElementById('search-count');\n"
+            "searchInput.addEventListener('input',()=>{"
+            "const q=searchInput.value.toLowerCase().trim();"
+            "const msgs=document.querySelectorAll('.msg');"
+            "const phases=document.querySelectorAll('.phase');"
+            "if(!q){msgs.forEach(m=>{m.classList.remove('search-hide','search-match')});"
+            "phases.forEach(p=>p.classList.remove('search-hide'));searchCount.textContent='';return;}"
+            "let count=0;"
+            "phases.forEach(p=>{"
+            "let hasMatch=false;"
+            "p.querySelectorAll('.msg').forEach(m=>{"
+            "const txt=m.querySelector('.msg-text');"
+            "if(txt&&txt.textContent.toLowerCase().includes(q)){"
+            "m.classList.remove('search-hide');m.classList.add('search-match');"
+            "hasMatch=true;count++;"
+            "}else{m.classList.add('search-hide');m.classList.remove('search-match')}});"
+            "if(hasMatch){p.classList.remove('search-hide','collapsed')}"
+            "else{p.classList.add('search-hide')}});"
+            "searchCount.textContent=count+' found'});\n"
+            # Keyboard shortcut: Escape to clear search
+            "searchInput.addEventListener('keydown',e=>{"
+            "if(e.key==='Escape'){searchInput.value='';searchInput.dispatchEvent(new Event('input'));"
+            "searchInput.blur()}});\n"
             '</script>')
 
         # \u2500\u2500 Assemble page \u2500\u2500
@@ -724,6 +786,12 @@ class ModelFactory:
             % (photo, h(name), h(name_up),
                c.get('age', ''), h(c.get('location', '')), h(c.get('job', '')))
             + '<nav class="toc" id="toc">\n  %s\n</nav>\n\n' % toc_str
+            + '<div class="search-wrap">\n'
+            '  <span class="search-icon">&#128269;</span>\n'
+            '  <input type="text" class="search-input" id="search" '
+            'placeholder="Search scripts..." autocomplete="off">\n'
+            '  <span class="search-count" id="search-count"></span>\n'
+            '</div>\n\n'
             + '<div class="info-grid">\n  <div>\n'
             '    <div class="profile">\n'
             '      <h2>\U0001f464 Character Profile</h2>\n'

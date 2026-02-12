@@ -56,7 +56,7 @@ config = {
         ("S1-1", "so?", "Wait for reply.", "sext"),
         ("S1-2", "knew you'd like that", "React to what he says", "sext"),
         ("S1-3", "you wanna see more? I'm in a mood rn", None, "sext"),
-        ("S1-4", "give me a sec", "WAIT 2-3 MIN", "wait"),
+        ("S1-4", "wait one sec", "WAIT 2-3 MIN", "wait"),
         ("S1-5", "you're not ready for this one", "SEND PPV 1 — $12. Bought → continue. Silent 3 min → NR Waves.", "ppv"),
 
         # ── Sexting Phase 2 → PPV 2 ($25) ──
@@ -71,15 +71,15 @@ config = {
         ("S1-12", "fuck", "Wait for reply. NO cooldown — keep momentum.", "sext"),
         ("S1-13", "I need to cum so bad rn you have no idea", None, "sext"),
         ("S1-14", "imagine me pinning you down and taking control while you can't do anything about it", None, "sext"),
-        ("S1-15", "I can't hold back anymore", None, "sext"),
-        ("S1-16", "give me a sec", "WAIT 2-3 MIN", "wait"),
+        ("S1-15", "screw it I'm done waiting", None, "sext"),
+        ("S1-16", "wait one sec", "WAIT 2-3 MIN", "wait"),
         ("S1-17", "I've never gone this far for anyone... watch", "SEND PPV 3 — $40. Bought → continue. Silent 3 min → NR Waves.", "ppv"),
 
         # ── Sexting Phase 4 → PPV 4 ($55) ──
-        ("S1-18", "FUCK", "Wait for reply.", "sext"),
+        ("S1-18", "oh fuck", "Wait for reply.", "sext"),
         ("S1-19", "don't cum yet", None, "sext"),
         ("S1-20", "I wanna finish with you... I'm close", None, "sext"),
-        ("S1-21", "hold on", "WAIT 1-2 MIN", "wait"),
+        ("S1-21", "don't go anywhere", "WAIT 1-2 MIN", "wait"),
         ("S1-22", "cum with me", "SEND PPV 4 — $55. Bought → Aftercare. Silent → NR Waves.", "ppv"),
 
         # ── Aftercare ──
@@ -297,13 +297,21 @@ config = {
         ], "res"),
 
         # ── SITUATIONAL ──
-        "cumcontrol": ([
-            ("edge1", "don't cum yet... I'm not done with you", "EDGE. More PPVs left."),
-            ("edge2", "hold it, not yet... I need you to last a little longer for me", "EDGE variant."),
-            ("sync1", "I'm so close too, cum with me... but you need to see this first", "SYNC. Final PPV."),
-            ("sync2", "wait for me, I want us to finish together... open this first", "SYNC variant."),
-            ("delay1", "hold it... wait until you see what I'm about to send, trust me it's worth it", "DELAY."),
-            ("delay2", "don't you dare finish before you see this, trust me you want to wait", "DELAY variant."),
+        "cumcontrol1": ([
+            ("edge1", "bro don't you dare finish yet... I'm not even close to done", "CONTROL."),
+            ("edge2", "hold it... you're gonna last until I say otherwise", "EDGE variant."),
+            ("sync1", "aight let's bust together... open this", "SYNC. Send PPV."),
+            ("sync2", "I'm close too man, let's go at the same time... check this", "SYNC variant."),
+            ("delay1", "edge for me... what I'm about to send is gonna hit different", "DELAY. Send PPV."),
+            ("delay2", "trust me you wanna save it for this next one, it's the best one", "DELAY variant."),
+        ], "sit"),
+        "cumcontrol2": ([
+            ("edge1", "yo slow down... we're not done here", "CONTROL."),
+            ("edge2", "hold it, I got one more thing to show you first", "EDGE variant."),
+            ("sync1", "alright go time, let's finish this together... open it", "SYNC. Send PPV."),
+            ("sync2", "I'm about to blow too, watch this and let's go", "SYNC variant."),
+            ("delay1", "don't finish yet bro... this last one? insane", "DELAY. Send PPV."),
+            ("delay2", "edge just a bit more... the finale is worth it", "DELAY variant."),
         ], "sit"),
         "dickpic": ([
             ("dpsext1", "fuck okay that's... damn. you have no idea what that just did to me", "DURING SEXTING."),

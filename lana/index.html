@@ -70,6 +70,17 @@ body{background:var(--bg);color:var(--text);font-family:"Segoe UI",system-ui,san
 .qi-text{flex:1;font-size:.88rem}
 .top-btn{position:fixed;bottom:16px;right:16px;width:36px;height:36px;border-radius:50%;background:var(--card);border:1px solid var(--border);color:var(--muted);font-size:1rem;cursor:pointer;display:none;align-items:center;justify-content:center;z-index:100;transition:.15s}
 .top-btn:hover{color:var(--text);border-color:var(--muted)}.top-btn.show{display:flex}
+.search-wrap{margin:12px 0 4px;position:relative}
+.search-input{width:100%;background:var(--card);border:1px solid var(--border);color:var(--text);padding:8px 14px 8px 36px;border-radius:8px;font-size:.85rem;outline:none;transition:.15s}
+.search-input:focus{border-color:var(--accent);box-shadow:0 0 0 2px #58a6ff22}
+.search-input::placeholder{color:var(--muted)}
+.search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:.8rem;pointer-events:none}
+.search-count{position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:.72rem}
+.msg.search-hide,.phase.search-hide{display:none}
+.msg.search-match .msg-text{background:#58a6ff12;border-radius:4px}
+.copy-all{background:none;border:1px solid var(--border);color:var(--muted);padding:2px 8px;border-radius:6px;font-size:.64rem;cursor:pointer;transition:.15s;margin-left:auto;margin-right:8px}
+.copy-all:hover{border-color:var(--accent);color:var(--accent)}
+.copy-all.ok{border-color:var(--green);color:var(--green)}
 @media(max-width:700px){.page{padding:12px 10px}.info-grid,.qi-grid{grid-template-columns:1fr}.hero{flex-direction:column;text-align:center}.hero h1{font-size:1.5rem}.profile-grid{grid-template-columns:1fr}.toc{margin:0 -10px;padding-left:10px;padding-right:10px}}
 </style>
 </head>
@@ -101,13 +112,19 @@ body{background:var(--bg);color:var(--text);font-family:"Segoe UI",system-ui,san
   <a href="objections.html" class="toc-ref" style="color:var(--red);border-color:#f8514933">🛡️ OBJ/RES</a>
 </nav>
 
+<div class="search-wrap">
+  <span class="search-icon">&#128269;</span>
+  <input type="text" class="search-input" id="search" placeholder="Search scripts..." autocomplete="off">
+  <span class="search-count" id="search-count"></span>
+</div>
+
 <div class="info-grid">
   <div>
     <div class="profile">
       <h2>👤 Character Profile</h2>
       <div class="profile-grid"><div class="profile-item"><div class="label">Nationality</div><div class="value">Argentinian living in USA</div></div><div class="profile-item"><div class="label">Page Type</div><div class="value">Free Page</div></div><div class="profile-item"><div class="label">Traffic</div><div class="value">social_media</div></div><div class="profile-item"><div class="label">Job</div><div class="value">Student (business)</div></div><div class="profile-item"><div class="label">Interests</div><div class="value">studying business, exploring, chatting, self-care, new experiences</div></div><div class="profile-item"><div class="label">Physical</div><div class="value">150cm, 55kg, straight brown hair, brown eyes, some tattoos, 85B</div></div><div class="profile-item"><div class="label">Countries</div><div class="value">USA, Canada, Mexico, Chile, Europe</div></div><div class="profile-item"><div class="label">Languages</div><div class="value">English, Spanish</div></div></div>
     </div>
-    <div class="voice-box"><strong>🗣️ Voice:</strong> Sweet, curious, slightly breathless. Lowercase. Uses &#x27;omg&#x27;, &#x27;wait&#x27;, &#x27;I&#x27;ve never...&#x27;, &#x27;is this okay?&#x27;, &#x27;I can&#x27;t believe I&#x27;m doing this&#x27;. Emojis: 🌸💕😳🥺✨ (not every msg). Short msgs with bursts of vulnerability. Discovering herself in real-time. Not experienced — everything feels new and exciting to her.<br><strong>Pet names:</strong> babe, cutie, love<br><strong>Never say:</strong> daddy, sir, papi, master</div>
+    <div class="voice-box"><strong>🗣️ Voice:</strong> Sweet, curious, slightly breathless. Lowercase. Uses &#x27;omg&#x27;, &#x27;wait&#x27;, &#x27;I&#x27;ve never...&#x27;, &#x27;is this okay?&#x27;, &#x27;I can&#x27;t believe I&#x27;m doing this&#x27;. Emojis: 🌸💕😳🥺✨ (not every msg). Short msgs with bursts of vulnerability. Discovering herself in real-time. Authentic — gets genuinely excited and enthusiastic.<br><strong>Pet names:</strong> babe, cutie, love<br><strong>Never say:</strong> daddy, sir, papi, master</div>
   </div>
   <div>
     <div class="profile" style="border-color:var(--border)">
@@ -132,6 +149,7 @@ body{background:var(--bg);color:var(--text);font-family:"Segoe UI",system-ui,san
     <span class="phase-emoji">💬</span>
     <span class="phase-name">Rapport</span>
     <span class="phase-meta">5 msgs</span>
+    <button class="copy-all" data-copy-all="hii cutie 🌸 omg you actually subscribed, that literally made my day. what made you want to?\n\naww that's so sweet. so where are you from? 💕\n\nI'm in Houston right now! originally from Argentina though. I'm studying business and honestly just trying to figure life out one step at a time 🌸\n\nso tell me about you, what do you like doing when you're not making new girls on the internet smile? 💕\n\nokay I need to be honest cutie, you have this really warm energy and it's doing something to me 😳">Copy All</button>
     <span class="toggle">▼</span>
   </div>
   <div class="phase-body">
@@ -147,11 +165,12 @@ body{background:var(--bg);color:var(--text);font-family:"Segoe UI",system-ui,san
     <span class="phase-emoji">🔥</span>
     <span class="phase-name">Teasing</span>
     <span class="phase-meta">4 msgs</span>
+    <button class="copy-all" data-copy-all="sooo I've been in this really soft mood all day and talking to you is making it so much more intense 🌸\n\nlike I keep getting these butterflies and I can't explain it, you make me feel so comfortable, that's kinda rare for me 💕\n\nokay this is gonna sound crazy but I trust you... I want to show you something">Copy All</button>
     <span class="toggle">▼</span>
   </div>
   <div class="phase-body">
 <div class="msg"><span class="msg-id">TB-1</span><div class="msg-body"><div class="msg-text">sooo I&#x27;ve been in this really soft mood all day and talking to you is making it so much more intense 🌸</div><div class="msg-note">THE PIVOT. She&#x27;s feeling new things.</div></div><button class="cp" data-copy="sooo I&#x27;ve been in this really soft mood all day and talking to you is making it so much more intense 🌸"><span class="cp-icon">📋</span></button></div>
-<div class="msg"><span class="msg-id">TB-2</span><div class="msg-body"><div class="msg-text">like I keep getting these butterflies and I can&#x27;t explain it, this is so new for me 💕</div><div class="msg-note">Build curiosity. Wait for reply.</div></div><button class="cp" data-copy="like I keep getting these butterflies and I can&#x27;t explain it, this is so new for me 💕"><span class="cp-icon">📋</span></button></div>
+<div class="msg"><span class="msg-id">TB-2</span><div class="msg-body"><div class="msg-text">like I keep getting these butterflies and I can&#x27;t explain it, you make me feel so comfortable, that&#x27;s kinda rare for me 💕</div><div class="msg-note">Build curiosity. Wait for reply.</div></div><button class="cp" data-copy="like I keep getting these butterflies and I can&#x27;t explain it, you make me feel so comfortable, that&#x27;s kinda rare for me 💕"><span class="cp-icon">📋</span></button></div>
 <div class="msg"><span class="msg-id">TB-3</span><div class="msg-body"><div class="msg-text">okay this is gonna sound crazy but I trust you... I want to show you something</div><div class="msg-note">Build anticipation.</div></div><button class="cp" data-copy="okay this is gonna sound crazy but I trust you... I want to show you something"><span class="cp-icon">📋</span></button></div>
 <div class="msg msg-wait"><span class="msg-id">TB-4</span><div class="msg-body"><div class="msg-text">give me a moment okay? I&#x27;m a little nervous 🌸</div><div class="msg-note">WAIT 1-2 MIN</div></div><button class="cp" data-copy="give me a moment okay? I&#x27;m a little nervous 🌸"><span class="cp-icon">📋</span></button></div>
   </div>
@@ -161,6 +180,7 @@ body{background:var(--bg);color:var(--text);font-family:"Segoe UI",system-ui,san
     <span class="phase-emoji">🔥</span>
     <span class="phase-name">Sexting Phase 1</span>
     <span class="phase-meta">1 PPV</span>
+    
     <span class="toggle">▼</span>
   </div>
   <div class="phase-body">
@@ -172,14 +192,15 @@ body{background:var(--bg);color:var(--text);font-family:"Segoe UI",system-ui,san
     <span class="phase-emoji">🔥</span>
     <span class="phase-name">Sexting Phase 2</span>
     <span class="phase-meta">4 msgs + 1 PPV</span>
+    <button class="copy-all" data-copy-all="so?? 🌸\n\nwait you actually like it?? that makes me so happy omg 💕\n\nyou're making me feel some type of way right now 🌸">Copy All</button>
     <span class="toggle">▼</span>
   </div>
   <div class="phase-body">
 <div class="msg"><span class="msg-id">S1-1</span><div class="msg-body"><div class="msg-text">so?? 🌸</div><div class="msg-note">Wait for reply.</div></div><button class="cp" data-copy="so?? 🌸"><span class="cp-icon">📋</span></button></div>
 <div class="msg"><span class="msg-id">S1-2</span><div class="msg-body"><div class="msg-text">wait you actually like it?? that makes me so happy omg 💕</div><div class="msg-note">React to compliment.</div></div><button class="cp" data-copy="wait you actually like it?? that makes me so happy omg 💕"><span class="cp-icon">📋</span></button></div>
-<div class="msg"><span class="msg-id">S1-3</span><div class="msg-body"><div class="msg-text">you&#x27;re making me want to show you more of me and I&#x27;ve never felt this way before</div></div><button class="cp" data-copy="you&#x27;re making me want to show you more of me and I&#x27;ve never felt this way before"><span class="cp-icon">📋</span></button></div>
+<div class="msg"><span class="msg-id">S1-3</span><div class="msg-body"><div class="msg-text">you&#x27;re making me feel some type of way right now 🌸</div></div><button class="cp" data-copy="you&#x27;re making me feel some type of way right now 🌸"><span class="cp-icon">📋</span></button></div>
 <div class="msg msg-wait"><span class="msg-id">S1-4</span><div class="msg-body"><div class="msg-text">hold on 🌸</div><div class="msg-note">WAIT 2-3 MIN</div></div><button class="cp" data-copy="hold on 🌸"><span class="cp-icon">📋</span></button></div>
-<div class="ppv-moment"><span class="ppv-icon">📎</span><span class="ppv-label">I&#x27;ve never shown this to anyone before... please be nice 🥺</span></div>
+<div class="ppv-moment"><span class="ppv-icon">📎</span><span class="ppv-label">I&#x27;ve never shown this to anyone before... this is just for you 🌸</span></div>
   </div>
 </div>
 <div class="phase collapsed" id="phase-4" style="--phase-color:#f85149">
@@ -187,15 +208,16 @@ body{background:var(--bg);color:var(--text);font-family:"Segoe UI",system-ui,san
     <span class="phase-emoji">🔥</span>
     <span class="phase-name">Sexting Phase 3</span>
     <span class="phase-meta">5 msgs + 1 PPV</span>
+    <button class="copy-all" data-copy-all="tell me what you think 💕\n\nomg cutie you're making me feel so many things right now... 🌸\n\nI'm lying here and my whole body is tingling because of you\n\ntell me what you'd want me to do... I want to hear it from you 😳">Copy All</button>
     <span class="toggle">▼</span>
   </div>
   <div class="phase-body">
-<div class="msg"><span class="msg-id">S1-6</span><div class="msg-body"><div class="msg-text">did you watch it? 💕</div><div class="msg-note">Wait for reply.</div></div><button class="cp" data-copy="did you watch it? 💕"><span class="cp-icon">📋</span></button></div>
-<div class="msg"><span class="msg-id">S1-7</span><div class="msg-body"><div class="msg-text">omg cutie you&#x27;re making me feel things I didn&#x27;t even know I could feel right now 🌸</div><div class="msg-note">HE caused this. React to what he said.</div></div><button class="cp" data-copy="omg cutie you&#x27;re making me feel things I didn&#x27;t even know I could feel right now 🌸"><span class="cp-icon">📋</span></button></div>
+<div class="msg"><span class="msg-id">S1-6</span><div class="msg-body"><div class="msg-text">tell me what you think 💕</div><div class="msg-note">Wait for reply.</div></div><button class="cp" data-copy="tell me what you think 💕"><span class="cp-icon">📋</span></button></div>
+<div class="msg"><span class="msg-id">S1-7</span><div class="msg-body"><div class="msg-text">omg cutie you&#x27;re making me feel so many things right now... 🌸</div><div class="msg-note">HE caused this. React to what he said.</div></div><button class="cp" data-copy="omg cutie you&#x27;re making me feel so many things right now... 🌸"><span class="cp-icon">📋</span></button></div>
 <div class="msg"><span class="msg-id">S1-8</span><div class="msg-body"><div class="msg-text">I&#x27;m lying here and my whole body is tingling because of you</div></div><button class="cp" data-copy="I&#x27;m lying here and my whole body is tingling because of you"><span class="cp-icon">📋</span></button></div>
 <div class="msg"><span class="msg-id">S1-9</span><div class="msg-body"><div class="msg-text">tell me what you&#x27;d want me to do... I want to hear it from you 😳</div><div class="msg-note">Wait for reply. React. Solo framing — what she does to HERSELF.</div></div><button class="cp" data-copy="tell me what you&#x27;d want me to do... I want to hear it from you 😳"><span class="cp-icon">📋</span></button></div>
 <div class="msg msg-wait"><span class="msg-id">S1-10</span><div class="msg-body"><div class="msg-text">wait give me a sec 🌸</div><div class="msg-note">WAIT 2-3 MIN</div></div><button class="cp" data-copy="wait give me a sec 🌸"><span class="cp-icon">📋</span></button></div>
-<div class="ppv-moment"><span class="ppv-icon">📎</span><span class="ppv-label">I can&#x27;t believe I&#x27;m actually doing this... look 💕</span></div>
+<div class="ppv-moment"><span class="ppv-icon">📎</span><span class="ppv-label">okay I really want to show you something... look 💕</span></div>
   </div>
 </div>
 <div class="phase collapsed" id="phase-5" style="--phase-color:#f85149">
@@ -203,15 +225,16 @@ body{background:var(--bg);color:var(--text);font-family:"Segoe UI",system-ui,san
     <span class="phase-emoji">🔥</span>
     <span class="phase-name">Sexting Phase 4</span>
     <span class="phase-meta">5 msgs + 1 PPV</span>
+    <button class="copy-all" data-copy-all="fuuuck 😳\n\nI want you so bad right now 🌸\n\nthe thought of you watching me right now is making everything so much more intense 💕\n\nI can't hold back anymore">Copy All</button>
     <span class="toggle">▼</span>
   </div>
   <div class="phase-body">
-<div class="msg"><span class="msg-id">S1-12</span><div class="msg-body"><div class="msg-text">oh my god 😳</div><div class="msg-note">Wait for reply. NO cooldown — keep momentum.</div></div><button class="cp" data-copy="oh my god 😳"><span class="cp-icon">📋</span></button></div>
-<div class="msg"><span class="msg-id">S1-13</span><div class="msg-body"><div class="msg-text">I need you so bad right now, I&#x27;ve never wanted someone like this 🌸</div></div><button class="cp" data-copy="I need you so bad right now, I&#x27;ve never wanted someone like this 🌸"><span class="cp-icon">📋</span></button></div>
+<div class="msg"><span class="msg-id">S1-12</span><div class="msg-body"><div class="msg-text">fuuuck 😳</div><div class="msg-note">Wait for reply. NO cooldown — keep momentum.</div></div><button class="cp" data-copy="fuuuck 😳"><span class="cp-icon">📋</span></button></div>
+<div class="msg"><span class="msg-id">S1-13</span><div class="msg-body"><div class="msg-text">I want you so bad right now 🌸</div></div><button class="cp" data-copy="I want you so bad right now 🌸"><span class="cp-icon">📋</span></button></div>
 <div class="msg"><span class="msg-id">S1-14</span><div class="msg-body"><div class="msg-text">the thought of you watching me right now is making everything so much more intense 💕</div><div class="msg-note">Solo framing — she touches herself while he watches.</div></div><button class="cp" data-copy="the thought of you watching me right now is making everything so much more intense 💕"><span class="cp-icon">📋</span></button></div>
 <div class="msg"><span class="msg-id">S1-15</span><div class="msg-body"><div class="msg-text">I can&#x27;t hold back anymore</div></div><button class="cp" data-copy="I can&#x27;t hold back anymore"><span class="cp-icon">📋</span></button></div>
 <div class="msg msg-wait"><span class="msg-id">S1-16</span><div class="msg-body"><div class="msg-text">one more moment 🌸</div><div class="msg-note">WAIT 2-3 MIN</div></div><button class="cp" data-copy="one more moment 🌸"><span class="cp-icon">📋</span></button></div>
-<div class="ppv-moment"><span class="ppv-icon">📎</span><span class="ppv-label">this is the most I&#x27;ve ever shared with anyone... it&#x27;s all for you 💕</span></div>
+<div class="ppv-moment"><span class="ppv-icon">📎</span><span class="ppv-label">this is only for you, nobody else gets to see this 💕</span></div>
   </div>
 </div>
 <div class="phase collapsed" id="phase-6" style="--phase-color:#f85149">
@@ -219,10 +242,11 @@ body{background:var(--bg);color:var(--text);font-family:"Segoe UI",system-ui,san
     <span class="phase-emoji">🔥</span>
     <span class="phase-name">Sexting Phase 5</span>
     <span class="phase-meta">4 msgs + 1 PPV</span>
+    <button class="copy-all" data-copy-all="fuuuck 🥺\n\nnot yet... please stay with me a little longer 🌸\n\nI want to finish with you, I'm right there 💕">Copy All</button>
     <span class="toggle">▼</span>
   </div>
   <div class="phase-body">
-<div class="msg"><span class="msg-id">S1-18</span><div class="msg-body"><div class="msg-text">oh my god 🥺</div><div class="msg-note">Wait for reply.</div></div><button class="cp" data-copy="oh my god 🥺"><span class="cp-icon">📋</span></button></div>
+<div class="msg"><span class="msg-id">S1-18</span><div class="msg-body"><div class="msg-text">fuuuck 🥺</div><div class="msg-note">Wait for reply.</div></div><button class="cp" data-copy="fuuuck 🥺"><span class="cp-icon">📋</span></button></div>
 <div class="msg"><span class="msg-id">S1-19</span><div class="msg-body"><div class="msg-text">not yet... please stay with me a little longer 🌸</div></div><button class="cp" data-copy="not yet... please stay with me a little longer 🌸"><span class="cp-icon">📋</span></button></div>
 <div class="msg"><span class="msg-id">S1-20</span><div class="msg-body"><div class="msg-text">I want to finish with you, I&#x27;m right there 💕</div></div><button class="cp" data-copy="I want to finish with you, I&#x27;m right there 💕"><span class="cp-icon">📋</span></button></div>
 <div class="msg msg-wait"><span class="msg-id">S1-21</span><div class="msg-body"><div class="msg-text">hold on</div><div class="msg-note">WAIT 1-2 MIN</div></div><button class="cp" data-copy="hold on"><span class="cp-icon">📋</span></button></div>
@@ -234,10 +258,11 @@ body{background:var(--bg);color:var(--text);font-family:"Segoe UI",system-ui,san
     <span class="phase-emoji">💪</span>
     <span class="phase-name">Aftercare</span>
     <span class="phase-meta">2 msgs</span>
+    <button class="copy-all" data-copy-all="wow that was... incredible 🌸\n\nI'm literally shaking right now. you made me feel so safe and that's everything to me. please don't go anywhere okay? 💕">Copy All</button>
     <span class="toggle">▼</span>
   </div>
   <div class="phase-body">
-<div class="msg"><span class="msg-id">AC-1</span><div class="msg-body"><div class="msg-text">oh my god... I&#x27;ve never felt anything like that before 🌸</div></div><button class="cp" data-copy="oh my god... I&#x27;ve never felt anything like that before 🌸"><span class="cp-icon">📋</span></button></div>
+<div class="msg"><span class="msg-id">AC-1</span><div class="msg-body"><div class="msg-text">wow that was... incredible 🌸</div></div><button class="cp" data-copy="wow that was... incredible 🌸"><span class="cp-icon">📋</span></button></div>
 <div class="msg"><span class="msg-id">AC-2</span><div class="msg-body"><div class="msg-text">I&#x27;m literally shaking right now. you made me feel so safe and that&#x27;s everything to me. please don&#x27;t go anywhere okay? 💕</div><div class="msg-note">Mention something specific he said. KEEP TALKING. Build bond. NEVER say goodbye.</div></div><button class="cp" data-copy="I&#x27;m literally shaking right now. you made me feel so safe and that&#x27;s everything to me. please don&#x27;t go anywhere okay? 💕"><span class="cp-icon">📋</span></button></div>
   </div>
 </div>
@@ -251,7 +276,7 @@ body{background:var(--bg);color:var(--text);font-family:"Segoe UI",system-ui,san
   </div>
   <div class="phase-body">
 <div class="msg"><span class="msg-id">RE-1</span><div class="msg-body"><div class="msg-text">hey... I&#x27;ve been thinking about you and I can&#x27;t stop 🌸</div><div class="msg-note">Send 6-12 hrs after convo goes quiet.</div></div><button class="cp" data-copy="hey... I&#x27;ve been thinking about you and I can&#x27;t stop 🌸"><span class="cp-icon">📋</span></button></div>
-<div class="msg"><span class="msg-id">RE-2</span><div class="msg-body"><div class="msg-text">so after we stopped talking I did something I&#x27;ve never done before and you&#x27;re the only one I want to share it with 💕</div><div class="msg-note">Next day. Seeds next session.</div></div><button class="cp" data-copy="so after we stopped talking I did something I&#x27;ve never done before and you&#x27;re the only one I want to share it with 💕"><span class="cp-icon">📋</span></button></div>
+<div class="msg"><span class="msg-id">RE-2</span><div class="msg-body"><div class="msg-text">so after we stopped talking I did something special and you&#x27;re the only one I want to share it with 💕</div><div class="msg-note">Next day. Seeds next session.</div></div><button class="cp" data-copy="so after we stopped talking I did something special and you&#x27;re the only one I want to share it with 💕"><span class="cp-icon">📋</span></button></div>
   </div>
 </div>
 <hr class="divider">
@@ -264,12 +289,12 @@ body{background:var(--bg);color:var(--text);font-family:"Segoe UI",system-ui,san
 <hr class="divider">
 <div class="ref-section" id="personal-info">
   <div class="ref-title">👤 Personal Info</div>
-  <div class="qi-grid"><div class="qi-item"><span class="qi-label">Age</span><span class="qi-text">I just turned 18, everything is still so new and exciting for me honestly 🌸</span><button class="cp" data-copy="I just turned 18, everything is still so new and exciting for me honestly 🌸"><span class="cp-icon">📋</span></button></div><div class="qi-item"><span class="qi-label">Location</span><span class="qi-text">I&#x27;m in Houston right now! originally from Argentina, I love it here though 💕</span><button class="cp" data-copy="I&#x27;m in Houston right now! originally from Argentina, I love it here though 💕"><span class="cp-icon">📋</span></button></div><div class="qi-item"><span class="qi-label">Profession</span><span class="qi-text">I&#x27;m studying business, it keeps me busy but I love learning new things 🌸</span><button class="cp" data-copy="I&#x27;m studying business, it keeps me busy but I love learning new things 🌸"><span class="cp-icon">📋</span></button></div><div class="qi-item"><span class="qi-label">Hobbies</span><span class="qi-text">I love exploring new experiences, chatting with interesting people, and discovering new things about myself 💕</span><button class="cp" data-copy="I love exploring new experiences, chatting with interesting people, and discovering new things about myself 💕"><span class="cp-icon">📋</span></button></div><div class="qi-item"><span class="qi-label">Food</span><span class="qi-text">I&#x27;m such a meat lover honestly, a good steak is everything to me 🌸</span><button class="cp" data-copy="I&#x27;m such a meat lover honestly, a good steak is everything to me 🌸"><span class="cp-icon">📋</span></button></div><div class="qi-item"><span class="qi-label">Relationship</span><span class="qi-text">single and just enjoying figuring out who I am right now 💕</span><button class="cp" data-copy="single and just enjoying figuring out who I am right now 💕"><span class="cp-icon">📋</span></button></div><div class="qi-item"><span class="qi-label">Languages</span><span class="qi-text">English and Spanish! I grew up speaking both 🌸</span><button class="cp" data-copy="English and Spanish! I grew up speaking both 🌸"><span class="cp-icon">📋</span></button></div><div class="qi-item"><span class="qi-label">Travel</span><span class="qi-text">I&#x27;ve been to Canada, Mexico, Chile, and some places in Europe. I love traveling so much 💕</span><button class="cp" data-copy="I&#x27;ve been to Canada, Mexico, Chile, and some places in Europe. I love traveling so much 💕"><span class="cp-icon">📋</span></button></div><div class="qi-item"><span class="qi-label">Personality</span><span class="qi-text">I&#x27;m curious about everything and I love connecting with people who make me feel comfortable and safe 🌸</span><button class="cp" data-copy="I&#x27;m curious about everything and I love connecting with people who make me feel comfortable and safe 🌸"><span class="cp-icon">📋</span></button></div></div>
+  <div class="qi-grid"><div class="qi-item"><span class="qi-label">Age</span><span class="qi-text">I&#x27;m 18, just started college and I&#x27;m loving this whole new chapter of my life 🌸</span><button class="cp" data-copy="I&#x27;m 18, just started college and I&#x27;m loving this whole new chapter of my life 🌸"><span class="cp-icon">📋</span></button></div><div class="qi-item"><span class="qi-label">Location</span><span class="qi-text">I&#x27;m in Houston right now! originally from Argentina, I love it here though 💕</span><button class="cp" data-copy="I&#x27;m in Houston right now! originally from Argentina, I love it here though 💕"><span class="cp-icon">📋</span></button></div><div class="qi-item"><span class="qi-label">Profession</span><span class="qi-text">I&#x27;m studying business, it keeps me busy but I love learning new things 🌸</span><button class="cp" data-copy="I&#x27;m studying business, it keeps me busy but I love learning new things 🌸"><span class="cp-icon">📋</span></button></div><div class="qi-item"><span class="qi-label">Hobbies</span><span class="qi-text">I love exploring new experiences, chatting with interesting people, and discovering new things about myself 💕</span><button class="cp" data-copy="I love exploring new experiences, chatting with interesting people, and discovering new things about myself 💕"><span class="cp-icon">📋</span></button></div><div class="qi-item"><span class="qi-label">Food</span><span class="qi-text">I&#x27;m such a meat lover honestly, a good steak is everything to me 🌸</span><button class="cp" data-copy="I&#x27;m such a meat lover honestly, a good steak is everything to me 🌸"><span class="cp-icon">📋</span></button></div><div class="qi-item"><span class="qi-label">Relationship</span><span class="qi-text">single and just enjoying figuring out who I am right now 💕</span><button class="cp" data-copy="single and just enjoying figuring out who I am right now 💕"><span class="cp-icon">📋</span></button></div><div class="qi-item"><span class="qi-label">Languages</span><span class="qi-text">English and Spanish! I grew up speaking both 🌸</span><button class="cp" data-copy="English and Spanish! I grew up speaking both 🌸"><span class="cp-icon">📋</span></button></div><div class="qi-item"><span class="qi-label">Travel</span><span class="qi-text">I&#x27;ve been to Canada, Mexico, Chile, and some places in Europe. I love traveling so much 💕</span><button class="cp" data-copy="I&#x27;ve been to Canada, Mexico, Chile, and some places in Europe. I love traveling so much 💕"><span class="cp-icon">📋</span></button></div><div class="qi-item"><span class="qi-label">Personality</span><span class="qi-text">I&#x27;m curious about everything and I love connecting with people who make me feel comfortable and safe 🌸</span><button class="cp" data-copy="I&#x27;m curious about everything and I love connecting with people who make me feel comfortable and safe 🌸"><span class="cp-icon">📋</span></button></div></div>
 </div>
 <hr class="divider">
 <div class="ref-section" id="positive-spin">
   <div class="ref-title">✨ Positive Spin</div>
-  <div class="qi-grid"><div class="qi-item"><span class="qi-label">Age40Plus</span><span class="qi-text">honestly I really like talking to someone more experienced, you make me feel so comfortable and that means everything to me 🌸</span><button class="cp" data-copy="honestly I really like talking to someone more experienced, you make me feel so comfortable and that means everything to me 🌸"><span class="cp-icon">📋</span></button></div><div class="qi-item"><span class="qi-label">Age20s</span><span class="qi-text">oh nice we&#x27;re close in age! that&#x27;s actually really cool 💕</span><button class="cp" data-copy="oh nice we&#x27;re close in age! that&#x27;s actually really cool 💕"><span class="cp-icon">📋</span></button></div><div class="qi-item"><span class="qi-label">BoringJob</span><span class="qi-text">that&#x27;s really stable and honestly I find that so attractive, it shows you have your life together 🌸</span><button class="cp" data-copy="that&#x27;s really stable and honestly I find that so attractive, it shows you have your life together 🌸"><span class="cp-icon">📋</span></button></div><div class="qi-item"><span class="qi-label">CoolJob</span><span class="qi-text">wait really?? that&#x27;s so amazing, I want to hear everything about it 💕</span><button class="cp" data-copy="wait really?? that&#x27;s so amazing, I want to hear everything about it 💕"><span class="cp-icon">📋</span></button></div><div class="qi-item"><span class="qi-label">Fit</span><span class="qi-text">I can tell you take care of yourself, that&#x27;s really attractive honestly 🌸</span><button class="cp" data-copy="I can tell you take care of yourself, that&#x27;s really attractive honestly 🌸"><span class="cp-icon">📋</span></button></div><div class="qi-item"><span class="qi-label">NotFit</span><span class="qi-text">I honestly don&#x27;t care about that at all, it&#x27;s the connection that matters and yours feels perfect 💕</span><button class="cp" data-copy="I honestly don&#x27;t care about that at all, it&#x27;s the connection that matters and yours feels perfect 💕"><span class="cp-icon">📋</span></button></div><div class="qi-item"><span class="qi-label">SameCity</span><span class="qi-text">wait you&#x27;re in Houston too?? omg that&#x27;s so cool 🌸</span><button class="cp" data-copy="wait you&#x27;re in Houston too?? omg that&#x27;s so cool 🌸"><span class="cp-icon">📋</span></button></div><div class="qi-item"><span class="qi-label">FarAway</span><span class="qi-text">aw that&#x27;s far but honestly distance doesn&#x27;t matter when the connection feels this real 💕</span><button class="cp" data-copy="aw that&#x27;s far but honestly distance doesn&#x27;t matter when the connection feels this real 💕"><span class="cp-icon">📋</span></button></div></div>
+  <div class="qi-grid"><div class="qi-item"><span class="qi-label">Age40Plus</span><span class="qi-text">honestly I love talking to someone who actually knows what they want, you make me feel so comfortable and that means everything to me 🌸</span><button class="cp" data-copy="honestly I love talking to someone who actually knows what they want, you make me feel so comfortable and that means everything to me 🌸"><span class="cp-icon">📋</span></button></div><div class="qi-item"><span class="qi-label">Age20s</span><span class="qi-text">oh nice we&#x27;re close in age! that&#x27;s actually really cool 💕</span><button class="cp" data-copy="oh nice we&#x27;re close in age! that&#x27;s actually really cool 💕"><span class="cp-icon">📋</span></button></div><div class="qi-item"><span class="qi-label">BoringJob</span><span class="qi-text">that&#x27;s really stable and honestly I find that so attractive, it shows you have your life together 🌸</span><button class="cp" data-copy="that&#x27;s really stable and honestly I find that so attractive, it shows you have your life together 🌸"><span class="cp-icon">📋</span></button></div><div class="qi-item"><span class="qi-label">CoolJob</span><span class="qi-text">wait really?? that&#x27;s so amazing, I want to hear everything about it 💕</span><button class="cp" data-copy="wait really?? that&#x27;s so amazing, I want to hear everything about it 💕"><span class="cp-icon">📋</span></button></div><div class="qi-item"><span class="qi-label">Fit</span><span class="qi-text">I can tell you take care of yourself, that&#x27;s really attractive honestly 🌸</span><button class="cp" data-copy="I can tell you take care of yourself, that&#x27;s really attractive honestly 🌸"><span class="cp-icon">📋</span></button></div><div class="qi-item"><span class="qi-label">NotFit</span><span class="qi-text">I honestly don&#x27;t care about that at all, it&#x27;s the connection that matters and yours feels perfect 💕</span><button class="cp" data-copy="I honestly don&#x27;t care about that at all, it&#x27;s the connection that matters and yours feels perfect 💕"><span class="cp-icon">📋</span></button></div><div class="qi-item"><span class="qi-label">SameCity</span><span class="qi-text">wait you&#x27;re in Houston too?? omg that&#x27;s so cool 🌸</span><button class="cp" data-copy="wait you&#x27;re in Houston too?? omg that&#x27;s so cool 🌸"><span class="cp-icon">📋</span></button></div><div class="qi-item"><span class="qi-label">FarAway</span><span class="qi-text">aw that&#x27;s far but honestly distance doesn&#x27;t matter when the connection feels this real 💕</span><button class="cp" data-copy="aw that&#x27;s far but honestly distance doesn&#x27;t matter when the connection feels this real 💕"><span class="cp-icon">📋</span></button></div></div>
 </div>
 <hr class="divider">
 <div style="text-align:center;padding:24px 0 10px;color:var(--muted);font-size:.73rem">Chatting Wizard · Script Manager · 2026</div>
@@ -278,8 +303,8 @@ body{background:var(--bg);color:var(--text);font-family:"Segoe UI",system-ui,san
 <button class="top-btn" id="top-btn">↑</button>
 
 <script>
-document.addEventListener('click',e=>{const b=e.target.closest('.cp');if(!b)return;navigator.clipboard.writeText(b.dataset.copy).then(()=>{b.classList.add('ok');setTimeout(()=>b.classList.remove('ok'),1200)})});
-document.querySelectorAll('.phase-header').forEach(h=>{h.addEventListener('click',e=>{if(e.target.closest('.cp'))return;h.closest('.phase').classList.toggle('collapsed')})});
+document.addEventListener('click',e=>{const b=e.target.closest('.cp');if(b){navigator.clipboard.writeText(b.dataset.copy).then(()=>{b.classList.add('ok');setTimeout(()=>b.classList.remove('ok'),1200)});return;}const ca=e.target.closest('.copy-all');if(ca){e.stopPropagation();const txt=ca.dataset.copyAll.replace(/\\n/g,'\n');navigator.clipboard.writeText(txt).then(()=>{ca.classList.add('ok');ca.textContent='Copied!';setTimeout(()=>{ca.classList.remove('ok');ca.textContent='Copy All'},1500)});return;}});
+document.querySelectorAll('.phase-header').forEach(h=>{h.addEventListener('click',e=>{if(e.target.closest('.cp')||e.target.closest('.copy-all'))return;h.closest('.phase').classList.toggle('collapsed')})});
 document.querySelectorAll('.toc a[href^="#"]').forEach(a=>{a.addEventListener('click',()=>{const t=document.getElementById(a.getAttribute('href').slice(1));if(t&&t.classList.contains('phase'))t.classList.remove('collapsed')})});
 const topBtn=document.getElementById('top-btn');
 window.addEventListener('scroll',()=>topBtn.classList.toggle('show',window.scrollY>400));
@@ -290,6 +315,10 @@ const tocLinks=document.querySelectorAll('.toc a[href^="#"]');
 const sections=Array.from(tocLinks).map(a=>({link:a,el:document.getElementById(a.getAttribute('href').slice(1))})).filter(s=>s.el);
 function updateToc(){let a=sections[0];for(const s of sections)if(s.el.getBoundingClientRect().top<=100)a=s;tocLinks.forEach(l=>l.classList.remove('active'));if(a)a.link.classList.add('active')}
 window.addEventListener('scroll',updateToc);updateToc();
+const searchInput=document.getElementById('search');
+const searchCount=document.getElementById('search-count');
+searchInput.addEventListener('input',()=>{const q=searchInput.value.toLowerCase().trim();const msgs=document.querySelectorAll('.msg');const phases=document.querySelectorAll('.phase');if(!q){msgs.forEach(m=>{m.classList.remove('search-hide','search-match')});phases.forEach(p=>p.classList.remove('search-hide'));searchCount.textContent='';return;}let count=0;phases.forEach(p=>{let hasMatch=false;p.querySelectorAll('.msg').forEach(m=>{const txt=m.querySelector('.msg-text');if(txt&&txt.textContent.toLowerCase().includes(q)){m.classList.remove('search-hide');m.classList.add('search-match');hasMatch=true;count++;}else{m.classList.add('search-hide');m.classList.remove('search-match')}});if(hasMatch){p.classList.remove('search-hide','collapsed')}else{p.classList.add('search-hide')}});searchCount.textContent=count+' found'});
+searchInput.addEventListener('keydown',e=>{if(e.key==='Escape'){searchInput.value='';searchInput.dispatchEvent(new Event('input'));searchInput.blur()}});
 </script>
 </body>
 </html>

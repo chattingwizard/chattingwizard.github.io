@@ -44,7 +44,13 @@ def make_card(m):
     if m.get("tag") == "non-explicit":
         tag_html = '<span class="meta-tag" style="background:#f8514922;color:#f85149">NON-EXPLICIT</span>'
     
-    return f'''    <div class="card">
+    # Data attributes for filtering
+    page_lower = m["page"].lower()
+    traffic_lower = m["traffic"].lower()
+    is_ne = "true" if m.get("tag") == "non-explicit" else "false"
+    search_text = f'{m["name"]} {m["nationality"]} {m["traffic"]} {m["page"]}'.lower()
+    
+    return f'''    <div class="card" data-name="{m["name"].lower()}" data-page="{page_lower}" data-traffic="{traffic_lower}" data-ne="{is_ne}" data-search="{search_text}">
       <div class="card-header">
         <span class="card-name">{m["name"]}</span>
         <span class="card-badge badge-live">LIVE</span>
@@ -113,6 +119,17 @@ html = f'''<!DOCTYPE html>
   .alert-bar .text {{ font-size: 0.9em; color: #f85149; }}
   .alert-bar .text strong {{ color: #e6edf3; }}
   .footer {{ text-align: center; padding: 50px 20px; color: #484f58; font-size: 0.8em; }}
+  .search-bar {{ max-width: 500px; margin: 20px auto 0; position: relative; }}
+  .search-bar input {{ width: 100%; background: #161b22; border: 1px solid #30363d; color: #e6edf3; padding: 10px 16px 10px 40px; border-radius: 10px; font-size: 0.95em; outline: none; transition: 0.15s; }}
+  .search-bar input:focus {{ border-color: #58a6ff; box-shadow: 0 0 0 2px rgba(88,166,255,0.15); }}
+  .search-bar input::placeholder {{ color: #484f58; }}
+  .search-bar .s-icon {{ position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: #484f58; }}
+  .filters {{ display: flex; gap: 8px; justify-content: center; margin: 16px 0 0; flex-wrap: wrap; }}
+  .filter-btn {{ background: #161b22; border: 1px solid #30363d; color: #8b949e; padding: 4px 14px; border-radius: 20px; font-size: 0.78em; cursor: pointer; transition: 0.15s; }}
+  .filter-btn:hover {{ border-color: #58a6ff; color: #58a6ff; }}
+  .filter-btn.active {{ background: #58a6ff; color: #0d1117; border-color: #58a6ff; }}
+  .card.hide {{ display: none; }}
+  .no-results {{ text-align: center; padding: 40px 20px; color: #484f58; display: none; }}
   @media (max-width: 600px) {{ .grid {{ grid-template-columns: 1fr; }} .header h1 {{ font-size: 1.6em; }} }}
 </style>
 </head>
@@ -122,6 +139,18 @@ html = f'''<!DOCTYPE html>
   <h1>CW Scripts</h1>
   <p>Script guides for chatters — Chatting Wizard</p>
   <div class="count">{len(FEMALE_MODELS) + len(MALE_DATING_APP) + len(MALE_OTHER)} creators live</div>
+  <div class="search-bar">
+    <span class="s-icon">&#128269;</span>
+    <input type="text" id="dash-search" placeholder="Search by name, nationality, or traffic..." autocomplete="off">
+  </div>
+  <div class="filters">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="free">Free Page</button>
+    <button class="filter-btn" data-filter="paid">Paid Page</button>
+    <button class="filter-btn" data-filter="nonexplicit">Non-Explicit</button>
+    <button class="filter-btn" data-filter="reddit">Reddit</button>
+    <button class="filter-btn" data-filter="ig">IG/TikTok</button>
+  </div>
 </div>
 
 <div class="container">
@@ -159,6 +188,44 @@ html = f'''<!DOCTYPE html>
   Chatting Wizard — Script Manager — 2026<br>
   Internal use only
 </div>
+
+<script>
+// Search
+const searchInput = document.getElementById('dash-search');
+const cards = document.querySelectorAll('.card');
+const sections = document.querySelectorAll('.section-title');
+
+searchInput.addEventListener('input', () => {{
+  const q = searchInput.value.toLowerCase().trim();
+  cards.forEach(c => {{
+    if (!q || c.dataset.search.includes(q)) {{
+      c.classList.remove('hide');
+    }} else {{
+      c.classList.add('hide');
+    }}
+  }});
+}});
+
+// Filters
+const filterBtns = document.querySelectorAll('.filter-btn');
+filterBtns.forEach(btn => {{
+  btn.addEventListener('click', () => {{
+    filterBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const f = btn.dataset.filter;
+    cards.forEach(c => {{
+      if (f === 'all') {{ c.classList.remove('hide'); return; }}
+      if (f === 'free' && c.dataset.page.includes('free')) {{ c.classList.remove('hide'); return; }}
+      if (f === 'paid' && c.dataset.page.includes('paid') && !c.dataset.page.includes('free')) {{ c.classList.remove('hide'); return; }}
+      if (f === 'nonexplicit' && c.dataset.ne === 'true') {{ c.classList.remove('hide'); return; }}
+      if (f === 'reddit' && c.dataset.traffic.includes('reddit')) {{ c.classList.remove('hide'); return; }}
+      if (f === 'ig' && (c.dataset.traffic.includes('ig') || c.dataset.traffic.includes('tiktok'))) {{ c.classList.remove('hide'); return; }}
+      c.classList.add('hide');
+    }});
+    searchInput.value = '';
+  }});
+}});
+</script>
 
 </body>
 </html>

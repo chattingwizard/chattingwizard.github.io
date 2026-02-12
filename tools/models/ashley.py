@@ -57,7 +57,7 @@ config = {
         ("S1-5", "I can't believe I'm doing this... this is only for you", "SEND PPV 1 — $12. Bought → continue. Silent → NR Waves. 'I never/can't believe' — ONE TIME per journey.", "ppv"),
 
         # ── Sexting Phase 2 → PPV 2 ($25) ──
-        ("S1-6", "did you watch it? 💕", "Wait for reply.", "sext"),
+        ("S1-6", "tell me what you think 💕", "Wait for reply.", "sext"),
         ("S1-7", "talking to you does something to my body that I can't explain... like I'm tingling everywhere right now", "HE caused this feeling.", "sext"),
         ("S1-8", "I'm lying here and I keep imagining your hands all over me and I can't stop", None, "sext"),
         ("S1-9", "what would you do to me if you were right here next to me?", "Wait for reply. React to what he says.", "sext"),
@@ -68,12 +68,12 @@ config = {
         ("S1-12", "dios mio", "Wait for reply. NO cooldown — keep momentum.", "sext"),
         ("S1-13", "I need you so bad right now, I can barely hold myself back", None, "sext"),
         ("S1-14", "imagine me right there with you, your body pressed against mine", None, "sext"),
-        ("S1-15", "I can't hold back anymore", None, "sext"),
-        ("S1-16", "give me a sec 🙈", "WAIT 2-3 MIN", "wait"),
+        ("S1-15", "I'm done holding back", None, "sext"),
+        ("S1-16", "hold on a sec 🙈", "WAIT 2-3 MIN", "wait"),
         ("S1-17", "every part of me is yours right now 💕", "SEND PPV 3 — $40. Bought → continue. Silent → NR Waves.", "ppv"),
 
         # ── Sexting Phase 4 → PPV 4 ($55) ──
-        ("S1-18", "oh my god", "Wait for reply.", "sext"),
+        ("S1-18", "omg", "Wait for reply.", "sext"),
         ("S1-19", "not yet... stay with me a little longer please", None, "sext"),
         ("S1-20", "I wanna finish with you... don't go anywhere", None, "sext"),
         ("S1-21", "one more second 💕", "WAIT 1-2 MIN", "wait"),
@@ -297,13 +297,21 @@ config = {
         ], "res"),
 
         # ── SITUATIONAL ──
-        "cumcontrol": ([
-            ("edge1", "not yet... I'm not ready to let go of this feeling 💕", "EDGE. More PPVs left."),
-            ("edge2", "hold on, stay with me a little longer... I need more of you 🙈", "EDGE variant."),
-            ("sync1", "I'm so close... let's finish together, but see this first 😊", "SYNC. Final PPV."),
-            ("sync2", "wait for me, I want us to let go at the same time... open this first 💕", "SYNC variant."),
-            ("delay1", "hold on... trust me you want to wait for what's coming 🙈", "DELAY."),
-            ("delay2", "don't finish yet, I have something that'll make it so much better 😊", "DELAY variant."),
+        "cumcontrol1": ([
+            ("edge1", "not yet babe... I want this to last a little longer with you 💕", "CONTROL."),
+            ("edge2", "please don't finish yet... I'm not ready for this to be over 🙈", "EDGE variant."),
+            ("sync1", "I want us to finish together... open this and let go with me 💕", "SYNC. Send PPV."),
+            ("sync2", "stay with me, I'm almost there too... watch this", "SYNC variant. Send PPV."),
+            ("delay1", "wait for me... I have one more thing and I want you to see it before we finish", "DELAY. Send PPV."),
+            ("delay2", "just hold on a little more, I want the last thing you see to be this", "DELAY variant."),
+        ], "sit"),
+        "cumcontrol2": ([
+            ("edge1", "slow down babe... I want to feel every second of this with you 😊", "CONTROL."),
+            ("edge2", "don't rush... this is too good to end yet", "EDGE variant."),
+            ("sync1", "okay... together, right now... open this", "SYNC. Send PPV."),
+            ("sync2", "I need you to see this before we both let go 🙈", "SYNC variant."),
+            ("delay1", "please wait... what I'm about to send, I want you to really take it in", "DELAY. Send PPV."),
+            ("delay2", "just a little longer for me babe? the next one is special 💕", "DELAY variant."),
         ], "sit"),
         "dickpic": ([
             ("dpsext1", "oh wow... that's really hot. you have no idea what you just made me feel 💕", "DURING SEXTING."),

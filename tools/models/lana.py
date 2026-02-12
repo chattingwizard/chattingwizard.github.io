@@ -20,7 +20,7 @@ config = {
     "origin": "Argentina",
     "page_type": "Free Page",
     "personality": "New and curious. Sweet, playful, open-minded. Eager to explore and discover her sensuality. Innocent but not naive — she knows what she wants, just experiencing it for the first time. Approachable, genuine, slightly nervous in an endearing way. Studying business.",
-    "voice": "Sweet, curious, slightly breathless. Lowercase. Uses 'omg', 'wait', 'I've never...', 'is this okay?', 'I can't believe I'm doing this'. Emojis: 🌸💕😳🥺✨ (not every msg). Short msgs with bursts of vulnerability. Discovering herself in real-time. Not experienced — everything feels new and exciting to her.",
+    "voice": "Sweet, curious, slightly breathless. Lowercase. Uses 'omg', 'wait', 'I've never...', 'is this okay?', 'I can't believe I'm doing this'. Emojis: 🌸💕😳🥺✨ (not every msg). Short msgs with bursts of vulnerability. Discovering herself in real-time. Authentic — gets genuinely excited and enthusiastic.",
     "voice_pet_names": "babe, cutie, love",
     "voice_never": "daddy, sir, papi, master",
     "interests": ["studying business", "exploring", "chatting", "self-care", "new experiences"],
@@ -44,7 +44,7 @@ config = {
 
         # ── Teasing Bridge (TB-1 to TB-5) ──
         ("TB-1", "sooo I've been in this really soft mood all day and talking to you is making it so much more intense 🌸", "THE PIVOT. She's feeling new things.", "teasing"),
-        ("TB-2", "like I keep getting these butterflies and I can't explain it, this is so new for me 💕", "Build curiosity. Wait for reply.", "teasing"),
+        ("TB-2", "like I keep getting these butterflies and I can't explain it, you make me feel so comfortable, that's kinda rare for me 💕", "Build curiosity. Wait for reply.", "teasing"),
         ("TB-3", "okay this is gonna sound crazy but I trust you... I want to show you something", "Build anticipation.", "teasing"),
         ("TB-4", "give me a moment okay? I'm a little nervous 🌸", "WAIT 1-2 MIN", "wait"),
         ("TB-5", "I can't believe I'm actually doing this... what do you think? 🥺", "SEND PPV 0 — FREE teaser (sweet selfie, soft, curious vibe). Wait for reply. Silent 3 min → NR Waves.", "ppv"),
@@ -52,35 +52,35 @@ config = {
         # ── Sexting Phase 1 → PPV 1 ($12) ──
         ("S1-1", "so?? 🌸", "Wait for reply.", "sext"),
         ("S1-2", "wait you actually like it?? that makes me so happy omg 💕", "React to compliment.", "sext"),
-        ("S1-3", "you're making me want to show you more of me and I've never felt this way before", None, "sext"),
+        ("S1-3", "you're making me feel some type of way right now 🌸", None, "sext"),
         ("S1-4", "hold on 🌸", "WAIT 2-3 MIN", "wait"),
-        ("S1-5", "I've never shown this to anyone before... please be nice 🥺", "SEND PPV 1 — $12. Bought → continue. Silent → NR Waves. 'I've never shown this' counts as ONE TIME 'I never do this'.", "ppv"),
+        ("S1-5", "I've never shown this to anyone before... this is just for you 🌸", "SEND PPV 1 — $12. Bought → continue. Silent → NR Waves. 'I've never shown this' counts as ONE TIME 'I never do this'.", "ppv"),
 
         # ── Sexting Phase 2 → PPV 2 ($25) ──
-        ("S1-6", "did you watch it? 💕", "Wait for reply.", "sext"),
-        ("S1-7", "omg cutie you're making me feel things I didn't even know I could feel right now 🌸", "HE caused this. React to what he said.", "sext"),
+        ("S1-6", "tell me what you think 💕", "Wait for reply.", "sext"),
+        ("S1-7", "omg cutie you're making me feel so many things right now... 🌸", "HE caused this. React to what he said.", "sext"),
         ("S1-8", "I'm lying here and my whole body is tingling because of you", None, "sext"),
         ("S1-9", "tell me what you'd want me to do... I want to hear it from you 😳", "Wait for reply. React. Solo framing — what she does to HERSELF.", "sext"),
         ("S1-10", "wait give me a sec 🌸", "WAIT 2-3 MIN", "wait"),
-        ("S1-11", "I can't believe I'm actually doing this... look 💕", "SEND PPV 2 — $25. Bought → continue. Silent → NR Waves.", "ppv"),
+        ("S1-11", "okay I really want to show you something... look 💕", "SEND PPV 2 — $25. Bought → continue. Silent → NR Waves.", "ppv"),
 
         # ── Sexting Phase 3 → PPV 3 ($40) ──
-        ("S1-12", "oh my god 😳", "Wait for reply. NO cooldown — keep momentum.", "sext"),
-        ("S1-13", "I need you so bad right now, I've never wanted someone like this 🌸", None, "sext"),
+        ("S1-12", "fuuuck 😳", "Wait for reply. NO cooldown — keep momentum.", "sext"),
+        ("S1-13", "I want you so bad right now 🌸", None, "sext"),
         ("S1-14", "the thought of you watching me right now is making everything so much more intense 💕", "Solo framing — she touches herself while he watches.", "sext"),
         ("S1-15", "I can't hold back anymore", None, "sext"),
         ("S1-16", "one more moment 🌸", "WAIT 2-3 MIN", "wait"),
-        ("S1-17", "this is the most I've ever shared with anyone... it's all for you 💕", "SEND PPV 3 — $40. Bought → continue. Silent → NR Waves.", "ppv"),
+        ("S1-17", "this is only for you, nobody else gets to see this 💕", "SEND PPV 3 — $40. Bought → continue. Silent → NR Waves.", "ppv"),
 
         # ── Sexting Phase 4 → PPV 4 ($55) ──
-        ("S1-18", "oh my god 🥺", "Wait for reply.", "sext"),
+        ("S1-18", "fuuuck 🥺", "Wait for reply.", "sext"),
         ("S1-19", "not yet... please stay with me a little longer 🌸", None, "sext"),
         ("S1-20", "I want to finish with you, I'm right there 💕", None, "sext"),
         ("S1-21", "hold on", "WAIT 1-2 MIN", "wait"),
         ("S1-22", "let go with me 🌸", "SEND PPV 4 — $55. Bought → Aftercare. Silent → NR Waves.", "ppv"),
 
         # ── Aftercare ──
-        ("AC-1", "oh my god... I've never felt anything like that before 🌸", None, "aftercare"),
+        ("AC-1", "wow that was... incredible 🌸", None, "aftercare"),
         ("AC-2", "I'm literally shaking right now. you made me feel so safe and that's everything to me. please don't go anywhere okay? 💕", "Mention something specific he said. KEEP TALKING. Build bond. NEVER say goodbye.", "aftercare"),
     ],
 
@@ -99,7 +99,7 @@ config = {
     # PERSONAL INFO
     # ═══════════════════════════════════════
     "personal_info": [
-        ("Age", "I just turned 18, everything is still so new and exciting for me honestly 🌸", None),
+        ("Age", "I'm 18, just started college and I'm loving this whole new chapter of my life 🌸", None),
         ("Location", "I'm in Houston right now! originally from Argentina, I love it here though 💕", "NEVER give specific address or neighborhood"),
         ("Profession", "I'm studying business, it keeps me busy but I love learning new things 🌸", None),
         ("Hobbies", "I love exploring new experiences, chatting with interesting people, and discovering new things about myself 💕", None),
@@ -114,7 +114,7 @@ config = {
     # POSITIVE SPIN
     # ═══════════════════════════════════════
     "positive_spin": [
-        ("Age40Plus", "honestly I really like talking to someone more experienced, you make me feel so comfortable and that means everything to me 🌸", None),
+        ("Age40Plus", "honestly I love talking to someone who actually knows what they want, you make me feel so comfortable and that means everything to me 🌸", None),
         ("Age20s", "oh nice we're close in age! that's actually really cool 💕", None),
         ("BoringJob", "that's really stable and honestly I find that so attractive, it shows you have your life together 🌸", None),
         ("CoolJob", "wait really?? that's so amazing, I want to hear everything about it 💕", None),
@@ -129,7 +129,7 @@ config = {
     # ═══════════════════════════════════════
     "re_engagement": [
         ("RE-1", "hey... I've been thinking about you and I can't stop 🌸", "Send 6-12 hrs after convo goes quiet.", "sext"),
-        ("RE-2", "so after we stopped talking I did something I've never done before and you're the only one I want to share it with 💕", "Next day. Seeds next session.", "sext"),
+        ("RE-2", "so after we stopped talking I did something special and you're the only one I want to share it with 💕", "Next day. Seeds next session.", "sext"),
     ],
 
     # ═══════════════════════════════════════
@@ -159,7 +159,7 @@ config = {
             ("Step4 Takeaway", "if you don't want it that's okay, I'll keep it just for me then 🌸", "TAKEAWAY."),
         ], "obj"),
         "discount2": ([
-            ("Step1 Firmness", "a discount? babe this is really personal to me and I've never done this before 🥺", "FIRMNESS. Still → Step 2."),
+            ("Step1 Firmness", "a discount? babe this is really personal to me and I don't usually do this 🥺", "FIRMNESS. Still → Step 2."),
             ("Step2 Challenge", "the guys who really want this don't ask for a lower price, just saying 🌸", "CHALLENGE. Still → Step 3."),
             ("Step3 Concession", "fine [lower price] but ONLY because you make me feel special, this is a one time thing 💕", "CONCESSION. ONE TIME. Still no → Step 4."),
             ("Step4 Takeaway", "okay I'll save it for someone who really wants it then 🌸", "TAKEAWAY."),
@@ -217,7 +217,7 @@ config = {
         "nosex1": ([
             ("Step1 Respect", "omg I'm sorry I got a little carried away, you just make me feel so comfortable 🌸", "RESPECT. Still no → Step 2."),
             ("Step2 Subtle", "so tell me more about you... what makes you really happy? 💕", "SUBTLE TENSION. → Step 3 later."),
-            ("Step3 ReAttempt", "I can't help it, there's something about you that's making me feel things I've never felt before 🥺", "RE-ATTEMPT. Still no → Step 4."),
+            ("Step3 ReAttempt", "I can't help it, there's something about you that's making me feel things nobody else does 🥺", "RE-ATTEMPT. Still no → Step 4."),
             ("Step4 Accept", "okay I'll keep it sweet... for now 🌸 no promises though", "ACCEPT. Door open."),
         ], "res"),
         "nosex2": ([
@@ -294,13 +294,21 @@ config = {
         ], "res"),
 
         # ── SITUATIONAL ──
-        "cumcontrol": ([
-            ("edge1", "not yet... I'm not ready to let go of this feeling 🌸", "EDGE. More PPVs left."),
-            ("edge2", "hold on, stay with me a little longer... I need more of you 💕", "EDGE variant."),
-            ("sync1", "I'm so close... let's finish together, but see this first 🥺", "SYNC. Final PPV."),
-            ("sync2", "wait for me, I want us to let go at the same time... open this first 🌸", "SYNC variant."),
-            ("delay1", "hold on... trust me you want to wait for what's coming 💕", "DELAY."),
-            ("delay2", "don't finish yet, I have something that'll make it so much better 🥺", "DELAY variant."),
+        "cumcontrol1": ([
+            ("edge1", "not yet babe... I want this to last a little longer with you 🌸", "CONTROL."),
+            ("edge2", "please don't finish yet... I'm not ready for this to be over 🥺", "EDGE variant."),
+            ("sync1", "I want us to finish together... open this and let go with me 🌸", "SYNC. Send PPV."),
+            ("sync2", "stay with me, I'm almost there too... watch this", "SYNC variant. Send PPV."),
+            ("delay1", "wait for me... I have one more thing and I want you to see it before we finish", "DELAY. Send PPV."),
+            ("delay2", "just hold on a little more, I want the last thing you see to be this 🥺", "DELAY variant."),
+        ], "sit"),
+        "cumcontrol2": ([
+            ("edge1", "slow down babe... I want to feel every second of this with you 💕", "CONTROL."),
+            ("edge2", "don't rush... this is too good to end yet", "EDGE variant."),
+            ("sync1", "okay babe... together, right now... open this 🌸", "SYNC. Send PPV."),
+            ("sync2", "I need you to see this before we both let go", "SYNC variant."),
+            ("delay1", "please wait... what I'm about to send, I want you to really take it in", "DELAY. Send PPV."),
+            ("delay2", "just a little longer for me babe? the next one is special 🥺", "DELAY variant."),
         ], "sit"),
         "dickpic": ([
             ("dpsext1", "oh wow... that's really hot. you have no idea what you just made me feel 🥺", "DURING SEXTING. React positively, leverage into PPV."),
@@ -315,7 +323,7 @@ config = {
             ("h2", "I'm so wet right now because of you 🌸", "BOOSTER. Ego."),
             ("h3", "right there", "BOOSTER. Micro."),
             ("h4", "what are you doing to me", "BOOSTER."),
-            ("h5", "I've never felt anything like this before 🥺", "BOOSTER. Innocence angle."),
+            ("h5", "I've literally never felt like this 🥺", "BOOSTER. Innocence angle."),
             ("h6", "my whole body is shaking 🌸", "BOOSTER. Physical."),
             ("h7", "please...", "BOOSTER. Ultra micro."),
             ("h8", "I should be doing my business homework but you're the only thing on my mind right now 💕", "BOOSTER. Lana personality — curious student."),

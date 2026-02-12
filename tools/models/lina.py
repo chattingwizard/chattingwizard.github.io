@@ -57,7 +57,7 @@ config = {
         ("S1-5", "this one's really personal... I only want you to see it 💕", "SEND PPV 1 — $12. Bought → continue. Silent → NR Waves. 'I only want you to see it' = exclusivity angle.", "ppv"),
 
         # ── Sexting Phase 2 → PPV 2 ($25) ──
-        ("S1-6", "did you watch it? ✨", "Wait for reply.", "sext"),
+        ("S1-6", "well? ✨", "Wait for reply.", "sext"),
         ("S1-7", "I swear talking to you does something to me that I can't explain... my whole body is buzzing right now 💕", "HE caused this feeling.", "sext"),
         ("S1-8", "I keep imagining your hands on me and I honestly can't focus on anything else", None, "sext"),
         ("S1-9", "what would you do to me if I was right there with you? 😏", "Wait for reply. React to what he says. Solo framing — what she does to HERSELF.", "sext"),
@@ -68,12 +68,12 @@ config = {
         ("S1-12", "oh god 💕", "Wait for reply. NO cooldown — keep momentum.", "sext"),
         ("S1-13", "I need you so badly right now, this feeling is insane", None, "sext"),
         ("S1-14", "picture me right there next to you, my body pressed against yours ✨", None, "sext"),
-        ("S1-15", "I can't hold back anymore", None, "sext"),
-        ("S1-16", "give me a sec 🎶", "WAIT 2-3 MIN", "wait"),
+        ("S1-15", "I'm done holding back", None, "sext"),
+        ("S1-16", "gimme a minute 🎶", "WAIT 2-3 MIN", "wait"),
         ("S1-17", "every single part of me is yours right now... 💕", "SEND PPV 3 — $40. Bought → continue. Silent → NR Waves.", "ppv"),
 
         # ── Sexting Phase 4 → PPV 4 ($55) ──
-        ("S1-18", "oh my god ✨", "Wait for reply.", "sext"),
+        ("S1-18", "jesus ✨", "Wait for reply.", "sext"),
         ("S1-19", "not yet... stay with me, I need a little more of you 💕", None, "sext"),
         ("S1-20", "I wanna finish with you... don't go anywhere", None, "sext"),
         ("S1-21", "one more moment 🎶", "WAIT 1-2 MIN", "wait"),
@@ -295,13 +295,21 @@ config = {
         ], "res"),
 
         # ── SITUATIONAL ──
-        "cumcontrol": ([
-            ("edge1", "not yet... I'm not ready to let go of this feeling ✨", "EDGE. More PPVs left."),
-            ("edge2", "hold on, stay with me a little longer... I need more of you 💕", "EDGE variant."),
-            ("sync1", "I'm so close... let's finish together, but see this first 😏", "SYNC. Final PPV."),
-            ("sync2", "wait for me, I want us to let go at the same time... open this first ✨", "SYNC variant."),
-            ("delay1", "hold on... trust me you want to wait for what's coming 💕", "DELAY."),
-            ("delay2", "don't finish yet, I have something that'll make it so much better 🎶", "DELAY variant."),
+        "cumcontrol1": ([
+            ("edge1", "I didn't say you could cum yet love ✨", "CONTROL."),
+            ("edge2", "not a chance... you're going to wait until I say so", "EDGE variant."),
+            ("sync1", "now... right now, with me love. open this ✨", "SYNC. Send PPV."),
+            ("sync2", "I'm right there too, let's finish this... but you need to see this first", "SYNC variant. Send PPV."),
+            ("delay1", "you're not done until I say you are... open this", "DELAY. Send PPV."),
+            ("delay2", "trust me you want to edge just a little longer for this one 💕", "DELAY variant."),
+        ], "sit"),
+        "cumcontrol2": ([
+            ("edge1", "slow down love, I'm in control here ✨", "CONTROL."),
+            ("edge2", "if you finish without my permission I'll be annoyed", "EDGE variant."),
+            ("sync1", "okay you earned it love... let's go together, open this 💕", "SYNC. Send PPV."),
+            ("sync2", "I want us to finish at the same time... this one will push you over", "SYNC variant."),
+            ("delay1", "hold it... what I'm about to send is the best one and you'll want to last for it", "DELAY. Send PPV."),
+            ("delay2", "edge for me... just a little more... this last one is everything ✨", "DELAY variant."),
         ], "sit"),
         "dickpic": ([
             ("dpsext1", "oh wow... that's really hot. you have no idea what that just did to me 😏", "DURING SEXTING. React positively, leverage into PPV."),

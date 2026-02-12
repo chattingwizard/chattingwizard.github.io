@@ -58,7 +58,7 @@ config = {
         ("S1-5", "I literally never show anyone this stuff but you're actually funny AND hot so you earned it", "SEND PPV 1 — $12 (teasing, touching over clothes, sporty vibe). Bought → continue. Silent 3 min → NR Waves. 'I never show this' — ONE TIME per journey.", "ppv"),
 
         # ── Sexting Phase 2 → PPV 2 ($25) ──
-        ("S1-6", "did you watch it? 😏", "Wait for reply. Brief cooldown.", "sext"),
+        ("S1-6", "so what do you think? 😏", "Wait for reply. Brief cooldown.", "sext"),
         ("S1-7", "okay wow you're actually doing things to me rn and I can't even blame it on the party vibes because I'm sober in bed 😂", "React to what he said. HE caused this.", "sext"),
         ("S1-8", "I'm so turned on right now and it's 100% your fault", None, "sext"),
         ("S1-9", "tell me what you'd want me to do right now... to myself, while you watch", "Wait for reply. React to what he says. SOLO framing — what she does to HERSELF.", "sext"),
@@ -74,11 +74,11 @@ config = {
         ("S1-17", "this is the craziest thing I've ever done for someone online ngl... watch 🔥", "SEND PPV 3 — $40 (toy play, explicit solo). Bought → continue. Silent 3 min → NR Waves.", "ppv"),
 
         # ── Sexting Phase 4 → PPV 4 ($55) ──
-        ("S1-18", "FUCK", "Wait for reply.", "sext"),
+        ("S1-18", "fuckkkk", "Wait for reply.", "sext"),
         ("S1-19", "don't cum yet I swear", None, "sext"),
         ("S1-20", "I wanna finish with you... I'm so close right now omg", None, "sext"),
-        ("S1-21", "hold on", "WAIT 1-2 MIN", "wait"),
-        ("S1-22", "cum with me 🔥", "SEND PPV 4 — $55 (full solo climax with toy). Bought → Aftercare. Silent → NR Waves.", "ppv"),
+        ("S1-21", "hold on hold on", "WAIT 1-2 MIN", "wait"),
+        ("S1-22", "let go with me 🔥", "SEND PPV 4 — $55 (full solo climax with toy). Bought → Aftercare. Silent → NR Waves.", "ppv"),
 
         # ── Aftercare ──
         ("AC-1", "oh my god that was... wow okay I need a minute 😂", None, "aftercare"),
@@ -299,13 +299,21 @@ config = {
         ], "res"),
 
         # ── SITUATIONAL ──
-        "cumcontrol": ([
-            ("edge1", "don't cum yet... I'm not done with you 🔥", "EDGE. More PPVs left."),
-            ("edge2", "hold it, not yet... I need you to last a little longer for me pleaseee 😏", "EDGE variant."),
-            ("sync1", "I'm so close too, cum with me... but you need to see this first 🔥", "SYNC. Final PPV."),
-            ("sync2", "wait for me, I want us to finish together... open this first", "SYNC variant."),
-            ("delay1", "hold it... wait until you see what I'm about to send, trust me it's worth it 🔥", "DELAY."),
-            ("delay2", "don't you dare finish before you see this, trust me you want to wait 😏", "DELAY variant."),
+        "cumcontrol1": ([
+            ("edge1", "not yet... I said not yet 😏", "CONTROL. More PPVs to send. Create urgency to open next."),
+            ("edge2", "you better not be close already babe... I have more to show you 🔥", "EDGE variant."),
+            ("sync1", "okay NOW we can go together... open this 🔥", "SYNC. Send PPV."),
+            ("sync2", "I want to feel it at the same time... watch this first", "SYNC variant. Send PPV."),
+            ("delay1", "wait wait wait... I have one more thing for you before you finish", "DELAY. Send final PPV."),
+            ("delay2", "if you finish before you see what I'm sending next you'll regret it", "DELAY variant."),
+        ], "sit"),
+        "cumcontrol2": ([
+            ("edge1", "slow down babe... I'm not letting you off that easy 😏", "CONTROL."),
+            ("edge2", "patience... the best part hasn't even happened yet", "EDGE variant."),
+            ("sync1", "okay I'm ready now too... watch this with me 🔥", "SYNC. Send PPV."),
+            ("sync2", "let's do this together... but you have to open this first", "SYNC variant."),
+            ("delay1", "don't you dare... not until you see what I just did", "DELAY. Send PPV."),
+            ("delay2", "hold on just a little longer, I promise this next one is worth it 😏", "DELAY variant."),
         ], "sit"),
         "dickpic": ([
             ("dpsext1", "fuck okay that's... damn. you have no idea what that just did to me 🔥", "DURING SEXTING. React positively, leverage into PPV."),

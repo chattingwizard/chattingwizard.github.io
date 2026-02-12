@@ -69,12 +69,12 @@ config = {
         ("S1-12", "fuck", "Wait for reply. NO cooldown — keep momentum.", "sext"),
         ("S1-13", "I need to cum so badly right now, you have no idea", None, "sext"),
         ("S1-14", "imagine me right there in front of you, ready for whatever you want", None, "sext"),
-        ("S1-15", "I can't hold back anymore", None, "sext"),
+        ("S1-15", "I can't resist you anymore", None, "sext"),
         ("S1-16", "give me a sec", "WAIT 2-3 MIN", "wait"),
         ("S1-17", "I've never gone this far for anyone on here... watch", "SEND PPV 3 — $40. Bought → continue. Silent 3 min → NR Waves.", "ppv"),
 
         # ── Sexting Phase 4 → PPV 4 ($55) ──
-        ("S1-18", "FUCK", "Wait for reply.", "sext"),
+        ("S1-18", "fuckkkk", "Wait for reply.", "sext"),
         ("S1-19", "don't you dare cum yet", None, "sext"),
         ("S1-20", "I want to finish with you... I'm right there", None, "sext"),
         ("S1-21", "hold on amor", "WAIT 1-2 MIN", "wait"),
@@ -299,13 +299,21 @@ config = {
         ], "res"),
 
         # ── SITUATIONAL ──
-        "cumcontrol": ([
-            ("edge1", "don't cum yet... I'm not done with you", "EDGE. More PPVs left."),
-            ("edge2", "hold it amor, not yet... I need you to last a little longer for me", "EDGE variant."),
-            ("sync1", "I'm so close too, cum with me... but you need to see this first", "SYNC. Final PPV."),
-            ("sync2", "wait for me, I want us to finish together... open this first", "SYNC variant."),
-            ("delay1", "hold it... wait until you see what I'm about to send, trust me it's worth the wait", "DELAY."),
-            ("delay2", "don't you dare finish before you see this, trust me you want to wait", "DELAY variant."),
+        "cumcontrol1": ([
+            ("edge1", "I can tell you're close... not yet amor, I know what I'm doing", "CONTROL."),
+            ("edge2", "a man who can wait gets rewarded... trust me on that", "EDGE variant."),
+            ("sync1", "now we go together amor... I've been holding back too. open this", "SYNC. Send PPV."),
+            ("sync2", "I want to feel you let go while I do the same... watch this first", "SYNC variant. Send PPV."),
+            ("delay1", "hold it for me... I have years of experience and this next one is my best work", "DELAY. Send PPV."),
+            ("delay2", "patience... what's coming is worth every second of waiting", "DELAY variant."),
+        ], "sit"),
+        "cumcontrol2": ([
+            ("edge1", "slow down for me amor... I know exactly when to let you go", "CONTROL."),
+            ("edge2", "not yet... a little more anticipation makes it so much better, trust me", "EDGE variant."),
+            ("sync1", "okay... let's both let go right now. open this", "SYNC. Send PPV."),
+            ("sync2", "I'm ready when you are... but see this first", "SYNC variant."),
+            ("delay1", "one more for you before we're done... this is the one I'm most proud of", "DELAY. Send PPV."),
+            ("delay2", "save it for this last one amor, I promise you it's going to be worth it", "DELAY variant."),
         ], "sit"),
         "dickpic": ([
             ("dpsext1", "fuck okay that's... wow. you have no idea what that just did to me", "DURING SEXTING."),

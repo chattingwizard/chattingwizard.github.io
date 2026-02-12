@@ -37,6 +37,17 @@
   .alert-bar .text { font-size: 0.9em; color: #f85149; }
   .alert-bar .text strong { color: #e6edf3; }
   .footer { text-align: center; padding: 50px 20px; color: #484f58; font-size: 0.8em; }
+  .search-bar { max-width: 500px; margin: 20px auto 0; position: relative; }
+  .search-bar input { width: 100%; background: #161b22; border: 1px solid #30363d; color: #e6edf3; padding: 10px 16px 10px 40px; border-radius: 10px; font-size: 0.95em; outline: none; transition: 0.15s; }
+  .search-bar input:focus { border-color: #58a6ff; box-shadow: 0 0 0 2px rgba(88,166,255,0.15); }
+  .search-bar input::placeholder { color: #484f58; }
+  .search-bar .s-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: #484f58; }
+  .filters { display: flex; gap: 8px; justify-content: center; margin: 16px 0 0; flex-wrap: wrap; }
+  .filter-btn { background: #161b22; border: 1px solid #30363d; color: #8b949e; padding: 4px 14px; border-radius: 20px; font-size: 0.78em; cursor: pointer; transition: 0.15s; }
+  .filter-btn:hover { border-color: #58a6ff; color: #58a6ff; }
+  .filter-btn.active { background: #58a6ff; color: #0d1117; border-color: #58a6ff; }
+  .card.hide { display: none; }
+  .no-results { text-align: center; padding: 40px 20px; color: #484f58; display: none; }
   @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } .header h1 { font-size: 1.6em; } }
 </style>
 </head>
@@ -46,6 +57,18 @@
   <h1>CW Scripts</h1>
   <p>Script guides for chatters — Chatting Wizard</p>
   <div class="count">25 creators live</div>
+  <div class="search-bar">
+    <span class="s-icon">&#128269;</span>
+    <input type="text" id="dash-search" placeholder="Search by name, nationality, or traffic..." autocomplete="off">
+  </div>
+  <div class="filters">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="free">Free Page</button>
+    <button class="filter-btn" data-filter="paid">Paid Page</button>
+    <button class="filter-btn" data-filter="nonexplicit">Non-Explicit</button>
+    <button class="filter-btn" data-filter="reddit">Reddit</button>
+    <button class="filter-btn" data-filter="ig">IG/TikTok</button>
+  </div>
 </div>
 
 <div class="container">
@@ -53,7 +76,7 @@
   <div class="section-title">Female Creators (22)</div>
   <div class="grid">
 
-    <div class="card">
+    <div class="card" data-name="putri" data-page="free page" data-traffic="social media" data-ne="false" data-search="putri indonesian social media free page">
       <div class="card-header">
         <span class="card-name">Putri</span>
         <span class="card-badge badge-live">LIVE</span>
@@ -72,7 +95,7 @@
       </div>
     </div>
 
-    <div class="card">
+    <div class="card" data-name="riri vip" data-page="paid page" data-traffic="oftv / social" data-ne="false" data-search="riri vip italian oftv / social paid page">
       <div class="card-header">
         <span class="card-name">Riri VIP</span>
         <span class="card-badge badge-live">LIVE</span>
@@ -91,7 +114,7 @@
       </div>
     </div>
 
-    <div class="card">
+    <div class="card" data-name="eva martinez" data-page="paid page" data-traffic="ig/tiktok" data-ne="false" data-search="eva martinez colombian ig/tiktok paid page">
       <div class="card-header">
         <span class="card-name">Eva Martinez</span>
         <span class="card-badge badge-live">LIVE</span>
@@ -110,7 +133,7 @@
       </div>
     </div>
 
-    <div class="card">
+    <div class="card" data-name="antonella" data-page="mixed" data-traffic="reddit" data-ne="false" data-search="antonella american reddit mixed">
       <div class="card-header">
         <span class="card-name">Antonella</span>
         <span class="card-badge badge-live">LIVE</span>
@@ -129,7 +152,7 @@
       </div>
     </div>
 
-    <div class="card">
+    <div class="card" data-name="jasmine" data-page="free/paid" data-traffic="ig/tiktok + reddit" data-ne="false" data-search="jasmine dominican ig/tiktok + reddit free/paid">
       <div class="card-header">
         <span class="card-name">Jasmine</span>
         <span class="card-badge badge-live">LIVE</span>
@@ -148,7 +171,7 @@
       </div>
     </div>
 
-    <div class="card">
+    <div class="card" data-name="fernanda" data-page="paid page" data-traffic="ig/tiktok" data-ne="false" data-search="fernanda brazilian ig/tiktok paid page">
       <div class="card-header">
         <span class="card-name">Fernanda</span>
         <span class="card-badge badge-live">LIVE</span>
@@ -167,7 +190,7 @@
       </div>
     </div>
 
-    <div class="card">
+    <div class="card" data-name="isabella" data-page="free/paid" data-traffic="social media" data-ne="false" data-search="isabella colombian/scottish social media free/paid">
       <div class="card-header">
         <span class="card-name">Isabella</span>
         <span class="card-badge badge-live">LIVE</span>
@@ -186,7 +209,7 @@
       </div>
     </div>
 
-    <div class="card">
+    <div class="card" data-name="jessica" data-page="mixed" data-traffic="reddit" data-ne="true" data-search="jessica american reddit mixed">
       <div class="card-header">
         <span class="card-name">Jessica</span>
         <span class="card-badge badge-live">LIVE</span>
@@ -205,7 +228,7 @@
       </div>
     </div>
 
-    <div class="card">
+    <div class="card" data-name="jessica fp" data-page="free/paid" data-traffic="reddit + ig" data-ne="false" data-search="jessica fp argentinian reddit + ig free/paid">
       <div class="card-header">
         <span class="card-name">Jessica FP</span>
         <span class="card-badge badge-live">LIVE</span>
@@ -224,7 +247,7 @@
       </div>
     </div>
 
-    <div class="card">
+    <div class="card" data-name="maddison" data-page="paid page" data-traffic="reddit" data-ne="false" data-search="maddison american reddit paid page">
       <div class="card-header">
         <span class="card-name">Maddison</span>
         <span class="card-badge badge-live">LIVE</span>
@@ -243,7 +266,7 @@
       </div>
     </div>
 
-    <div class="card">
+    <div class="card" data-name="vera" data-page="free page" data-traffic="reddit" data-ne="false" data-search="vera american reddit free page">
       <div class="card-header">
         <span class="card-name">Vera</span>
         <span class="card-badge badge-live">LIVE</span>
@@ -262,7 +285,7 @@
       </div>
     </div>
 
-    <div class="card">
+    <div class="card" data-name="mia luna" data-page="free page" data-traffic="reddit" data-ne="false" data-search="mia luna argentinian reddit free page">
       <div class="card-header">
         <span class="card-name">Mia Luna</span>
         <span class="card-badge badge-live">LIVE</span>
@@ -281,7 +304,7 @@
       </div>
     </div>
 
-    <div class="card">
+    <div class="card" data-name="mia brooks" data-page="free page" data-traffic="ig/tiktok" data-ne="false" data-search="mia brooks spanish ig/tiktok free page">
       <div class="card-header">
         <span class="card-name">Mia Brooks</span>
         <span class="card-badge badge-live">LIVE</span>
@@ -300,7 +323,7 @@
       </div>
     </div>
 
-    <div class="card">
+    <div class="card" data-name="ashley" data-page="free page" data-traffic="ig/tiktok" data-ne="false" data-search="ashley spanish ig/tiktok free page">
       <div class="card-header">
         <span class="card-name">Ashley</span>
         <span class="card-badge badge-live">LIVE</span>
@@ -319,7 +342,7 @@
       </div>
     </div>
 
-    <div class="card">
+    <div class="card" data-name="chayla grey" data-page="free page" data-traffic="ig/tiktok" data-ne="false" data-search="chayla grey brazilian ig/tiktok free page">
       <div class="card-header">
         <span class="card-name">Chayla Grey</span>
         <span class="card-badge badge-live">LIVE</span>
@@ -338,7 +361,7 @@
       </div>
     </div>
 
-    <div class="card">
+    <div class="card" data-name="emily bell" data-page="free page" data-traffic="ig/tiktok" data-ne="false" data-search="emily bell argentinian ig/tiktok free page">
       <div class="card-header">
         <span class="card-name">Emily Bell</span>
         <span class="card-badge badge-live">LIVE</span>
@@ -357,7 +380,7 @@
       </div>
     </div>
 
-    <div class="card">
+    <div class="card" data-name="lana monroe" data-page="free page" data-traffic="ig/tiktok" data-ne="false" data-search="lana monroe argentinian ig/tiktok free page">
       <div class="card-header">
         <span class="card-name">Lana Monroe</span>
         <span class="card-badge badge-live">LIVE</span>
@@ -376,7 +399,7 @@
       </div>
     </div>
 
-    <div class="card">
+    <div class="card" data-name="lia kuroki" data-page="free page" data-traffic="ig/tiktok" data-ne="false" data-search="lia kuroki japanese ig/tiktok free page">
       <div class="card-header">
         <span class="card-name">Lia Kuroki</span>
         <span class="card-badge badge-live">LIVE</span>
@@ -395,7 +418,7 @@
       </div>
     </div>
 
-    <div class="card">
+    <div class="card" data-name="lina" data-page="free page" data-traffic="ig/tiktok" data-ne="false" data-search="lina spanish ig/tiktok free page">
       <div class="card-header">
         <span class="card-name">Lina</span>
         <span class="card-badge badge-live">LIVE</span>
@@ -414,7 +437,7 @@
       </div>
     </div>
 
-    <div class="card">
+    <div class="card" data-name="faby monteiro" data-page="paid page" data-traffic="other" data-ne="false" data-search="faby monteiro brazilian other paid page">
       <div class="card-header">
         <span class="card-name">Faby Monteiro</span>
         <span class="card-badge badge-live">LIVE</span>
@@ -433,7 +456,7 @@
       </div>
     </div>
 
-    <div class="card">
+    <div class="card" data-name="irina" data-page="paid page" data-traffic="ig/tiktok" data-ne="true" data-search="irina american/russian ig/tiktok paid page">
       <div class="card-header">
         <span class="card-name">Irina</span>
         <span class="card-badge badge-live">LIVE</span>
@@ -452,7 +475,7 @@
       </div>
     </div>
 
-    <div class="card">
+    <div class="card" data-name="zansi" data-page="free page" data-traffic="social media" data-ne="false" data-search="zansi american social media free page">
       <div class="card-header">
         <span class="card-name">Zansi</span>
         <span class="card-badge badge-live">LIVE</span>
@@ -480,7 +503,7 @@
   </div>
   <div class="grid">
 
-    <div class="card">
+    <div class="card" data-name="max" data-page="paid page" data-traffic="dating apps (gay)" data-ne="false" data-search="max italian dating apps (gay) paid page">
       <div class="card-header">
         <span class="card-name">Max</span>
         <span class="card-badge badge-live">LIVE</span>
@@ -499,7 +522,7 @@
       </div>
     </div>
 
-    <div class="card">
+    <div class="card" data-name="marco" data-page="paid page" data-traffic="dating apps (gay)" data-ne="false" data-search="marco turkish dating apps (gay) paid page">
       <div class="card-header">
         <span class="card-name">Marco</span>
         <span class="card-badge badge-live">LIVE</span>
@@ -528,7 +551,7 @@
   <div class="section-title">Male Creators — Other Traffic (1)</div>
   <div class="grid">
 
-    <div class="card">
+    <div class="card" data-name="jockurworld" data-page="paid page" data-traffic="twitter/x" data-ne="false" data-search="jockurworld american twitter/x paid page">
       <div class="card-header">
         <span class="card-name">Jockurworld</span>
         <span class="card-badge badge-live">LIVE</span>
@@ -555,6 +578,44 @@
   Chatting Wizard — Script Manager — 2026<br>
   Internal use only
 </div>
+
+<script>
+// Search
+const searchInput = document.getElementById('dash-search');
+const cards = document.querySelectorAll('.card');
+const sections = document.querySelectorAll('.section-title');
+
+searchInput.addEventListener('input', () => {
+  const q = searchInput.value.toLowerCase().trim();
+  cards.forEach(c => {
+    if (!q || c.dataset.search.includes(q)) {
+      c.classList.remove('hide');
+    } else {
+      c.classList.add('hide');
+    }
+  });
+});
+
+// Filters
+const filterBtns = document.querySelectorAll('.filter-btn');
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    filterBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const f = btn.dataset.filter;
+    cards.forEach(c => {
+      if (f === 'all') { c.classList.remove('hide'); return; }
+      if (f === 'free' && c.dataset.page.includes('free')) { c.classList.remove('hide'); return; }
+      if (f === 'paid' && c.dataset.page.includes('paid') && !c.dataset.page.includes('free')) { c.classList.remove('hide'); return; }
+      if (f === 'nonexplicit' && c.dataset.ne === 'true') { c.classList.remove('hide'); return; }
+      if (f === 'reddit' && c.dataset.traffic.includes('reddit')) { c.classList.remove('hide'); return; }
+      if (f === 'ig' && (c.dataset.traffic.includes('ig') || c.dataset.traffic.includes('tiktok'))) { c.classList.remove('hide'); return; }
+      c.classList.add('hide');
+    });
+    searchInput.value = '';
+  });
+});
+</script>
 
 </body>
 </html>

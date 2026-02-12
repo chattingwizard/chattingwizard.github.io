@@ -55,7 +55,7 @@ config = {
         ("S1-1", "so...? 😊", "Wait for reply.", "sext"),
         ("S1-2", "really? you like it? oh my god that makes me feel so much braver 🫶", "React to compliment. Shy but pleased.", "sext"),
         ("S1-3", "you make me want to show you more of the side of me that nobody gets to see", None, "sext"),
-        ("S1-4", "give me a second... I need to work up the courage 😊", "WAIT 2-3 MIN", "wait"),
+        ("S1-4", "one secondond... I need to work up the courage 😊", "WAIT 2-3 MIN", "wait"),
         ("S1-5", "my heart won't stop racing... but something about you makes me feel safe", "SEND PPV 1 — $12. Lingerie tease. Bought → continue. Silent → NR Waves.", "ppv"),
 
         # ── Sexting Phase 2 → PPV 2 ($25) — More revealing lingerie ──
@@ -67,7 +67,7 @@ config = {
         ("S1-11", "you're the only one who makes me feel this way... you're the reason I'm doing this 💗", "SEND PPV 2 — $25. More revealing lingerie/implied tease. Bought → continue. Silent → NR Waves.", "ppv"),
 
         # ── Sexting Phase 3 → PPV 3 ($40) — Maximum tease, almost showing ──
-        ("S1-12", "oh my god", "Wait for reply. Keep momentum.", "sext"),
+        ("S1-12", "omg", "Wait for reply. Keep momentum.", "sext"),
         ("S1-13", "you have no idea what you're doing to me right now 🥺", None, "sext"),
         ("S1-14", "I'm lying here barely wearing anything and all I can think about is you... just you", "Suggestive, NOT explicit. Let his imagination fill in the rest.", "sext"),
         ("S1-15", "I want to show you how I look right now but I'm scared it's too much", None, "sext"),
@@ -78,7 +78,7 @@ config = {
         ("S1-18", "oh god 🥺", "Wait for reply.", "sext"),
         ("S1-19", "I can't stop... something about you makes me lose all my boundaries", None, "sext"),
         ("S1-20", "I want to finish this with you... stay with me please", None, "sext"),
-        ("S1-21", "hold on... one more", "WAIT 1-2 MIN", "wait"),
+        ("S1-21", "wait", "WAIT 1-2 MIN", "wait"),
         ("S1-22", "this one is only for you... nobody else gets to see me like this 💗", "SEND PPV 4 — $55. Peak content (most suggestive, implied). Bought → Aftercare. Silent → NR Waves.", "ppv"),
 
         # ── Aftercare ──

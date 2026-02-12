@@ -55,7 +55,7 @@ config = {
         ("S1-5", "I only want you to see this...", "SEND PPV 1 — $12. Bought → continue. Silent → NR Waves.", "ppv"),
 
         # ── Sexting Phase 2 → PPV 2 ($25) ──
-        ("S1-6", "did you watch it? 🥰", "Wait for reply.", "sext"),
+        ("S1-6", "did you see it? 🥰", "Wait for reply.", "sext"),
         ("S1-7", "talking to you does something to me I can't explain... like my whole body is tingling right now", "HE caused this feeling.", "sext"),
         ("S1-8", "I'm lying here thinking about your hands on me and I can't stop", None, "sext"),
         ("S1-9", "what would you do to me if you were next to me right now?", "Wait for reply. React to what he says.", "sext"),
@@ -66,8 +66,8 @@ config = {
         ("S1-12", "oh god", "Wait for reply. NO cooldown — keep momentum.", "sext"),
         ("S1-13", "I need you so bad right now, I can barely hold back", None, "sext"),
         ("S1-14", "imagine me right there with you, feeling your body against mine", None, "sext"),
-        ("S1-15", "I can't hold back anymore", None, "sext"),
-        ("S1-16", "give me a sec", "WAIT 2-3 MIN", "wait"),
+        ("S1-15", "I'm done holding back", None, "sext"),
+        ("S1-16", "hold on a sec", "WAIT 2-3 MIN", "wait"),
         ("S1-17", "this is all yours... every part of me 🌸", "SEND PPV 3 — $40. Bought → continue. Silent → NR Waves.", "ppv"),
 
         # ── Sexting Phase 4 → PPV 4 ($55) ──
@@ -295,13 +295,21 @@ config = {
         ], "res"),
 
         # ── SITUATIONAL ──
-        "cumcontrol": ([
-            ("edge1", "not yet... I'm not ready to let go of this feeling 🌸", "EDGE. More PPVs left."),
-            ("edge2", "hold on, stay with me a little longer... I need more of you", "EDGE variant."),
-            ("sync1", "I'm so close... let's finish together, but see this first 😊", "SYNC. Final PPV."),
-            ("sync2", "wait for me, I want us to let go at the same time... open this first 🌸", "SYNC variant."),
-            ("delay1", "hold on... trust me you want to wait for what's coming", "DELAY."),
-            ("delay2", "don't finish yet, I have something that'll make it so much better 🥰", "DELAY variant."),
+        "cumcontrol1": ([
+            ("edge1", "not yet... I said not yet love", "CONTROL. More PPVs to send. Create urgency to open next."),
+            ("edge2", "you better not be close already... I have more to show you", "EDGE variant."),
+            ("sync1", "okay NOW we can go together... open this", "SYNC. Send PPV."),
+            ("sync2", "I want to feel it at the same time... watch this first", "SYNC variant. Send PPV."),
+            ("delay1", "wait wait wait love... I have one more thing for you before you finish", "DELAY. Send final PPV."),
+            ("delay2", "if you finish before you see what I'm sending next you'll regret it", "DELAY variant."),
+        ], "sit"),
+        "cumcontrol2": ([
+            ("edge1", "slow down... I'm not letting you off that easy", "CONTROL."),
+            ("edge2", "patience... the best part hasn't even happened yet", "EDGE variant."),
+            ("sync1", "okay I'm ready now too love... watch this with me", "SYNC. Send PPV."),
+            ("sync2", "let's do this together... but you have to open this first", "SYNC variant."),
+            ("delay1", "don't you dare... not until you see what I just did", "DELAY. Send PPV."),
+            ("delay2", "hold on just a little longer love, I promise this next one is worth it", "DELAY variant."),
         ], "sit"),
         "dickpic": ([
             ("dpsext1", "oh wow... that's really hot. you have no idea what you just made me feel 🥰", "DURING SEXTING."),

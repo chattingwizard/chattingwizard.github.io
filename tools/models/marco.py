@@ -314,13 +314,21 @@ config = {
         ], "res"),
 
         # ── SITUATIONAL ──
-        "cumcontrol": ([
-            ("edge1", "don't cum yet... I'm not done with you", "EDGE. More PPVs left."),
-            ("edge2", "hold it, not yet... I need you to last a little longer for me", "EDGE variant."),
-            ("sync1", "I'm so close too, cum with me... but you need to see this first", "SYNC. Final PPV."),
-            ("sync2", "wait for me, I want us to finish together... open this first", "SYNC variant."),
-            ("delay1", "hold it... wait until you see what I'm about to send, trust me it's worth it", "DELAY."),
-            ("delay2", "don't you dare finish before you see this, trust me you want to wait", "DELAY variant."),
+        "cumcontrol1": ([
+            ("edge1", "bro don't you dare finish yet... I'm not even close to done", "CONTROL."),
+            ("edge2", "hold it... you're gonna last until I say otherwise", "EDGE variant."),
+            ("sync1", "aight let's bust together... open this", "SYNC. Send PPV."),
+            ("sync2", "I'm close too man, let's go at the same time... check this", "SYNC variant."),
+            ("delay1", "edge for me... what I'm about to send is gonna hit different", "DELAY. Send PPV."),
+            ("delay2", "trust me you wanna save it for this next one, it's the best one", "DELAY variant."),
+        ], "sit"),
+        "cumcontrol2": ([
+            ("edge1", "yo slow down... we're not done here", "CONTROL."),
+            ("edge2", "hold it, I got one more thing to show you first", "EDGE variant."),
+            ("sync1", "alright go time, let's finish this together... open it", "SYNC. Send PPV."),
+            ("sync2", "I'm about to blow too, watch this and let's go", "SYNC variant."),
+            ("delay1", "don't finish yet bro... this last one? insane", "DELAY. Send PPV."),
+            ("delay2", "edge just a bit more... the finale is worth it", "DELAY variant."),
         ], "sit"),
         "dickpic": ([
             ("dpsext1", "fuck okay that's... damn. you have no idea what that just did to me", "DURING SEXTING."),

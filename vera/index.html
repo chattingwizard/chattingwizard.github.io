@@ -70,6 +70,17 @@ body{background:var(--bg);color:var(--text);font-family:"Segoe UI",system-ui,san
 .qi-text{flex:1;font-size:.88rem}
 .top-btn{position:fixed;bottom:16px;right:16px;width:36px;height:36px;border-radius:50%;background:var(--card);border:1px solid var(--border);color:var(--muted);font-size:1rem;cursor:pointer;display:none;align-items:center;justify-content:center;z-index:100;transition:.15s}
 .top-btn:hover{color:var(--text);border-color:var(--muted)}.top-btn.show{display:flex}
+.search-wrap{margin:12px 0 4px;position:relative}
+.search-input{width:100%;background:var(--card);border:1px solid var(--border);color:var(--text);padding:8px 14px 8px 36px;border-radius:8px;font-size:.85rem;outline:none;transition:.15s}
+.search-input:focus{border-color:var(--accent);box-shadow:0 0 0 2px #58a6ff22}
+.search-input::placeholder{color:var(--muted)}
+.search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:.8rem;pointer-events:none}
+.search-count{position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:.72rem}
+.msg.search-hide,.phase.search-hide{display:none}
+.msg.search-match .msg-text{background:#58a6ff12;border-radius:4px}
+.copy-all{background:none;border:1px solid var(--border);color:var(--muted);padding:2px 8px;border-radius:6px;font-size:.64rem;cursor:pointer;transition:.15s;margin-left:auto;margin-right:8px}
+.copy-all:hover{border-color:var(--accent);color:var(--accent)}
+.copy-all.ok{border-color:var(--green);color:var(--green)}
 @media(max-width:700px){.page{padding:12px 10px}.info-grid,.qi-grid{grid-template-columns:1fr}.hero{flex-direction:column;text-align:center}.hero h1{font-size:1.5rem}.profile-grid{grid-template-columns:1fr}.toc{margin:0 -10px;padding-left:10px;padding-right:10px}}
 </style>
 </head>
@@ -100,6 +111,12 @@ body{background:var(--bg);color:var(--text);font-family:"Segoe UI",system-ui,san
   <a href="#positive-spin" class="toc-ref">Spin</a>
   <a href="objections.html" class="toc-ref" style="color:var(--red);border-color:#f8514933">🛡️ OBJ/RES</a>
 </nav>
+
+<div class="search-wrap">
+  <span class="search-icon">&#128269;</span>
+  <input type="text" class="search-input" id="search" placeholder="Search scripts..." autocomplete="off">
+  <span class="search-count" id="search-count"></span>
+</div>
 
 <div class="info-grid">
   <div>
@@ -132,6 +149,7 @@ body{background:var(--bg);color:var(--text);font-family:"Segoe UI",system-ui,san
     <span class="phase-emoji">💬</span>
     <span class="phase-name">Rapport</span>
     <span class="phase-meta">5 msgs</span>
+    <button class="copy-all" data-copy-all="hii 😊 thanks for subscribing, that means a lot to me. what made you want to be here?\n\naww that's really sweet. so where are you from?\n\nthat's cool! I'm in Miami, studying medicine and spending way too much time with my cats haha 🌸\n\nso tell me about you... what do you like doing when you're not on here making girls smile?\n\nyou know what... I really like this. you have this calm energy that makes me feel really comfortable 😊">Copy All</button>
     <span class="toggle">▼</span>
   </div>
   <div class="phase-body">
@@ -147,6 +165,7 @@ body{background:var(--bg);color:var(--text);font-family:"Segoe UI",system-ui,san
     <span class="phase-emoji">🔥</span>
     <span class="phase-name">Teasing</span>
     <span class="phase-meta">4 msgs</span>
+    <button class="copy-all" data-copy-all="okay so I need to tell you something... I've been in this really soft mood all day and I can't shake it\n\nlike everything feels warm and tingly and I keep thinking about... things 🙈\n\nugh talking to you is making it so much worse... in the best way though 🌸">Copy All</button>
     <span class="toggle">▼</span>
   </div>
   <div class="phase-body">
@@ -161,6 +180,7 @@ body{background:var(--bg);color:var(--text);font-family:"Segoe UI",system-ui,san
     <span class="phase-emoji">🔥</span>
     <span class="phase-name">Sexting Phase 1</span>
     <span class="phase-meta">1 PPV</span>
+    
     <span class="toggle">▼</span>
   </div>
   <div class="phase-body">
@@ -172,6 +192,7 @@ body{background:var(--bg);color:var(--text);font-family:"Segoe UI",system-ui,san
     <span class="phase-emoji">🔥</span>
     <span class="phase-name">Sexting Phase 2</span>
     <span class="phase-meta">4 msgs + 1 PPV</span>
+    <button class="copy-all" data-copy-all="so? 😊\n\nyou really like it? that makes me so happy you have no idea 🥰\n\nyou make me want to show you more of me... the real me">Copy All</button>
     <span class="toggle">▼</span>
   </div>
   <div class="phase-body">
@@ -187,10 +208,11 @@ body{background:var(--bg);color:var(--text);font-family:"Segoe UI",system-ui,san
     <span class="phase-emoji">🔥</span>
     <span class="phase-name">Sexting Phase 3</span>
     <span class="phase-meta">5 msgs + 1 PPV</span>
+    <button class="copy-all" data-copy-all="did you see it? 🥰\n\ntalking to you does something to me I can't explain... like my whole body is tingling right now\n\nI'm lying here thinking about your hands on me and I can't stop\n\nwhat would you do to me if you were next to me right now?">Copy All</button>
     <span class="toggle">▼</span>
   </div>
   <div class="phase-body">
-<div class="msg"><span class="msg-id">S1-6</span><div class="msg-body"><div class="msg-text">did you watch it? 🥰</div><div class="msg-note">Wait for reply.</div></div><button class="cp" data-copy="did you watch it? 🥰"><span class="cp-icon">📋</span></button></div>
+<div class="msg"><span class="msg-id">S1-6</span><div class="msg-body"><div class="msg-text">did you see it? 🥰</div><div class="msg-note">Wait for reply.</div></div><button class="cp" data-copy="did you see it? 🥰"><span class="cp-icon">📋</span></button></div>
 <div class="msg"><span class="msg-id">S1-7</span><div class="msg-body"><div class="msg-text">talking to you does something to me I can&#x27;t explain... like my whole body is tingling right now</div><div class="msg-note">HE caused this feeling.</div></div><button class="cp" data-copy="talking to you does something to me I can&#x27;t explain... like my whole body is tingling right now"><span class="cp-icon">📋</span></button></div>
 <div class="msg"><span class="msg-id">S1-8</span><div class="msg-body"><div class="msg-text">I&#x27;m lying here thinking about your hands on me and I can&#x27;t stop</div></div><button class="cp" data-copy="I&#x27;m lying here thinking about your hands on me and I can&#x27;t stop"><span class="cp-icon">📋</span></button></div>
 <div class="msg"><span class="msg-id">S1-9</span><div class="msg-body"><div class="msg-text">what would you do to me if you were next to me right now?</div><div class="msg-note">Wait for reply. React to what he says.</div></div><button class="cp" data-copy="what would you do to me if you were next to me right now?"><span class="cp-icon">📋</span></button></div>
@@ -203,14 +225,15 @@ body{background:var(--bg);color:var(--text);font-family:"Segoe UI",system-ui,san
     <span class="phase-emoji">🔥</span>
     <span class="phase-name">Sexting Phase 4</span>
     <span class="phase-meta">5 msgs + 1 PPV</span>
+    <button class="copy-all" data-copy-all="oh god\n\nI need you so bad right now, I can barely hold back\n\nimagine me right there with you, feeling your body against mine\n\nI'm done holding back">Copy All</button>
     <span class="toggle">▼</span>
   </div>
   <div class="phase-body">
 <div class="msg"><span class="msg-id">S1-12</span><div class="msg-body"><div class="msg-text">oh god</div><div class="msg-note">Wait for reply. NO cooldown — keep momentum.</div></div><button class="cp" data-copy="oh god"><span class="cp-icon">📋</span></button></div>
 <div class="msg"><span class="msg-id">S1-13</span><div class="msg-body"><div class="msg-text">I need you so bad right now, I can barely hold back</div></div><button class="cp" data-copy="I need you so bad right now, I can barely hold back"><span class="cp-icon">📋</span></button></div>
 <div class="msg"><span class="msg-id">S1-14</span><div class="msg-body"><div class="msg-text">imagine me right there with you, feeling your body against mine</div></div><button class="cp" data-copy="imagine me right there with you, feeling your body against mine"><span class="cp-icon">📋</span></button></div>
-<div class="msg"><span class="msg-id">S1-15</span><div class="msg-body"><div class="msg-text">I can&#x27;t hold back anymore</div></div><button class="cp" data-copy="I can&#x27;t hold back anymore"><span class="cp-icon">📋</span></button></div>
-<div class="msg msg-wait"><span class="msg-id">S1-16</span><div class="msg-body"><div class="msg-text">give me a sec</div><div class="msg-note">WAIT 2-3 MIN</div></div><button class="cp" data-copy="give me a sec"><span class="cp-icon">📋</span></button></div>
+<div class="msg"><span class="msg-id">S1-15</span><div class="msg-body"><div class="msg-text">I&#x27;m done holding back</div></div><button class="cp" data-copy="I&#x27;m done holding back"><span class="cp-icon">📋</span></button></div>
+<div class="msg msg-wait"><span class="msg-id">S1-16</span><div class="msg-body"><div class="msg-text">hold on a sec</div><div class="msg-note">WAIT 2-3 MIN</div></div><button class="cp" data-copy="hold on a sec"><span class="cp-icon">📋</span></button></div>
 <div class="ppv-moment"><span class="ppv-icon">📎</span><span class="ppv-label">this is all yours... every part of me 🌸</span></div>
   </div>
 </div>
@@ -219,6 +242,7 @@ body{background:var(--bg);color:var(--text);font-family:"Segoe UI",system-ui,san
     <span class="phase-emoji">🔥</span>
     <span class="phase-name">Sexting Phase 5</span>
     <span class="phase-meta">4 msgs + 1 PPV</span>
+    <button class="copy-all" data-copy-all="oh my god\n\nnot yet... stay with me a little longer\n\nI wanna finish with you... don't go anywhere">Copy All</button>
     <span class="toggle">▼</span>
   </div>
   <div class="phase-body">
@@ -234,6 +258,7 @@ body{background:var(--bg);color:var(--text);font-family:"Segoe UI",system-ui,san
     <span class="phase-emoji">💪</span>
     <span class="phase-name">Aftercare</span>
     <span class="phase-meta">2 msgs</span>
+    <button class="copy-all" data-copy-all="wow... that was so beautiful 🌸\n\nI feel so close to you right now. you made me feel things I didn't know I could feel on here. stay with me okay? 💕">Copy All</button>
     <span class="toggle">▼</span>
   </div>
   <div class="phase-body">
@@ -278,8 +303,8 @@ body{background:var(--bg);color:var(--text);font-family:"Segoe UI",system-ui,san
 <button class="top-btn" id="top-btn">↑</button>
 
 <script>
-document.addEventListener('click',e=>{const b=e.target.closest('.cp');if(!b)return;navigator.clipboard.writeText(b.dataset.copy).then(()=>{b.classList.add('ok');setTimeout(()=>b.classList.remove('ok'),1200)})});
-document.querySelectorAll('.phase-header').forEach(h=>{h.addEventListener('click',e=>{if(e.target.closest('.cp'))return;h.closest('.phase').classList.toggle('collapsed')})});
+document.addEventListener('click',e=>{const b=e.target.closest('.cp');if(b){navigator.clipboard.writeText(b.dataset.copy).then(()=>{b.classList.add('ok');setTimeout(()=>b.classList.remove('ok'),1200)});return;}const ca=e.target.closest('.copy-all');if(ca){e.stopPropagation();const txt=ca.dataset.copyAll.replace(/\\n/g,'\n');navigator.clipboard.writeText(txt).then(()=>{ca.classList.add('ok');ca.textContent='Copied!';setTimeout(()=>{ca.classList.remove('ok');ca.textContent='Copy All'},1500)});return;}});
+document.querySelectorAll('.phase-header').forEach(h=>{h.addEventListener('click',e=>{if(e.target.closest('.cp')||e.target.closest('.copy-all'))return;h.closest('.phase').classList.toggle('collapsed')})});
 document.querySelectorAll('.toc a[href^="#"]').forEach(a=>{a.addEventListener('click',()=>{const t=document.getElementById(a.getAttribute('href').slice(1));if(t&&t.classList.contains('phase'))t.classList.remove('collapsed')})});
 const topBtn=document.getElementById('top-btn');
 window.addEventListener('scroll',()=>topBtn.classList.toggle('show',window.scrollY>400));
@@ -290,6 +315,10 @@ const tocLinks=document.querySelectorAll('.toc a[href^="#"]');
 const sections=Array.from(tocLinks).map(a=>({link:a,el:document.getElementById(a.getAttribute('href').slice(1))})).filter(s=>s.el);
 function updateToc(){let a=sections[0];for(const s of sections)if(s.el.getBoundingClientRect().top<=100)a=s;tocLinks.forEach(l=>l.classList.remove('active'));if(a)a.link.classList.add('active')}
 window.addEventListener('scroll',updateToc);updateToc();
+const searchInput=document.getElementById('search');
+const searchCount=document.getElementById('search-count');
+searchInput.addEventListener('input',()=>{const q=searchInput.value.toLowerCase().trim();const msgs=document.querySelectorAll('.msg');const phases=document.querySelectorAll('.phase');if(!q){msgs.forEach(m=>{m.classList.remove('search-hide','search-match')});phases.forEach(p=>p.classList.remove('search-hide'));searchCount.textContent='';return;}let count=0;phases.forEach(p=>{let hasMatch=false;p.querySelectorAll('.msg').forEach(m=>{const txt=m.querySelector('.msg-text');if(txt&&txt.textContent.toLowerCase().includes(q)){m.classList.remove('search-hide');m.classList.add('search-match');hasMatch=true;count++;}else{m.classList.add('search-hide');m.classList.remove('search-match')}});if(hasMatch){p.classList.remove('search-hide','collapsed')}else{p.classList.add('search-hide')}});searchCount.textContent=count+' found'});
+searchInput.addEventListener('keydown',e=>{if(e.key==='Escape'){searchInput.value='';searchInput.dispatchEvent(new Event('input'));searchInput.blur()}});
 </script>
 </body>
 </html>

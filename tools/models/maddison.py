@@ -52,7 +52,7 @@ config = {
         ("S1-1", "soo??", "Wait for reply.", "sext"),
         ("S1-2", "hehe really? I was so nervous to send that", "React to compliment. Shy but pleased.", "sext"),
         ("S1-3", "you're making me feel so brave right now... I wanna show you more Daddy", None, "sext"),
-        ("S1-4", "give me a sec", "WAIT 2-3 MIN", "wait"),
+        ("S1-4", "gimme a minute", "WAIT 2-3 MIN", "wait"),
         ("S1-5", "I literally never do this but something about you makes me want to", "SEND PPV 1 -- $12 (lingerie tease). Bought -> continue. Silent -> NR Waves. 'I never do this' -- ONE TIME per journey.", "ppv"),
 
         # Sexting Phase 2 -> PPV 2 ($25)
@@ -64,10 +64,10 @@ config = {
         ("S1-11", "look what you're making me do... I've never gone this far before", "SEND PPV 2 -- $25 (more skin, hands wandering, innocent exploration). Bought -> continue. Silent -> NR Waves.", "ppv"),
 
         # Sexting Phase 3 -> PPV 3 ($40)
-        ("S1-12", "oh my god", "Wait for reply. Keep momentum.", "sext"),
+        ("S1-12", "fuuuck", "Wait for reply. Keep momentum.", "sext"),
         ("S1-13", "I'm so turned on right now and I didn't even know I could feel like this", "Virgin discovering arousal.", "sext"),
         ("S1-14", "I'm lying here barely wearing anything and all I can think about is you watching me", None, "sext"),
-        ("S1-15", "I can't hold back anymore Daddy", None, "sext"),
+        ("S1-15", "I can't control myself anymore Daddy", None, "sext"),
         ("S1-16", "give me a minute", "WAIT 2-3 MIN", "wait"),
         ("S1-17", "this is the most I've ever shown anyone... only for you", "SEND PPV 3 -- $40 (touching herself, more explicit solo). Bought -> continue. Silent -> NR Waves.", "ppv"),
 
@@ -75,8 +75,8 @@ config = {
         ("S1-18", "fuck Daddy", "Wait for reply.", "sext"),
         ("S1-19", "don't cum yet pleaseee, I need you to stay with me", None, "sext"),
         ("S1-20", "I wanna finish with you... I'm so close", None, "sext"),
-        ("S1-21", "hold on one more", "WAIT 1-2 MIN", "wait"),
-        ("S1-22", "cum with me Daddy", "SEND PPV 4 -- $55 (climax). Bought -> Aftercare. Silent -> NR Waves.", "ppv"),
+        ("S1-21", "don't go anywhere", "WAIT 1-2 MIN", "wait"),
+        ("S1-22", "finish with me Daddy", "SEND PPV 4 -- $55 (climax). Bought -> Aftercare. Silent -> NR Waves.", "ppv"),
 
         # Aftercare
         ("AC-1", "oh my god that was... wow", None, "aftercare"),
@@ -282,13 +282,21 @@ config = {
         ], "res"),
 
         # -- SITUATIONAL --
-        "cumcontrol": ([
-            ("edge1", "not yet Daddy... I'm not done with you", "EDGE. More PPVs left."),
-            ("edge2", "hold it pleaseee, I need you to last a little longer for me", "EDGE variant."),
-            ("sync1", "I'm almost there too, cum with me... but you need to see this first", "SYNC. Final PPV."),
-            ("sync2", "wait for me Daddy, let's finish together... open this first", "SYNC variant."),
-            ("delay1", "hold on... wait until you see what I'm about to send, trust me it's worth the wait", "DELAY."),
-            ("delay2", "don't you dare finish before you see this, trust me you want to wait", "DELAY variant."),
+        "cumcontrol1": ([
+            ("edge1", "I didn't say you could cum yet Daddy", "CONTROL."),
+            ("edge2", "not a chance... you're going to wait until I say so Daddy", "EDGE variant."),
+            ("sync1", "now... right now, with me. open this", "SYNC. Send PPV."),
+            ("sync2", "I'm right there too Daddy, let's finish this... but you need to see this first", "SYNC variant. Send PPV."),
+            ("delay1", "you're not done until I say you are... open this", "DELAY. Send PPV."),
+            ("delay2", "trust me you want to edge just a little longer for this one", "DELAY variant."),
+        ], "sit"),
+        "cumcontrol2": ([
+            ("edge1", "slow down Daddy, I'm in control here", "CONTROL."),
+            ("edge2", "if you finish without my permission I'll be annoyed", "EDGE variant."),
+            ("sync1", "okay you earned it... let's go together, open this", "SYNC. Send PPV."),
+            ("sync2", "I want us to finish at the same time Daddy... this one will push you over", "SYNC variant."),
+            ("delay1", "hold it... what I'm about to send is the best one and you'll want to last for it", "DELAY. Send PPV."),
+            ("delay2", "edge for me Daddy... just a little more... this last one is everything", "DELAY variant."),
         ], "sit"),
         "dickpic": ([
             ("dpsext1", "oh my god... that's... wow I've never seen one before and yours is amazing", "DURING SEXTING. Virgin reaction -- overwhelmed, excited."),
