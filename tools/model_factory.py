@@ -374,6 +374,41 @@ class ModelFactory:
             after_ppv = (msg_type == "ppv")
         return phases
 
+    # Intensity targets per sexting message ID
+    _INTENSITY = {
+        "S1-1": 6, "S1-2": 7, "S1-3": 8, "S1-5": 8,
+        "S1-6": 6, "S1-7": 8, "S1-8": 8, "S1-9": 9, "S1-11": 9,
+        "S1-12": 9, "S1-13": 9, "S1-14": 9, "S1-15": 10, "S1-17": 10,
+        "S1-18": 10, "S1-19": 10, "S1-20": 10, "S1-22": 10,
+    }
+    _INTENSITY_NE = {
+        "S1-1": 4, "S1-2": 5, "S1-3": 6, "S1-5": 6,
+        "S1-6": 5, "S1-7": 6, "S1-8": 6, "S1-9": 7, "S1-11": 7,
+        "S1-12": 7, "S1-13": 7, "S1-14": 7, "S1-15": 8, "S1-17": 8,
+        "S1-18": 8, "S1-19": 8, "S1-20": 8, "S1-22": 8,
+    }
+
+    @staticmethod
+    def _intensity_html(level):
+        """Return HTML for a small intensity meter bar."""
+        if level <= 0:
+            return ''
+        pct = level * 10  # 0-100%
+        if level <= 4:
+            color = '#3b82f6'   # blue
+        elif level <= 6:
+            color = '#eab308'   # yellow
+        elif level <= 8:
+            color = '#f97316'   # orange
+        else:
+            color = '#ef4444'   # red
+        return (
+            '<span class="intensity" title="Intensity %d/10">'
+            '<span class="i-track"><span class="i-bar" style="width:%d%%;background:%s"></span></span>'
+            '<span class="i-val" style="color:%s">%d</span></span>'
+            % (level, pct, color, color, level)
+        )
+
     def generate_guide_html(self):
         """Generate index.html \u2014 main chatter guide page."""
         h = html_mod.escape
@@ -382,6 +417,8 @@ class ModelFactory:
         name_up = name.upper()
         photo = h(c.get("photo_file", "profile.jpg"))
         phases = self._build_journey_phases()
+        is_ne = c.get("explicit_level") in ("non_explicit", "soft")
+        imap = self._INTENSITY_NE if is_ne else self._INTENSITY
 
         # \u2500\u2500 Journey HTML \u2500\u2500
         journey_parts = []
@@ -395,19 +432,22 @@ class ModelFactory:
             rows = []
             for mid, txt, note, mtype in phase["msgs"]:
                 et = h(txt)
+                ilevel = imap.get(mid, 0)
+                ibar = self._intensity_html(ilevel)
                 if mtype == "ppv":
                     rows.append(
                         '<div class="ppv-moment"><span class="ppv-icon">\U0001f4ce</span>'
-                        '<span class="ppv-label">%s</span></div>' % et)
+                        '%s<span class="ppv-label">%s</span></div>' % (ibar, et))
                 else:
                     wcls = ' msg-wait' if mtype == 'wait' else ''
                     note_h = '<div class="msg-note">%s</div>' % h(note) if note else ''
                     rows.append(
                         '<div class="msg%s"><span class="msg-id">%s</span>'
+                        '%s'
                         '<div class="msg-body"><div class="msg-text">%s</div>%s</div>'
                         '<button class="cp" data-copy="%s">'
                         '<span class="cp-icon">\U0001f4cb</span></button></div>'
-                        % (wcls, h(mid), et, note_h, et))
+                        % (wcls, h(mid), ibar, et, note_h, et))
             collapsed = ' collapsed' if i > 0 else ''
             # Build smart meta label: "X msgs" or "PPV" or "X msgs + PPV"
             if msg_count > 0 and ppv_count > 0:
@@ -656,6 +696,11 @@ class ModelFactory:
             '.msg-note{background:#e3b34112;border-left:3px solid var(--yellow);padding:5px 10px;'
             'border-radius:0 6px 6px 0;margin:4px 0 2px;font-size:.8rem;color:var(--yellow)}\n'
             '.msg-wait{background:#d2992210}.msg-wait .msg-id{border-color:var(--orange);color:var(--orange)}\n'
+            '.intensity{display:flex;align-items:center;gap:3px;flex-shrink:0;margin-top:5px}\n'
+            '.i-track{width:40px;height:5px;background:#1a1e26;border-radius:3px;overflow:hidden;border:1px solid #ffffff10}\n'
+            '.i-bar{height:100%;border-radius:3px;transition:width .3s}\n'
+            '.i-val{font-size:.58rem;font-weight:700;min-width:12px;text-align:center}\n'
+            '.ppv-moment .intensity{margin-top:0}\n'
             '.ppv-moment{background:#3fb95010;border:1px solid #3fb95028;border-radius:10px;'
             'padding:8px 14px;margin:6px 16px;display:flex;align-items:center;gap:10px}\n'
             '.ppv-moment .ppv-icon{font-size:1.2rem}\n'

@@ -74,9 +74,9 @@ config = {
         ("S1-17", "I've never let anyone see me like this... but you're about to 💦", "SEND PPV 3 — $40. Bought → continue. Silent → NR Waves.", "ppv"),
 
         # ── Sexting Phase 4 → PPV 4 ($55) ──
-        ("S1-18", "FUCK I can't stop shaking amor... I'm dripping everywhere 🔥", "Wait for reply.", "sext"),
-        ("S1-19", "I'm so close I can feel it in every part of my body amor... wait for me, I'm right there 💦", None, "sext"),
-        ("S1-20", "I'm cumming right now... don't look away for a single second", None, "sext"),
+        ("S1-18", "FUCK my pussy won't stop clenching and I'm dripping everywhere amor 🔥", "Wait for reply.", "sext"),
+        ("S1-19", "my whole body is squeezing and I need to cum for you right now amor... I can feel every throb 💦", None, "sext"),
+        ("S1-20", "I'm cumming all over my fingers... FUCK amor my pussy is pulsing so hard right now", None, "sext"),
         ("S1-21", "hold on", "WAIT 1-2 MIN", "wait"),
         ("S1-22", "watch me cum amor... this one is only for you 💦", "SEND PPV 4 — $55. Bought → Aftercare. Silent → NR Waves.", "ppv"),
 

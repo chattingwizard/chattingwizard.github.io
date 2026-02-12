@@ -73,11 +73,11 @@ config = {
         ("S1-17", "you need to see this... I've never been like this before 💜", "SEND PPV 3 — $40 (toy play, more explicit solo). Bought → continue. Silent 3 min → NR Waves.", "ppv"),
 
         # ── Sexting Phase 4 → PPV 4 ($55) ──
-        ("S1-18", "oh my god I can't stop shaking... I can feel it everywhere 🖤", "Wait for reply.", "sext"),
-        ("S1-19", "I'm right there babe... don't go anywhere, I need you to watch me finish 💜", None, "sext"),
-        ("S1-20", "I'm cumming... right now... don't look away", None, "sext"),
+        ("S1-18", "oh my god my pussy is pulsing so hard around my fingers and I can't stop 🖤", "Wait for reply.", "sext"),
+        ("S1-19", "I'm right there babe... my whole body is clenching around my fingers and I need you watching when I cum 💜", None, "sext"),
+        ("S1-20", "I'm cumming... fuck my pussy is pulsing so hard and I can barely breathe", None, "sext"),
         ("S1-21", "wait", "WAIT 1-2 MIN", "wait"),
-        ("S1-22", "let go with me babe... I need you to see this 💜", "SEND PPV 4 — $55 (full solo climax with toy). Bought → Aftercare. Silent → NR Waves.", "ppv"),
+        ("S1-22", "cum with me babe... watch what happens to my body right now 💜", "SEND PPV 4 — $55 (full solo climax with toy). Bought → Aftercare. Silent → NR Waves.", "ppv"),
 
         # ── Aftercare ──
         ("AC-1", "oh my god that was... wow 🥺💜", None, "aftercare"),

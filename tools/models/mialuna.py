@@ -74,9 +74,9 @@ config = {
         ("S1-17", "I've never recorded anything like this before babe... you need to see what you made me do 🥵", "SEND PPV 3 — $40 (toy play, explicit solo). Bought → continue. Silent 3 min → NR Waves.", "ppv"),
 
         # ── Sexting Phase 4 → PPV 4 ($55) ──
-        ("S1-18", "FUCK my legs won't stop shaking 🥵", "Wait for reply.", "sext"),
-        ("S1-19", "babe I'm about to cum... please don't go anywhere, I need you watching when it happens 😊", None, "sext"),
-        ("S1-20", "I'm cumming... oh my GOD I'm cumming right now", None, "sext"),
+        ("S1-18", "FUCK my pussy is pulsing so hard and my legs won't stop shaking 🥵", "Wait for reply.", "sext"),
+        ("S1-19", "I'm about to cum everywhere babe... I can feel my pussy clenching so hard around my fingers 😊", None, "sext"),
+        ("S1-20", "I'm cumming for you babe... holy fuck my pussy is throbbing and I can feel it dripping all over", None, "sext"),
         ("S1-21", "hold on hold on", "WAIT 1-2 MIN", "wait"),
         ("S1-22", "watch me cum for you babe... right now 🥵", "SEND PPV 4 — $55 (full solo climax with toy). Bought → Aftercare. Silent → NR Waves.", "ppv"),
 

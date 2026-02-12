@@ -76,9 +76,9 @@ config = {
         ("S1-17", "you're about to see what happens when I completely let go 💦", "SEND PPV 3 — $40. Bought → continue. Silent 3 min → NR Waves.", "ppv"),
 
         # ── Sexting Phase 4 → PPV 4 ($55) ──
-        ("S1-18", "holy fuck I can feel it building so hard 🥵", "Wait for reply.", "sext"),
-        ("S1-19", "I'm right there bro... don't stop watching, I'm about to blow 💦", None, "sext"),
-        ("S1-20", "I'm cumming... FUCK watch every drop", None, "sext"),
+        ("S1-18", "holy fuck my cock is throbbing and I can feel it about to explode 🥵", "Wait for reply.", "sext"),
+        ("S1-19", "I'm so hard I can barely hold it bro... my cock is throbbing and I'm about to blow 💦", None, "sext"),
+        ("S1-20", "FUCK I'm cumming... my cock is pulsing so hard right now and I can't stop it", None, "sext"),
         ("S1-21", "don't go anywhere", "WAIT 1-2 MIN", "wait"),
         ("S1-22", "watch me cum for you right now bro 💦", "SEND PPV 4 — $55. Bought → Aftercare. Silent → NR Waves.", "ppv"),
 
