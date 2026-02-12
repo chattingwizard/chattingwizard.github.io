@@ -6,55 +6,81 @@
 <title>CW Scripts — Chatting Wizard</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { background: #0d1117; color: #e6edf3; font-family: 'Segoe UI', system-ui, sans-serif; min-height: 100vh; }
-  .header { text-align: center; padding: 50px 20px 30px; }
-  .header h1 { font-size: 2.2em; color: #58a6ff; margin-bottom: 8px; }
-  .header p { color: #8b949e; font-size: 1em; max-width: 500px; margin: 0 auto; }
-  .header .count { color: #3fb950; font-weight: 700; font-size: 1.1em; margin-top: 8px; }
-  .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
-  .section-title { font-size: 1.1em; color: #8b949e; text-transform: uppercase; letter-spacing: 1px; margin: 40px 0 16px 0; padding-bottom: 8px; border-bottom: 1px solid #21262d; }
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
-  .card { background: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 20px; transition: all 0.2s; }
-  .card:hover { border-color: #58a6ff; box-shadow: 0 4px 20px rgba(88,166,255,0.1); }
-  .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-  .card-name { font-size: 1.3em; font-weight: 700; }
-  .card-badge { font-size: 0.7em; padding: 3px 10px; border-radius: 20px; font-weight: 600; text-transform: uppercase; }
-  .badge-live { background: #3fb95022; color: #3fb950; border: 1px solid #3fb95044; }
-  .card-meta { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
-  .meta-tag { font-size: 0.75em; color: #8b949e; background: #1c2129; padding: 2px 8px; border-radius: 4px; }
-  .card-traffic { font-size: 0.85em; color: #8b949e; margin-bottom: 8px; }
-  .card-traffic strong { color: #e6edf3; }
-  .card-actions { display: flex; gap: 8px; margin-top: 12px; padding-top: 12px; border-top: 1px solid #21262d; }
-  .btn-guide, .btn-xlsx { flex: 1; text-align: center; padding: 7px 10px; border-radius: 8px; font-size: 0.75em; font-weight: 600; text-decoration: none; transition: all 0.2s; }
-  .btn-guide { background: #58a6ff22; color: #58a6ff; border: 1px solid #58a6ff44; }
-  .btn-guide:hover { background: #58a6ff33; }
-  .btn-xlsx { background: #3fb95022; color: #3fb950; border: 1px solid #3fb95044; }
-  .btn-xlsx:hover { background: #3fb95033; }
-  .empty-card { background: #161b22; border: 1px dashed #30363d; border-radius: 12px; padding: 20px; text-align: center; color: #484f58; }
-  .empty-card .icon { font-size: 2em; margin-bottom: 8px; }
-  .alert-bar { background: #161b22; border: 1px solid #f8514933; border-radius: 10px; padding: 14px 20px; margin: 0 0 16px 0; display: flex; align-items: center; gap: 12px; }
-  .alert-bar .icon { font-size: 1.3em; }
-  .alert-bar .text { font-size: 0.9em; color: #f85149; }
-  .alert-bar .text strong { color: #e6edf3; }
-  .footer { text-align: center; padding: 50px 20px; color: #484f58; font-size: 0.8em; }
-  .search-bar { max-width: 500px; margin: 20px auto 0; position: relative; }
+  body { background: #0d1117; color: #e6edf3; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; min-height: 100vh; }
+
+  /* ── Header ── */
+  .header { text-align: center; padding: 40px 20px 24px; }
+  .header-brand { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 6px; }
+  .cw-logo { width: 42px; height: 42px; }
+  .header h1 { font-size: 2em; color: #58a6ff; }
+  .header p { color: #8b949e; font-size: 0.95em; max-width: 500px; margin: 0 auto; }
+  .header .count { color: #3fb950; font-weight: 700; font-size: 1.05em; margin-top: 6px; }
+
+  /* ── Search + Filters ── */
+  .search-bar { max-width: 500px; margin: 16px auto 0; position: relative; }
   .search-bar input { width: 100%; background: #161b22; border: 1px solid #30363d; color: #e6edf3; padding: 10px 16px 10px 40px; border-radius: 10px; font-size: 0.95em; outline: none; transition: 0.15s; }
   .search-bar input:focus { border-color: #58a6ff; box-shadow: 0 0 0 2px rgba(88,166,255,0.15); }
   .search-bar input::placeholder { color: #484f58; }
-  .search-bar .s-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: #484f58; }
-  .filters { display: flex; gap: 8px; justify-content: center; margin: 16px 0 0; flex-wrap: wrap; }
-  .filter-btn { background: #161b22; border: 1px solid #30363d; color: #8b949e; padding: 4px 14px; border-radius: 20px; font-size: 0.78em; cursor: pointer; transition: 0.15s; }
+  .search-bar .s-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: #484f58; font-size: 0.9em; }
+  .filters { display: flex; gap: 6px; justify-content: center; margin: 14px 0 0; flex-wrap: wrap; }
+  .filter-btn { background: #161b22; border: 1px solid #30363d; color: #8b949e; padding: 4px 12px; border-radius: 20px; font-size: 0.73em; cursor: pointer; transition: 0.15s; white-space: nowrap; }
   .filter-btn:hover { border-color: #58a6ff; color: #58a6ff; }
-  .filter-btn.active { background: #58a6ff; color: #0d1117; border-color: #58a6ff; }
+  .filter-btn.active { background: #58a6ff; color: #0d1117; border-color: #58a6ff; font-weight: 600; }
+
+  /* ── Layout ── */
+  .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+  .section-title { font-size: 1em; color: #8b949e; text-transform: uppercase; letter-spacing: 1px; margin: 36px 0 14px 0; padding-bottom: 8px; border-bottom: 1px solid #21262d; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+
+  /* ── Cards ── */
+  .card { background: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 16px; transition: all 0.2s; }
+  .card:hover { border-color: #58a6ff; box-shadow: 0 4px 20px rgba(88,166,255,0.08); transform: translateY(-1px); }
+  .card-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .card-thumb { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; border: 2px solid #30363d; flex-shrink: 0; }
+  .card-thumb-fallback { width: 36px; height: 36px; border-radius: 50%; background: #21262d; border: 2px solid #30363d; display: flex; align-items: center; justify-content: center; font-size: 0.7em; font-weight: 700; color: #8b949e; flex-shrink: 0; }
+  .card-name-wrap { flex: 1; min-width: 0; }
+  .card-name { font-size: 1.15em; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; }
+  .card-badge { font-size: 0.65em; padding: 2px 8px; border-radius: 20px; font-weight: 600; text-transform: uppercase; flex-shrink: 0; }
+  .badge-live { background: #3fb95022; color: #3fb950; border: 1px solid #3fb95044; }
+  .card-meta { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 8px; }
+  .meta-tag { font-size: 0.7em; color: #8b949e; background: #1c2129; padding: 2px 7px; border-radius: 4px; }
+  .ne-tag { background: #f8514922; color: #f85149; }
+  .card-traffic { font-size: 0.8em; color: #8b949e; margin-bottom: 6px; }
+  .card-traffic strong { color: #e6edf3; }
+  .card-actions { display: flex; gap: 6px; margin-top: 10px; padding-top: 10px; border-top: 1px solid #21262d; }
+  .btn-guide, .btn-obj, .btn-xlsx { flex: 1; text-align: center; padding: 6px 8px; border-radius: 8px; font-size: 0.72em; font-weight: 600; text-decoration: none; transition: all 0.15s; }
+  .btn-guide { background: #58a6ff18; color: #58a6ff; border: 1px solid #58a6ff33; }
+  .btn-guide:hover { background: #58a6ff28; }
+  .btn-obj { background: #f8514918; color: #f85149; border: 1px solid #f8514933; }
+  .btn-obj:hover { background: #f8514928; }
+  .btn-xlsx { background: #3fb95018; color: #3fb950; border: 1px solid #3fb95033; }
+  .btn-xlsx:hover { background: #3fb95028; }
+
+  /* ── Alert bar ── */
+  .alert-bar { background: #161b22; border: 1px solid #f8514933; border-radius: 10px; padding: 12px 18px; margin: 0 0 14px 0; display: flex; align-items: center; gap: 10px; }
+  .alert-bar .icon { font-size: 1.2em; }
+  .alert-bar .text { font-size: 0.85em; color: #f85149; }
+  .alert-bar .text strong { color: #e6edf3; }
+
+  /* ── Utilities ── */
   .card.hide { display: none; }
   .no-results { text-align: center; padding: 40px 20px; color: #484f58; display: none; }
-  @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } .header h1 { font-size: 1.6em; } }
+  .footer { text-align: center; padding: 40px 20px; color: #484f58; font-size: 0.75em; }
+  .footer-brand { display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 4px; }
+  .footer .cw-logo { width: 22px; height: 22px; }
+  @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } .header h1 { font-size: 1.5em; } }
 </style>
 </head>
 <body>
 
 <div class="header">
-  <h1>CW Scripts</h1>
+  <div class="header-brand">
+    <svg class="cw-logo" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="40" height="40" rx="10" fill="#58a6ff" fill-opacity="0.15"/>
+  <text x="20" y="27" text-anchor="middle" fill="#58a6ff" font-size="18" font-weight="800" font-family="system-ui">CW</text>
+</svg>
+    <h1>CW Scripts</h1>
+  </div>
   <p>Script guides for chatters — Chatting Wizard</p>
   <div class="count">33 creators live</div>
   <div class="search-bar">
@@ -68,6 +94,11 @@
     <button class="filter-btn" data-filter="nonexplicit">Non-Explicit</button>
     <button class="filter-btn" data-filter="reddit">Reddit</button>
     <button class="filter-btn" data-filter="ig">IG/TikTok</button>
+    <button class="filter-btn" data-filter="dating">Dating Apps</button>
+    <button class="filter-btn" data-filter="social">Social Media</button>
+    <button class="filter-btn" data-filter="twitter">Twitter/X</button>
+    <button class="filter-btn" data-filter="oftv">OFTV</button>
+    <button class="filter-btn" data-filter="other">Other</button>
   </div>
 </div>
 
@@ -78,7 +109,10 @@
 
     <div class="card" data-name="putri" data-page="free page" data-traffic="social media" data-ne="false" data-search="putri indonesian social media free page">
       <div class="card-header">
-        <span class="card-name">Putri</span>
+        <img class="card-thumb" src="putri/profile.jpg" alt="Putri" onerror="this.style.display='none'">
+        <div class="card-name-wrap">
+          <span class="card-name">Putri</span>
+        </div>
         <span class="card-badge badge-live">LIVE</span>
       </div>
       <div class="card-meta">
@@ -89,15 +123,18 @@
       </div>
       <div class="card-traffic">Traffic: <strong>Social Media</strong></div>
       <div class="card-actions">
-        <a href="putri/" class="btn-guide">📖 Guide</a>
-        <a href="putri/objections.html" class="btn-guide" style="background:#f8514922;color:#f85149;border-color:#f8514944">🛡️ OBJ/RES</a>
-        <a href="putri/Putri_Complete_Infloww.xlsx" download class="btn-xlsx">📥 XLSX</a>
+        <a href="putri/" class="btn-guide">Guide</a>
+        <a href="putri/objections.html" class="btn-obj">OBJ/RES</a>
+        <a href="putri/Putri_Complete_Infloww.xlsx" download class="btn-xlsx">XLSX</a>
       </div>
     </div>
 
     <div class="card" data-name="riri vip" data-page="paid page" data-traffic="oftv / social" data-ne="false" data-search="riri vip italian oftv / social paid page">
       <div class="card-header">
-        <span class="card-name">Riri VIP</span>
+        <img class="card-thumb" src="riri/profile.jpg" alt="Riri VIP" onerror="this.style.display='none'">
+        <div class="card-name-wrap">
+          <span class="card-name">Riri VIP</span>
+        </div>
         <span class="card-badge badge-live">LIVE</span>
       </div>
       <div class="card-meta">
@@ -108,15 +145,18 @@
       </div>
       <div class="card-traffic">Traffic: <strong>OFTV / Social</strong></div>
       <div class="card-actions">
-        <a href="riri/" class="btn-guide">📖 Guide</a>
-        <a href="riri/objections.html" class="btn-guide" style="background:#f8514922;color:#f85149;border-color:#f8514944">🛡️ OBJ/RES</a>
-        <a href="riri/Riri_Complete_Infloww.xlsx" download class="btn-xlsx">📥 XLSX</a>
+        <a href="riri/" class="btn-guide">Guide</a>
+        <a href="riri/objections.html" class="btn-obj">OBJ/RES</a>
+        <a href="riri/Riri_Complete_Infloww.xlsx" download class="btn-xlsx">XLSX</a>
       </div>
     </div>
 
     <div class="card" data-name="eva martinez" data-page="paid page" data-traffic="ig/tiktok" data-ne="false" data-search="eva martinez colombian ig/tiktok paid page">
       <div class="card-header">
-        <span class="card-name">Eva Martinez</span>
+        <img class="card-thumb" src="eva/profile.jpg" alt="Eva Martinez" onerror="this.style.display='none'">
+        <div class="card-name-wrap">
+          <span class="card-name">Eva Martinez</span>
+        </div>
         <span class="card-badge badge-live">LIVE</span>
       </div>
       <div class="card-meta">
@@ -127,15 +167,18 @@
       </div>
       <div class="card-traffic">Traffic: <strong>IG/TikTok</strong></div>
       <div class="card-actions">
-        <a href="eva/" class="btn-guide">📖 Guide</a>
-        <a href="eva/objections.html" class="btn-guide" style="background:#f8514922;color:#f85149;border-color:#f8514944">🛡️ OBJ/RES</a>
-        <a href="eva/Eva_Complete_Infloww.xlsx" download class="btn-xlsx">📥 XLSX</a>
+        <a href="eva/" class="btn-guide">Guide</a>
+        <a href="eva/objections.html" class="btn-obj">OBJ/RES</a>
+        <a href="eva/Eva_Complete_Infloww.xlsx" download class="btn-xlsx">XLSX</a>
       </div>
     </div>
 
     <div class="card" data-name="antonella" data-page="mixed" data-traffic="reddit" data-ne="false" data-search="antonella american reddit mixed">
       <div class="card-header">
-        <span class="card-name">Antonella</span>
+        <img class="card-thumb" src="antonella/profile.jpg" alt="Antonella" onerror="this.style.display='none'">
+        <div class="card-name-wrap">
+          <span class="card-name">Antonella</span>
+        </div>
         <span class="card-badge badge-live">LIVE</span>
       </div>
       <div class="card-meta">
@@ -146,15 +189,18 @@
       </div>
       <div class="card-traffic">Traffic: <strong>Reddit</strong></div>
       <div class="card-actions">
-        <a href="antonella/" class="btn-guide">📖 Guide</a>
-        <a href="antonella/objections.html" class="btn-guide" style="background:#f8514922;color:#f85149;border-color:#f8514944">🛡️ OBJ/RES</a>
-        <a href="antonella/Antonella_Complete_Infloww.xlsx" download class="btn-xlsx">📥 XLSX</a>
+        <a href="antonella/" class="btn-guide">Guide</a>
+        <a href="antonella/objections.html" class="btn-obj">OBJ/RES</a>
+        <a href="antonella/Antonella_Complete_Infloww.xlsx" download class="btn-xlsx">XLSX</a>
       </div>
     </div>
 
     <div class="card" data-name="jasmine" data-page="free/paid" data-traffic="ig/tiktok + reddit" data-ne="false" data-search="jasmine dominican ig/tiktok + reddit free/paid">
       <div class="card-header">
-        <span class="card-name">Jasmine</span>
+        <img class="card-thumb" src="jasmine/profile.jpg" alt="Jasmine" onerror="this.style.display='none'">
+        <div class="card-name-wrap">
+          <span class="card-name">Jasmine</span>
+        </div>
         <span class="card-badge badge-live">LIVE</span>
       </div>
       <div class="card-meta">
@@ -165,15 +211,18 @@
       </div>
       <div class="card-traffic">Traffic: <strong>IG/TikTok + Reddit</strong></div>
       <div class="card-actions">
-        <a href="jasmine/" class="btn-guide">📖 Guide</a>
-        <a href="jasmine/objections.html" class="btn-guide" style="background:#f8514922;color:#f85149;border-color:#f8514944">🛡️ OBJ/RES</a>
-        <a href="jasmine/Jasmine_Complete_Infloww.xlsx" download class="btn-xlsx">📥 XLSX</a>
+        <a href="jasmine/" class="btn-guide">Guide</a>
+        <a href="jasmine/objections.html" class="btn-obj">OBJ/RES</a>
+        <a href="jasmine/Jasmine_Complete_Infloww.xlsx" download class="btn-xlsx">XLSX</a>
       </div>
     </div>
 
     <div class="card" data-name="fernanda" data-page="paid page" data-traffic="ig/tiktok" data-ne="false" data-search="fernanda brazilian ig/tiktok paid page">
       <div class="card-header">
-        <span class="card-name">Fernanda</span>
+        <img class="card-thumb" src="fernanda/profile.jpg" alt="Fernanda" onerror="this.style.display='none'">
+        <div class="card-name-wrap">
+          <span class="card-name">Fernanda</span>
+        </div>
         <span class="card-badge badge-live">LIVE</span>
       </div>
       <div class="card-meta">
@@ -184,15 +233,18 @@
       </div>
       <div class="card-traffic">Traffic: <strong>IG/TikTok</strong></div>
       <div class="card-actions">
-        <a href="fernanda/" class="btn-guide">📖 Guide</a>
-        <a href="fernanda/objections.html" class="btn-guide" style="background:#f8514922;color:#f85149;border-color:#f8514944">🛡️ OBJ/RES</a>
-        <a href="fernanda/Fernanda_Complete_Infloww.xlsx" download class="btn-xlsx">📥 XLSX</a>
+        <a href="fernanda/" class="btn-guide">Guide</a>
+        <a href="fernanda/objections.html" class="btn-obj">OBJ/RES</a>
+        <a href="fernanda/Fernanda_Complete_Infloww.xlsx" download class="btn-xlsx">XLSX</a>
       </div>
     </div>
 
     <div class="card" data-name="isabella" data-page="free/paid" data-traffic="social media" data-ne="false" data-search="isabella colombian/scottish social media free/paid">
       <div class="card-header">
-        <span class="card-name">Isabella</span>
+        <img class="card-thumb" src="isabella/profile.jpg" alt="Isabella" onerror="this.style.display='none'">
+        <div class="card-name-wrap">
+          <span class="card-name">Isabella</span>
+        </div>
         <span class="card-badge badge-live">LIVE</span>
       </div>
       <div class="card-meta">
@@ -203,34 +255,40 @@
       </div>
       <div class="card-traffic">Traffic: <strong>Social Media</strong></div>
       <div class="card-actions">
-        <a href="isabella/" class="btn-guide">📖 Guide</a>
-        <a href="isabella/objections.html" class="btn-guide" style="background:#f8514922;color:#f85149;border-color:#f8514944">🛡️ OBJ/RES</a>
-        <a href="isabella/Isabella_Complete_Infloww.xlsx" download class="btn-xlsx">📥 XLSX</a>
+        <a href="isabella/" class="btn-guide">Guide</a>
+        <a href="isabella/objections.html" class="btn-obj">OBJ/RES</a>
+        <a href="isabella/Isabella_Complete_Infloww.xlsx" download class="btn-xlsx">XLSX</a>
       </div>
     </div>
 
     <div class="card" data-name="jessica" data-page="mixed" data-traffic="reddit" data-ne="true" data-search="jessica american reddit mixed">
       <div class="card-header">
-        <span class="card-name">Jessica</span>
+        <img class="card-thumb" src="jessica/profile.jpg" alt="Jessica" onerror="this.style.display='none'">
+        <div class="card-name-wrap">
+          <span class="card-name">Jessica</span>
+        </div>
         <span class="card-badge badge-live">LIVE</span>
       </div>
       <div class="card-meta">
         <span class="meta-tag">34 yrs</span>
         <span class="meta-tag">American</span>
         <span class="meta-tag">Mixed</span>
-        <span class="meta-tag" style="background:#f8514922;color:#f85149">NON-EXPLICIT</span>
+        <span class="meta-tag ne-tag">NON-EXPLICIT</span>
       </div>
       <div class="card-traffic">Traffic: <strong>Reddit</strong></div>
       <div class="card-actions">
-        <a href="jessica/" class="btn-guide">📖 Guide</a>
-        <a href="jessica/objections.html" class="btn-guide" style="background:#f8514922;color:#f85149;border-color:#f8514944">🛡️ OBJ/RES</a>
-        <a href="jessica/Jessica_Complete_Infloww.xlsx" download class="btn-xlsx">📥 XLSX</a>
+        <a href="jessica/" class="btn-guide">Guide</a>
+        <a href="jessica/objections.html" class="btn-obj">OBJ/RES</a>
+        <a href="jessica/Jessica_Complete_Infloww.xlsx" download class="btn-xlsx">XLSX</a>
       </div>
     </div>
 
     <div class="card" data-name="jessica fp" data-page="free/paid" data-traffic="reddit + ig" data-ne="false" data-search="jessica fp argentinian reddit + ig free/paid">
       <div class="card-header">
-        <span class="card-name">Jessica FP</span>
+        <img class="card-thumb" src="jessica-fp/profile.jpg" alt="Jessica FP" onerror="this.style.display='none'">
+        <div class="card-name-wrap">
+          <span class="card-name">Jessica FP</span>
+        </div>
         <span class="card-badge badge-live">LIVE</span>
       </div>
       <div class="card-meta">
@@ -241,15 +299,18 @@
       </div>
       <div class="card-traffic">Traffic: <strong>Reddit + IG</strong></div>
       <div class="card-actions">
-        <a href="jessica-fp/" class="btn-guide">📖 Guide</a>
-        <a href="jessica-fp/objections.html" class="btn-guide" style="background:#f8514922;color:#f85149;border-color:#f8514944">🛡️ OBJ/RES</a>
-        <a href="jessica-fp/JessicaFP_Complete_Infloww.xlsx" download class="btn-xlsx">📥 XLSX</a>
+        <a href="jessica-fp/" class="btn-guide">Guide</a>
+        <a href="jessica-fp/objections.html" class="btn-obj">OBJ/RES</a>
+        <a href="jessica-fp/JessicaFP_Complete_Infloww.xlsx" download class="btn-xlsx">XLSX</a>
       </div>
     </div>
 
     <div class="card" data-name="maddison" data-page="paid page" data-traffic="reddit" data-ne="false" data-search="maddison american reddit paid page">
       <div class="card-header">
-        <span class="card-name">Maddison</span>
+        <img class="card-thumb" src="maddison/profile.jpg" alt="Maddison" onerror="this.style.display='none'">
+        <div class="card-name-wrap">
+          <span class="card-name">Maddison</span>
+        </div>
         <span class="card-badge badge-live">LIVE</span>
       </div>
       <div class="card-meta">
@@ -260,15 +321,18 @@
       </div>
       <div class="card-traffic">Traffic: <strong>Reddit</strong></div>
       <div class="card-actions">
-        <a href="maddison/" class="btn-guide">📖 Guide</a>
-        <a href="maddison/objections.html" class="btn-guide" style="background:#f8514922;color:#f85149;border-color:#f8514944">🛡️ OBJ/RES</a>
-        <a href="maddison/Maddison_Complete_Infloww.xlsx" download class="btn-xlsx">📥 XLSX</a>
+        <a href="maddison/" class="btn-guide">Guide</a>
+        <a href="maddison/objections.html" class="btn-obj">OBJ/RES</a>
+        <a href="maddison/Maddison_Complete_Infloww.xlsx" download class="btn-xlsx">XLSX</a>
       </div>
     </div>
 
     <div class="card" data-name="vera" data-page="free page" data-traffic="reddit" data-ne="false" data-search="vera american reddit free page">
       <div class="card-header">
-        <span class="card-name">Vera</span>
+        <img class="card-thumb" src="vera/profile.jpg" alt="Vera" onerror="this.style.display='none'">
+        <div class="card-name-wrap">
+          <span class="card-name">Vera</span>
+        </div>
         <span class="card-badge badge-live">LIVE</span>
       </div>
       <div class="card-meta">
@@ -279,15 +343,18 @@
       </div>
       <div class="card-traffic">Traffic: <strong>Reddit</strong></div>
       <div class="card-actions">
-        <a href="vera/" class="btn-guide">📖 Guide</a>
-        <a href="vera/objections.html" class="btn-guide" style="background:#f8514922;color:#f85149;border-color:#f8514944">🛡️ OBJ/RES</a>
-        <a href="vera/Vera_Complete_Infloww.xlsx" download class="btn-xlsx">📥 XLSX</a>
+        <a href="vera/" class="btn-guide">Guide</a>
+        <a href="vera/objections.html" class="btn-obj">OBJ/RES</a>
+        <a href="vera/Vera_Complete_Infloww.xlsx" download class="btn-xlsx">XLSX</a>
       </div>
     </div>
 
     <div class="card" data-name="mia luna" data-page="free page" data-traffic="reddit" data-ne="false" data-search="mia luna argentinian reddit free page">
       <div class="card-header">
-        <span class="card-name">Mia Luna</span>
+        <img class="card-thumb" src="mialuna/profile.jpg" alt="Mia Luna" onerror="this.style.display='none'">
+        <div class="card-name-wrap">
+          <span class="card-name">Mia Luna</span>
+        </div>
         <span class="card-badge badge-live">LIVE</span>
       </div>
       <div class="card-meta">
@@ -298,15 +365,18 @@
       </div>
       <div class="card-traffic">Traffic: <strong>Reddit</strong></div>
       <div class="card-actions">
-        <a href="mialuna/" class="btn-guide">📖 Guide</a>
-        <a href="mialuna/objections.html" class="btn-guide" style="background:#f8514922;color:#f85149;border-color:#f8514944">🛡️ OBJ/RES</a>
-        <a href="mialuna/MiaLuna_Complete_Infloww.xlsx" download class="btn-xlsx">📥 XLSX</a>
+        <a href="mialuna/" class="btn-guide">Guide</a>
+        <a href="mialuna/objections.html" class="btn-obj">OBJ/RES</a>
+        <a href="mialuna/MiaLuna_Complete_Infloww.xlsx" download class="btn-xlsx">XLSX</a>
       </div>
     </div>
 
     <div class="card" data-name="mia brooks" data-page="free page" data-traffic="ig/tiktok" data-ne="false" data-search="mia brooks spanish ig/tiktok free page">
       <div class="card-header">
-        <span class="card-name">Mia Brooks</span>
+        <img class="card-thumb" src="miabrooks/profile.jpg" alt="Mia Brooks" onerror="this.style.display='none'">
+        <div class="card-name-wrap">
+          <span class="card-name">Mia Brooks</span>
+        </div>
         <span class="card-badge badge-live">LIVE</span>
       </div>
       <div class="card-meta">
@@ -317,15 +387,18 @@
       </div>
       <div class="card-traffic">Traffic: <strong>IG/TikTok</strong></div>
       <div class="card-actions">
-        <a href="miabrooks/" class="btn-guide">📖 Guide</a>
-        <a href="miabrooks/objections.html" class="btn-guide" style="background:#f8514922;color:#f85149;border-color:#f8514944">🛡️ OBJ/RES</a>
-        <a href="miabrooks/MiaBrooks_Complete_Infloww.xlsx" download class="btn-xlsx">📥 XLSX</a>
+        <a href="miabrooks/" class="btn-guide">Guide</a>
+        <a href="miabrooks/objections.html" class="btn-obj">OBJ/RES</a>
+        <a href="miabrooks/MiaBrooks_Complete_Infloww.xlsx" download class="btn-xlsx">XLSX</a>
       </div>
     </div>
 
     <div class="card" data-name="ashley" data-page="free page" data-traffic="ig/tiktok" data-ne="false" data-search="ashley spanish ig/tiktok free page">
       <div class="card-header">
-        <span class="card-name">Ashley</span>
+        <img class="card-thumb" src="ashley/profile.jpg" alt="Ashley" onerror="this.style.display='none'">
+        <div class="card-name-wrap">
+          <span class="card-name">Ashley</span>
+        </div>
         <span class="card-badge badge-live">LIVE</span>
       </div>
       <div class="card-meta">
@@ -336,15 +409,18 @@
       </div>
       <div class="card-traffic">Traffic: <strong>IG/TikTok</strong></div>
       <div class="card-actions">
-        <a href="ashley/" class="btn-guide">📖 Guide</a>
-        <a href="ashley/objections.html" class="btn-guide" style="background:#f8514922;color:#f85149;border-color:#f8514944">🛡️ OBJ/RES</a>
-        <a href="ashley/Ashley_Complete_Infloww.xlsx" download class="btn-xlsx">📥 XLSX</a>
+        <a href="ashley/" class="btn-guide">Guide</a>
+        <a href="ashley/objections.html" class="btn-obj">OBJ/RES</a>
+        <a href="ashley/Ashley_Complete_Infloww.xlsx" download class="btn-xlsx">XLSX</a>
       </div>
     </div>
 
     <div class="card" data-name="chayla grey" data-page="free page" data-traffic="ig/tiktok" data-ne="false" data-search="chayla grey brazilian ig/tiktok free page">
       <div class="card-header">
-        <span class="card-name">Chayla Grey</span>
+        <img class="card-thumb" src="chayla/profile.jpg" alt="Chayla Grey" onerror="this.style.display='none'">
+        <div class="card-name-wrap">
+          <span class="card-name">Chayla Grey</span>
+        </div>
         <span class="card-badge badge-live">LIVE</span>
       </div>
       <div class="card-meta">
@@ -355,15 +431,18 @@
       </div>
       <div class="card-traffic">Traffic: <strong>IG/TikTok</strong></div>
       <div class="card-actions">
-        <a href="chayla/" class="btn-guide">📖 Guide</a>
-        <a href="chayla/objections.html" class="btn-guide" style="background:#f8514922;color:#f85149;border-color:#f8514944">🛡️ OBJ/RES</a>
-        <a href="chayla/ChaylaGrey_Complete_Infloww.xlsx" download class="btn-xlsx">📥 XLSX</a>
+        <a href="chayla/" class="btn-guide">Guide</a>
+        <a href="chayla/objections.html" class="btn-obj">OBJ/RES</a>
+        <a href="chayla/ChaylaGrey_Complete_Infloww.xlsx" download class="btn-xlsx">XLSX</a>
       </div>
     </div>
 
     <div class="card" data-name="emily bell" data-page="free page" data-traffic="ig/tiktok" data-ne="false" data-search="emily bell argentinian ig/tiktok free page">
       <div class="card-header">
-        <span class="card-name">Emily Bell</span>
+        <img class="card-thumb" src="emilybell/profile.jpg" alt="Emily Bell" onerror="this.style.display='none'">
+        <div class="card-name-wrap">
+          <span class="card-name">Emily Bell</span>
+        </div>
         <span class="card-badge badge-live">LIVE</span>
       </div>
       <div class="card-meta">
@@ -374,15 +453,18 @@
       </div>
       <div class="card-traffic">Traffic: <strong>IG/TikTok</strong></div>
       <div class="card-actions">
-        <a href="emilybell/" class="btn-guide">📖 Guide</a>
-        <a href="emilybell/objections.html" class="btn-guide" style="background:#f8514922;color:#f85149;border-color:#f8514944">🛡️ OBJ/RES</a>
-        <a href="emilybell/EmilyBell_Complete_Infloww.xlsx" download class="btn-xlsx">📥 XLSX</a>
+        <a href="emilybell/" class="btn-guide">Guide</a>
+        <a href="emilybell/objections.html" class="btn-obj">OBJ/RES</a>
+        <a href="emilybell/EmilyBell_Complete_Infloww.xlsx" download class="btn-xlsx">XLSX</a>
       </div>
     </div>
 
     <div class="card" data-name="lana monroe" data-page="free page" data-traffic="ig/tiktok" data-ne="false" data-search="lana monroe argentinian ig/tiktok free page">
       <div class="card-header">
-        <span class="card-name">Lana Monroe</span>
+        <img class="card-thumb" src="lana/profile.jpg" alt="Lana Monroe" onerror="this.style.display='none'">
+        <div class="card-name-wrap">
+          <span class="card-name">Lana Monroe</span>
+        </div>
         <span class="card-badge badge-live">LIVE</span>
       </div>
       <div class="card-meta">
@@ -393,15 +475,18 @@
       </div>
       <div class="card-traffic">Traffic: <strong>IG/TikTok</strong></div>
       <div class="card-actions">
-        <a href="lana/" class="btn-guide">📖 Guide</a>
-        <a href="lana/objections.html" class="btn-guide" style="background:#f8514922;color:#f85149;border-color:#f8514944">🛡️ OBJ/RES</a>
-        <a href="lana/Lana_Complete_Infloww.xlsx" download class="btn-xlsx">📥 XLSX</a>
+        <a href="lana/" class="btn-guide">Guide</a>
+        <a href="lana/objections.html" class="btn-obj">OBJ/RES</a>
+        <a href="lana/Lana_Complete_Infloww.xlsx" download class="btn-xlsx">XLSX</a>
       </div>
     </div>
 
     <div class="card" data-name="lia kuroki" data-page="free page" data-traffic="ig/tiktok" data-ne="false" data-search="lia kuroki japanese ig/tiktok free page">
       <div class="card-header">
-        <span class="card-name">Lia Kuroki</span>
+        <img class="card-thumb" src="lia/profile.jpg" alt="Lia Kuroki" onerror="this.style.display='none'">
+        <div class="card-name-wrap">
+          <span class="card-name">Lia Kuroki</span>
+        </div>
         <span class="card-badge badge-live">LIVE</span>
       </div>
       <div class="card-meta">
@@ -412,15 +497,18 @@
       </div>
       <div class="card-traffic">Traffic: <strong>IG/TikTok</strong></div>
       <div class="card-actions">
-        <a href="lia/" class="btn-guide">📖 Guide</a>
-        <a href="lia/objections.html" class="btn-guide" style="background:#f8514922;color:#f85149;border-color:#f8514944">🛡️ OBJ/RES</a>
-        <a href="lia/Lia_Complete_Infloww.xlsx" download class="btn-xlsx">📥 XLSX</a>
+        <a href="lia/" class="btn-guide">Guide</a>
+        <a href="lia/objections.html" class="btn-obj">OBJ/RES</a>
+        <a href="lia/Lia_Complete_Infloww.xlsx" download class="btn-xlsx">XLSX</a>
       </div>
     </div>
 
     <div class="card" data-name="lina" data-page="free page" data-traffic="ig/tiktok" data-ne="false" data-search="lina spanish ig/tiktok free page">
       <div class="card-header">
-        <span class="card-name">Lina</span>
+        <img class="card-thumb" src="lina/profile.jpg" alt="Lina" onerror="this.style.display='none'">
+        <div class="card-name-wrap">
+          <span class="card-name">Lina</span>
+        </div>
         <span class="card-badge badge-live">LIVE</span>
       </div>
       <div class="card-meta">
@@ -431,15 +519,18 @@
       </div>
       <div class="card-traffic">Traffic: <strong>IG/TikTok</strong></div>
       <div class="card-actions">
-        <a href="lina/" class="btn-guide">📖 Guide</a>
-        <a href="lina/objections.html" class="btn-guide" style="background:#f8514922;color:#f85149;border-color:#f8514944">🛡️ OBJ/RES</a>
-        <a href="lina/Lina_Complete_Infloww.xlsx" download class="btn-xlsx">📥 XLSX</a>
+        <a href="lina/" class="btn-guide">Guide</a>
+        <a href="lina/objections.html" class="btn-obj">OBJ/RES</a>
+        <a href="lina/Lina_Complete_Infloww.xlsx" download class="btn-xlsx">XLSX</a>
       </div>
     </div>
 
     <div class="card" data-name="faby monteiro" data-page="paid page" data-traffic="other" data-ne="false" data-search="faby monteiro brazilian other paid page">
       <div class="card-header">
-        <span class="card-name">Faby Monteiro</span>
+        <img class="card-thumb" src="faby/profile.jpg" alt="Faby Monteiro" onerror="this.style.display='none'">
+        <div class="card-name-wrap">
+          <span class="card-name">Faby Monteiro</span>
+        </div>
         <span class="card-badge badge-live">LIVE</span>
       </div>
       <div class="card-meta">
@@ -450,34 +541,40 @@
       </div>
       <div class="card-traffic">Traffic: <strong>Other</strong></div>
       <div class="card-actions">
-        <a href="faby/" class="btn-guide">📖 Guide</a>
-        <a href="faby/objections.html" class="btn-guide" style="background:#f8514922;color:#f85149;border-color:#f8514944">🛡️ OBJ/RES</a>
-        <a href="faby/Faby_Complete_Infloww.xlsx" download class="btn-xlsx">📥 XLSX</a>
+        <a href="faby/" class="btn-guide">Guide</a>
+        <a href="faby/objections.html" class="btn-obj">OBJ/RES</a>
+        <a href="faby/Faby_Complete_Infloww.xlsx" download class="btn-xlsx">XLSX</a>
       </div>
     </div>
 
     <div class="card" data-name="irina" data-page="paid page" data-traffic="ig/tiktok" data-ne="true" data-search="irina american/russian ig/tiktok paid page">
       <div class="card-header">
-        <span class="card-name">Irina</span>
+        <img class="card-thumb" src="irina/profile.jpg" alt="Irina" onerror="this.style.display='none'">
+        <div class="card-name-wrap">
+          <span class="card-name">Irina</span>
+        </div>
         <span class="card-badge badge-live">LIVE</span>
       </div>
       <div class="card-meta">
         <span class="meta-tag">23 yrs</span>
         <span class="meta-tag">American/Russian</span>
         <span class="meta-tag">Paid Page</span>
-        <span class="meta-tag" style="background:#f8514922;color:#f85149">NON-EXPLICIT</span>
+        <span class="meta-tag ne-tag">NON-EXPLICIT</span>
       </div>
       <div class="card-traffic">Traffic: <strong>IG/TikTok</strong></div>
       <div class="card-actions">
-        <a href="irina/" class="btn-guide">📖 Guide</a>
-        <a href="irina/objections.html" class="btn-guide" style="background:#f8514922;color:#f85149;border-color:#f8514944">🛡️ OBJ/RES</a>
-        <a href="irina/Irina_Complete_Infloww.xlsx" download class="btn-xlsx">📥 XLSX</a>
+        <a href="irina/" class="btn-guide">Guide</a>
+        <a href="irina/objections.html" class="btn-obj">OBJ/RES</a>
+        <a href="irina/Irina_Complete_Infloww.xlsx" download class="btn-xlsx">XLSX</a>
       </div>
     </div>
 
     <div class="card" data-name="zansi" data-page="free page" data-traffic="social media" data-ne="false" data-search="zansi american social media free page">
       <div class="card-header">
-        <span class="card-name">Zansi</span>
+        <img class="card-thumb" src="zansi/profile.jpg" alt="Zansi" onerror="this.style.display='none'">
+        <div class="card-name-wrap">
+          <span class="card-name">Zansi</span>
+        </div>
         <span class="card-badge badge-live">LIVE</span>
       </div>
       <div class="card-meta">
@@ -488,9 +585,9 @@
       </div>
       <div class="card-traffic">Traffic: <strong>Social Media</strong></div>
       <div class="card-actions">
-        <a href="zansi/" class="btn-guide">📖 Guide</a>
-        <a href="zansi/objections.html" class="btn-guide" style="background:#f8514922;color:#f85149;border-color:#f8514944">🛡️ OBJ/RES</a>
-        <a href="zansi/Zansi_Complete_Infloww.xlsx" download class="btn-xlsx">📥 XLSX</a>
+        <a href="zansi/" class="btn-guide">Guide</a>
+        <a href="zansi/objections.html" class="btn-obj">OBJ/RES</a>
+        <a href="zansi/Zansi_Complete_Infloww.xlsx" download class="btn-xlsx">XLSX</a>
       </div>
     </div>
 
@@ -498,14 +595,17 @@
 
   <div class="section-title">Male Creators — Dating App Traffic (10)</div>
   <div class="alert-bar">
-    <div class="icon">⚠️</div>
+    <div class="icon">&#9888;&#65039;</div>
     <div class="text"><strong>Dating App Traffic:</strong> These creators have the Meetup Redirect (MR) module. NEVER say "meet/meeting" on OnlyFans.</div>
   </div>
   <div class="grid">
 
     <div class="card" data-name="max" data-page="paid page" data-traffic="dating apps (gay)" data-ne="false" data-search="max italian dating apps (gay) paid page">
       <div class="card-header">
-        <span class="card-name">Max</span>
+        <img class="card-thumb" src="max/profile.jpeg" alt="Max" onerror="this.style.display='none'">
+        <div class="card-name-wrap">
+          <span class="card-name">Max</span>
+        </div>
         <span class="card-badge badge-live">LIVE</span>
       </div>
       <div class="card-meta">
@@ -516,15 +616,18 @@
       </div>
       <div class="card-traffic">Traffic: <strong>Dating Apps (Gay)</strong></div>
       <div class="card-actions">
-        <a href="max/" class="btn-guide">📖 Guide</a>
-        <a href="max/objections.html" class="btn-guide" style="background:#f8514922;color:#f85149;border-color:#f8514944">🛡️ OBJ/RES</a>
-        <a href="max/Max_Complete_Infloww.xlsx" download class="btn-xlsx">📥 XLSX</a>
+        <a href="max/" class="btn-guide">Guide</a>
+        <a href="max/objections.html" class="btn-obj">OBJ/RES</a>
+        <a href="max/Max_Complete_Infloww.xlsx" download class="btn-xlsx">XLSX</a>
       </div>
     </div>
 
     <div class="card" data-name="marco" data-page="paid page" data-traffic="dating apps (gay)" data-ne="false" data-search="marco turkish dating apps (gay) paid page">
       <div class="card-header">
-        <span class="card-name">Marco</span>
+        <img class="card-thumb" src="marco/profile.jpg" alt="Marco" onerror="this.style.display='none'">
+        <div class="card-name-wrap">
+          <span class="card-name">Marco</span>
+        </div>
         <span class="card-badge badge-live">LIVE</span>
       </div>
       <div class="card-meta">
@@ -535,15 +638,18 @@
       </div>
       <div class="card-traffic">Traffic: <strong>Dating Apps (Gay)</strong></div>
       <div class="card-actions">
-        <a href="marco/" class="btn-guide">📖 Guide</a>
-        <a href="marco/objections.html" class="btn-guide" style="background:#f8514922;color:#f85149;border-color:#f8514944">🛡️ OBJ/RES</a>
-        <a href="marco/Marco_Complete_Infloww.xlsx" download class="btn-xlsx">📥 XLSX</a>
+        <a href="marco/" class="btn-guide">Guide</a>
+        <a href="marco/objections.html" class="btn-obj">OBJ/RES</a>
+        <a href="marco/Marco_Complete_Infloww.xlsx" download class="btn-xlsx">XLSX</a>
       </div>
     </div>
 
     <div class="card" data-name="lucas passione" data-page="paid page" data-traffic="dating apps" data-ne="false" data-search="lucas passione argentinian dating apps paid page">
       <div class="card-header">
-        <span class="card-name">Lucas Passione</span>
+        <img class="card-thumb" src="lucas/profile.jpg" alt="Lucas Passione" onerror="this.style.display='none'">
+        <div class="card-name-wrap">
+          <span class="card-name">Lucas Passione</span>
+        </div>
         <span class="card-badge badge-live">LIVE</span>
       </div>
       <div class="card-meta">
@@ -554,15 +660,18 @@
       </div>
       <div class="card-traffic">Traffic: <strong>Dating Apps</strong></div>
       <div class="card-actions">
-        <a href="lucas/" class="btn-guide">📖 Guide</a>
-        <a href="lucas/objections.html" class="btn-guide" style="background:#f8514922;color:#f85149;border-color:#f8514944">🛡️ OBJ/RES</a>
-        <a href="lucas/LucasPassione_Complete_Infloww.xlsx" download class="btn-xlsx">📥 XLSX</a>
+        <a href="lucas/" class="btn-guide">Guide</a>
+        <a href="lucas/objections.html" class="btn-obj">OBJ/RES</a>
+        <a href="lucas/Lucas Passione_Complete_Infloww.xlsx" download class="btn-xlsx">XLSX</a>
       </div>
     </div>
 
     <div class="card" data-name="liam" data-page="paid page" data-traffic="dating apps" data-ne="false" data-search="liam argentinian dating apps paid page">
       <div class="card-header">
-        <span class="card-name">Liam</span>
+        <img class="card-thumb" src="liam/profile.jpg" alt="Liam" onerror="this.style.display='none'">
+        <div class="card-name-wrap">
+          <span class="card-name">Liam</span>
+        </div>
         <span class="card-badge badge-live">LIVE</span>
       </div>
       <div class="card-meta">
@@ -573,15 +682,18 @@
       </div>
       <div class="card-traffic">Traffic: <strong>Dating Apps</strong></div>
       <div class="card-actions">
-        <a href="liam/" class="btn-guide">📖 Guide</a>
-        <a href="liam/objections.html" class="btn-guide" style="background:#f8514922;color:#f85149;border-color:#f8514944">🛡️ OBJ/RES</a>
-        <a href="liam/Liam_Complete_Infloww.xlsx" download class="btn-xlsx">📥 XLSX</a>
+        <a href="liam/" class="btn-guide">Guide</a>
+        <a href="liam/objections.html" class="btn-obj">OBJ/RES</a>
+        <a href="liam/Liam_Complete_Infloww.xlsx" download class="btn-xlsx">XLSX</a>
       </div>
     </div>
 
     <div class="card" data-name="peter" data-page="paid page" data-traffic="dating apps" data-ne="false" data-search="peter american dating apps paid page">
       <div class="card-header">
-        <span class="card-name">Peter</span>
+        <img class="card-thumb" src="peter/profile.jpg" alt="Peter" onerror="this.style.display='none'">
+        <div class="card-name-wrap">
+          <span class="card-name">Peter</span>
+        </div>
         <span class="card-badge badge-live">LIVE</span>
       </div>
       <div class="card-meta">
@@ -592,15 +704,18 @@
       </div>
       <div class="card-traffic">Traffic: <strong>Dating Apps</strong></div>
       <div class="card-actions">
-        <a href="peter/" class="btn-guide">📖 Guide</a>
-        <a href="peter/objections.html" class="btn-guide" style="background:#f8514922;color:#f85149;border-color:#f8514944">🛡️ OBJ/RES</a>
-        <a href="peter/Peter_Complete_Infloww.xlsx" download class="btn-xlsx">📥 XLSX</a>
+        <a href="peter/" class="btn-guide">Guide</a>
+        <a href="peter/objections.html" class="btn-obj">OBJ/RES</a>
+        <a href="peter/Peter_Complete_Infloww.xlsx" download class="btn-xlsx">XLSX</a>
       </div>
     </div>
 
     <div class="card" data-name="damon" data-page="paid page" data-traffic="dating apps" data-ne="false" data-search="damon argentinian dating apps paid page">
       <div class="card-header">
-        <span class="card-name">Damon</span>
+        <img class="card-thumb" src="damon/profile.jpg" alt="Damon" onerror="this.style.display='none'">
+        <div class="card-name-wrap">
+          <span class="card-name">Damon</span>
+        </div>
         <span class="card-badge badge-live">LIVE</span>
       </div>
       <div class="card-meta">
@@ -611,15 +726,18 @@
       </div>
       <div class="card-traffic">Traffic: <strong>Dating Apps</strong></div>
       <div class="card-actions">
-        <a href="damon/" class="btn-guide">📖 Guide</a>
-        <a href="damon/objections.html" class="btn-guide" style="background:#f8514922;color:#f85149;border-color:#f8514944">🛡️ OBJ/RES</a>
-        <a href="damon/Damon_Complete_Infloww.xlsx" download class="btn-xlsx">📥 XLSX</a>
+        <a href="damon/" class="btn-guide">Guide</a>
+        <a href="damon/objections.html" class="btn-obj">OBJ/RES</a>
+        <a href="damon/Damon_Complete_Infloww.xlsx" download class="btn-xlsx">XLSX</a>
       </div>
     </div>
 
     <div class="card" data-name="stefan" data-page="paid page" data-traffic="dating apps" data-ne="false" data-search="stefan argentinian dating apps paid page">
       <div class="card-header">
-        <span class="card-name">Stefan</span>
+        <img class="card-thumb" src="stefan/profile.jpg" alt="Stefan" onerror="this.style.display='none'">
+        <div class="card-name-wrap">
+          <span class="card-name">Stefan</span>
+        </div>
         <span class="card-badge badge-live">LIVE</span>
       </div>
       <div class="card-meta">
@@ -630,15 +748,18 @@
       </div>
       <div class="card-traffic">Traffic: <strong>Dating Apps</strong></div>
       <div class="card-actions">
-        <a href="stefan/" class="btn-guide">📖 Guide</a>
-        <a href="stefan/objections.html" class="btn-guide" style="background:#f8514922;color:#f85149;border-color:#f8514944">🛡️ OBJ/RES</a>
-        <a href="stefan/Stefan_Complete_Infloww.xlsx" download class="btn-xlsx">📥 XLSX</a>
+        <a href="stefan/" class="btn-guide">Guide</a>
+        <a href="stefan/objections.html" class="btn-obj">OBJ/RES</a>
+        <a href="stefan/Stefan_Complete_Infloww.xlsx" download class="btn-xlsx">XLSX</a>
       </div>
     </div>
 
     <div class="card" data-name="zack" data-page="paid page" data-traffic="dating apps" data-ne="false" data-search="zack british dating apps paid page">
       <div class="card-header">
-        <span class="card-name">Zack</span>
+        <img class="card-thumb" src="zack/profile.jpg" alt="Zack" onerror="this.style.display='none'">
+        <div class="card-name-wrap">
+          <span class="card-name">Zack</span>
+        </div>
         <span class="card-badge badge-live">LIVE</span>
       </div>
       <div class="card-meta">
@@ -649,15 +770,18 @@
       </div>
       <div class="card-traffic">Traffic: <strong>Dating Apps</strong></div>
       <div class="card-actions">
-        <a href="zack/" class="btn-guide">📖 Guide</a>
-        <a href="zack/objections.html" class="btn-guide" style="background:#f8514922;color:#f85149;border-color:#f8514944">🛡️ OBJ/RES</a>
-        <a href="zack/Zack_Complete_Infloww.xlsx" download class="btn-xlsx">📥 XLSX</a>
+        <a href="zack/" class="btn-guide">Guide</a>
+        <a href="zack/objections.html" class="btn-obj">OBJ/RES</a>
+        <a href="zack/Zack_Complete_Infloww.xlsx" download class="btn-xlsx">XLSX</a>
       </div>
     </div>
 
     <div class="card" data-name="noah" data-page="paid page" data-traffic="dating apps" data-ne="false" data-search="noah italian dating apps paid page">
       <div class="card-header">
-        <span class="card-name">Noah</span>
+        <img class="card-thumb" src="noah/profile.jpg" alt="Noah" onerror="this.style.display='none'">
+        <div class="card-name-wrap">
+          <span class="card-name">Noah</span>
+        </div>
         <span class="card-badge badge-live">LIVE</span>
       </div>
       <div class="card-meta">
@@ -668,15 +792,18 @@
       </div>
       <div class="card-traffic">Traffic: <strong>Dating Apps</strong></div>
       <div class="card-actions">
-        <a href="noah/" class="btn-guide">📖 Guide</a>
-        <a href="noah/objections.html" class="btn-guide" style="background:#f8514922;color:#f85149;border-color:#f8514944">🛡️ OBJ/RES</a>
-        <a href="noah/Noah_Complete_Infloww.xlsx" download class="btn-xlsx">📥 XLSX</a>
+        <a href="noah/" class="btn-guide">Guide</a>
+        <a href="noah/objections.html" class="btn-obj">OBJ/RES</a>
+        <a href="noah/Noah_Complete_Infloww.xlsx" download class="btn-xlsx">XLSX</a>
       </div>
     </div>
 
     <div class="card" data-name="jack hollywood" data-page="paid page" data-traffic="dating apps" data-ne="false" data-search="jack hollywood american dating apps paid page">
       <div class="card-header">
-        <span class="card-name">Jack Hollywood</span>
+        <img class="card-thumb" src="jack/profile.jpg" alt="Jack Hollywood" onerror="this.style.display='none'">
+        <div class="card-name-wrap">
+          <span class="card-name">Jack Hollywood</span>
+        </div>
         <span class="card-badge badge-live">LIVE</span>
       </div>
       <div class="card-meta">
@@ -687,15 +814,10 @@
       </div>
       <div class="card-traffic">Traffic: <strong>Dating Apps</strong></div>
       <div class="card-actions">
-        <a href="jack/" class="btn-guide">📖 Guide</a>
-        <a href="jack/objections.html" class="btn-guide" style="background:#f8514922;color:#f85149;border-color:#f8514944">🛡️ OBJ/RES</a>
-        <a href="jack/JackHollywood_Complete_Infloww.xlsx" download class="btn-xlsx">📥 XLSX</a>
+        <a href="jack/" class="btn-guide">Guide</a>
+        <a href="jack/objections.html" class="btn-obj">OBJ/RES</a>
+        <a href="jack/Jack Hollywood_Complete_Infloww.xlsx" download class="btn-xlsx">XLSX</a>
       </div>
-    </div>
-
-    <div class="empty-card">
-      <div class="icon">🔜</div>
-      <p>Lucas, Liam, Peter, Damon, Stefan, Zack, Noah, Jack Hollywood<br>Coming soon</p>
     </div>
 
   </div>
@@ -705,7 +827,10 @@
 
     <div class="card" data-name="jockurworld" data-page="paid page" data-traffic="twitter/x" data-ne="false" data-search="jockurworld american twitter/x paid page">
       <div class="card-header">
-        <span class="card-name">Jockurworld</span>
+        <img class="card-thumb" src="jockurworld/profile.jpg" alt="Jockurworld" onerror="this.style.display='none'">
+        <div class="card-name-wrap">
+          <span class="card-name">Jockurworld</span>
+        </div>
         <span class="card-badge badge-live">LIVE</span>
       </div>
       <div class="card-meta">
@@ -716,9 +841,9 @@
       </div>
       <div class="card-traffic">Traffic: <strong>Twitter/X</strong></div>
       <div class="card-actions">
-        <a href="jockurworld/" class="btn-guide">📖 Guide</a>
-        <a href="jockurworld/objections.html" class="btn-guide" style="background:#f8514922;color:#f85149;border-color:#f8514944">🛡️ OBJ/RES</a>
-        <a href="jockurworld/Jockurworld_Complete_Infloww.xlsx" download class="btn-xlsx">📥 XLSX</a>
+        <a href="jockurworld/" class="btn-guide">Guide</a>
+        <a href="jockurworld/objections.html" class="btn-obj">OBJ/RES</a>
+        <a href="jockurworld/Jockurworld_Complete_Infloww.xlsx" download class="btn-xlsx">XLSX</a>
       </div>
     </div>
 
@@ -727,18 +852,26 @@
 </div>
 
 <div class="footer">
-  Chatting Wizard — Script Manager — 2026<br>
-  Internal use only
+  <div class="footer-brand">
+    <svg class="cw-logo" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="40" height="40" rx="10" fill="#58a6ff" fill-opacity="0.15"/>
+  <text x="20" y="27" text-anchor="middle" fill="#58a6ff" font-size="18" font-weight="800" font-family="system-ui">CW</text>
+</svg>
+    <span>Chatting Wizard</span>
+  </div>
+  Script Manager — 2026 — Internal use only
 </div>
 
 <script>
 // Search
 const searchInput = document.getElementById('dash-search');
 const cards = document.querySelectorAll('.card');
-const sections = document.querySelectorAll('.section-title');
 
 searchInput.addEventListener('input', () => {
   const q = searchInput.value.toLowerCase().trim();
+  // Reset active filter to "All" when searching
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector('.filter-btn[data-filter="all"]').classList.add('active');
   cards.forEach(c => {
     if (!q || c.dataset.search.includes(q)) {
       c.classList.remove('hide');
@@ -756,12 +889,19 @@ filterBtns.forEach(btn => {
     btn.classList.add('active');
     const f = btn.dataset.filter;
     cards.forEach(c => {
+      const t = c.dataset.traffic;
+      const p = c.dataset.page;
       if (f === 'all') { c.classList.remove('hide'); return; }
-      if (f === 'free' && c.dataset.page.includes('free')) { c.classList.remove('hide'); return; }
-      if (f === 'paid' && c.dataset.page.includes('paid') && !c.dataset.page.includes('free')) { c.classList.remove('hide'); return; }
+      if (f === 'free' && p.includes('free')) { c.classList.remove('hide'); return; }
+      if (f === 'paid' && p.includes('paid') && !p.includes('free')) { c.classList.remove('hide'); return; }
       if (f === 'nonexplicit' && c.dataset.ne === 'true') { c.classList.remove('hide'); return; }
-      if (f === 'reddit' && c.dataset.traffic.includes('reddit')) { c.classList.remove('hide'); return; }
-      if (f === 'ig' && (c.dataset.traffic.includes('ig') || c.dataset.traffic.includes('tiktok'))) { c.classList.remove('hide'); return; }
+      if (f === 'reddit' && t.includes('reddit')) { c.classList.remove('hide'); return; }
+      if (f === 'ig' && (t.includes('ig') || t.includes('tiktok'))) { c.classList.remove('hide'); return; }
+      if (f === 'dating' && t.includes('dating')) { c.classList.remove('hide'); return; }
+      if (f === 'social' && t.includes('social')) { c.classList.remove('hide'); return; }
+      if (f === 'twitter' && t.includes('twitter')) { c.classList.remove('hide'); return; }
+      if (f === 'oftv' && t.includes('oftv')) { c.classList.remove('hide'); return; }
+      if (f === 'other' && t === 'other') { c.classList.remove('hide'); return; }
       c.classList.add('hide');
     });
     searchInput.value = '';
