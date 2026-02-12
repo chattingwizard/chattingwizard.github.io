@@ -38,13 +38,15 @@ sys.stdout.reconfigure(encoding='utf-8', errors='replace')
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MODELS_DIR = os.path.join(BASE_DIR, "tools", "models")
 SLACK_CHANNEL = "0-management-scripts"
+
+# Monday.com — ENGLISH board only (CWENG). Spanish (CWESP) is ignored.
+MONDAY_BOARD_ID = "5018047892"  # 👩🏻 Client OnOffboarding CWENG
+
 ONBOARDING_KEYWORDS = [
     "onboarding", "new model", "new creator", "new account",
-    "nueva creadora", "nuevo modelo", "nuevo onboarding",
     "start preparing", "prepare scripts", "preparing scripts",
     "isn't linked", "isn\u2019t linked", "not linked yet",
     "starting the chat", "new onboarding",
-    # Structured trigger (recommended format for Angeles)
     "NEWMODEL:",
 ]
 
@@ -608,21 +610,7 @@ def cmd_check_monday(args):
         print("[ERROR] monday_cli.py not found")
         return []
 
-    # Find the onboarding board
-    data = monday_query("""{boards(limit: 50) {id name}}""")
-    board_id = None
-    for b in data.get("boards", []):
-        name_lower = b["name"].lower()
-        # Skip subitems boards
-        if name_lower.startswith("subitems") or name_lower.startswith("subelementos"):
-            continue
-        if "clientonoffboarding" in name_lower.replace(" ", "").replace("\u200d", ""):
-            board_id = b["id"]
-            break
-    
-    if not board_id:
-        print("[ERROR] Onboarding board not found in Monday")
-        return []
+    board_id = MONDAY_BOARD_ID
 
     # Get items from the board
     data = monday_query("""
