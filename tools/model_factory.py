@@ -736,15 +736,16 @@ class ModelFactory:
         if c.get('special_notes') or c.get('key_phrases') or c.get('explicit_level'):
             right_parts = []
             if c.get('explicit_level'):
-                level_map = {'full': ('Full Explicit', 'var(--red)'),
-                             'non_explicit': ('Non-Explicit (Lingerie/Tease)', 'var(--orange)'),
-                             'soft': ('Soft (No Hardcore)', 'var(--yellow)')}
-                lbl, clr = level_map.get(c['explicit_level'], (c['explicit_level'], 'var(--muted)'))
+                level_map = {'full': ('Full Explicit', '#f85149', '#f8514912', '#f8514933'),
+                             'non_explicit': ('Non-Explicit (Lingerie/Tease)', '#d29922', '#d2992212', '#d2992233'),
+                             'soft': ('Soft (No Hardcore)', '#e3b341', '#e3b34112', '#e3b34133')}
+                defaults = (c['explicit_level'], '#8b949e', '#8b949e12', '#8b949e33')
+                lbl, clr, bg, bdr = level_map.get(c['explicit_level'], defaults)
                 right_parts.append(
-                    '<div class="content-level" style="background:%s12;border:1px solid %s33;'
+                    '<div class="content-level" style="background:%s;border:1px solid %s;'
                     'padding:8px 14px;border-radius:8px;margin-bottom:10px;font-size:.84rem">'
                     '<strong style="color:%s">Content Level:</strong> %s</div>'
-                    % (clr, clr, clr, h(lbl)))
+                    % (bg, bdr, clr, h(lbl)))
             if c.get('special_notes'):
                 right_parts.append(
                     '<div style="background:#e3b34112;border-left:3px solid var(--yellow);'
