@@ -50,7 +50,7 @@ config = {
         ("TB-5", "okay I don't do this for everyone... tell me what you think? 💕", "SEND PPV 0 — FREE teaser (bold/confident selfie, travel vibe). Wait for reply. Silent 3 min → NR Waves.", "ppv"),
 
         # ── Sexting Phase 1 → PPV 1 ($12) ──
-        ("S1-1", "soo you liked that huh? because honestly my heart is racing knowing you just saw that 🥵", "Wait for reply.", "sext"),
+        ("S1-1", "soo you liked that huh? because honestly it just made me way wetter than I expected 🥵", "Wait for reply.", "sext"),
         ("S1-2", "I wasn't planning on going there tonight but you're literally making me so wet I can't think straight", "React to compliment.", "sext"),
         ("S1-3", "okay I'm definitely touching myself right now and I blame you entirely babe ✨", None, "sext"),
         ("S1-4", "hold on 🎶", "WAIT 2-3 MIN", "wait"),
@@ -65,15 +65,15 @@ config = {
         ("S1-11", "look at me... this is ALL because of you and I can't stop ✨", "SEND PPV 2 — $25. Bought → continue. Silent → NR Waves.", "ppv"),
 
         # ── Sexting Phase 3 → PPV 3 ($40) ──
-        ("S1-12", "fuckkk ✨", "Wait for reply. NO cooldown — keep momentum.", "sext"),
+        ("S1-12", "fuckkk I can't stop ✨", "Wait for reply. NO cooldown — keep momentum.", "sext"),
         ("S1-13", "I'm rubbing my clit so fast right now and god it feels so good thinking about you watching", None, "sext"),
         ("S1-14", "my fingers are deep inside me and I can't stop moaning... I hope my neighbors can't hear this 🥵", None, "sext"),
-        ("S1-15", "I'm about to lose it and I need you to see what's happening to me right now", None, "sext"),
+        ("S1-15", "I'm about to cum and I need you to see what's happening to my body right now", None, "sext"),
         ("S1-16", "gimme a minute 🎶", "WAIT 2-3 MIN", "wait"),
         ("S1-17", "you're not ready for this one babe... but I need you to see it ✨", "SEND PPV 3 — $40. Bought → continue. Silent → NR Waves.", "ppv"),
 
         # ── Sexting Phase 4 → PPV 4 ($55) ──
-        ("S1-18", "oh fuck oh fuck ✨", "Wait for reply.", "sext"),
+        ("S1-18", "oh fuck oh fuck I'm literally trembling right now ✨", "Wait for reply.", "sext"),
         ("S1-19", "I'm SO close babe... wait for me, I want you to watch the second it happens 🥵", None, "sext"),
         ("S1-20", "I'm cumming right now... don't miss this", None, "sext"),
         ("S1-21", "one more moment 🎶", "WAIT 1-2 MIN", "wait"),

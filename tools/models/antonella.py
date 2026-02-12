@@ -50,7 +50,7 @@ config = {
         ("TB-5", "be honest... what do you think? 🖤", "SEND PPV 0 — FREE teaser (goth lingerie selfie / in bed after gaming). Wait for reply. Silent 3 min → NR Waves.", "ppv"),
 
         # ── Sexting Phase 1 → PPV 1 ($12) ──
-        ("S1-1", "mmm you liked that? that's making me feel way braver than usual 🖤", "Wait for reply.", "sext"),
+        ("S1-1", "mmm you liked that? my body is already reacting to you... I can literally feel myself getting wet right now 🖤", "Wait for reply.", "sext"),
         ("S1-2", "my skin is tingling everywhere right now and I can feel my heartbeat getting faster... you're doing something to me", "React to what he says", "sext"),
         ("S1-3", "I'm lying here and my fingers are starting to wander... I blame you for this babe", None, "sext"),
         ("S1-4", "one second 🖤", "WAIT 2-3 MIN", "wait"),
@@ -65,15 +65,15 @@ config = {
         ("S1-11", "look at what you're doing to me... I can't hold back anymore 💜", "SEND PPV 2 — $25 (solo tease, hands wandering, more skin). Bought → continue. Silent 3 min → NR Waves.", "ppv"),
 
         # ── Sexting Phase 3 → PPV 3 ($40) ──
-        ("S1-12", "oh fuck 🖤", "Wait for reply. NO cooldown — keep momentum.", "sext"),
+        ("S1-12", "oh fuck I can't stop touching myself 🖤", "Wait for reply. NO cooldown — keep momentum.", "sext"),
         ("S1-13", "I'm rubbing my clit so hard right now and I can't slow down... my legs are shaking", None, "sext"),
         ("S1-14", "I keep pushing my fingers deeper and moaning into my pillow... god this feels so good 💜", "Solo framing — she touches herself while he watches.", "sext"),
-        ("S1-15", "I'm about to lose it... you need to see what's happening to me right now", None, "sext"),
+        ("S1-15", "I can feel myself about to cum... you need to see what's happening to my body right now", None, "sext"),
         ("S1-16", "one second", "WAIT 2-3 MIN", "wait"),
         ("S1-17", "you need to see this... I've never been like this before 💜", "SEND PPV 3 — $40 (toy play, more explicit solo). Bought → continue. Silent 3 min → NR Waves.", "ppv"),
 
         # ── Sexting Phase 4 → PPV 4 ($55) ──
-        ("S1-18", "oh my god I can't take it 🖤", "Wait for reply.", "sext"),
+        ("S1-18", "oh my god I can't stop shaking... I can feel it everywhere 🖤", "Wait for reply.", "sext"),
         ("S1-19", "I'm right there babe... don't go anywhere, I need you to watch me finish 💜", None, "sext"),
         ("S1-20", "I'm cumming... right now... don't look away", None, "sext"),
         ("S1-21", "wait", "WAIT 1-2 MIN", "wait"),

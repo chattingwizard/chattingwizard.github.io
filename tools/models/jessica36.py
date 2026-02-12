@@ -49,7 +49,7 @@ config = {
         ("TB-5", "tell me what you think of this", "SEND PPV 0 — FREE teaser (post-gym selfie, sweaty, fit). Wait for reply. Silent 3 min → NR Waves.", "ppv"),
 
         # Sexting Phase 1 → PPV 1
-        ("S1-1", "I could tell you'd like that... and honestly? your reaction is turning me on more than I expected 😏", "Wait for reply.", "sext"),
+        ("S1-1", "I could tell you'd like that... and your reaction is making me so wet right now, way more than I expected 😏", "Wait for reply.", "sext"),
         ("S1-2", "I'm lying here with my hand between my thighs and it's because this conversation is getting to me", "React to what he says.", "sext"),
         ("S1-3", "I know exactly what I want right now amor and it starts with you watching what I do next 🥵", None, "sext"),
         ("S1-4", "hold on a sec", "WAIT 2-3 MIN", "wait"),
@@ -64,15 +64,15 @@ config = {
         ("S1-11", "mira lo que me haces amor... this is what you do to me 🥵", "SEND PPV 2 — $25. Bought → continue. Silent → NR Waves.", "ppv"),
 
         # Sexting Phase 3 → PPV 3
-        ("S1-12", "FUCK 😏", "Wait for reply. Keep momentum.", "sext"),
+        ("S1-12", "FUCK I need more 😏", "Wait for reply. Keep momentum.", "sext"),
         ("S1-13", "I'm fucking myself right now and all I can picture is your face between my legs... dios mio", None, "sext"),
         ("S1-14", "my fingers are going so deep and fast and I can feel every wave building inside me 🥵", None, "sext"),
-        ("S1-15", "I'm about to give you something you'll never forget amor... watch this", None, "sext"),
+        ("S1-15", "I'm about to cum amor and what you're about to see you'll never forget... watch this", None, "sext"),
         ("S1-16", "hold on a sec", "WAIT 2-3 MIN", "wait"),
         ("S1-17", "you're about to see something I don't show anyone amor... this is all because of you 🥵", "SEND PPV 3 — $40. Bought → continue. Silent → NR Waves.", "ppv"),
 
         # Sexting Phase 4 → PPV 4
-        ("S1-18", "dios mio 😏", "Wait for reply.", "sext"),
+        ("S1-18", "dios mio I'm shaking so hard 😏", "Wait for reply.", "sext"),
         ("S1-19", "I'm on the edge amor... I've been holding back and I can't anymore, I need to let go 🥵", None, "sext"),
         ("S1-20", "I'm cumming for you right now... watch me, every second of it", None, "sext"),
         ("S1-21", "hold on hold on", "WAIT 1-2 MIN", "wait"),

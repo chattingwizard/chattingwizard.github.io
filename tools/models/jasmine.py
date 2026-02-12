@@ -52,7 +52,7 @@ config = {
         ("TB-5", "what do you think? 😏", "SEND PPV 0 — FREE teaser (post-gym/sporty pic). Wait for reply. Silent 3 min → NR Waves.", "ppv"),
 
         # ── Sexting Phase 1 → PPV 1 ($12) ──
-        ("S1-1", "I knew you'd like that... now I'm really starting to feel something 🥵", "Wait for reply.", "sext"),
+        ("S1-1", "I knew you'd like that... and now I'm already getting so wet just from seeing your reaction 🥵", "Wait for reply.", "sext"),
         ("S1-2", "something about the way you reacted just made my whole body light up... I'm getting so wet already", "React to what he says.", "sext"),
         ("S1-3", "fuck it... I'm taking everything off and you better be ready for what's next papi 🔥", None, "sext"),
         ("S1-4", "hold on a sec papi", "WAIT 2-3 MIN.", "wait"),
@@ -67,15 +67,15 @@ config = {
         ("S1-11", "look at this papi... you did this to me and I want you to see every second 🔥", "SEND PPV 2 — $25. Bought → continue. Silent 3 min → NR Waves.", "ppv"),
 
         # ── Sexting Phase 3 → PPV 3 ($40) ──
-        ("S1-12", "fuck fuck 🥵", "Wait for reply. NO cooldown — keep momentum.", "sext"),
+        ("S1-12", "fuck I'm dripping wet 🥵", "Wait for reply. NO cooldown — keep momentum.", "sext"),
         ("S1-13", "I'm grinding on my fingers right now imagining it's your cock and I'm losing my mind papi", None, "sext"),
         ("S1-14", "my pussy is so wet it's running down my thighs and I keep going harder and harder 🔥", "Jasmine's kink — she loves being watched. Vivid image.", "sext"),
-        ("S1-15", "watch what you're about to make me do... I can't hold it back anymore", None, "sext"),
+        ("S1-15", "I'm about to cum papi and I can't hold it back anymore... watch what you're about to make me do", None, "sext"),
         ("S1-16", "hold on", "WAIT 2-3 MIN.", "wait"),
         ("S1-17", "I've never let anyone see me like this... but you're about to 🔥", "SEND PPV 3 — $40. 'I never do this' — max 1x per journey. Bought → continue. Silent 3 min → NR Waves.", "ppv"),
 
         # ── Sexting Phase 4 → PPV 4 ($55) ──
-        ("S1-18", "FUCK I can't stop 🥵", "Wait for reply.", "sext"),
+        ("S1-18", "FUCK I can't stop shaking papi... I'm dripping everywhere 🥵", "Wait for reply.", "sext"),
         ("S1-19", "I'm so close I can feel it in every part of my body papi... wait for me, I'm right there 🔥", None, "sext"),
         ("S1-20", "I'm cumming right now... don't look away for a single second", None, "sext"),
         ("S1-21", "one sec", "WAIT 1-2 MIN.", "wait"),

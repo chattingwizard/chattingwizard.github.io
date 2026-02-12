@@ -50,7 +50,7 @@ config = {
         ("TB-5", "tell me what you think 😏", "SEND PPV 0 — FREE teaser (bikini/beach pic). Wait for reply. Silent 3 min → NR Waves.", "ppv"),
 
         # ── Sexting Phase 1 → PPV 1 ($12) ──
-        ("S1-1", "mm you liked that? good... because I can already feel my body reacting to the way you're looking at me 😏", "Wait for reply.", "sext"),
+        ("S1-1", "mm you liked that? good... because I can feel myself getting wet just from the way you're looking at me 😏", "Wait for reply.", "sext"),
         ("S1-2", "my hand is drifting lower and I can feel myself getting wet just from this conversation... you're dangerous babe", "React to what he says", "sext"),
         ("S1-3", "I want to show you what happens when I stop holding back... I think you can handle it 🥵", None, "sext"),
         ("S1-4", "one second", "WAIT 2-3 MIN", "wait"),
@@ -65,15 +65,15 @@ config = {
         ("S1-11", "this is what you're making me do to myself babe... watch 🥵", "SEND PPV 2 — $25. Bought → continue. Silent 3 min → NR Waves.", "ppv"),
 
         # ── Sexting Phase 3 → PPV 3 ($40) ──
-        ("S1-12", "oh fuck 😏", "Wait for reply. NO cooldown — keep momentum.", "sext"),
+        ("S1-12", "oh fuck I can't stop 😏", "Wait for reply. NO cooldown — keep momentum.", "sext"),
         ("S1-13", "I'm rubbing my pussy and going deeper with every stroke babe... I can hear how wet I am", None, "sext"),
         ("S1-14", "my body is arching off the bed and my legs are trembling... I can't stop 🥵", None, "sext"),
-        ("S1-15", "I'm so close to the edge and I need you to see what happens when I fall", None, "sext"),
+        ("S1-15", "I'm about to cum babe and I need you to see what happens to my body when I let go", None, "sext"),
         ("S1-16", "one second", "WAIT 2-3 MIN", "wait"),
         ("S1-17", "you need to see this babe... I don't let anyone see me like this 🥵", "SEND PPV 3 — $40. Bought → continue. Silent 3 min → NR Waves.", "ppv"),
 
         # ── Sexting Phase 4 → PPV 4 ($55) ──
-        ("S1-18", "oh my god 😏", "Wait for reply.", "sext"),
+        ("S1-18", "oh my god I can't stop shaking... I'm right on the edge 😏", "Wait for reply.", "sext"),
         ("S1-19", "I'm right there babe... every nerve in my body is on fire and I need you to watch me 🥵", None, "sext"),
         ("S1-20", "I'm cumming... god I'm cumming so hard for you right now", None, "sext"),
         ("S1-21", "wait", "WAIT 1-2 MIN", "wait"),

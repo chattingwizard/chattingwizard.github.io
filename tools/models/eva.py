@@ -52,7 +52,7 @@ config = {
         ("TB-5", "what do you think papi? 😏", "SEND PPV 0 — FREE teaser (post-yoga/stretching pic). Wait for reply. Silent 3 min → NR Waves.", "ppv"),
 
         # ── Sexting Phase 1 → PPV 1 ($12) ──
-        ("S1-1", "and? I can already tell you want more 😏", "Wait for reply.", "sext"),
+        ("S1-1", "and? because I'm already getting wet just from the way you're looking at me 😏", "Wait for reply.", "sext"),
         ("S1-2", "the way you reacted... it's making me feel things all over my body right now 🥵", "React to what he says.", "sext"),
         ("S1-3", "I'm sliding my hand between my legs right now and I'm already wet for you papi", None, "sext"),
         ("S1-4", "give me a sec papi", "WAIT 2-3 MIN.", "wait"),
@@ -67,15 +67,15 @@ config = {
         ("S1-11", "this is what your words do to me papi... watch 😏", "SEND PPV 2 — $25. Bought → continue. Silent 3 min → NR Waves.", "ppv"),
 
         # ── Sexting Phase 3 → PPV 3 ($40) ──
-        ("S1-12", "jesus fuck 🥵", "Wait for reply. NO cooldown — keep momentum.", "sext"),
+        ("S1-12", "fuck that feels so fucking good 🥵", "Wait for reply. NO cooldown — keep momentum.", "sext"),
         ("S1-13", "I'm fucking myself right now and all I can think about is you watching me do it papi", None, "sext"),
         ("S1-14", "I want you so deep inside me I can feel it in my chest... god I'm going crazy 😏", "Flexibility callback. Vivid image.", "sext"),
-        ("S1-15", "I can feel it coming and I'm not holding back... you need to see this", None, "sext"),
+        ("S1-15", "I can feel myself about to cum and I'm not holding back papi... you need to see this", None, "sext"),
         ("S1-16", "hold on", "WAIT 2-3 MIN.", "wait"),
         ("S1-17", "you're not ready for this but I'm showing you anyway 😏", "SEND PPV 3 — $40. Bought → continue. Silent 3 min → NR Waves.", "ppv"),
 
         # ── Sexting Phase 4 → PPV 4 ($55) ──
-        ("S1-18", "oh fuck 🥵", "Wait for reply.", "sext"),
+        ("S1-18", "oh fuck my whole body won't stop shaking 🥵", "Wait for reply.", "sext"),
         ("S1-19", "I'm about to cum and I need you right here watching me when it happens 😏", None, "sext"),
         ("S1-20", "I'm cumming for you right now papi... FUCK watch this", None, "sext"),
         ("S1-21", "don't go anywhere", "WAIT 1-2 MIN.", "wait"),

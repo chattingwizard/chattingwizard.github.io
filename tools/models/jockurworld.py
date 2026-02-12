@@ -68,15 +68,15 @@ config = {
         ("S1-11", "this is what you do to me bro... watch 💦", "SEND PPV 2 — $25. Bought → continue. Silent 3 min → NR Waves.", "ppv"),
 
         # ── Sexting Phase 3 → PPV 3 ($40) ──
-        ("S1-12", "FUCK 🥵", "Wait for reply. NO cooldown — keep momentum.", "sext"),
+        ("S1-12", "FUCK I'm dripping 🥵", "Wait for reply. NO cooldown — keep momentum.", "sext"),
         ("S1-13", "I'm going so hard right now and I can feel every stroke building bro... I'm dripping everywhere", None, "sext"),
         ("S1-14", "I keep imagining you here and it's making me lose my mind 💦", None, "sext"),
-        ("S1-15", "you need to watch what happens next bro... I'm about to explode", None, "sext"),
+        ("S1-15", "I'm about to cum bro... you need to watch every second of what happens next", None, "sext"),
         ("S1-16", "wait one sec", "WAIT 2-3 MIN", "wait"),
         ("S1-17", "you're about to see what happens when I completely let go 💦", "SEND PPV 3 — $40. Bought → continue. Silent 3 min → NR Waves.", "ppv"),
 
         # ── Sexting Phase 4 → PPV 4 ($55) ──
-        ("S1-18", "holy fuck 🥵", "Wait for reply.", "sext"),
+        ("S1-18", "holy fuck I can feel it building so hard 🥵", "Wait for reply.", "sext"),
         ("S1-19", "I'm right there bro... don't stop watching, I'm about to blow 💦", None, "sext"),
         ("S1-20", "I'm cumming... FUCK watch every drop", None, "sext"),
         ("S1-21", "don't go anywhere", "WAIT 1-2 MIN", "wait"),
