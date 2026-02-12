@@ -6,9 +6,9 @@ BASE = r"c:\Users\34683\CW-ScriptManager"
 
 # Define all models in display order
 FEMALE_MODELS = [
-    {"name": "Putri", "folder": "putri", "age": 25, "nationality": "Indonesian", "page": "Free Page", "traffic": "Social Media", "xlsx": "Putri_Complete_Infloww.xlsx"},
-    {"name": "Riri VIP", "folder": "riri", "age": 22, "nationality": "Italian", "page": "Paid Page", "traffic": "OFTV / Social", "xlsx": "Riri_Complete_Infloww.xlsx"},
-    {"name": "Eva Martinez", "folder": "eva", "age": 24, "nationality": "Colombian", "page": "Paid Page", "traffic": "IG/TikTok", "xlsx": "Eva_Complete_Infloww.xlsx"},
+    {"name": "Putri", "folder": "putri", "age": 25, "nationality": "Indonesian", "page": "Free Page", "traffic": "OFTV", "xlsx": "Putri_Complete_Infloww.xlsx"},
+    {"name": "Riri VIP", "folder": "riri", "age": 22, "nationality": "Italian", "page": "Paid Page", "traffic": "OFTV / Others", "xlsx": "Riri_Complete_Infloww.xlsx"},
+    {"name": "Eva Martinez", "folder": "eva", "age": 24, "nationality": "Colombian", "page": "Paid Page", "traffic": "IG/TikTok + Others", "xlsx": "Eva_Complete_Infloww.xlsx"},
     {"name": "Antonella", "folder": "antonella", "age": 19, "nationality": "American", "page": "Mixed", "traffic": "Reddit", "xlsx": "Antonella_Complete_Infloww.xlsx"},
     {"name": "Jasmine", "folder": "jasmine", "age": 25, "nationality": "Dominican", "page": "Free/Paid", "traffic": "IG/TikTok + Reddit", "xlsx": "Jasmine_Complete_Infloww.xlsx"},
     {"name": "Fernanda", "folder": "fernanda", "age": 46, "nationality": "Brazilian", "page": "Paid Page", "traffic": "IG/TikTok", "xlsx": "Fernanda_Complete_Infloww.xlsx"},
@@ -26,25 +26,25 @@ FEMALE_MODELS = [
     {"name": "Lia Kuroki", "folder": "lia", "age": 22, "nationality": "Japanese", "page": "Free Page", "traffic": "IG/TikTok", "xlsx": "Lia_Complete_Infloww.xlsx"},
     {"name": "Lina", "folder": "lina", "age": 24, "nationality": "Spanish", "page": "Free Page", "traffic": "IG/TikTok", "xlsx": "Lina_Complete_Infloww.xlsx"},
     {"name": "Faby Monteiro", "folder": "faby", "age": 45, "nationality": "Brazilian", "page": "Paid Page", "traffic": "Other", "xlsx": "Faby_Complete_Infloww.xlsx"},
-    {"name": "Irina", "folder": "irina", "age": 23, "nationality": "American/Russian", "page": "Paid Page", "traffic": "IG/TikTok", "xlsx": "Irina_Complete_Infloww.xlsx", "tag": "non-explicit"},
+    {"name": "Irina", "folder": "irina", "age": 23, "nationality": "American/Russian", "page": "Free Page", "traffic": "IG/TikTok", "xlsx": "Irina_Complete_Infloww.xlsx", "tag": "non-explicit"},
     {"name": "Zansi", "folder": "zansi", "age": 26, "nationality": "American", "page": "Free Page", "traffic": "Social Media", "xlsx": "Zansi_Complete_Infloww.xlsx"},
 ]
 
 MALE_DATING_APP = [
     {"name": "Max", "folder": "max", "age": 20, "nationality": "Italian", "page": "Paid Page", "traffic": "Dating Apps (Gay)", "xlsx": "Max_Complete_Infloww.xlsx"},
-    {"name": "Marco", "folder": "marco", "age": 25, "nationality": "Turkish", "page": "Paid Page", "traffic": "Dating Apps (Gay)", "xlsx": "Marco_Complete_Infloww.xlsx"},
+    {"name": "Marco", "folder": "marco", "age": 25, "nationality": "Turkish", "page": "Paid Page", "traffic": "Dating Apps (Gay) + Others", "xlsx": "Marco_Complete_Infloww.xlsx"},
     {"name": "Lucas Passione", "folder": "lucas", "age": 24, "nationality": "Argentinian", "page": "Paid Page", "traffic": "Dating Apps", "xlsx": "Lucas Passione_Complete_Infloww.xlsx"},
-    {"name": "Liam", "folder": "liam", "age": 20, "nationality": "Argentinian", "page": "Paid Page", "traffic": "Dating Apps", "xlsx": "Liam_Complete_Infloww.xlsx"},
+    {"name": "Liam", "folder": "liam", "age": 20, "nationality": "Argentinian", "page": "Paid Page", "traffic": "Dating Apps + Others", "xlsx": "Liam_Complete_Infloww.xlsx"},
     {"name": "Peter", "folder": "peter", "age": 20, "nationality": "American", "page": "Paid Page", "traffic": "Dating Apps", "xlsx": "Peter_Complete_Infloww.xlsx"},
-    {"name": "Damon", "folder": "damon", "age": 24, "nationality": "Argentinian", "page": "Paid Page", "traffic": "Dating Apps", "xlsx": "Damon_Complete_Infloww.xlsx"},
-    {"name": "Stefan", "folder": "stefan", "age": 18, "nationality": "Argentinian", "page": "Paid Page", "traffic": "Dating Apps", "xlsx": "Stefan_Complete_Infloww.xlsx"},
+    {"name": "Damon", "folder": "damon", "age": 24, "nationality": "Argentinian", "page": "Paid Page", "traffic": "Dating Apps + Others", "xlsx": "Damon_Complete_Infloww.xlsx"},
+    {"name": "Stefan", "folder": "stefan", "age": 18, "nationality": "Argentinian", "page": "Paid Page", "traffic": "Dating Apps + Others", "xlsx": "Stefan_Complete_Infloww.xlsx"},
     {"name": "Zack", "folder": "zack", "age": 23, "nationality": "British", "page": "Paid Page", "traffic": "Dating Apps", "xlsx": "Zack_Complete_Infloww.xlsx"},
-    {"name": "Noah", "folder": "noah", "age": 21, "nationality": "Italian", "page": "Paid Page", "traffic": "Dating Apps", "xlsx": "Noah_Complete_Infloww.xlsx"},
-    {"name": "Jack Hollywood", "folder": "jack", "age": 20, "nationality": "American", "page": "Paid Page", "traffic": "Dating Apps", "xlsx": "Jack Hollywood_Complete_Infloww.xlsx"},
+    {"name": "Noah", "folder": "noah", "age": 21, "nationality": "Italian", "page": "Paid Page", "traffic": "Dating Apps + Twitter/X", "xlsx": "Noah_Complete_Infloww.xlsx"},
+    {"name": "Jack Hollywood", "folder": "jack", "age": 20, "nationality": "American", "page": "Paid Page", "traffic": "Dating Apps + Others", "xlsx": "Jack Hollywood_Complete_Infloww.xlsx"},
 ]
 
 MALE_OTHER = [
-    {"name": "Jockurworld", "folder": "jockurworld", "age": 26, "nationality": "American", "page": "Paid Page", "traffic": "Twitter/X", "xlsx": "Jockurworld_Complete_Infloww.xlsx"},
+    {"name": "Jockurworld", "folder": "jockurworld", "age": 26, "nationality": "American", "page": "Paid Page", "traffic": "Twitter/X + Others", "xlsx": "Jockurworld_Complete_Infloww.xlsx"},
 ]
 
 def find_photo(folder):
@@ -106,11 +106,9 @@ male_other_cards = "\n\n".join(make_card(m) for m in MALE_OTHER)
 
 total = len(FEMALE_MODELS) + len(MALE_DATING_APP) + len(MALE_OTHER)
 
-# CW Logo SVG (inline — wizard hat silhouette)
-CW_LOGO_SVG = '''<svg class="cw-logo" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="40" height="40" rx="10" fill="#58a6ff" fill-opacity="0.15"/>
-  <text x="20" y="27" text-anchor="middle" fill="#58a6ff" font-size="18" font-weight="800" font-family="system-ui">CW</text>
-</svg>'''
+# CW Logo — real logo image with fallback
+CW_LOGO_HEADER = '<img class="cw-logo" src="assets/logo-google.png" alt="Chatting Wizard" onerror="this.style.display=\'none\'">'
+CW_LOGO_FOOTER = '<img class="cw-logo-sm" src="assets/logo-google.png" alt="CW" onerror="this.style.display=\'none\'">'
 
 html = f'''<!DOCTYPE html>
 <html lang="en">
@@ -181,7 +179,7 @@ html = f'''<!DOCTYPE html>
   .no-results {{ text-align: center; padding: 40px 20px; color: #484f58; display: none; }}
   .footer {{ text-align: center; padding: 40px 20px; color: #484f58; font-size: 0.75em; }}
   .footer-brand {{ display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 4px; }}
-  .footer .cw-logo {{ width: 22px; height: 22px; }}
+  .cw-logo-sm {{ width: 22px; height: 22px; border-radius: 4px; }}
   @media (max-width: 600px) {{ .grid {{ grid-template-columns: 1fr; }} .header h1 {{ font-size: 1.5em; }} }}
 </style>
 </head>
@@ -189,7 +187,7 @@ html = f'''<!DOCTYPE html>
 
 <div class="header">
   <div class="header-brand">
-    {CW_LOGO_SVG}
+    {CW_LOGO_HEADER}
     <h1>CW Scripts</h1>
   </div>
   <p>Script guides for chatters — Chatting Wizard</p>
@@ -244,7 +242,7 @@ html = f'''<!DOCTYPE html>
 
 <div class="footer">
   <div class="footer-brand">
-    {CW_LOGO_SVG}
+    {CW_LOGO_FOOTER}
     <span>Chatting Wizard</span>
   </div>
   Script Manager — 2026 — Internal use only
@@ -289,7 +287,7 @@ filterBtns.forEach(btn => {{
       if (f === 'social' && t.includes('social')) {{ c.classList.remove('hide'); return; }}
       if (f === 'twitter' && t.includes('twitter')) {{ c.classList.remove('hide'); return; }}
       if (f === 'oftv' && t.includes('oftv')) {{ c.classList.remove('hide'); return; }}
-      if (f === 'other' && t === 'other') {{ c.classList.remove('hide'); return; }}
+      if (f === 'other' && t.includes('other')) {{ c.classList.remove('hide'); return; }}
       c.classList.add('hide');
     }});
     searchInput.value = '';

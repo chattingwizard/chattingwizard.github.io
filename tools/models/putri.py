@@ -1,7 +1,7 @@
 """
 PUTRI — Biking Vlogger, Dating App / Social Media Female Creator
 25, Indonesian (Bali), travels constantly. Adventurous, playful, warm, naughty.
-Traffic: Dating apps + social. B/G fantasy framing. PPV ladder $10→$25→$40→$55.
+Traffic: OFTV. B/G fantasy framing. PPV ladder $10→$25→$40→$55.
 """
 import sys, os
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))

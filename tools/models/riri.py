@@ -1,7 +1,7 @@
 """
 RIRI VIP — Social Media Female Creator
 22, Italian, Fitness Influencer, Miami
-Traffic: Social Media (OFTV + others)
+Traffic: OFTV / Others
 Voice: Warm, playful, confident Italian girl energy. Gym/fitness references. Flirty but escalates gradually.
 """
 import sys, os
