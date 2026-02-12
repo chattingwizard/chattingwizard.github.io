@@ -52,34 +52,34 @@ config = {
         ("TB-5", "okay here... please be nice, this is really personal to me 🥺", "SEND PPV 0 — FREE teaser (cute selfie, shy but pretty). Wait for reply. Silent 3 min → NR Waves.", "ppv"),
 
         # ── Sexting Phase 1 → PPV 1 ($12) — Lingerie tease ──
-        ("S1-1", "so...? 😊", "Wait for reply.", "sext"),
-        ("S1-2", "really? you like it? oh my god that makes me feel so much braver 🫶", "React to compliment. Shy but pleased.", "sext"),
-        ("S1-3", "you make me want to show you more of the side of me that nobody gets to see", None, "sext"),
+        ("S1-1", "wait you actually liked it? oh my god my heart won't slow down right now 😊", "Wait for reply.", "sext"),
+        ("S1-2", "my skin feels so sensitive everywhere... I keep getting goosebumps and I know it's because of you 🥺", "React to compliment. Shy but pleased.", "sext"),
+        ("S1-3", "I want to show you something I've never shown anyone before babe... you make me want to be brave", None, "sext"),
         ("S1-4", "one secondond... I need to work up the courage 😊", "WAIT 2-3 MIN", "wait"),
-        ("S1-5", "my heart won't stop racing... but something about you makes me feel safe", "SEND PPV 1 — $12. Lingerie tease. Bought → continue. Silent → NR Waves.", "ppv"),
+        ("S1-5", "this is what you're making me feel babe... please be gentle 🥺", "SEND PPV 1 — $12. Lingerie tease. Bought → continue. Silent → NR Waves.", "ppv"),
 
         # ── Sexting Phase 2 → PPV 2 ($25) — More revealing lingerie ──
-        ("S1-6", "did you see it? 😳", "Wait for reply.", "sext"),
-        ("S1-7", "talking to you is doing something to me right now that I can't explain... my heart is racing so fast", "HE caused this feeling.", "sext"),
-        ("S1-8", "I keep thinking about what it would feel like if you were here with me right now", "Suggestive NOT explicit. Let his imagination work.", "sext"),
-        ("S1-9", "what would you want me to do...?", "Wait for reply. React to what he says. Stay suggestive, NOT explicit.", "sext"),
+        ("S1-6", "I can't believe I just did that... oh my god 😊", "Wait for reply.", "sext"),
+        ("S1-7", "but I don't want to stop babe... you make me feel things I didn't know I could feel on here", "HE caused this feeling.", "sext"),
+        ("S1-8", "I'm lying here barely wearing anything and my hand keeps going where it shouldn't... because of you 🥺", "Suggestive NOT explicit. Let his imagination work.", "sext"),
+        ("S1-9", "what would you do if you could see me right now babe? I really need to hear it", "Wait for reply. React to what he says. Stay suggestive, NOT explicit.", "sext"),
         ("S1-10", "hold on... I need to show you something", "WAIT 2-3 MIN", "wait"),
-        ("S1-11", "you're the only one who makes me feel this way... you're the reason I'm doing this 💗", "SEND PPV 2 — $25. More revealing lingerie/implied tease. Bought → continue. Silent → NR Waves.", "ppv"),
+        ("S1-11", "look at what you're doing to me babe... I'm losing my mind 🥺", "SEND PPV 2 — $25. More revealing lingerie/implied tease. Bought → continue. Silent → NR Waves.", "ppv"),
 
         # ── Sexting Phase 3 → PPV 3 ($40) — Maximum tease, almost showing ──
-        ("S1-12", "omg", "Wait for reply. Keep momentum.", "sext"),
-        ("S1-13", "you have no idea what you're doing to me right now 🥺", None, "sext"),
-        ("S1-14", "I'm lying here barely wearing anything and all I can think about is you... just you", "Suggestive, NOT explicit. Let his imagination fill in the rest.", "sext"),
-        ("S1-15", "I want to show you how I look right now but I'm scared it's too much", None, "sext"),
+        ("S1-12", "oh god 😊", "Wait for reply. Keep momentum.", "sext"),
+        ("S1-13", "something about you makes me lose every single boundary I have babe... I'm scared of how good this feels", None, "sext"),
+        ("S1-14", "I can feel my body responding to you and I'm touching places I never thought I'd show anyone 🥺", "Suggestive, NOT explicit. Let his imagination fill in the rest.", "sext"),
+        ("S1-15", "I need you to see what's happening to me right now babe... I can't hold it in anymore", None, "sext"),
         ("S1-16", "okay give me a minute", "WAIT 2-3 MIN", "wait"),
-        ("S1-17", "I feel so safe with you... you're the only one I trust enough to see me like this 💗", "SEND PPV 3 — $40. Most revealing yet (sheer/see-through, touching over fabric). Bought → continue. Silent → NR Waves.", "ppv"),
+        ("S1-17", "I've never let anyone see me like this before babe... it's all yours 🥺", "SEND PPV 3 — $40. Most revealing yet (sheer/see-through, touching over fabric). Bought → continue. Silent → NR Waves.", "ppv"),
 
         # ── Sexting Phase 4 → PPV 4 ($55) — Peak tease ──
-        ("S1-18", "oh god 🥺", "Wait for reply.", "sext"),
-        ("S1-19", "I can't stop... something about you makes me lose all my boundaries", None, "sext"),
-        ("S1-20", "I want to finish this with you... stay with me please", None, "sext"),
+        ("S1-18", "oh god I can't stop 😊", "Wait for reply.", "sext"),
+        ("S1-19", "please don't leave babe... I've never been this vulnerable with anyone and I need you right here 🥺", None, "sext"),
+        ("S1-20", "stay with me babe... I need you to see this, it's only for you", None, "sext"),
         ("S1-21", "wait", "WAIT 1-2 MIN", "wait"),
-        ("S1-22", "this one is only for you... nobody else gets to see me like this 💗", "SEND PPV 4 — $55. Peak content (most suggestive, implied). Bought → Aftercare. Silent → NR Waves.", "ppv"),
+        ("S1-22", "don't look away babe... I need you right here with me 🥺", "SEND PPV 4 — $55. Peak content (most suggestive, implied). Bought → Aftercare. Silent → NR Waves.", "ppv"),
 
         # ── Aftercare ──
         ("AC-1", "wow... that was... I don't even have words 😊", None, "aftercare"),

@@ -52,34 +52,34 @@ config = {
         ("TB-5", "what do you think papi? 😏", "SEND PPV 0 — FREE teaser (post-yoga/stretching pic). Wait for reply. Silent 3 min → NR Waves.", "ppv"),
 
         # ── Sexting Phase 1 → PPV 1 ($12) ──
-        ("S1-1", "and?", "Wait for reply.", "sext"),
-        ("S1-2", "I knew you'd like it 😏 colombian flexibility hits different huh", "React to what he says.", "sext"),
-        ("S1-3", "wanna see how flexible I really am? I'm in a mood right now", None, "sext"),
+        ("S1-1", "and? I can already tell you want more 😏", "Wait for reply.", "sext"),
+        ("S1-2", "the way you reacted... it's making me feel things all over my body right now 🥵", "React to what he says.", "sext"),
+        ("S1-3", "I'm sliding my hand between my legs right now and I'm already wet for you papi", None, "sext"),
         ("S1-4", "give me a sec papi", "WAIT 2-3 MIN.", "wait"),
-        ("S1-5", "you're not ready for this", "SEND PPV 1 — $12. Bought → continue. Silent 3 min → NR Waves.", "ppv"),
+        ("S1-5", "you asked for more papi... be careful what you wish for 😏", "SEND PPV 1 — $12. Bought → continue. Silent 3 min → NR Waves.", "ppv"),
 
         # ── Sexting Phase 2 → PPV 2 ($25) ──
-        ("S1-6", "did you watch it?", "Wait for reply. Brief cooldown.", "sext"),
-        ("S1-7", "fuck... something about you is doing things to me I can't even explain", "React to what he said. HE caused this.", "sext"),
-        ("S1-8", "I'm so wet right now and it's literally your fault", None, "sext"),
-        ("S1-9", "what would you do to me if you were here right now papi", "Wait for reply. React to what he says.", "sext"),
+        ("S1-6", "mm okay wow... that hit different 🥵", "Wait for reply. Brief cooldown.", "sext"),
+        ("S1-7", "I literally can't stop now... I'm so turned on my whole body is aching for it", "React to what he said. HE caused this.", "sext"),
+        ("S1-8", "I'm soaking wet and my fingers are going in and out and it's not enough papi... I need you 😏", None, "sext"),
+        ("S1-9", "tell me what you want me to do next... be specific, I want to hear every word", "Wait for reply. React to what he says.", "sext"),
         ("S1-10", "fuck wait I need to show you something", "WAIT 2-3 MIN.", "wait"),
-        ("S1-11", "look what you did to me", "SEND PPV 2 — $25. Bought → continue. Silent 3 min → NR Waves.", "ppv"),
+        ("S1-11", "this is what your words do to me papi... watch 😏", "SEND PPV 2 — $25. Bought → continue. Silent 3 min → NR Waves.", "ppv"),
 
         # ── Sexting Phase 3 → PPV 3 ($40) ──
-        ("S1-12", "fuck", "Wait for reply. NO cooldown — keep momentum.", "sext"),
-        ("S1-13", "I need to cum so bad right now, dios mio you have no idea", None, "sext"),
-        ("S1-14", "imagine me right in front of you... legs behind my head... doing whatever you want", "Flexibility callback. Vivid image.", "sext"),
-        ("S1-15", "screw it I'm done waiting", None, "sext"),
+        ("S1-12", "jesus fuck 🥵", "Wait for reply. NO cooldown — keep momentum.", "sext"),
+        ("S1-13", "I'm fucking myself right now and all I can think about is you watching me do it papi", None, "sext"),
+        ("S1-14", "I want you so deep inside me I can feel it in my chest... god I'm going crazy 😏", "Flexibility callback. Vivid image.", "sext"),
+        ("S1-15", "I can feel it coming and I'm not holding back... you need to see this", None, "sext"),
         ("S1-16", "hold on", "WAIT 2-3 MIN.", "wait"),
-        ("S1-17", "I've never done this for anyone... watch", "SEND PPV 3 — $40. Bought → continue. Silent 3 min → NR Waves.", "ppv"),
+        ("S1-17", "you're not ready for this but I'm showing you anyway 😏", "SEND PPV 3 — $40. Bought → continue. Silent 3 min → NR Waves.", "ppv"),
 
         # ── Sexting Phase 4 → PPV 4 ($55) ──
-        ("S1-18", "FUCK", "Wait for reply.", "sext"),
-        ("S1-19", "don't cum yet papi", None, "sext"),
-        ("S1-20", "I wanna finish with you... I'm so close, wait for me", None, "sext"),
+        ("S1-18", "oh fuck 🥵", "Wait for reply.", "sext"),
+        ("S1-19", "I'm about to cum and I need you right here watching me when it happens 😏", None, "sext"),
+        ("S1-20", "I'm cumming for you right now papi... FUCK watch this", None, "sext"),
         ("S1-21", "don't go anywhere", "WAIT 1-2 MIN.", "wait"),
-        ("S1-22", "I'm about to finish... stay with me", "SEND PPV 4 — $55. Bought → Aftercare. Silent → NR Waves.", "ppv"),
+        ("S1-22", "cum with me papi... I'm done holding back 😏", "SEND PPV 4 — $55. Bought → Aftercare. Silent → NR Waves.", "ppv"),
 
         # ── Aftercare ──
         ("AC-1", "dios mio that was insane", None, "aftercare"),

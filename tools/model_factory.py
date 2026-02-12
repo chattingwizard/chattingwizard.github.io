@@ -348,7 +348,9 @@ class ModelFactory:
         }
         for msg_id, text, note, msg_type in self.c.get("journey", []):
             if msg_type == "ppv":
-                cat = "sext"
+                # PPV stays in its current phase (e.g., PPV 0 stays in Teasing)
+                # Only defaults to "sext" if there's no current phase
+                cat = current["cat"] if current else "sext"
             elif msg_type == "wait":
                 cat = current["cat"] if current else "sext"
             else:

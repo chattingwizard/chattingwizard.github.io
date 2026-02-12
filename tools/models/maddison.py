@@ -49,34 +49,34 @@ config = {
         ("TB-5", "I've never shown anyone this before... be honest, what do you think?", "SEND PPV 0 -- FREE teaser (innocent selfie, cute/flirty). Wait for reply. Silent 3 min -> NR Waves.", "ppv"),
 
         # Sexting Phase 1 -> PPV 1 ($12)
-        ("S1-1", "soo??", "Wait for reply.", "sext"),
-        ("S1-2", "hehe really? I was so nervous to send that", "React to compliment. Shy but pleased.", "sext"),
-        ("S1-3", "you're making me feel so brave right now... I wanna show you more Daddy", None, "sext"),
+        ("S1-1", "wait you actually liked that? something just shifted inside me and I can feel it everywhere 🥺", "Wait for reply.", "sext"),
+        ("S1-2", "my breathing is getting heavier and I keep arching my back... my body wants something and I think it's you", "React to compliment. Shy but pleased.", "sext"),
+        ("S1-3", "I'm touching myself right now and I want you to know it's because of you Daddy", None, "sext"),
         ("S1-4", "gimme a minute", "WAIT 2-3 MIN", "wait"),
-        ("S1-5", "I literally never do this but something about you makes me want to", "SEND PPV 1 -- $12 (lingerie tease). Bought -> continue. Silent -> NR Waves. 'I never do this' -- ONE TIME per journey.", "ppv"),
+        ("S1-5", "this is what you're making me do... I can't believe I'm showing you this 💕", "SEND PPV 1 -- $12 (lingerie tease). Bought -> continue. Silent -> NR Waves. 'I never do this' -- ONE TIME per journey.", "ppv"),
 
         # Sexting Phase 2 -> PPV 2 ($25)
-        ("S1-6", "did you see it?", "Wait for reply.", "sext"),
-        ("S1-7", "omg okay talking to you is making me feel things I've never felt before", "HE caused this. Virgin discovery angle.", "sext"),
-        ("S1-8", "I keep wondering what it would be like if you were here right now", None, "sext"),
-        ("S1-9", "tell me what you'd want me to do Daddy", "Wait for reply. React to what he says. Stay innocent but curious.", "sext"),
+        ("S1-6", "omg... I can't believe that just happened 🥺", "Wait for reply.", "sext"),
+        ("S1-7", "I can't stop now even if I wanted to... my hand is already between my thighs and I'm soaked", "HE caused this. Virgin discovery angle.", "sext"),
+        ("S1-8", "every part of me is on fire right now and it keeps getting more intense because of you 💕", None, "sext"),
+        ("S1-9", "tell me exactly what you're thinking right now Daddy... I want to hear everything while I touch myself", "Wait for reply. React to what he says. Stay innocent but curious.", "sext"),
         ("S1-10", "oh god hold on... I need to show you something", "WAIT 2-3 MIN", "wait"),
-        ("S1-11", "look what you're making me do... I've never gone this far before", "SEND PPV 2 -- $25 (more skin, hands wandering, innocent exploration). Bought -> continue. Silent -> NR Waves.", "ppv"),
+        ("S1-11", "see what you did to me? I can't stop 💕", "SEND PPV 2 -- $25 (more skin, hands wandering, innocent exploration). Bought -> continue. Silent -> NR Waves.", "ppv"),
 
         # Sexting Phase 3 -> PPV 3 ($40)
-        ("S1-12", "fuuuck", "Wait for reply. Keep momentum.", "sext"),
-        ("S1-13", "I'm so turned on right now and I didn't even know I could feel like this", "Virgin discovering arousal.", "sext"),
-        ("S1-14", "I'm lying here barely wearing anything and all I can think about is you watching me", None, "sext"),
-        ("S1-15", "I can't control myself anymore Daddy", None, "sext"),
+        ("S1-12", "fuckk 🥺", "Wait for reply. Keep momentum.", "sext"),
+        ("S1-13", "my fingers are inside my pussy and I'm moaning so loud right now... I hope nobody can hear me", "Virgin discovering arousal.", "sext"),
+        ("S1-14", "I'm going faster and faster and I can feel myself getting closer... my whole body is trembling 💕", None, "sext"),
+        ("S1-15", "I'm almost there and I need you to see what you're doing to me right now", None, "sext"),
         ("S1-16", "give me a minute", "WAIT 2-3 MIN", "wait"),
-        ("S1-17", "this is the most I've ever shown anyone... only for you", "SEND PPV 3 -- $40 (touching herself, more explicit solo). Bought -> continue. Silent -> NR Waves.", "ppv"),
+        ("S1-17", "I've never gone this far with anyone Daddy... watch what you made me do 💕", "SEND PPV 3 -- $40 (touching herself, more explicit solo). Bought -> continue. Silent -> NR Waves.", "ppv"),
 
         # Sexting Phase 4 -> PPV 4 ($55)
-        ("S1-18", "fuck Daddy", "Wait for reply.", "sext"),
-        ("S1-19", "don't cum yet pleaseee, I need you to stay with me", None, "sext"),
-        ("S1-20", "I wanna finish with you... I'm so close", None, "sext"),
+        ("S1-18", "oh fuck oh fuck 🥺", "Wait for reply.", "sext"),
+        ("S1-19", "don't leave... I'm so close and I need to feel you right here when I finish 💕", None, "sext"),
+        ("S1-20", "I'm about to cum so hard Daddy... watch me, please don't look away", None, "sext"),
         ("S1-21", "don't go anywhere", "WAIT 1-2 MIN", "wait"),
-        ("S1-22", "finish with me Daddy", "SEND PPV 4 -- $55 (climax). Bought -> Aftercare. Silent -> NR Waves.", "ppv"),
+        ("S1-22", "cum with me right now Daddy... this is just for you 💕", "SEND PPV 4 -- $55 (climax). Bought -> Aftercare. Silent -> NR Waves.", "ppv"),
 
         # Aftercare
         ("AC-1", "oh my god that was... wow", None, "aftercare"),
