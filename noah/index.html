@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOAH — Chatter Guide</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0d1117;--card:#161b22;--border:#30363d;--text:#e6edf3;--muted:#8b949e;--accent:#58a6ff;--green:#3fb950;--red:#f85149;--orange:#d29922;--purple:#bc8cff;--yellow:#e3b341}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:"Segoe UI",system-ui,sans-serif;line-height:1.6;padding:0 0 60px}
+.page{max-width:960px;margin:0 auto;padding:16px 20px}
+.back-btn{display:inline-flex;align-items:center;gap:6px;color:var(--muted);text-decoration:none;font-size:.85rem;padding:10px 0;transition:.15s}
+.back-btn:hover{color:var(--accent)}
+.hero{display:flex;align-items:center;gap:18px;padding:20px 0 16px;border-bottom:1px solid var(--border)}
+.hero-photo{width:72px;height:72px;border-radius:50%;object-fit:cover;border:3px solid var(--accent);flex-shrink:0}
+.hero-info{flex:1}.hero h1{font-size:1.8rem;font-weight:800;letter-spacing:2px;line-height:1.2}
+.hero .tagline{color:var(--muted);font-size:.85rem}
+.toc{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--border);padding:8px 0;margin:0 -20px;padding-left:20px;padding-right:20px;display:flex;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.toc.shadow{box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.toc a{font-size:.72rem;color:var(--muted);background:var(--card);border:1px solid var(--border);padding:4px 10px;border-radius:14px;text-decoration:none;white-space:nowrap;transition:.15s;flex-shrink:0}
+.toc a:hover,.toc a.active{color:var(--accent);border-color:var(--accent)}
+.toc a.toc-ppv{color:var(--green);border-color:#3fb95033}
+.toc a.toc-ref{color:var(--orange);border-color:#d2992233}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0}
+.profile{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 18px}
+.profile h2{font-size:.78rem;color:var(--accent);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:12px}
+.profile-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 16px}
+.profile-item .label{color:var(--muted);font-size:.7rem;text-transform:uppercase;letter-spacing:.5px}
+.profile-item .value{font-size:.85rem}
+.voice-box{background:#1c262f;border-left:3px solid var(--purple);padding:10px 14px;border-radius:0 8px 8px 0;margin-top:12px;font-size:.84rem;color:#c4b5e0}
+.voice-box strong{color:var(--purple)}
+.obj-link{display:flex;align-items:center;gap:14px;background:#f8514910;border:1px solid #f8514933;border-radius:12px;padding:14px 18px;margin:16px 0;text-decoration:none;transition:.15s}
+.obj-link:hover{border-color:var(--red)}
+.phase{margin:10px 0 0;border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.phase-header{display:flex;align-items:center;gap:10px;padding:12px 16px;cursor:pointer;user-select:none;background:var(--card);border-left:3px solid var(--phase-color,var(--accent))}
+.phase-header:hover{background:#1c2129}
+.phase-header .phase-emoji{font-size:1.2rem}
+.phase-header .phase-name{font-size:1rem;font-weight:700;flex:1}
+.phase-header .phase-meta{font-size:.72rem;color:var(--muted);background:var(--bg);padding:2px 10px;border-radius:12px;border:1px solid var(--border)}
+.phase-header .toggle{color:var(--muted);font-size:.8rem;transition:transform .2s}
+.phase.collapsed .toggle{transform:rotate(-90deg)}
+.phase-body{padding:4px 0 8px}.phase.collapsed .phase-body{display:none}
+.msg{display:flex;gap:10px;align-items:flex-start;padding:8px 16px;margin:2px 0;transition:background .12s}
+.msg:hover{background:#161b2266}
+.msg-id{font-size:.64rem;color:var(--muted);background:var(--card);border:1px solid var(--border);padding:2px 6px;border-radius:4px;white-space:nowrap;margin-top:4px;flex-shrink:0;min-width:36px;text-align:center;font-weight:600}
+.msg-body{flex:1;min-width:0}
+.msg-text{font-size:1rem;line-height:1.5;word-wrap:break-word}
+.msg-note{background:#e3b34112;border-left:3px solid var(--yellow);padding:5px 10px;border-radius:0 6px 6px 0;margin:4px 0 2px;font-size:.8rem;color:var(--yellow)}
+.msg-wait{background:#d2992210}.msg-wait .msg-id{border-color:var(--orange);color:var(--orange)}
+.intensity{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;padding:0 5px;border-radius:10px;font-size:.62rem;font-weight:700;border:1px solid;flex-shrink:0;letter-spacing:-.02em;margin-left:4px}
+.ppv-moment{background:#3fb95010;border:1px solid #3fb95028;border-radius:10px;padding:8px 14px;margin:6px 16px;display:flex;align-items:center;gap:10px}
+.ppv-moment .ppv-icon{font-size:1.2rem}
+.ppv-moment .ppv-label{font-size:.88rem;font-weight:600;color:var(--green)}
+.cp{background:none;border:1px solid transparent;color:var(--border);width:28px;height:28px;border-radius:6px;cursor:pointer;font-size:.75rem;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:.15s;position:relative;margin-top:2px;opacity:.3}
+.msg:hover .cp,.qi-item:hover .cp,.nr-table tr:hover .cp{opacity:1;border-color:var(--border)}
+.cp:hover{background:var(--card);color:var(--text);opacity:1}
+.cp.ok{border-color:var(--green);color:var(--green);opacity:1}
+.cp.ok::after{content:"\2713";position:absolute;font-size:.7rem;font-weight:700}
+.cp.ok .cp-icon{visibility:hidden}
+.divider{border:none;border-top:1px solid var(--border);margin:24px 0}
+.ref-section{margin:16px 0}
+.ref-title{font-size:.95rem;font-weight:700;padding:8px 0;border-bottom:2px solid var(--border);margin-bottom:8px}
+.nr-table{width:100%;border-collapse:collapse;margin:6px 0}
+.nr-table th{text-align:left;font-size:.68rem;color:var(--muted);text-transform:uppercase;padding:5px 10px;border-bottom:1px solid var(--border)}
+.nr-table td{padding:7px 10px;font-size:.88rem;border-bottom:1px solid #21262d;vertical-align:top}
+.nr-note{color:var(--muted);font-size:.8rem}
+.qi-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin:6px 0}
+.qi-item{display:flex;gap:8px;align-items:flex-start;padding:8px 12px;background:var(--card);border:1px solid var(--border);border-radius:8px}
+.qi-label{font-size:.7rem;font-weight:600;color:var(--accent);text-transform:uppercase;min-width:56px;margin-top:3px;flex-shrink:0}
+.qi-text{flex:1;font-size:.88rem}
+.top-btn{position:fixed;bottom:16px;right:16px;width:36px;height:36px;border-radius:50%;background:var(--card);border:1px solid var(--border);color:var(--muted);font-size:1rem;cursor:pointer;display:none;align-items:center;justify-content:center;z-index:100;transition:.15s}
+.top-btn:hover{color:var(--text);border-color:var(--muted)}.top-btn.show{display:flex}
+.search-wrap{margin:12px 0 4px;position:relative}
+.search-input{width:100%;background:var(--card);border:1px solid var(--border);color:var(--text);padding:8px 14px 8px 36px;border-radius:8px;font-size:.85rem;outline:none;transition:.15s}
+.search-input:focus{border-color:var(--accent);box-shadow:0 0 0 2px #58a6ff22}
+.search-input::placeholder{color:var(--muted)}
+.search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:.8rem;pointer-events:none}
+.search-count{position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:.72rem}
+.msg.search-hide,.phase.search-hide{display:none}
+.msg.search-match .msg-text{background:#58a6ff12;border-radius:4px}
+.copy-all{background:none;border:1px solid var(--border);color:var(--muted);padding:2px 8px;border-radius:6px;font-size:.64rem;cursor:pointer;transition:.15s;margin-left:auto;margin-right:8px}
+.copy-all:hover{border-color:var(--accent);color:var(--accent)}
+.copy-all.ok{border-color:var(--green);color:var(--green)}
+@media(max-width:700px){.page{padding:12px 10px}.info-grid,.qi-grid{grid-template-columns:1fr}.hero{flex-direction:column;text-align:center}.hero h1{font-size:1.5rem}.profile-grid{grid-template-columns:1fr}.toc{margin:0 -10px;padding-left:10px;padding-right:10px}}
+</style>
+</head>
+<body>
+<div class="page">
+
+<a href="../" class="back-btn">← All Creators</a>
+
+<div class="hero" id="top">
+  <img src="profile.jpeg" alt="Noah" class="hero-photo">
+  <div class="hero-info">
+    <h1>NOAH</h1>
+    <div class="tagline">21 · USA (from Italy) · Family business</div>
+  </div>
+</div>
+
+<nav class="toc" id="toc">
+  <a href="#phase-0">💬 Rapport</a>
+  <a href="#phase-1">🔥 Teasing</a>
+  <a href="#phase-2" class="toc-ppv">🔥 Sexting Phase 1</a>
+  <a href="#phase-3" class="toc-ppv">🔥 Sexting Phase 2</a>
+  <a href="#phase-4" class="toc-ppv">🔥 Sexting Phase 3</a>
+  <a href="#phase-5" class="toc-ppv">🔥 Sexting Phase 4</a>
+  <a href="#phase-6">💪 Aftercare</a>
+  <a href="#nr-waves" class="toc-ref">NR</a>
+  <a href="#personal-info" class="toc-ref">Personal</a>
+  <a href="#positive-spin" class="toc-ref">Spin</a>
+  <a href="objections.html" class="toc-ref" style="color:var(--red);border-color:#f8514933">🛡️ OBJ/RES</a>
+</nav>
+
+<div class="search-wrap">
+  <span class="search-icon">&#128269;</span>
+  <input type="text" class="search-input" id="search" placeholder="Search scripts..." autocomplete="off">
+  <span class="search-count" id="search-count"></span>
+</div>
+
+<div class="info-grid">
+  <div>
+    <div class="profile">
+      <h2>👤 Character Profile</h2>
+      <div class="profile-grid"><div class="profile-item"><div class="label">Nationality</div><div class="value">Italian</div></div><div class="profile-item"><div class="label">Page Type</div><div class="value">Paid Page</div></div><div class="profile-item"><div class="label">Traffic</div><div class="value">dating_app</div></div><div class="profile-item"><div class="label">Job</div><div class="value">Family business</div></div><div class="profile-item"><div class="label">Interests</div><div class="value">calisthenics, sushi, travel, being mysterious</div></div><div class="profile-item"><div class="label">Physical</div><div class="value">170cm, 69kg, brown hair, brown eyes, arm tattoos, lean/athletic</div></div><div class="profile-item"><div class="label">Countries</div><div class="value">All of Europe, USA</div></div><div class="profile-item"><div class="label">Languages</div><div class="value">English (fluent)</div></div></div>
+    </div>
+    <div class="voice-box"><strong>🗣️ Voice:</strong> Lowercase. Calm. Minimal. Powerful. Every word counts — less is more. NEVER &#x27;baby/babe/honey/sweetie/daddy/sir&#x27;. Uses &#x27;man&#x27;, &#x27;bro&#x27; sparingly. Semi-dominant: quiet control. During sexting: slow build, intense finish, controlled dominance. Few words that hit hard. Emojis: 😏🥵💦 very sparingly — Noah doesn&#x27;t overdo anything.<br><strong>Pet names:</strong> man, bro<br><strong>Never say:</strong> baby, babe, honey, sweetie, daddy, sir</div>
+  </div>
+  <div>
+    <div class="profile" style="border-color:var(--border)">
+      <h2>Quick Reference</h2>
+      <div class="content-level" style="background:#8b949e12;border:1px solid #8b949e33;padding:8px 14px;border-radius:8px;margin-bottom:10px;font-size:.84rem"><strong style="color:#8b949e">Content Level:</strong> full_male</div>
+      <div style="background:#e3b34112;border-left:3px solid var(--yellow);padding:10px 14px;border-radius:0 8px 8px 0;margin-bottom:10px;font-size:.84rem;color:var(--yellow)"><strong>Notes:</strong> Male creator. Dating app + Twitter/X traffic. The &#x27;mysterious seducer&#x27; archetype. Calm, few words, hits hard. Arm tattoos. Has B/G content available. Has Meetup Redirect. Video Calls: No. No anal. Custom: Yes. Calisthenics instead of gym. Doesn&#x27;t smoke, doesn&#x27;t drink.</div>
+    </div>
+  </div>
+</div>
+
+<a href="objections.html" class="obj-link">
+  <span style="font-size:1.4rem">🛡️</span>
+  <div style="flex:1">
+    <div style="font-size:.95rem;font-weight:700;color:var(--red)">Objection & Resistance Handling</div>
+    <div style="font-size:.78rem;color:var(--muted)">Complete sequences for Infloww</div>
+  </div>
+  <span style="color:var(--red);font-size:.85rem;font-weight:600">Open →</span>
+</a>
+
+<div class="phase collapsed" id="meetup-redirect" style="--phase-color:#f85149">
+  <div class="phase-header">
+    <span class="phase-emoji">🤝</span>
+    <span class="phase-name">Meetup Redirect</span>
+    <span class="phase-meta">7 msgs</span>
+    <span class="toggle">▼</span>
+  </div>
+  <div class="phase-body">
+<div class="msg"><span class="msg-id">MR-1</span><div class="msg-body"><div class="msg-text">slow down. let me show you something first</div><div class="msg-note">DO NOT acknowledge &#x27;meet&#x27;. Redirect. Minimal.</div></div><button class="cp" data-copy="slow down. let me show you something first"><span class="cp-icon">📋</span></button></div>
+<div class="msg"><span class="msg-id">MR-2</span><div class="msg-body"><div class="msg-text">trust me</div><div class="msg-note">WAIT 1-2 MIN</div></div><button class="cp" data-copy="trust me"><span class="cp-icon">📋</span></button></div>
+<div class="msg"><span class="msg-id">MR-3</span><div class="msg-body"><div class="msg-text">what do you think</div><div class="msg-note">SEND PPV 0 — FREE teaser. Wait for reply.</div></div><button class="cp" data-copy="what do you think"><span class="cp-icon">📋</span></button></div>
+<div class="msg"><span class="msg-id">MR-4</span><div class="msg-body"><div class="msg-text">that&#x27;s just a taste</div><div class="msg-note">Positive → R-1. Asks again → MR-OBJ. Silent → NR Waves.</div></div><button class="cp" data-copy="that&#x27;s just a taste"><span class="cp-icon">📋</span></button></div>
+<div class="msg"><span class="msg-id">MR-OBJ-1</span><div class="msg-body"><div class="msg-text">patience. focus on what&#x27;s in front of you</div><div class="msg-note">Deflect + challenge</div></div><button class="cp" data-copy="patience. focus on what&#x27;s in front of you"><span class="cp-icon">📋</span></button></div>
+<div class="msg"><span class="msg-id">MR-OBJ-2</span><div class="msg-body"><div class="msg-text">impatient? what I&#x27;m about to show you is worth it</div><div class="msg-note">Challenge</div></div><button class="cp" data-copy="impatient? what I&#x27;m about to show you is worth it"><span class="cp-icon">📋</span></button></div>
+<div class="msg"><span class="msg-id">MR-OBJ-3</span><div class="msg-body"><div class="msg-text">I don&#x27;t do this for just anyone. take it or leave it</div><div class="msg-note">Firm. If still → disengage.</div></div><button class="cp" data-copy="I don&#x27;t do this for just anyone. take it or leave it"><span class="cp-icon">📋</span></button></div>
+  </div>
+</div>
+<div class="phase" id="phase-0" style="--phase-color:#3fb950">
+  <div class="phase-header">
+    <span class="phase-emoji">💬</span>
+    <span class="phase-name">Rapport</span>
+    <span class="phase-meta">5 msgs</span>
+    <button class="copy-all" data-copy-all="hey. glad you're here 😏 what made you subscribe?\n\nrespect. where you from?\n\nI'm Italian but I'm in the states now. calisthenics and content is my life 😏\n\nso what do you do besides keeping me on my phone 😏\n\nyou're different. I can tell. most guys on here don't hold my attention">Copy All</button>
+    <span class="toggle">▼</span>
+  </div>
+  <div class="phase-body">
+<div class="msg"><span class="msg-id">R-1</span><div class="msg-body"><div class="msg-text">hey. glad you&#x27;re here 😏 what made you subscribe?</div><div class="msg-note">Add his name. Keep it short — Noah is minimal.</div></div><button class="cp" data-copy="hey. glad you&#x27;re here 😏 what made you subscribe?"><span class="cp-icon">📋</span></button></div>
+<div class="msg"><span class="msg-id">R-2</span><div class="msg-body"><div class="msg-text">respect. where you from?</div><div class="msg-note">Short react — &#x27;cool&#x27;, &#x27;nice&#x27;, &#x27;respect&#x27;.</div></div><button class="cp" data-copy="respect. where you from?"><span class="cp-icon">📋</span></button></div>
+<div class="msg"><span class="msg-id">R-3</span><div class="msg-body"><div class="msg-text">I&#x27;m Italian but I&#x27;m in the states now. calisthenics and content is my life 😏</div><div class="msg-note">If he named somewhere Noah visited → &#x27;been there&#x27;. Keep short.</div></div><button class="cp" data-copy="I&#x27;m Italian but I&#x27;m in the states now. calisthenics and content is my life 😏"><span class="cp-icon">📋</span></button></div>
+<div class="msg"><span class="msg-id">R-4</span><div class="msg-body"><div class="msg-text">so what do you do besides keeping me on my phone 😏</div></div><button class="cp" data-copy="so what do you do besides keeping me on my phone 😏"><span class="cp-icon">📋</span></button></div>
+<div class="msg"><span class="msg-id">R-5</span><div class="msg-body"><div class="msg-text">you&#x27;re different. I can tell. most guys on here don&#x27;t hold my attention</div><div class="msg-note">Ego boost. → TB-1.</div></div><button class="cp" data-copy="you&#x27;re different. I can tell. most guys on here don&#x27;t hold my attention"><span class="cp-icon">📋</span></button></div>
+  </div>
+</div>
+<div class="phase collapsed" id="phase-1" style="--phase-color:#bc8cff">
+  <div class="phase-header">
+    <span class="phase-emoji">🔥</span>
+    <span class="phase-name">Teasing</span>
+    <span class="phase-meta">4 msgs + 1 PPV</span>
+    <button class="copy-all" data-copy-all="just finished training and my body is still wired... this convo isn't helping me calm down\n\nngl you're making me feel something right now 😈\n\nyou're making it worse 🥵">Copy All</button>
+    <span class="toggle">▼</span>
+  </div>
+  <div class="phase-body">
+<div class="msg"><span class="msg-id">TB-1</span><div class="msg-body"><div class="msg-text">just finished training and my body is still wired... this convo isn&#x27;t helping me calm down</div><div class="msg-note">THE PIVOT. Minimal.</div></div><button class="cp" data-copy="just finished training and my body is still wired... this convo isn&#x27;t helping me calm down"><span class="cp-icon">📋</span></button></div>
+<div class="msg"><span class="msg-id">TB-2</span><div class="msg-body"><div class="msg-text">ngl you&#x27;re making me feel something right now 😈</div><div class="msg-note">Wait for reply.</div></div><button class="cp" data-copy="ngl you&#x27;re making me feel something right now 😈"><span class="cp-icon">📋</span></button></div>
+<div class="msg"><span class="msg-id">TB-3</span><div class="msg-body"><div class="msg-text">you&#x27;re making it worse 🥵</div><div class="msg-note">Short. Impactful. If sexual → &#x27;especially that&#x27;.</div></div><button class="cp" data-copy="you&#x27;re making it worse 🥵"><span class="cp-icon">📋</span></button></div>
+<div class="msg msg-wait"><span class="msg-id">TB-4</span><div class="msg-body"><div class="msg-text">hold on</div><div class="msg-note">WAIT 1-2 MIN</div></div><button class="cp" data-copy="hold on"><span class="cp-icon">📋</span></button></div>
+<div class="ppv-moment"><span class="ppv-icon">📎</span><span class="ppv-label">tell me what you think</span></div>
+  </div>
+</div>
+<div class="phase collapsed" id="phase-2" style="--phase-color:#f85149">
+  <div class="phase-header">
+    <span class="phase-emoji">🔥</span>
+    <span class="phase-name">Sexting Phase 1</span>
+    <span class="phase-meta">4 msgs + 1 PPV</span>
+    <button class="copy-all" data-copy-all="knowing you're thinking about me is getting me hard right now 🥵\n\nI knew it 😈 that's making me throb\n\nI want to show you more. I'm not holding back right now">Copy All</button>
+    <span class="toggle">▼</span>
+  </div>
+  <div class="phase-body">
+<div class="msg"><span class="msg-id">S1-1</span><div class="msg-body"><div class="msg-text">knowing you&#x27;re thinking about me is getting me hard right now 🥵</div><div class="msg-note">Wait for reply. Short.</div></div><span class="intensity" title="Intensity 6/10" style="background:#eab30820;border-color:#eab30850;color:#facc15">6</span><button class="cp" data-copy="knowing you&#x27;re thinking about me is getting me hard right now 🥵"><span class="cp-icon">📋</span></button></div>
+<div class="msg"><span class="msg-id">S1-2</span><div class="msg-body"><div class="msg-text">I knew it 😈 that&#x27;s making me throb</div><div class="msg-note">React. Minimal.</div></div><span class="intensity" title="Intensity 7/10" style="background:#f9731620;border-color:#f9731650;color:#fb923c">7</span><button class="cp" data-copy="I knew it 😈 that&#x27;s making me throb"><span class="cp-icon">📋</span></button></div>
+<div class="msg"><span class="msg-id">S1-3</span><div class="msg-body"><div class="msg-text">I want to show you more. I&#x27;m not holding back right now</div></div><span class="intensity" title="Intensity 8/10" style="background:#f9731620;border-color:#f9731650;color:#fb923c">8</span><button class="cp" data-copy="I want to show you more. I&#x27;m not holding back right now"><span class="cp-icon">📋</span></button></div>
+<div class="msg msg-wait"><span class="msg-id">S1-4</span><div class="msg-body"><div class="msg-text">hold on</div><div class="msg-note">WAIT 2-3 MIN</div></div><button class="cp" data-copy="hold on"><span class="cp-icon">📋</span></button></div>
+<div class="ppv-moment"><span class="ppv-icon">📎</span><span class="ppv-label">you&#x27;re not ready 🥵</span><span class="intensity" title="Intensity 8/10" style="background:#f9731620;border-color:#f9731650;color:#fb923c">8</span></div>
+  </div>
+</div>
+<div class="phase collapsed" id="phase-3" style="--phase-color:#f85149">
+  <div class="phase-header">
+    <span class="phase-emoji">🔥</span>
+    <span class="phase-name">Sexting Phase 2</span>
+    <span class="phase-meta">5 msgs + 1 PPV</span>
+    <button class="copy-all" data-copy-all="you saw it 😏\n\nfuck... I'm rock hard right now and it's all you 🥵 my hand won't stop\n\nI'm gripping my cock and every stroke is because of you\n\nwhat would you do if you were here right now">Copy All</button>
+    <span class="toggle">▼</span>
+  </div>
+  <div class="phase-body">
+<div class="msg"><span class="msg-id">S1-6</span><div class="msg-body"><div class="msg-text">you saw it 😏</div><div class="msg-note">Wait for reply.</div></div><span class="intensity" title="Intensity 6/10" style="background:#eab30820;border-color:#eab30850;color:#facc15">6</span><button class="cp" data-copy="you saw it 😏"><span class="cp-icon">📋</span></button></div>
+<div class="msg"><span class="msg-id">S1-7</span><div class="msg-body"><div class="msg-text">fuck... I&#x27;m rock hard right now and it&#x27;s all you 🥵 my hand won&#x27;t stop</div><div class="msg-note">HE caused this.</div></div><span class="intensity" title="Intensity 8/10" style="background:#f9731620;border-color:#f9731650;color:#fb923c">8</span><button class="cp" data-copy="fuck... I&#x27;m rock hard right now and it&#x27;s all you 🥵 my hand won&#x27;t stop"><span class="cp-icon">📋</span></button></div>
+<div class="msg"><span class="msg-id">S1-8</span><div class="msg-body"><div class="msg-text">I&#x27;m gripping my cock and every stroke is because of you</div></div><span class="intensity" title="Intensity 8/10" style="background:#f9731620;border-color:#f9731650;color:#fb923c">8</span><button class="cp" data-copy="I&#x27;m gripping my cock and every stroke is because of you"><span class="cp-icon">📋</span></button></div>
+<div class="msg"><span class="msg-id">S1-9</span><div class="msg-body"><div class="msg-text">what would you do if you were here right now</div><div class="msg-note">Wait for reply. React.</div></div><span class="intensity" title="Intensity 9/10" style="background:#ef444420;border-color:#ef444450;color:#f87171">9</span><button class="cp" data-copy="what would you do if you were here right now"><span class="cp-icon">📋</span></button></div>
+<div class="msg msg-wait"><span class="msg-id">S1-10</span><div class="msg-body"><div class="msg-text">fuck 🥵 hold on</div><div class="msg-note">WAIT 2-3 MIN</div></div><button class="cp" data-copy="fuck 🥵 hold on"><span class="cp-icon">📋</span></button></div>
+<div class="ppv-moment"><span class="ppv-icon">📎</span><span class="ppv-label">look what you did 🥵</span><span class="intensity" title="Intensity 9/10" style="background:#ef444420;border-color:#ef444450;color:#f87171">9</span></div>
+  </div>
+</div>
+<div class="phase collapsed" id="phase-4" style="--phase-color:#f85149">
+  <div class="phase-header">
+    <span class="phase-emoji">🔥</span>
+    <span class="phase-name">Sexting Phase 3</span>
+    <span class="phase-meta">5 msgs + 1 PPV</span>
+    <button class="copy-all" data-copy-all="FUCK I'm throbbing 🥵🥵\n\nI need to cum so bad right now... you did this\n\nI keep thinking about pinning you down and going as deep as I can while you look at me 🥵\n\nI can't hold it... my cock is about to explode">Copy All</button>
+    <span class="toggle">▼</span>
+  </div>
+  <div class="phase-body">
+<div class="msg"><span class="msg-id">S1-12</span><div class="msg-body"><div class="msg-text">FUCK I&#x27;m throbbing 🥵🥵</div><div class="msg-note">Short. Raw. NO cooldown.</div></div><span class="intensity" title="Intensity 9/10" style="background:#ef444420;border-color:#ef444450;color:#f87171">9</span><button class="cp" data-copy="FUCK I&#x27;m throbbing 🥵🥵"><span class="cp-icon">📋</span></button></div>
+<div class="msg"><span class="msg-id">S1-13</span><div class="msg-body"><div class="msg-text">I need to cum so bad right now... you did this</div></div><span class="intensity" title="Intensity 9/10" style="background:#ef444420;border-color:#ef444450;color:#f87171">9</span><button class="cp" data-copy="I need to cum so bad right now... you did this"><span class="cp-icon">📋</span></button></div>
+<div class="msg"><span class="msg-id">S1-14</span><div class="msg-body"><div class="msg-text">I keep thinking about pinning you down and going as deep as I can while you look at me 🥵</div></div><span class="intensity" title="Intensity 9/10" style="background:#ef444420;border-color:#ef444450;color:#f87171">9</span><button class="cp" data-copy="I keep thinking about pinning you down and going as deep as I can while you look at me 🥵"><span class="cp-icon">📋</span></button></div>
+<div class="msg"><span class="msg-id">S1-15</span><div class="msg-body"><div class="msg-text">I can&#x27;t hold it... my cock is about to explode</div></div><span class="intensity" title="Intensity 10/10" style="background:#ef444420;border-color:#ef444450;color:#f87171">10</span><button class="cp" data-copy="I can&#x27;t hold it... my cock is about to explode"><span class="cp-icon">📋</span></button></div>
+<div class="msg msg-wait"><span class="msg-id">S1-16</span><div class="msg-body"><div class="msg-text">give me a sec 🥵</div><div class="msg-note">WAIT 2-3 MIN</div></div><button class="cp" data-copy="give me a sec 🥵"><span class="cp-icon">📋</span></button></div>
+<div class="ppv-moment"><span class="ppv-icon">📎</span><span class="ppv-label">I don&#x27;t show this to anyone... watch 🥵💦</span><span class="intensity" title="Intensity 10/10" style="background:#ef444420;border-color:#ef444450;color:#f87171">10</span></div>
+  </div>
+</div>
+<div class="phase collapsed" id="phase-5" style="--phase-color:#f85149">
+  <div class="phase-header">
+    <span class="phase-emoji">🔥</span>
+    <span class="phase-name">Sexting Phase 4</span>
+    <span class="phase-meta">4 msgs + 1 PPV</span>
+    <button class="copy-all" data-copy-all="FUCK my cock is throbbing so hard and the pre is dripping down I can barely hold on 🥵🥵\n\ndon't cum yet... my cock is pulsing and I'm not letting go until you're with me 💦\n\nI'm cumming... fuck my cock is throbbing and shooting everywhere and I can't stop 💦💦">Copy All</button>
+    <span class="toggle">▼</span>
+  </div>
+  <div class="phase-body">
+<div class="msg"><span class="msg-id">S1-18</span><div class="msg-body"><div class="msg-text">FUCK my cock is throbbing so hard and the pre is dripping down I can barely hold on 🥵🥵</div><div class="msg-note">Wait for reply.</div></div><span class="intensity" title="Intensity 10/10" style="background:#ef444420;border-color:#ef444450;color:#f87171">10</span><button class="cp" data-copy="FUCK my cock is throbbing so hard and the pre is dripping down I can barely hold on 🥵🥵"><span class="cp-icon">📋</span></button></div>
+<div class="msg"><span class="msg-id">S1-19</span><div class="msg-body"><div class="msg-text">don&#x27;t cum yet... my cock is pulsing and I&#x27;m not letting go until you&#x27;re with me 💦</div></div><span class="intensity" title="Intensity 10/10" style="background:#ef444420;border-color:#ef444450;color:#f87171">10</span><button class="cp" data-copy="don&#x27;t cum yet... my cock is pulsing and I&#x27;m not letting go until you&#x27;re with me 💦"><span class="cp-icon">📋</span></button></div>
+<div class="msg"><span class="msg-id">S1-20</span><div class="msg-body"><div class="msg-text">I&#x27;m cumming... fuck my cock is throbbing and shooting everywhere and I can&#x27;t stop 💦💦</div></div><span class="intensity" title="Intensity 10/10" style="background:#ef444420;border-color:#ef444450;color:#f87171">10</span><button class="cp" data-copy="I&#x27;m cumming... fuck my cock is throbbing and shooting everywhere and I can&#x27;t stop 💦💦"><span class="cp-icon">📋</span></button></div>
+<div class="msg msg-wait"><span class="msg-id">S1-21</span><div class="msg-body"><div class="msg-text">hold on 🥵</div><div class="msg-note">WAIT 1-2 MIN</div></div><button class="cp" data-copy="hold on 🥵"><span class="cp-icon">📋</span></button></div>
+<div class="ppv-moment"><span class="ppv-icon">📎</span><span class="ppv-label">cum with me. now 💦</span><span class="intensity" title="Intensity 10/10" style="background:#ef444420;border-color:#ef444450;color:#f87171">10</span></div>
+  </div>
+</div>
+<div class="phase collapsed" id="phase-6" style="--phase-color:#58a6ff">
+  <div class="phase-header">
+    <span class="phase-emoji">💪</span>
+    <span class="phase-name">Aftercare</span>
+    <span class="phase-meta">2 msgs</span>
+    <button class="copy-all" data-copy-all="fuck 🥵 that was intense\n\nI don't do that for anyone. you're different">Copy All</button>
+    <span class="toggle">▼</span>
+  </div>
+  <div class="phase-body">
+<div class="msg"><span class="msg-id">AC-1</span><div class="msg-body"><div class="msg-text">fuck 🥵 that was intense</div></div><button class="cp" data-copy="fuck 🥵 that was intense"><span class="cp-icon">📋</span></button></div>
+<div class="msg"><span class="msg-id">AC-2</span><div class="msg-body"><div class="msg-text">I don&#x27;t do that for anyone. you&#x27;re different</div><div class="msg-note">Short. Genuine. Mention something he said. KEEP TALKING. NEVER say goodbye.</div></div><button class="cp" data-copy="I don&#x27;t do that for anyone. you&#x27;re different"><span class="cp-icon">📋</span></button></div>
+  </div>
+</div>
+
+<div class="phase collapsed" id="re-engagement" style="--phase-color:#58a6ff">
+  <div class="phase-header">
+    <span class="phase-emoji">🔄</span>
+    <span class="phase-name">Re-engagement</span>
+    <span class="phase-meta">2 msgs</span>
+    <span class="toggle">▼</span>
+  </div>
+  <div class="phase-body">
+<div class="msg"><span class="msg-id">RE-1</span><div class="msg-body"><div class="msg-text">been thinking about you 😏 free?</div><div class="msg-note">6-12 hrs after.</div></div><button class="cp" data-copy="been thinking about you 😏 free?"><span class="cp-icon">📋</span></button></div>
+<div class="msg"><span class="msg-id">RE-2</span><div class="msg-body"><div class="msg-text">did something crazier. you need to see this</div><div class="msg-note">Next day.</div></div><button class="cp" data-copy="did something crazier. you need to see this"><span class="cp-icon">📋</span></button></div>
+  </div>
+</div>
+<hr class="divider">
+
+<div class="ref-section" id="nr-waves">
+  <div class="ref-title">🔇 NR Wave Protocol</div>
+  <table class="nr-table"><thead><tr><th>Wave</th><th>Message</th><th>Note</th><th></th></tr></thead>
+  <tbody><tr><td><strong>NR-W1</strong></td><td>yo 🥵</td><td class="nr-note">2-3 min after PPV.</td><td><button class="cp" data-copy="yo 🥵"><span class="cp-icon">📋</span></button></td></tr><tr><td><strong>NR-W2</strong></td><td>you need to see this 🥵</td><td class="nr-note">3-5 min later.</td><td><button class="cp" data-copy="you need to see this 🥵"><span class="cp-icon">📋</span></button></td></tr><tr><td><strong>NR-W3</strong></td><td>guess you&#x27;re busy. might not keep this around</td><td class="nr-note">5-10 min later.</td><td><button class="cp" data-copy="guess you&#x27;re busy. might not keep this around"><span class="cp-icon">📋</span></button></td></tr><tr><td><strong>NR-W4</strong></td><td>hope you&#x27;re good. hit me up</td><td class="nr-note">15-30 min later.</td><td><button class="cp" data-copy="hope you&#x27;re good. hit me up"><span class="cp-icon">📋</span></button></td></tr><tr><td><strong>NR-W5</strong></td><td>been thinking about earlier. you around?</td><td class="nr-note">2-6 hrs later.</td><td><button class="cp" data-copy="been thinking about earlier. you around?"><span class="cp-icon">📋</span></button></td></tr></tbody></table>
+</div>
+<hr class="divider">
+<div class="ref-section" id="personal-info">
+  <div class="ref-title">👤 Personal Info</div>
+  <div class="qi-grid"><div class="qi-item"><span class="qi-label">Age</span><span class="qi-text">21</span><button class="cp" data-copy="21"><span class="cp-icon">📋</span></button></div><div class="qi-item"><span class="qi-label">Location</span><span class="qi-text">Italian but I&#x27;m in the states now</span><button class="cp" data-copy="Italian but I&#x27;m in the states now"><span class="cp-icon">📋</span></button></div><div class="qi-item"><span class="qi-label">Profession</span><span class="qi-text">family business and content</span><button class="cp" data-copy="family business and content"><span class="cp-icon">📋</span></button></div><div class="qi-item"><span class="qi-label">Hobbies</span><span class="qi-text">calisthenics. sushi. travel</span><button class="cp" data-copy="calisthenics. sushi. travel"><span class="cp-icon">📋</span></button></div><div class="qi-item"><span class="qi-label">Countries</span><span class="qi-text">all of Europe. now the states</span><button class="cp" data-copy="all of Europe. now the states"><span class="cp-icon">📋</span></button></div><div class="qi-item"><span class="qi-label">Relationship</span><span class="qi-text">single</span><button class="cp" data-copy="single"><span class="cp-icon">📋</span></button></div><div class="qi-item"><span class="qi-label">Favorite</span><span class="qi-text">sushi</span><button class="cp" data-copy="sushi"><span class="cp-icon">📋</span></button></div><div class="qi-item"><span class="qi-label">Tattoos</span><span class="qi-text">yeah. arms</span><button class="cp" data-copy="yeah. arms"><span class="cp-icon">📋</span></button></div></div>
+</div>
+<hr class="divider">
+<div class="ref-section" id="positive-spin">
+  <div class="ref-title">✨ Positive Spin</div>
+  <div class="qi-grid"><div class="qi-item"><span class="qi-label">Age40Plus</span><span class="qi-text">respect. you know what you want 💪</span><button class="cp" data-copy="respect. you know what you want 💪"><span class="cp-icon">📋</span></button></div><div class="qi-item"><span class="qi-label">Age20s</span><span class="qi-text">same range. rare on here</span><button class="cp" data-copy="same range. rare on here"><span class="cp-icon">📋</span></button></div><div class="qi-item"><span class="qi-label">BoringJob</span><span class="qi-text">solid. respect</span><button class="cp" data-copy="solid. respect"><span class="cp-icon">📋</span></button></div><div class="qi-item"><span class="qi-label">CoolJob</span><span class="qi-text">that&#x27;s sick 🔥</span><button class="cp" data-copy="that&#x27;s sick 🔥"><span class="cp-icon">📋</span></button></div><div class="qi-item"><span class="qi-label">Fit</span><span class="qi-text">respect 💪</span><button class="cp" data-copy="respect 💪"><span class="cp-icon">📋</span></button></div><div class="qi-item"><span class="qi-label">NotFit</span><span class="qi-text">doesn&#x27;t matter. energy matters</span><button class="cp" data-copy="doesn&#x27;t matter. energy matters"><span class="cp-icon">📋</span></button></div><div class="qi-item"><span class="qi-label">SameCity</span><span class="qi-text">no way</span><button class="cp" data-copy="no way"><span class="cp-icon">📋</span></button></div><div class="qi-item"><span class="qi-label">FarAway</span><span class="qi-text">distance doesn&#x27;t matter when the vibe is right</span><button class="cp" data-copy="distance doesn&#x27;t matter when the vibe is right"><span class="cp-icon">📋</span></button></div></div>
+</div>
+<hr class="divider">
+<div style="text-align:center;padding:24px 0 10px;color:var(--muted);font-size:.73rem">Chatting Wizard · Script Manager · 2026</div>
+
+</div>
+<button class="top-btn" id="top-btn">↑</button>
+
+<script>
+document.addEventListener('click',e=>{const b=e.target.closest('.cp');if(b){navigator.clipboard.writeText(b.dataset.copy).then(()=>{b.classList.add('ok');setTimeout(()=>b.classList.remove('ok'),1200)});return;}const ca=e.target.closest('.copy-all');if(ca){e.stopPropagation();const txt=ca.dataset.copyAll.replace(/\\n/g,'\n');navigator.clipboard.writeText(txt).then(()=>{ca.classList.add('ok');ca.textContent='Copied!';setTimeout(()=>{ca.classList.remove('ok');ca.textContent='Copy All'},1500)});return;}});
+document.querySelectorAll('.phase-header').forEach(h=>{h.addEventListener('click',e=>{if(e.target.closest('.cp')||e.target.closest('.copy-all'))return;h.closest('.phase').classList.toggle('collapsed')})});
+document.querySelectorAll('.toc a[href^="#"]').forEach(a=>{a.addEventListener('click',()=>{const t=document.getElementById(a.getAttribute('href').slice(1));if(t&&t.classList.contains('phase'))t.classList.remove('collapsed')})});
+const topBtn=document.getElementById('top-btn');
+window.addEventListener('scroll',()=>topBtn.classList.toggle('show',window.scrollY>400));
+topBtn.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+const toc=document.getElementById('toc');
+window.addEventListener('scroll',()=>toc.classList.toggle('shadow',window.scrollY>200));
+const tocLinks=document.querySelectorAll('.toc a[href^="#"]');
+const sections=Array.from(tocLinks).map(a=>({link:a,el:document.getElementById(a.getAttribute('href').slice(1))})).filter(s=>s.el);
+function updateToc(){let a=sections[0];for(const s of sections)if(s.el.getBoundingClientRect().top<=100)a=s;tocLinks.forEach(l=>l.classList.remove('active'));if(a)a.link.classList.add('active')}
+window.addEventListener('scroll',updateToc);updateToc();
+const searchInput=document.getElementById('search');
+const searchCount=document.getElementById('search-count');
+searchInput.addEventListener('input',()=>{const q=searchInput.value.toLowerCase().trim();const msgs=document.querySelectorAll('.msg');const phases=document.querySelectorAll('.phase');if(!q){msgs.forEach(m=>{m.classList.remove('search-hide','search-match')});phases.forEach(p=>p.classList.remove('search-hide'));searchCount.textContent='';return;}let count=0;phases.forEach(p=>{let hasMatch=false;p.querySelectorAll('.msg').forEach(m=>{const txt=m.querySelector('.msg-text');if(txt&&txt.textContent.toLowerCase().includes(q)){m.classList.remove('search-hide');m.classList.add('search-match');hasMatch=true;count++;}else{m.classList.add('search-hide');m.classList.remove('search-match')}});if(hasMatch){p.classList.remove('search-hide','collapsed')}else{p.classList.add('search-hide')}});searchCount.textContent=count+' found'});
+searchInput.addEventListener('keydown',e=>{if(e.key==='Escape'){searchInput.value='';searchInput.dispatchEvent(new Event('input'));searchInput.blur()}});
+</script>
+</body>
+</html>

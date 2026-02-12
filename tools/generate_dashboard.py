@@ -33,6 +33,14 @@ FEMALE_MODELS = [
 MALE_DATING_APP = [
     {"name": "Max", "folder": "max", "age": 20, "nationality": "Italian", "page": "Paid Page", "traffic": "Dating Apps (Gay)", "xlsx": "Max_Complete_Infloww.xlsx"},
     {"name": "Marco", "folder": "marco", "age": 25, "nationality": "Turkish", "page": "Paid Page", "traffic": "Dating Apps (Gay)", "xlsx": "Marco_Complete_Infloww.xlsx"},
+    {"name": "Lucas Passione", "folder": "lucas", "age": 24, "nationality": "Argentinian", "page": "Paid Page", "traffic": "Dating Apps", "xlsx": "LucasPassione_Complete_Infloww.xlsx"},
+    {"name": "Liam", "folder": "liam", "age": 20, "nationality": "Argentinian", "page": "Paid Page", "traffic": "Dating Apps", "xlsx": "Liam_Complete_Infloww.xlsx"},
+    {"name": "Peter", "folder": "peter", "age": 20, "nationality": "American", "page": "Paid Page", "traffic": "Dating Apps", "xlsx": "Peter_Complete_Infloww.xlsx"},
+    {"name": "Damon", "folder": "damon", "age": 24, "nationality": "Argentinian", "page": "Paid Page", "traffic": "Dating Apps", "xlsx": "Damon_Complete_Infloww.xlsx"},
+    {"name": "Stefan", "folder": "stefan", "age": 18, "nationality": "Argentinian", "page": "Paid Page", "traffic": "Dating Apps", "xlsx": "Stefan_Complete_Infloww.xlsx"},
+    {"name": "Zack", "folder": "zack", "age": 23, "nationality": "British", "page": "Paid Page", "traffic": "Dating Apps", "xlsx": "Zack_Complete_Infloww.xlsx"},
+    {"name": "Noah", "folder": "noah", "age": 21, "nationality": "Italian", "page": "Paid Page", "traffic": "Dating Apps", "xlsx": "Noah_Complete_Infloww.xlsx"},
+    {"name": "Jack Hollywood", "folder": "jack", "age": 20, "nationality": "American", "page": "Paid Page", "traffic": "Dating Apps", "xlsx": "JackHollywood_Complete_Infloww.xlsx"},
 ]
 
 MALE_OTHER = [
