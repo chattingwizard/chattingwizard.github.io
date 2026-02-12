@@ -60,6 +60,7 @@ When creating xlsx files for Infloww import:
 - **Sheet name = tag in Infloww** (max 32 chars)
 - **Journey sheet includes**: W -> AF -> R -> TB -> S -> AC (all in sequential order)
 - **NOT in journey sheet**: Objection handlers, NR waves, Personal Info, Positive Spin — separate if needed.
+- **CRITICAL: All Name values must be UNIQUE across the entire XLSX.** No two scripts in the same model package can share the same Name. For OBJ sheets, prefix the sheet name to each step (e.g., "price1 Step1 Reframe", "price2 Step1 Reframe"). Always run `check_duplicate_names.py` before deploying.
 
 ## Chatter Profile
 

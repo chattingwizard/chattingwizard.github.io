@@ -116,7 +116,12 @@ def make_obj_sheet(wb, title, rows, fill):
     ws.column_dimensions["C"].width = 50
     ws.column_dimensions["D"].width = 25
     for name, text, note in reversed(rows):
-        ws.append([name, text, note, ""])
+        # Prefix sheet name to ensure unique command names across all sheets
+        unique_name = f"{title} {name}" if not name.startswith(title) else name
+        # Infloww max 64 chars for Name column
+        if len(unique_name) > 64:
+            unique_name = unique_name[:64]
+        ws.append([unique_name, text, note, ""])
         r = ws.max_row
         for col in range(1, 5):
             cell = ws.cell(row=r, column=col)
