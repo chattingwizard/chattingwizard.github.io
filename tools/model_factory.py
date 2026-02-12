@@ -41,6 +41,26 @@ SIT_FILL = PatternFill("solid", fgColor="1a2a1a")
 WRAP = Alignment(wrap_text=True, vertical="top")
 THIN = Border(bottom=Side(style="thin", color="30363d"))
 
+# ── Protocol descriptions: explains WHEN to use each OBJ/RES/SIT protocol ──
+PROTOCOL_DESCRIPTIONS = {
+    "price": "Fan says it's too expensive. Reframe value → FOMO → Challenge → Downgrade (once) → Seed.",
+    "discount": "Fan asks for a discount. Firmness → Challenge → One-time concession → Takeaway.",
+    "free": "Fan wants free content. Remind PPV0 was free → Challenge → Guilt → Seed.",
+    "nomoney": "Fan says no money. Empathy → Test sincerity → PWYW → Protect relationship.",
+    "noppv": "Fan says 'I don't buy PPVs'. Accept → Keep sexting → Emotional reframe → PWYW.",
+    "card": "Card doesn't work. Retry → Alt card → Urgency.",
+    "nosex": "Fan doesn't want to go sexual. Respect → Subtle tension → Re-attempt → Accept.",
+    "offtopic": "Fan goes off-topic. Acknowledge → Redirect → Retake control.",
+    "real": "Fan asks 'are you real?' / 'is this a bot?'. Humor → Challenge → Emotional grounding.",
+    "voice": "Fan asks for voice note or video call. Playful dodge → Redirect to content → Firm.",
+    "customyes": "Fan asks for content we HAVE. Tease → Price → Close.",
+    "customno": "Fan asks for content we DON'T have. Redirect → Alternative + FOMO → Close.",
+    "done": "Fan already finished before final PPV. Validate → Rescue → Seed next session.",
+    "cumcontrol": "Situational: control orgasm pacing to maximize PPVs sold.",
+    "dickpic": "Situational: fan sends dick pic. React positively → Leverage for PPV.",
+    "boosters": "Pool of short messages to keep mid-sexting intensity between PPVs.",
+}
+
 GUIDELINES = """Character limits
 Name: Up to 64 characters
 Tag: Up to 32 characters
@@ -243,7 +263,38 @@ class ModelFactory:
         self.base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         self.web_dir = os.path.join(self.base_dir, self.c["folder"])
         self.scripts_dir = os.path.join(self.base_dir, "scripts", "models", self.c["folder"])
+        self._apply_obj_defaults()
         
+    def _apply_obj_defaults(self):
+        """Merge default OBJ scripts with model-specific overrides.
+        
+        Base defaults are selected by gender + traffic type.
+        Model config can override any specific protocol.
+        """
+        from obj_defaults import DEFAULT_OBJ_FEMALE, DEFAULT_OBJ_MALE, DEFAULT_OBJ_MALE_GAY
+        
+        gender = self.c.get("gender", "female")
+        traffic = self.c.get("traffic", "social_media")
+        
+        # Select base template
+        if gender == "male" and "gay" in traffic.lower():
+            base = DEFAULT_OBJ_MALE_GAY
+        elif gender == "male":
+            base = DEFAULT_OBJ_MALE
+        else:
+            base = DEFAULT_OBJ_FEMALE
+        
+        # Merge: base defaults + model-specific overrides
+        model_overrides = self.c.get("obj_scripts", {})
+        if model_overrides:
+            # Model has custom scripts — use base as fallback for missing protocols
+            merged = {**base, **model_overrides}
+        else:
+            # No custom scripts — use full base
+            merged = dict(base)
+        
+        self.c["obj_scripts"] = merged
+
     def ensure_dirs(self):
         os.makedirs(self.web_dir, exist_ok=True)
         os.makedirs(self.scripts_dir, exist_ok=True)
@@ -981,7 +1032,7 @@ class ModelFactory:
                     act = ' active' if vi == 0 else ''
                     tabs.append(
                         '<div class="seq-tab%s" data-seq="%s">'
-                        '<code>\\%s</code></div>' % (act, h(sn), h(sn)))
+                        '<code>/%s</code></div>' % (act, h(sn), h(sn)))
                     steps = []
                     for si, (step_name, txt, note) in enumerate(rows):
                         et = h(txt)
@@ -1000,17 +1051,22 @@ class ModelFactory:
                         '<div class="seq-panel%s" id="%s">\n%s\n</div>'
                         % (act, h(sn), '\n'.join(steps)))
 
+                # Protocol description
+                desc = PROTOCOL_DESCRIPTIONS.get(base_name, "")
+                desc_html = ('<div class="p-desc">%s</div>' % h(desc)) if desc else ''
+
                 proto_parts.append(
                     '<div class="protocol%s" id="%s">\n'
                     '  <div class="protocol-header">'
                     '<span class="p-name">%s</span>'
                     '<span class="p-meta">%d steps \u00b7 %d seq</span>'
                     '<span class="toggle">\u25bc</span></div>\n'
+                    '  %s\n'
                     '  <div class="protocol-body">\n'
                     '    <div class="seq-tabs">%s</div>\n%s\n'
                     '  </div>\n</div>'
                     % (collapsed, h(base_name), h(proto["display"]),
-                       max_s, nv, ''.join(tabs), '\n'.join(panels)))
+                       max_s, nv, desc_html, ''.join(tabs), '\n'.join(panels)))
 
         # \u2500\u2500 CSS \u2500\u2500
         CSS = (
@@ -1058,6 +1114,8 @@ class ModelFactory:
             'padding:2px 8px;border-radius:10px;border:1px solid var(--border)}\n'
             '.protocol-header .toggle{color:var(--muted);font-size:.8rem;transition:transform .2s}\n'
             '.protocol.collapsed .toggle{transform:rotate(-90deg)}\n'
+            '.p-desc{font-size:.78rem;color:var(--muted);padding:4px 16px 2px;border-top:1px solid var(--border);background:#1a1d23;line-height:1.4}\n'
+            '.protocol.collapsed .p-desc{display:none}\n'
             '.protocol-body{padding:6px 0 12px}.protocol.collapsed .protocol-body{display:none}\n'
             '.seq-tabs{display:flex;gap:6px;padding:8px 16px}\n'
             '.seq-tab{font-size:.76rem;font-weight:700;padding:4px 12px;border-radius:8px;cursor:pointer;'
