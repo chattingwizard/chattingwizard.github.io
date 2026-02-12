@@ -106,9 +106,9 @@ male_other_cards = "\n\n".join(make_card(m) for m in MALE_OTHER)
 
 total = len(FEMALE_MODELS) + len(MALE_DATING_APP) + len(MALE_OTHER)
 
-# CW Logo — real logo image with fallback
-CW_LOGO_HEADER = '<img class="cw-logo" src="assets/logo-google.png" alt="Chatting Wizard" onerror="this.style.display=\'none\'">'
-CW_LOGO_FOOTER = '<img class="cw-logo-sm" src="assets/logo-google.png" alt="CW" onerror="this.style.display=\'none\'">'
+# CW Logo — real logo
+CW_LOGO_HEADER = '<img class="cw-logo" src="assets/cw-logo.png" alt="Chatting Wizard">'
+CW_LOGO_FOOTER = '<img class="cw-logo-sm" src="assets/cw-logo.png" alt="Chatting Wizard">'
 
 html = f'''<!DOCTYPE html>
 <html lang="en">
@@ -122,8 +122,8 @@ html = f'''<!DOCTYPE html>
 
   /* ── Header ── */
   .header {{ text-align: center; padding: 40px 20px 24px; }}
-  .header-brand {{ display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 6px; }}
-  .cw-logo {{ width: 42px; height: 42px; }}
+  .header-brand {{ display: flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 6px; }}
+  .cw-logo {{ height: 44px; width: auto; }}
   .header h1 {{ font-size: 2em; color: #58a6ff; }}
   .header p {{ color: #8b949e; font-size: 0.95em; max-width: 500px; margin: 0 auto; }}
   .header .count {{ color: #3fb950; font-weight: 700; font-size: 1.05em; margin-top: 6px; }}
@@ -179,7 +179,7 @@ html = f'''<!DOCTYPE html>
   .no-results {{ text-align: center; padding: 40px 20px; color: #484f58; display: none; }}
   .footer {{ text-align: center; padding: 40px 20px; color: #484f58; font-size: 0.75em; }}
   .footer-brand {{ display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 4px; }}
-  .cw-logo-sm {{ width: 22px; height: 22px; border-radius: 4px; }}
+  .cw-logo-sm {{ height: 20px; width: auto; }}
   @media (max-width: 600px) {{ .grid {{ grid-template-columns: 1fr; }} .header h1 {{ font-size: 1.5em; }} }}
 </style>
 </head>
@@ -188,9 +188,9 @@ html = f'''<!DOCTYPE html>
 <div class="header">
   <div class="header-brand">
     {CW_LOGO_HEADER}
-    <h1>CW Scripts</h1>
   </div>
-  <p>Script guides for chatters — Chatting Wizard</p>
+  <h1>Script Manager</h1>
+  <p>Script guides &amp; XLSX exports for chatters</p>
   <div class="count">{total} creators live</div>
   <div class="search-bar">
     <span class="s-icon">&#128269;</span>
@@ -243,7 +243,6 @@ html = f'''<!DOCTYPE html>
 <div class="footer">
   <div class="footer-brand">
     {CW_LOGO_FOOTER}
-    <span>Chatting Wizard</span>
   </div>
   Script Manager — 2026 — Internal use only
 </div>
