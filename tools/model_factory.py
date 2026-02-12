@@ -390,23 +390,21 @@ class ModelFactory:
 
     @staticmethod
     def _intensity_html(level):
-        """Return HTML for a small intensity meter bar."""
+        """Return HTML for a compact intensity pill badge."""
         if level <= 0:
             return ''
-        pct = level * 10  # 0-100%
         if level <= 4:
-            color = '#3b82f6'   # blue
+            bg = '#3b82f620'; border = '#3b82f650'; color = '#60a5fa'   # blue
         elif level <= 6:
-            color = '#eab308'   # yellow
+            bg = '#eab30820'; border = '#eab30850'; color = '#facc15'   # yellow
         elif level <= 8:
-            color = '#f97316'   # orange
+            bg = '#f9731620'; border = '#f9731650'; color = '#fb923c'   # orange
         else:
-            color = '#ef4444'   # red
+            bg = '#ef444420'; border = '#ef444450'; color = '#f87171'   # red
         return (
-            '<span class="intensity" title="Intensity %d/10">'
-            '<span class="i-track"><span class="i-bar" style="width:%d%%;background:%s"></span></span>'
-            '<span class="i-val" style="color:%s">%d</span></span>'
-            % (level, pct, color, color, level)
+            '<span class="intensity" title="Intensity %d/10" style="background:%s;border-color:%s;color:%s">'
+            '%d</span>'
+            % (level, bg, border, color, level)
         )
 
     def generate_guide_html(self):
@@ -437,17 +435,17 @@ class ModelFactory:
                 if mtype == "ppv":
                     rows.append(
                         '<div class="ppv-moment"><span class="ppv-icon">\U0001f4ce</span>'
-                        '%s<span class="ppv-label">%s</span></div>' % (ibar, et))
+                        '<span class="ppv-label">%s</span>%s</div>' % (et, ibar))
                 else:
                     wcls = ' msg-wait' if mtype == 'wait' else ''
                     note_h = '<div class="msg-note">%s</div>' % h(note) if note else ''
                     rows.append(
                         '<div class="msg%s"><span class="msg-id">%s</span>'
-                        '%s'
                         '<div class="msg-body"><div class="msg-text">%s</div>%s</div>'
+                        '%s'
                         '<button class="cp" data-copy="%s">'
                         '<span class="cp-icon">\U0001f4cb</span></button></div>'
-                        % (wcls, h(mid), ibar, et, note_h, et))
+                        % (wcls, h(mid), et, note_h, ibar, et))
             collapsed = ' collapsed' if i > 0 else ''
             # Build smart meta label: "X msgs" or "PPV" or "X msgs + PPV"
             if msg_count > 0 and ppv_count > 0:
@@ -696,11 +694,10 @@ class ModelFactory:
             '.msg-note{background:#e3b34112;border-left:3px solid var(--yellow);padding:5px 10px;'
             'border-radius:0 6px 6px 0;margin:4px 0 2px;font-size:.8rem;color:var(--yellow)}\n'
             '.msg-wait{background:#d2992210}.msg-wait .msg-id{border-color:var(--orange);color:var(--orange)}\n'
-            '.intensity{display:flex;align-items:center;gap:3px;flex-shrink:0;margin-top:5px}\n'
-            '.i-track{width:40px;height:5px;background:#1a1e26;border-radius:3px;overflow:hidden;border:1px solid #ffffff10}\n'
-            '.i-bar{height:100%;border-radius:3px;transition:width .3s}\n'
-            '.i-val{font-size:.58rem;font-weight:700;min-width:12px;text-align:center}\n'
-            '.ppv-moment .intensity{margin-top:0}\n'
+            '.intensity{display:inline-flex;align-items:center;justify-content:center;'
+            'min-width:20px;height:20px;padding:0 5px;border-radius:10px;'
+            'font-size:.62rem;font-weight:700;border:1px solid;flex-shrink:0;'
+            'letter-spacing:-.02em;margin-left:4px}\n'
             '.ppv-moment{background:#3fb95010;border:1px solid #3fb95028;border-radius:10px;'
             'padding:8px 14px;margin:6px 16px;display:flex;align-items:center;gap:10px}\n'
             '.ppv-moment .ppv-icon{font-size:1.2rem}\n'
