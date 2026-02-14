@@ -1,5 +1,5 @@
 """
-Monday.com CLI — Read boards, items, and detect new onboardings.
+Monday.com CLI — Read boards, items, detect onboardings, and create tasks.
 
 Usage:
     python tools/monday_cli.py boards                         # List all boards
@@ -7,6 +7,8 @@ Usage:
     python tools/monday_cli.py columns <board_id>             # Show board columns/structure
     python tools/monday_cli.py item <item_id>                 # Get full item details
     python tools/monday_cli.py onboardings                    # Detect new onboardings
+    python tools/monday_cli.py create-item <board_id> <name> [options]  # Create a new item
+    python tools/monday_cli.py users                          # List users (for assignee IDs)
 
 Env var required: MONDAY_API_TOKEN
 """
@@ -293,6 +295,77 @@ def cmd_onboardings(args):
     return new_onboardings
 
 
+# ── Create / Write commands ───────────────────────────────────
+
+def cmd_users(args):
+    """List workspace users with their IDs (needed for assignee)."""
+    data = query("""
+    {
+        users(limit: 100) {
+            id
+            name
+            email
+        }
+    }
+    """)
+    users = data.get("users", [])
+    print(f"{'Name':<35} {'Email':<35} {'ID'}")
+    print("-" * 80)
+    for u in users:
+        print(f"{u['name']:<35} {u.get('email', '?'):<35} {u['id']}")
+    print(f"\nTotal: {len(users)} users")
+
+
+def cmd_create_item(args):
+    """Create a new item on a board."""
+    column_values = {}
+    
+    # Status
+    if args.status:
+        column_values["status"] = {"label": args.status}
+    
+    # Priority
+    if args.priority:
+        column_values["color_mkzc1yhb"] = {"label": args.priority}
+    
+    # Deadline
+    if args.deadline:
+        column_values["date4"] = {"date": args.deadline}
+    
+    # Description
+    if args.description:
+        column_values["text_mkzcrrme"] = args.description
+    
+    # Assignee (person column)
+    if args.assignee:
+        column_values["person"] = {"personsAndTeams": [{"id": int(args.assignee), "kind": "person"}]}
+    
+    col_json = json.dumps(json.dumps(column_values))  # double-encode for GraphQL
+    
+    group_part = ""
+    if args.group:
+        group_part = f', group_id: "{args.group}"'
+    
+    mutation = f"""
+    mutation {{
+        create_item (
+            board_id: {args.board_id},
+            item_name: "{args.name}",
+            column_values: {col_json}
+            {group_part}
+        ) {{
+            id
+            name
+        }}
+    }}
+    """
+    
+    data = query(mutation)
+    item = data.get("create_item", {})
+    print(f"[OK] Item created: '{item.get('name', '?')}' (ID: {item.get('id', '?')})")
+    return item
+
+
 # ── Main ──────────────────────────────────────────────────────
 
 def main():
@@ -313,6 +386,18 @@ def main():
 
     sub.add_parser("onboardings", help="Detect new onboardings")
 
+    sub.add_parser("users", help="List workspace users")
+
+    p = sub.add_parser("create-item", help="Create a new item")
+    p.add_argument("board_id", help="Board ID")
+    p.add_argument("name", help="Item name")
+    p.add_argument("--status", default=None, help="Status label")
+    p.add_argument("--priority", default=None, help="Priority label")
+    p.add_argument("--deadline", default=None, help="Deadline (YYYY-MM-DD)")
+    p.add_argument("--description", default=None, help="Description text")
+    p.add_argument("--assignee", default=None, help="Assignee user ID")
+    p.add_argument("--group", default=None, help="Group ID")
+
     args = parser.parse_args()
 
     cmds = {
@@ -321,6 +406,8 @@ def main():
         "items": cmd_items,
         "item": cmd_item,
         "onboardings": cmd_onboardings,
+        "users": cmd_users,
+        "create-item": cmd_create_item,
     }
 
     if args.command in cmds:
