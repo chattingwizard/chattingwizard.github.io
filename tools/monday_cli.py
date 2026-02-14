@@ -164,7 +164,7 @@ def cmd_items(args):
 
 
 def cmd_item(args):
-    """Get full details of a single item."""
+    """Get full details of a single item including updates/comments."""
     data = query("""
     query ($itemId: [ID!]!) {
         items(ids: $itemId) {
@@ -178,6 +178,15 @@ def cmd_item(args):
                 text
                 value
                 type
+            }
+            updates(limit: 20) {
+                id
+                body
+                text_body
+                created_at
+                creator {
+                    name
+                }
             }
         }
     }
@@ -197,6 +206,18 @@ def cmd_item(args):
         text = cv.get("text", "") or ""
         title = cv.get("title", cv["id"])
         print(f"{title:<25} {cv['type']:<15} {text[:50]}")
+    
+    updates = item.get("updates", [])
+    if updates:
+        print(f"\nUpdates/Comments ({len(updates)}):")
+        print("-" * 70)
+        for u in updates:
+            creator = u.get("creator", {}).get("name", "?")
+            created = u.get("created_at", "?")
+            body = u.get("text_body", "") or u.get("body", "")
+            print(f"  [{created}] {creator}:")
+            print(f"    {body[:200]}")
+            print()
 
 
 def cmd_onboardings(args):

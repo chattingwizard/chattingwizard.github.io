@@ -1,0 +1,10 @@
+[2026-02-14 15:31:39] [INFO] Watcher started (loop=0s)
+[2026-02-14 15:31:39] [INFO] ==================================================
+[2026-02-14 15:31:39] [INFO] WATCHER CYCLE START
+[2026-02-14 15:31:39] [INFO] --- Checking onboardings ---
+[2026-02-14 15:31:42] [INFO] No new onboardings
+[2026-02-14 15:31:42] [INFO] --- Checking watched tasks ---
+[2026-02-14 15:31:42] [INFO] Checking task: List content sets per model (2721603979)
+[2026-02-14 15:31:43] [INFO]   Status: '' (not done yet)
+[2026-02-14 15:31:43] [INFO] WATCHER CYCLE END
+[2026-02-14 15:31:43] [INFO] 
