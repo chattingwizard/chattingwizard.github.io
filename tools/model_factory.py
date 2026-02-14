@@ -270,6 +270,19 @@ class ModelFactory:
         self.scripts_dir = os.path.join(self.base_dir, "scripts", "models", self.c["folder"])
         self._apply_obj_defaults()
         
+    def _resolve_gender_key(self):
+        """Return normalized gender key: 'female', 'male', or 'male_gay'."""
+        gender = self.c.get("gender", "female")
+        traffic = self.c.get("traffic", "social_media")
+        # Jack Hollywood and similar DL/gay-audience males
+        special = self.c.get("special_notes", "") or ""
+        if gender == "male" and ("gay" in traffic.lower() or "gay" in special.lower()
+                                  or "DL" in special or "dl" in special.lower()):
+            return "male_gay"
+        elif gender == "male":
+            return "male"
+        return "female"
+
     def _apply_obj_defaults(self):
         """Merge default OBJ scripts with model-specific overrides.
         
@@ -278,13 +291,12 @@ class ModelFactory:
         """
         from obj_defaults import DEFAULT_OBJ_FEMALE, DEFAULT_OBJ_MALE, DEFAULT_OBJ_MALE_GAY
         
-        gender = self.c.get("gender", "female")
-        traffic = self.c.get("traffic", "social_media")
+        gk = self._resolve_gender_key()
         
         # Select base template
-        if gender == "male" and "gay" in traffic.lower():
+        if gk == "male_gay":
             base = DEFAULT_OBJ_MALE_GAY
-        elif gender == "male":
+        elif gk == "male":
             base = DEFAULT_OBJ_MALE
         else:
             base = DEFAULT_OBJ_FEMALE
@@ -299,6 +311,55 @@ class ModelFactory:
             merged = dict(base)
         
         self.c["obj_scripts"] = merged
+
+    def _build_sexting_sequences(self):
+        """Build personalized sexting sequences from templates.
+        
+        Returns dict: {sheet_name: [(name, text, note, msg_type), ...]}
+        Uses model's voice, pet names, and emoji preferences.
+        """
+        from sexting_defaults import SEXTING_TEMPLATES, DYNAMIC_ORDER, DYNAMIC_SHEET_NAMES
+        
+        gk = self._resolve_gender_key()
+        
+        # Determine how many sequences to generate
+        num_sets = self.c.get("sexting_sets", 4)  # default: 4 dynamics
+        dynamics_to_gen = DYNAMIC_ORDER[:num_sets]
+        
+        # Model personalization tokens
+        pet_names = self.c.get("voice_pet_names", "babe, baby")
+        pets = [p.strip() for p in pet_names.split(",") if p.strip()]
+        pet1 = pets[0] if pets else "babe"
+        pet2 = pets[1] if len(pets) > 1 else pet1
+        
+        # Pick emoji based on gender
+        if gk == "female":
+            emoji = "🖤"
+        else:
+            emoji = "💪"
+        
+        # Non-explicit models: skip sexting sequences entirely
+        if self.c.get("explicit_level") in ("non_explicit",):
+            return {}
+        
+        result = {}
+        for dynamic in dynamics_to_gen:
+            key = (gk, dynamic)
+            template = SEXTING_TEMPLATES.get(key)
+            if not template:
+                continue
+            
+            sheet_name = DYNAMIC_SHEET_NAMES[dynamic]
+            personalized = []
+            for name, text, note, msg_type in template:
+                # Replace placeholders
+                p_text = text.replace("{pet}", pet1).replace("{pet2}", pet2).replace("{emoji}", emoji)
+                p_note = note.replace("{pet}", pet1).replace("{pet2}", pet2).replace("{emoji}", emoji) if note else None
+                personalized.append((name, p_text, p_note, msg_type))
+            
+            result[sheet_name] = personalized
+        
+        return result
 
     def ensure_dirs(self):
         os.makedirs(self.web_dir, exist_ok=True)
@@ -353,6 +414,22 @@ class ModelFactory:
             ws = wb.create_sheet("ReEngagement")
             setup_journey_sheet(ws)
             add_rows_reversed(ws, self.c["re_engagement"])
+        
+        # Standalone Sexting Sequences (sex2, sex3, sex4, sex5)
+        sexting_seqs = self._build_sexting_sequences()
+        for sheet_name, rows in sexting_seqs.items():
+            ws = wb.create_sheet(sheet_name)
+            setup_journey_sheet(ws)
+            # Convert 4-tuples to 3-tuples (drop msg_type for XLSX, keep for styling)
+            xlsx_rows = []
+            for name, text, note, msg_type in rows:
+                # Prefix sheet name to Name for uniqueness across all sheets
+                unique_name = f"{sheet_name} {name}" if not name.startswith(sheet_name) else name
+                if len(unique_name) > 64:
+                    unique_name = unique_name[:64]
+                xlsx_rows.append((unique_name, text, note, msg_type))
+            # Use add_rows_reversed with 4-tuples (it only uses first 3)
+            add_rows_reversed(ws, xlsx_rows)
         
         return wb
     

@@ -1,0 +1,64 @@
+---
+description: Business logic and operational rules for the Chatting Wizard coaching/performance system
+alwaysApply: true
+---
+
+# Coaching System — Business Rules
+
+## Sources of Truth
+
+| Data | Source | Notes |
+|---|---|---|
+| Hours worked | **Hubstaff API** | The ONLY authority on whether a chatter worked. < 1h = didn't work (day off). |
+| Sales, CVR, Unlock, Golden Ratio, Msg/hr, Reply Time, Fans | **Inflow CSV** (exported daily by Daniela) | Daniela uploads to Slack DM. System downloads and parses. |
+| Chatter names & team assignments | **Airtable "Chatters" table** | Canonical names. Inflow names must match these. |
+| Daily aggregated performance | **Airtable "Daily Performance" table** | Merged Inflow + Hubstaff data per chatter per day. |
+| Weekly aggregated performance | **Airtable "Performance" table** | Historical weekly data. |
+
+## Key Rules
+
+- **Hubstaff hours < 1 = chatter didn't work.** Don't calculate scores, don't flag KPI alarms, show as "Day off".
+- **Name matching**: Inflow names may differ from Airtable. Use normalization (lowercase, collapse spaces) + fuzzy alias mapping. When mismatch is unresolvable, ask Daniela to fix in Inflow.
+- **Mondays**: Daniela can't export before ~2pm UTC. Daily ingest defers to 15:30 UTC cron on Mondays.
+- **TL briefings**: Sent 30min before each TL's shift start (not after). 3 briefings/day.
+- **Dashboard**: GitHub Pages at chattingwizard.github.io/cw-coaching/. Auto-switches to daily view. Inactive chatters go to bottom.
+
+## Team Structure
+
+| TL | Shift (UTC) | Color |
+|---|---|---|
+| Danilyn | 00:00–08:00 | Blue |
+| Huckle | 00:00–08:00 | Orange |
+| Ezekiel | 08:00–16:00 | Purple |
+
+## Pipeline Flow
+
+```
+Daniela exports Inflow CSV → Slack DM → ingest_daily.py downloads
+  ↓
+Hubstaff API → fetch hours per chatter
+  ↓
+Merge Inflow + Hubstaff → store in Airtable Daily Performance
+  ↓
+generate_dashboard.py → HTML dashboard (GitHub Pages)
+send_briefings.py → Slack briefings to TLs
+```
+
+## Traffic / Workload
+
+- **Fans/hr** = proxy for traffic per chatter (fans_chatted / hours_worked). More fans/hr = more traffic.
+- Traffic is determined by the models/accounts assigned to each chatter.
+- **TL action on imbalance**: move chatters between models/accounts, or adjust shifts.
+- **Imbalance alert**: ratio max/min > 2x = yellow warning, > 3x = critical.
+- Dashboard shows traffic distribution bars per TL team, ranked by Fans/hr.
+
+## Decision Principle
+
+When making ANY technical decision about this system, always ask: "What is the source of truth for this data?" Use the table above. Don't invent heuristics when a single authoritative signal exists.
+
+## Self-Updating Rule
+
+When a conversation produces a new business rule, operational insight, or source-of-truth clarification:
+1. Update THIS file (`.cursor/rules/coaching-system.mdc`) with the concise rule
+2. Update `cursor_context/04_COACHING_OPS.md` with the detailed explanation
+3. Confirm to the user what was added

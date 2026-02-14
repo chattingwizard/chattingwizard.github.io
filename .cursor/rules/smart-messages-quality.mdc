@@ -1,0 +1,38 @@
+---
+description: Mandatory quality rules for creating Smart Messages (nudges, welcome, etc.)
+alwaysApply: true
+---
+
+# Smart Messages — Quality Standards (MANDATORY)
+
+## Before Creating ANY Smart Message Content
+
+1. **READ the model's full config** (`tools/models/[model].py`) — personality, voice, voice_pet_names, voice_never, interests, job, nationality, age
+2. **READ existing journey messages** for the model — understand how she/he already talks in scripts
+3. **ADAPT every message** to the model's personality. NEVER use generic copy-paste across models.
+
+## Personalization Checklist (EVERY message must pass)
+
+- [ ] Pet names match `voice_pet_names`? (e.g., Eva uses "papi/handsome", NEVER "baby/babe")
+- [ ] Words in `voice_never` are NOT used? (e.g., Antonella never says "daddy/sir")
+- [ ] Emoji style matches the model's established pattern? (gothic model ≠ 💕🥰, Latina model ≠ 🖤💜)
+- [ ] Tone matches personality? (shy model doesn't open with bold sexual tease, bold model doesn't open with "hiii 🥰")
+- [ ] Interest/activity references are SPECIFIC to the model? (biker → "my ride", gamer → "my stream", gym → "the gym")
+- [ ] Greeting style matches voice? (e-girl extends: "hiiii", Latina is direct: "hey handsome", sweet model: "hiii 😊")
+- [ ] Message length and style match voice description? (some models are wordy, some are micro-texters)
+- [ ] For male models (gay audience): tone and dynamics are adapted — the model is the attractive MAN, fan is the pursuer
+
+## Male Models — Special Rules
+
+- Male models target gay male fans
+- The dynamic is: hot guy who's confident, slightly teasing, makes the fan feel desired
+- Nudge tone: masculine confidence + playful tease, NOT feminine GFE
+- Pet names: typically "babe", "handsome", "sexy" — check each model's config
+- NEVER use feminine-coded language ("🥰", "hiii", "omggg") unless the model's voice explicitly uses it
+
+## Quality Gates
+
+1. **No two models should have identical messages.** If Collection 3 Message 1 is the same for two models, something is wrong.
+2. **Spot-check test:** Read a message out of context — can you tell which model it's from? If not, it's too generic.
+3. **Banned words:** EVERY message scanned against OF banned words list before publishing.
+4. **Human feel:** Messages must read like a real person texted them. No perfect grammar, no corporate tone, no mass-message energy.
