@@ -62,6 +62,20 @@ When creating xlsx files for Infloww import:
 - **NOT in journey sheet**: Objection handlers, NR waves, Personal Info, Positive Spin — separate if needed.
 - **CRITICAL: All Name values must be UNIQUE across the entire XLSX.** No two scripts in the same model package can share the same Name. For OBJ sheets, prefix the sheet name to each step (e.g., "price1 Step1 Reframe", "price2 Step1 Reframe"). Always run `check_duplicate_names.py` before deploying.
 
+## Sexting Sequence Design Rules
+
+When creating sexting sequences (standalone or within journey):
+1. **4 dynamics per framework**: Sex1 (Dominant, in journey), Sex2 (Sub Leads), Sex3 (Intimate), Sex4 (Challenge), Sex5 (Fantasy).
+2. **Each standalone sequence**: Short teasing bridge (3-4 msgs + PPV 0) → Sexting (15-20 msgs with 4 PPVs) → Aftercare (2 msgs). ~27 entries total.
+3. **PPV pricing ladder**: PPV 0 FREE → PPV 1 $12 → PPV 2 $25 → PPV 3 $40 → PPV 4 $55.
+4. **Intensity curve**: Build 6→8 → PPV 1 → cooldown → 8→9 → PPV 2 → NO cooldown → 9→10 → PPV 3 → 10 → PPV 4.
+5. **Non-explicit models get NO sexting sequences** (e.g., Irina, Jessica).
+6. **Templates live in `tools/sexting_defaults.py`** — 12 templates (4 dynamics × 3 genders).
+7. **Personalization tokens**: `{pet}`, `{pet2}`, `{emoji}` — replaced per model config.
+8. **Sheet names**: `sex2`, `sex3`, `sex4`, `sex5` — become Infloww commands.
+9. **Name uniqueness**: Sexting sheet entries are auto-prefixed with sheet name (e.g., "sex2 TB-1").
+10. **Each dynamic must feel genuinely different** — not just reworded versions of the same script.
+
 ## Chatter Profile
 
 Chatters are low-cost operators ($2/hr, Philippines). Scripts must be:
