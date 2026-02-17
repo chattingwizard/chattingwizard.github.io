@@ -28,6 +28,7 @@ FEMALE_MODELS = [
     {"name": "Faby Monteiro", "folder": "faby", "age": 45, "nationality": "Brazilian", "page": "Paid Page", "traffic": "Other", "xlsx": "Faby_Complete_Infloww.xlsx"},
     {"name": "Irina", "folder": "irina", "age": 23, "nationality": "American/Russian", "page": "Free Page", "traffic": "IG/TikTok", "xlsx": "Irina_Complete_Infloww.xlsx", "tag": "non-explicit"},
     {"name": "Zansi", "folder": "zansi", "age": 26, "nationality": "American", "page": "Free Page", "traffic": "Social Media", "xlsx": "Zansi_Complete_Infloww.xlsx"},
+    {"name": "Adriana Meran", "folder": "adrianameran", "age": 42, "nationality": "Ecuadorian", "page": "Paid Page", "traffic": "Reddit + IG", "xlsx": "Adriana Meran_Complete_Infloww.xlsx"},
 ]
 
 MALE_DATING_APP = [
@@ -46,6 +47,58 @@ MALE_DATING_APP = [
 MALE_OTHER = [
     {"name": "Jockurworld", "folder": "jockurworld", "age": 26, "nationality": "American", "page": "Paid Page", "traffic": "Twitter/X + Others", "xlsx": "Jockurworld_Complete_Infloww.xlsx"},
 ]
+
+def _auto_discover_models():
+    """Auto-discover model configs not yet in the hardcoded lists."""
+    known_folders = set()
+    for lst in [FEMALE_MODELS, MALE_DATING_APP, MALE_OTHER]:
+        for m in lst:
+            known_folders.add(m["folder"])
+
+    models_dir = os.path.join(BASE, "tools", "models")
+    new_models = []
+    for py_file in sorted(glob.glob(os.path.join(models_dir, "*.py"))):
+        if os.path.basename(py_file) == "__init__.py":
+            continue
+        folder = os.path.basename(py_file).replace(".py", "")
+        if folder in known_folders:
+            continue
+        # Try to import config
+        try:
+            sys.path.insert(0, os.path.join(BASE, "tools"))
+            mod = __import__(f"models.{folder}", fromlist=["config"])
+            c = mod.config
+            clean_name = c.get("name", folder).strip()
+            xlsx_name = f"{clean_name}_Complete_Infloww.xlsx"
+            entry = {
+                "name": clean_name,
+                "folder": c.get("folder", folder),
+                "age": c.get("age", "?"),
+                "nationality": c.get("nationality", "Unknown"),
+                "page": c.get("page_type", "Mixed"),
+                "traffic": c.get("traffic", "Social Media").replace("_", " ").title(),
+                "xlsx": xlsx_name,
+            }
+            if c.get("explicit_level") in ("non_explicit", "soft"):
+                entry["tag"] = "non-explicit"
+
+            gender = c.get("gender", "female")
+            traffic = c.get("traffic", "")
+            if gender == "female":
+                FEMALE_MODELS.append(entry)
+            elif "dating" in traffic.lower():
+                MALE_DATING_APP.append(entry)
+            else:
+                MALE_OTHER.append(entry)
+            new_models.append(clean_name)
+        except Exception as e:
+            print(f"[WARN] Could not load {folder}: {e}")
+
+    if new_models:
+        print(f"[AUTO] Discovered {len(new_models)} new model(s): {', '.join(new_models)}")
+
+_auto_discover_models()
+
 
 def find_photo(folder):
     """Find profile photo in folder, return relative path or empty."""
