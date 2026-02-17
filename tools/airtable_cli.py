@@ -61,13 +61,29 @@ def fetch_all_records(fields=None):
 
 
 def fetch_model(name):
-    """Fetch a specific model by name."""
+    """Fetch a specific model by name. Tries exact match first, then trimmed."""
     headers = get_headers()
-    formula = f"{{Model Name}} = '{name}'"
+    name_clean = name.strip()
+    # Try exact match first
+    formula = f"{{Model Name}} = '{name_clean}'"
     r = requests.get(API_BASE, headers=headers, params={"filterByFormula": formula})
     r.raise_for_status()
     data = r.json()
     records = data.get("records", [])
+    if not records and name_clean != name:
+        # Retry with original (Airtable may have trailing spaces)
+        formula = f"{{Model Name}} = '{name}'"
+        r = requests.get(API_BASE, headers=headers, params={"filterByFormula": formula})
+        r.raise_for_status()
+        data = r.json()
+        records = data.get("records", [])
+    if not records:
+        # Fuzzy: search with FIND for partial match
+        formula = f"FIND('{name_clean}', {{Model Name}})"
+        r = requests.get(API_BASE, headers=headers, params={"filterByFormula": formula})
+        r.raise_for_status()
+        data = r.json()
+        records = data.get("records", [])
     if not records:
         return None
     return records[0].get("fields", {})

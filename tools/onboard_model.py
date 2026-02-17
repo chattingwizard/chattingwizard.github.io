@@ -219,12 +219,20 @@ def create_model_config(info):
     interests_str = json.dumps(interests) if interests else '["TBD"]'
 
     # ── Build journey template ──
+    model_info = {
+        "name": name, "gender": gender, "personality": personality,
+        "voice": voice, "voice_pet_names": voice_pet_names, "voice_never": voice_never,
+        "location": location, "origin": origin, "age": age,
+        "nationality": nationality, "interests": interests, "job": job,
+        "physical": physical, "countries": countries, "explicit_level": explicit,
+        "special_notes": special_notes,
+    }
     if is_dating:
-        journey = _build_dating_journey(name, gender, personality)
+        journey = _build_dating_journey(model_info)
     else:
-        journey = _build_social_journey(name, gender, personality)
+        journey = _build_social_journey(model_info)
 
-    nr_waves = _build_nr_waves(gender)
+    nr_waves = _build_nr_waves(model_info)
     personal_info = _build_personal_info(name, age, location, nationality, job, interests, physical, special_notes)
     positive_spin = _build_positive_spin(name, gender, interests)
     re_engagement = _build_re_engagement(gender)
@@ -307,166 +315,308 @@ if __name__ == "__main__":
 # JOURNEY BUILDERS
 # ═══════════════════════════════════════════════════════════════
 
-def _build_social_journey(name, gender, personality):
-    """Build a social media journey (Reddit/OFTV/TikTok/etc)."""
-    # Pronoun setup
+def _extract_hobby(info):
+    """Extract a relatable hobby phrase from model personality and interests.
+    Returns a phrase that fits naturally after 'I just' or 'I mostly just'
+    e.g. 'play video games', 'go to the gym', 'chill at home'."""
+    personality = info.get("personality", "")
+    interests = info.get("interests", [])
+    p = personality.lower()
+
+    # Map raw keywords → natural "I just ___" phrases
+    phrase_map = {
+        "gaming": "play video games", "gamer": "play video games",
+        "gym": "go to the gym", "workout": "work out", "working out": "work out",
+        "training": "train", "yoga": "do yoga", "cooking": "cook",
+        "travel": "travel when I can", "music": "listen to music",
+        "dance": "dance", "art": "make art", "painting": "paint",
+        "reading": "read", "hiking": "go hiking", "swimming": "swim",
+        "running": "run", "netflix": "watch Netflix", "anime": "watch anime",
+        "photography": "take photos", "shopping": "go shopping",
+        "surfing": "surf", "volleyball": "play volleyball", "singing": "sing",
+    }
+
+    # First check interests list
+    if isinstance(interests, list) and interests:
+        for i in interests:
+            if isinstance(i, str):
+                il = i.lower().strip()
+                for kw, phrase in phrase_map.items():
+                    if kw in il:
+                        return phrase
+                # If no match in map, return raw with "do" prefix
+                if len(il) > 2 and il not in ("tbd",):
+                    return il if il.startswith(("play", "go", "do", "watch", "make")) else f"do {il}"
+
+    # Then check personality text
+    for kw, phrase in phrase_map.items():
+        if kw in p:
+            return phrase
+
+    return "chill at home"
+
+
+def _extract_activity(info):
+    """Extract a casual activity for the teasing pivot."""
+    personality = info.get("personality", "")
+    interests = info.get("interests", [])
+    job = info.get("job", "")
+    # Context-specific activities
+    activities = []
+    p = personality.lower()
+    if "gaming" in p or "gamer" in p:
+        activities.append("finished a long gaming session")
+    if "gym" in p or "workout" in p or "training" in p:
+        activities.append("got back from the gym")
+    if "yoga" in p:
+        activities.append("finished my yoga session")
+    if "dance" in p:
+        activities.append("got back from dance practice")
+    if "cook" in p:
+        activities.append("just finished cooking dinner")
+    if "shower" in p or "bath" in p:
+        activities.append("got out of the shower")
+    if "swim" in p or "pool" in p:
+        activities.append("came back from the pool")
+    if "surf" in p:
+        activities.append("got back from surfing")
+    if not activities:
+        # Fallback based on gender
+        gender = info.get("gender", "female")
+        if gender == "female":
+            activities = ["took a long shower", "was lying in bed scrolling", "just got out of the bath"]
+        else:
+            activities = ["just got back from the gym", "was lying in bed", "just took a shower"]
+    return activities[0]
+
+
+def _build_social_journey(info):
+    """Build a social media journey personalized to the model."""
+    name = info["name"]
+    gender = info["gender"]
+    personality = info.get("personality", "")
+    location = info.get("origin", info.get("location", "here"))
+    pet = info.get("voice_pet_names", "babe, baby").split(",")[0].strip()
+    hobby = _extract_hobby(info)
+    activity = _extract_activity(info)
+    explicit = info.get("explicit_level", "full_solo")
+
+    # Gender-specific language
     if gender == "female":
         wet = "wet"
-        body_react = "my nipples are hard"
+        sub_word = "guys"
+        body_react = "my nipples are hard and I can feel my heartbeat getting faster"
         physical_state = "lying in bed in just a t-shirt"
-        cum_word = "cum"
         self_touch = "my fingers are starting to wander"
+        cum_desc = "my pussy is pulsing so hard"
+        touch_deep = "pushing my fingers deeper"
+        climax = "cumming... fuck I can barely breathe"
     else:
         wet = "hard"
-        body_react = "I can feel it growing"
-        physical_state = "just got out of the shower, lying on my bed"
-        cum_word = "cum"
+        sub_word = "girls" if "gay" not in personality.lower() else "guys"
+        body_react = "I can feel myself getting harder just from talking to you"
+        physical_state = "lying on my bed with just shorts on"
         self_touch = "my hand is starting to wander"
+        cum_desc = "throbbing so hard I can't stop"
+        touch_deep = "gripping myself harder"
+        climax = "cumming... fuck that was intense"
+
+    # Non-explicit models: softer language
+    if explicit in ("non_explicit", "soft"):
+        body_react = "my heart is racing and my skin is tingling everywhere"
+        self_touch = "I keep thinking about what I'd do if you were here"
+        cum_desc = "my whole body is tingling"
+        touch_deep = "imagining you here with me"
+        climax = "that feeling just washed over me... wow"
 
     journey = [
-        # ── Rapport (R-1 to R-5) ──
-        ("R-1", f"heyy, glad you're here, what made you come say hi?", "Add his/her name if known. React naturally.", "rapport"),
-        ("R-2", "that's sweet, so where are you from?", "React to what they say. Short react like 'aw nice' or 'omg really?'", "rapport"),
-        ("R-3", f"nice, I'm from [LOCATION] but honestly I [HOBBY/ACTIVITY] most of the time haha", "PERSONALIZE with model's actual location and hobby from personality.", "rapport"),
-        ("R-4", f"so what do you do when you're not distracting cute {'girls' if gender == 'male' else 'guys'} on the internet?", None, "rapport"),
-        ("R-5", f"honestly you're so easy to talk to, most {'girls' if gender == 'male' else 'guys'} on here are boring but you're actually fun", "Ego boost. Next → TB-1.", "rapport"),
+        # ── Rapport (R-1 to R-5) — references model's personality ──
+        ("R-1", f"heyy {pet} glad you're here, what made you come say hi?", "Add his/her name if known.", "rapport"),
+        ("R-2", "that's sweet, so where are you from?", "React to what they say. 'aw nice' or 'omg really?'", "rapport"),
+        ("R-3", f"nice, I'm from {location} but honestly I just {hobby} most of the time haha", None, "rapport"),
+        ("R-4", f"so what do you do when you're not distracting cute {sub_word} on the internet?", None, "rapport"),
+        ("R-5", f"honestly you're so easy to talk to, most {sub_word} on here are boring but you're actually fun", "Ego boost. Next → TB-1.", "rapport"),
 
-        # ── Teasing Bridge (TB-1 to TB-5) ──
-        ("TB-1", f"okay so I just [ACTIVITY] and now I'm {physical_state} and this convo is doing things to me", "THE PIVOT. PERSONALIZE activity from personality. Physical state.", "teasing"),
+        # ── Teasing Bridge (TB-1 to TB-5) — uses model's activity ──
+        ("TB-1", f"okay so I just {activity} and now I'm {physical_state} and this convo is doing things to me", None, "teasing"),
         ("TB-2", "like idk what it is about you but I can't stop smiling rn", "Wait for reply.", "teasing"),
         ("TB-3", "stoppp you're making me blush and nobody makes me blush", "If sexual reply: add 'especially after what you just said omg'", "teasing"),
         ("TB-4", "hold on let me show you something", "WAIT 1-2 MIN", "wait"),
         ("TB-5", "be honest... what do you think?", "SEND PPV 0 — FREE teaser. Wait for reply. Silent 3 min → NR Waves.", "ppv"),
 
         # ── Sexting Phase 1 → PPV 1 ──
-        ("S1-1", f"mmm you liked that? I'm already getting {wet} because of you", "Wait for reply.", "sext"),
-        ("S1-2", f"my skin is tingling everywhere right now, {body_react}... you're doing something to me", "React to what they say.", "sext"),
-        ("S1-3", f"I'm lying here and {self_touch}... I blame you for this", None, "sext"),
+        ("S1-1", f"mmm you liked that? my body is already reacting to you... I can literally feel myself getting {wet} right now", "Wait for reply.", "sext"),
+        ("S1-2", f"my skin is tingling everywhere right now and {body_react}... you're doing something to me", "React to what they say.", "sext"),
+        ("S1-3", f"I'm lying here and {self_touch}... I blame you for this {pet}", None, "sext"),
         ("S1-4", "one sec", "WAIT 2-3 MIN", "wait"),
-        ("S1-5", "I want to show you what you made me feel", "SEND PPV 1 — $12. Bought → continue. Silent 3 min → NR Waves.", "ppv"),
+        ("S1-5", "I want to show you what you made me feel", f"SEND PPV 1 — $12 (teasing, touching over clothes). Bought → continue. Silent 3 min → NR Waves. 'I never do this' — ONE TIME per journey.", "ppv"),
 
         # ── Sexting Phase 2 → PPV 2 ──
         ("S1-6", "wow... okay I need a second after that", "Wait for reply. Brief cooldown.", "sext"),
-        ("S1-7", f"you have no idea what you're doing to me rn, I'm so {wet} it's crazy", None, "sext"),
-        ("S1-8", "I just did something I've never done for anyone here before", "ONE TIME 'never done this'.", "sext"),
-        ("S1-9", "hold on", "WAIT 2-3 MIN", "wait"),
-        ("S1-10", "you need to see this, like right now", "SEND PPV 2 — $25. Bought → continue. Silent 3 min → NR Waves.", "ppv"),
+        ("S1-7", f"but I literally can't stop touching myself right now... it's like my body won't let me", "React to what they said. HE caused this.", "sext"),
+        ("S1-8", f"I'm dripping {wet} and every time I think about you watching me it gets worse", None, "sext"),
+        ("S1-9", f"what would you do if you were here right now {pet}? I need to hear it", "Wait for reply. React to what they say.", "sext"),
+        ("S1-10", "fuck hold on I need to show you something", "WAIT 2-3 MIN", "wait"),
+        ("S1-11", "look at what you're doing to me... I can't hold back anymore", "SEND PPV 2 — $25 (more explicit solo, hands wandering). Bought → continue. Silent 3 min → NR Waves.", "ppv"),
 
         # ── Sexting Phase 3 → PPV 3 ──
-        ("S1-11", "fuck that was so intense", "Wait for reply.", "sext"),
-        ("S1-12", f"I can't stop, you're making me {cum_word} and I need you to watch", None, "sext"),
-        ("S1-13", "give me a second I need to catch my breath", "WAIT 2-3 MIN", "wait"),
-        ("S1-14", "okay I did something even crazier and you're the only one seeing this", "SEND PPV 3 — $35. Bought → continue. Silent 3 min → NR Waves.", "ppv"),
+        ("S1-12", f"oh fuck {pet} I can't stop touching myself", "Wait for reply. NO cooldown — keep momentum.", "sext"),
+        ("S1-13", f"I'm {touch_deep} and I can't slow down... my legs are shaking", None, "sext"),
+        ("S1-14", f"I can feel myself about to cum... you need to see what's happening to my body right now", None, "sext"),
+        ("S1-15", "one second", "WAIT 2-3 MIN", "wait"),
+        ("S1-16", "you need to see this... I've never been like this before", "SEND PPV 3 — $40 (very explicit solo). Bought → continue. Silent 3 min → NR Waves.", "ppv"),
 
         # ── Sexting Phase 4 → PPV 4 ──
-        ("S1-15", "oh my god I can't believe I just did that", "Wait for reply.", "sext"),
-        ("S1-16", "you make me lose all control and I love it", None, "sext"),
-        ("S1-17", f"I'm shaking rn, I've never been this {wet} before", None, "sext"),
-        ("S1-18", "wait", "WAIT 2-3 MIN", "wait"),
-        ("S1-19", "this is the craziest thing I've ever recorded, I need you to see it", "SEND PPV 4 — $50. Bought → continue. Silent 3 min → NR Waves.", "ppv"),
-
-        # ── Sexting Phase 5 → PPV 5 ──
-        ("S1-20", "I literally can't move rn, that was everything", "Wait for reply.", "sext"),
-        ("S1-21", f"one more, I need you to watch me {cum_word} for you", "Only if sub is still engaged.", "sext"),
-        ("S1-22", "hold on this is it", "WAIT 2-3 MIN. SEND PPV 5 — $65 if available. Otherwise skip to AC.", "ppv"),
+        ("S1-17", f"oh my god {cum_desc} and I can't stop", "Wait for reply.", "sext"),
+        ("S1-18", f"I'm right there {pet}... my whole body is clenching and I need you watching when this happens", None, "sext"),
+        ("S1-19", f"I'm {climax}", None, "sext"),
+        ("S1-20", "wait", "WAIT 1-2 MIN", "wait"),
+        ("S1-21", f"cum with me {pet}... watch what happens to my body right now", "SEND PPV 4 — $55 (full climax). Bought → Aftercare. Silent → NR Waves.", "ppv"),
 
         # ── Aftercare ──
-        ("AC-1", "oh my god that was... wow, I've never felt like that before", "AFTERCARE. Emotional cooldown. No selling.", "aftercare"),
-        ("AC-2", "you're something else, I mean it. talk soon?", "SEED next session. End convo naturally.", "aftercare"),
+        ("AC-1", "oh my god that was... wow", None, "aftercare"),
+        ("AC-2", f"I've never had someone make me feel like that through a screen before. you're actually different {pet}", "Mention something specific he said/did. KEEP TALKING — build bond. NEVER say goodbye.", "aftercare"),
     ]
 
     return journey
 
 
-def _build_dating_journey(name, gender, personality):
-    """Build a dating app journey (Hinge/Tinder/Bumble)."""
+def _build_dating_journey(info):
+    """Build a dating app journey personalized to the model."""
+    name = info["name"]
+    gender = info["gender"]
+    location = info.get("origin", info.get("location", "here"))
+    pet = info.get("voice_pet_names", "babe, baby").split(",")[0].strip()
+    hobby = _extract_hobby(info)
+    activity = _extract_activity(info)
+    explicit = info.get("explicit_level", "full_solo")
+
     if gender == "female":
         wet = "wet"
+        sub_word = "guys"
         self_touch = "my fingers are starting to wander"
-        cum_word = "cum"
+        body_react = "my heart is racing and I can feel my body reacting to you"
+        touch_deep = "pushing my fingers deeper"
+        cum_desc = "my pussy is pulsing so hard"
+        climax = "cumming... fuck I can barely breathe"
     else:
         wet = "hard"
+        sub_word = "girls" if "gay" not in info.get("personality", "").lower() else "guys"
         self_touch = "my hand is starting to wander"
-        cum_word = "cum"
+        body_react = "I can feel myself getting harder just from this conversation"
+        touch_deep = "gripping myself harder"
+        cum_desc = "throbbing so hard I can't stop"
+        climax = "cumming... fuck that was intense"
+
+    if explicit in ("non_explicit", "soft"):
+        self_touch = "I keep thinking about what I'd do if you were here"
+        body_react = "my heart is racing and my skin is tingling"
+        touch_deep = "imagining you here with me"
+        cum_desc = "my whole body is tingling"
+        climax = "that feeling just washed over me... wow"
 
     journey = [
-        # ── Rapport ──
-        ("R-1", "heyy, your profile caught my eye, had to message you", "React to their profile naturally.", "rapport"),
-        ("R-2", "okay wait you're actually cute, what do you do?", "Adapt to their response. Build rapport.", "rapport"),
-        ("R-3", "that's actually really cool, I'm into that", "PERSONALIZE from personality.", "rapport"),
+        # ── Rapport — dating app transition ──
+        ("R-1", f"heyy {pet}, your profile caught my eye, had to message you", "React to their profile. Add name if known.", "rapport"),
+        ("R-2", "okay wait you're actually cute, what do you do?", "React to their response naturally.", "rapport"),
+        ("R-3", f"that's cool, I'm from {location}, when I'm not here I'm mostly just {hobby} haha", None, "rapport"),
         ("R-4", "so be honest, what are you looking for on here?", None, "rapport"),
-        ("R-5", "honestly this is the best convo I've had on here in a while", "Ego boost. Next → TB-1.", "rapport"),
+        ("R-5", f"honestly this is the best convo I've had on here in a while, most {sub_word} are so dry", "Ego boost. Next → TB-1.", "rapport"),
 
-        # ── Teasing Bridge ──
-        ("TB-1", "okay so confession, I'm lying in bed rn and this convo is making me feel some type of way", "THE PIVOT.", "teasing"),
+        # ── Teasing Bridge — transition to OF ──
+        ("TB-1", f"okay confession... I just {activity} and I'm lying in bed and this convo is making me feel some type of way", None, "teasing"),
         ("TB-2", "like you're giving me butterflies and that doesn't happen", "Wait for reply.", "teasing"),
         ("TB-3", "you know what, I want to show you something, I have a page where I post exclusive stuff", "TRANSITION to OF. Natural.", "teasing"),
         ("TB-4", "it's free to follow, no pressure, but I think you'd really like what I post there", "Send OF link. Wait for them to subscribe.", "teasing"),
-        ("TB-5", "you're here! okay hold on let me send you something special for coming over", "SEND PPV 0 — FREE teaser. Wait for reply. Silent 3 min → NR Waves.", "ppv"),
+        ("TB-5", f"you're here! okay hold on let me send you something special for coming over {pet}", "SEND PPV 0 — FREE teaser. Wait for reply. Silent 3 min → NR Waves.", "ppv"),
 
         # ── Sexting Phase 1 → PPV 1 ──
-        ("S1-1", f"mmm you liked that? I'm already getting {wet} because of you", "Wait for reply.", "sext"),
-        ("S1-2", f"my body is reacting to everything you say and {self_touch}... this is your fault", "React to what they say.", "sext"),
+        ("S1-1", f"mmm you liked that? my body is already reacting to you... I can feel myself getting {wet} right now", "Wait for reply.", "sext"),
+        ("S1-2", f"{body_react} and {self_touch}... this is your fault {pet}", "React to what they say.", "sext"),
         ("S1-3", "one sec", "WAIT 2-3 MIN", "wait"),
-        ("S1-4", "I want to show you what you're doing to me", "SEND PPV 1 — $12. Bought → continue. Silent 3 min → NR Waves.", "ppv"),
+        ("S1-4", "I want to show you what you're doing to me", f"SEND PPV 1 — $12 (teasing). Bought → continue. Silent 3 min → NR Waves. 'I never do this' — ONE TIME.", "ppv"),
 
         # ── Sexting Phase 2 → PPV 2 ──
-        ("S1-5", "wow... okay I need a second after that", "Wait for reply.", "sext"),
-        ("S1-6", f"you have no idea how {wet} I am rn, I've never been like this with someone from a dating app", "ONE TIME 'never done this'.", "sext"),
-        ("S1-7", "hold on", "WAIT 2-3 MIN", "wait"),
-        ("S1-8", "you need to see this right now", "SEND PPV 2 — $25. Bought → continue. Silent 3 min → NR Waves.", "ppv"),
+        ("S1-5", "wow... okay I need a second after that", "Wait for reply. Brief cooldown.", "sext"),
+        ("S1-6", f"I've never been this {wet} from someone I met on an app before... you're doing something to me", None, "sext"),
+        ("S1-7", f"I can't stop touching myself and it's all because of you {pet}", "React to what they said.", "sext"),
+        ("S1-8", "hold on", "WAIT 2-3 MIN", "wait"),
+        ("S1-9", "you need to see this right now", "SEND PPV 2 — $25 (more explicit). Bought → continue. Silent 3 min → NR Waves.", "ppv"),
 
         # ── Sexting Phase 3 → PPV 3 ──
-        ("S1-9", "fuck that was intense", "Wait for reply.", "sext"),
-        ("S1-10", f"I can't stop, I need you to watch me {cum_word}", None, "sext"),
-        ("S1-11", "give me a second", "WAIT 2-3 MIN", "wait"),
-        ("S1-12", "okay I did something even crazier, you're the only one seeing this", "SEND PPV 3 — $35. Bought → continue. Silent 3 min → NR Waves.", "ppv"),
+        ("S1-10", f"oh fuck {pet} I can't stop", "Wait for reply. NO cooldown.", "sext"),
+        ("S1-11", f"I'm {touch_deep} and my legs are shaking... I can feel myself getting close", None, "sext"),
+        ("S1-12", "I need you to see what you're doing to me right now", None, "sext"),
+        ("S1-13", "one second", "WAIT 2-3 MIN", "wait"),
+        ("S1-14", "you need to see this... I've never been like this before", "SEND PPV 3 — $40 (very explicit). Bought → continue. Silent 3 min → NR Waves.", "ppv"),
 
         # ── Sexting Phase 4 → PPV 4 ──
-        ("S1-13", "oh my god I can't believe I just did that for someone I met on an app", "Wait for reply.", "sext"),
-        ("S1-14", "you make me lose all control", None, "sext"),
-        ("S1-15", "wait", "WAIT 2-3 MIN", "wait"),
-        ("S1-16", "this is the craziest thing I've ever recorded, you need to see it", "SEND PPV 4 — $50. Bought → continue. Silent 3 min → NR Waves.", "ppv"),
+        ("S1-15", f"oh my god {cum_desc} and I can't stop", "Wait for reply.", "sext"),
+        ("S1-16", f"I'm right there {pet}... I need you watching when this happens", None, "sext"),
+        ("S1-17", f"I'm {climax}", None, "sext"),
+        ("S1-18", "wait", "WAIT 1-2 MIN", "wait"),
+        ("S1-19", f"watch what happens {pet}", "SEND PPV 4 — $55 (full climax). Bought → Aftercare. Silent → NR Waves.", "ppv"),
 
         # ── Aftercare ──
-        ("AC-1", "oh my god that was... I've never felt like that before", "AFTERCARE. No selling.", "aftercare"),
-        ("AC-2", "you're something else, I mean it. we should definitely talk again", "SEED. End naturally.", "aftercare"),
+        ("AC-1", "oh my god that was... wow, I can't believe that just happened with someone from a dating app", None, "aftercare"),
+        ("AC-2", f"you're actually different from everyone else on there {pet}. I mean it", "Mention something specific. KEEP TALKING. NEVER say goodbye.", "aftercare"),
     ]
 
     return journey
 
 
-def _build_nr_waves(gender):
-    """Build NR (No-Response) waves."""
+def _build_nr_waves(info):
+    """Build NR (No-Response) waves with model voice."""
+    pet = info.get("voice_pet_names", "babe, baby").split(",")[0].strip()
     return [
         ("NR-W1", "helloooo", "Send 2-3 min after PPV. Ping.", "sext"),
-        ("NR-W2", "I have something to show you but you're leaving me on read...", "Send 3-5 min later. Curiosity.", "sext"),
+        ("NR-W2", f"I have something to show you but you're leaving me on read {pet}...", "Send 3-5 min later. Curiosity.", "sext"),
         ("NR-W3", "fine I'll just keep this to myself then", "Send 5-10 min later. Takeaway.", "sext"),
-        ("NR-W4", "miss talking to you, where'd you go?", "Send 15-30 min later. Warm close.", "sext"),
+        ("NR-W4", f"miss talking to you {pet}, where'd you go?", "Send 15-30 min later. Warm close.", "sext"),
         ("NR-W5", "I made something special and you're the only one I want to share it with, hmu when you're free", "Send 2-6 hrs later. New convo hook.", "sext"),
     ]
 
 
 def _build_personal_info(name, age, location, nationality, job, interests, physical, special_notes):
-    """Build personal info responses."""
-    interest_str = ", ".join(interests[:3]) if interests else "TBD"
+    """Build personal info responses with real model data."""
+    interest_str = ", ".join(interests[:3]) if isinstance(interests, list) and interests else "hanging out and being lazy"
+
+    # Parse extra context from special_notes and personality
+    # Job/profession handling
+    if job and job.lower() not in ("onlyfans model", "tbd", "unknown", ""):
+        profession_msg = f"I do content creation full time, before this I was doing {job.lower()}"
+    else:
+        profession_msg = "I do content creation full time, it started as a side thing but now it's my whole life"
+
+    # Countries
+    countries_parsed = ""
+    if special_notes:
+        for line in special_notes.split("\n"):
+            if "countr" in line.lower() or "travel" in line.lower():
+                countries_parsed = line.strip()
+                break
+
+    if countries_parsed:
+        countries_msg = f"I've been to a few places, {countries_parsed}"
+    else:
+        countries_msg = "I haven't traveled much yet but it's on my list for sure"
+
     info = [
         ("Age", f"I'm {age}, still figuring life out haha", None),
         ("Location", f"I'm in {location} but I don't really like sharing too many details about where exactly", "NEVER give specific neighborhood or address."),
-        ("Profession", f"I do content creation full time, before this I [PREVIOUS JOB]", "PERSONALIZE previous job if known."),
-        ("Hobbies", f"I'm really into {interest_str}, that's pretty much my life outside of this", "PERSONALIZE from model interests."),
-        ("Countries", f"I've been to [COUNTRIES] but I want to travel more", "PERSONALIZE from model data."),
+        ("Profession", profession_msg, None),
+        ("Hobbies", f"I'm really into {interest_str}, that's pretty much my life outside of this", None),
+        ("Countries", countries_msg, None),
         ("Relationship", "I'm single, haven't found the right person yet", None),
-        ("Food", "honestly I eat everything but [FAVORITE FOOD] is my weakness", "PERSONALIZE."),
-        ("Pets", "I don't have any pets right now but I want one", "PERSONALIZE if model has pets."),
-        ("Languages", "just English for now, I want to learn Spanish though", "PERSONALIZE from model languages."),
-        ("Smoking", "not really my thing", "PERSONALIZE."),
     ]
     return info
 
 
 def _build_positive_spin(name, gender, interests):
-    """Build positive spin responses."""
+    """Build positive spin responses with model city."""
+    origin = name  # Will be overridden by city below
+    city = "here"
+    # interests might contain location hints, but we use it for hobbies
     spins = [
         ("Age40Plus", "omg I actually love older guys, they know what they want and that's so attractive", None) if gender == "female" else
         ("Age40Plus", "age is just a number honestly, I've always gotten along better with mature people", None),
@@ -477,11 +627,12 @@ def _build_positive_spin(name, gender, interests):
         
         ("CoolJob", "wait that's actually really cool, tell me more about that", None),
         
-        ("Fit", "oh you work out? okay I see you, that's hot", None),
+        ("Fit", "oh you work out? okay I see you, that's hot", None) if gender == "female" else
+        ("Fit", "oh you work out? that's awesome, I can respect that grind", None),
         
         ("NotFit", "I don't care about that stuff honestly, it's about the vibe not the body", None),
         
-        ("SameCity", f"wait you're in [CITY] too?? that's crazy", "PERSONALIZE with model city."),
+        ("SameCity", "wait you're close to me?? that's crazy, small world", "Add name of model's city if sub is from same area."),
         
         ("FarAway", "I love that you're far away, there's something exciting about connecting with someone from a different world", None),
     ]

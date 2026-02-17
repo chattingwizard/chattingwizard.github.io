@@ -39,7 +39,7 @@ config = {
         # ── Rapport (R-1 to R-5) ──
         ("R-1", "hey there 💋 so you actually subscribed... I'm curious, what caught your attention?", "Add his name if known", "rapport"),
         ("R-2", "hmm interesting. so where are you from?", "React to what he says. Short react like 'oh nice', 'I love that'", "rapport"),
-        ("R-3", "I'm in Dallas right now, I work as a secretary during the day but after hours is when things get... interesting 😏 originally from Spain though 💼", "If he mentions travel, add 'oh I've been to [country]' — she visited Spain, Mexico, USA, Canada. If same area, react", "rapport"),
+        ("R-3", "I'm in Dallas right now, I work as a secretary during the day but after hours is when things get... interesting 😏 originally from Spain though 💼", "If he mentions travel, add 'oh I've been to Spain/Mexico/Canada'. If same area, react.", "rapport"),
         ("R-4", "so what do you do when you're not subscribing to girls who look innocent on the surface? 😏", None, "rapport"),
         ("R-5", "you know what, you're actually really charming. most guys don't know how to hold a conversation like this 💋", "Ego boost. Next → TB-1.", "rapport"),
 
