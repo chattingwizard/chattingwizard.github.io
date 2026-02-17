@@ -115,16 +115,19 @@ def notify_slack(model_name, channel=SLACK_CHANNEL, notify_rei=True):
     """Notify team on Slack that scripts are ready."""
     client, resolve_channel_fn, _, resolve_user_id = get_slack_client()
     from slack_sdk.errors import SlackApiError
+    from urllib.parse import quote
 
-    folder = model_name.lower().replace(" ", "")
+    clean_name = model_name.strip()
+    folder = clean_name.lower().replace(" ", "")
     url = f"https://chattingwizard.github.io/{folder}/"
+    xlsx_filename = quote(f"{clean_name}_Complete_Infloww.xlsx")
 
     msg = (
-        f"Scripts ready for {model_name}! "
+        f"Scripts ready for {clean_name}! "
         f"All XLSX and HTML guides have been generated and deployed.\n\n"
         f"Dashboard: https://chattingwizard.github.io/\n"
         f"Model page: {url}\n"
-        f"XLSX: {url}{model_name}_Complete_Infloww.xlsx\n\n"
+        f"XLSX: {url}{xlsx_filename}\n\n"
         f"Rei — please import the XLSX into Infloww and assign content to each PPV."
     )
 
