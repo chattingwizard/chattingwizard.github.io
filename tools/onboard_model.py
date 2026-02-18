@@ -30,6 +30,8 @@ import os
 import sys
 import re
 import json
+import time
+import subprocess
 from datetime import datetime, timedelta
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -111,6 +113,89 @@ def check_slack_onboarding(days_back=7, verbose=True):
     return onboarding_msgs
 
 
+def git_push(commit_msg="Update scripts"):
+    """Stage all changes, commit, and push to GitHub."""
+    try:
+        subprocess.run(["git", "add", "-A"], cwd=BASE_DIR, check=True, capture_output=True)
+        subprocess.run(
+            ["git", "commit", "--no-verify", "-m", commit_msg],
+            cwd=BASE_DIR, check=True, capture_output=True
+        )
+        subprocess.run(
+            ["git", "push", "origin", "main"],
+            cwd=BASE_DIR, check=True, capture_output=True, timeout=60
+        )
+        print(f"[GIT] Pushed: {commit_msg}")
+        return True
+    except subprocess.CalledProcessError as e:
+        stderr = e.stderr.decode(errors="replace") if e.stderr else ""
+        if "nothing to commit" in stderr:
+            print("[GIT] Nothing to commit")
+            return True
+        print(f"[GIT ERROR] {stderr[:200]}")
+        return False
+    except subprocess.TimeoutExpired:
+        print("[GIT ERROR] Push timed out")
+        return False
+
+
+def wait_for_deploy(timeout=120, poll_interval=10):
+    """Wait for GitHub Pages build to succeed after a push.
+    Returns True if deploy succeeded, False if failed/timeout."""
+    print("[DEPLOY] Waiting for GitHub Pages build...")
+    start = time.time()
+    last_built_at = None
+
+    # Get the current latest build timestamp
+    try:
+        result = subprocess.run(
+            ["gh", "api", "repos/chattingwizard/chattingwizard.github.io/pages/builds",
+             "--jq", ".[0] | .created_at"],
+            capture_output=True, text=True, cwd=BASE_DIR, timeout=15
+        )
+        last_built_at = result.stdout.strip()
+    except Exception:
+        pass
+
+    while time.time() - start < timeout:
+        time.sleep(poll_interval)
+        try:
+            result = subprocess.run(
+                ["gh", "api", "repos/chattingwizard/chattingwizard.github.io/pages/builds",
+                 "--jq", ".[0] | {status, created_at, error: .error.message}"],
+                capture_output=True, text=True, cwd=BASE_DIR, timeout=15
+            )
+            build = json.loads(result.stdout.strip())
+
+            # Skip if it's still the old build
+            if build.get("created_at") == last_built_at and build.get("status") == "built":
+                continue
+
+            if build.get("status") == "built":
+                elapsed = int(time.time() - start)
+                print(f"[DEPLOY] Build succeeded in {elapsed}s")
+                return True
+            elif build.get("status") == "errored":
+                print(f"[DEPLOY] Build FAILED: {build.get('error', 'unknown')}")
+                # Auto-retry: trigger a new build
+                print("[DEPLOY] Triggering retry build...")
+                subprocess.run(
+                    ["gh", "api", "-X", "POST",
+                     "repos/chattingwizard/chattingwizard.github.io/pages/builds"],
+                    capture_output=True, cwd=BASE_DIR, timeout=15
+                )
+                last_built_at = build.get("created_at")
+                continue
+            else:
+                elapsed = int(time.time() - start)
+                print(f"[DEPLOY] Still building... ({elapsed}s)")
+        except Exception as e:
+            print(f"[DEPLOY] Check failed: {e}")
+
+    print(f"[DEPLOY] Timeout after {timeout}s — check manually")
+    return False
+
+
 def notify_slack(model_name, channel=SLACK_CHANNEL, notify_rei=True):
     """Notify team on Slack that scripts are ready."""
     client, resolve_channel_fn, _, resolve_user_id = get_slack_client()
@@ -120,7 +205,7 @@ def notify_slack(model_name, channel=SLACK_CHANNEL, notify_rei=True):
     clean_name = model_name.strip()
     folder = clean_name.lower().replace(" ", "")
     url = f"https://chattingwizard.github.io/{folder}/"
-    xlsx_filename = quote(f"{clean_name}_Complete_Infloww.xlsx")
+    xlsx_filename = f"{clean_name.replace(' ', '_')}_Complete_Infloww.xlsx"
 
     msg = (
         f"Scripts ready for {clean_name}! "
@@ -893,16 +978,27 @@ def cmd_onboard(args):
         # Step 4: Update dashboard
         update_dashboard()
 
-        # Step 5: Notify Rei
+        # Step 5: Push to GitHub + verify deploy
+        clean_name = model_name.strip()
+        pushed = git_push(f"Onboard {clean_name}: scripts + dashboard")
+        deployed = False
+        if pushed:
+            deployed = wait_for_deploy(timeout=120)
+
+        # Step 6: Notify Rei (only after successful deploy)
         if not args.no_notify:
-            notify_slack(model_name)
+            if deployed:
+                notify_slack(model_name)
+            else:
+                print(f"[WARN] Deploy not confirmed — skipping Slack notification. Check manually.")
 
         print(f"\n{'='*60}")
         print(f"[DONE] {model_name} fully onboarded!")
         print(f"  Config: tools/models/{folder}.py")
         print(f"  Web: {folder}/")
-        print(f"  XLSX: {folder}/{model_name}_Complete_Infloww.xlsx")
+        print(f"  XLSX: {folder}/{clean_name}_Complete_Infloww.xlsx")
         print(f"  Objections: {folder}/objections.html")
+        print(f"  Deployed: {'YES' if deployed else 'PENDING — check GitHub Pages'}")
         print(f"{'='*60}")
     else:
         print(f"[ERROR] Generation failed for {model_name}")

@@ -8,3 +8,133 @@
 [2026-02-14 15:31:43] [INFO]   Status: '' (not done yet)
 [2026-02-14 15:31:43] [INFO] WATCHER CYCLE END
 [2026-02-14 15:31:43] [INFO] 
+[2026-02-14 15:37:02] [INFO] Watcher started (loop=0s)
+[2026-02-14 15:37:02] [INFO] ==================================================
+[2026-02-14 15:37:02] [INFO] WATCHER CYCLE START
+[2026-02-14 15:37:02] [INFO] --- Checking onboardings ---
+[2026-02-14 15:37:04] [INFO] No new onboardings
+[2026-02-14 15:37:04] [INFO] --- Checking watched tasks ---
+[2026-02-14 15:37:04] [INFO] Checking task: List content sets per model (2721603979)
+[2026-02-14 15:37:05] [INFO]   Status: '' (not done yet)
+[2026-02-14 15:37:05] [INFO] WATCHER CYCLE END
+[2026-02-14 15:37:05] [INFO] 
+[2026-02-14 15:42:02] [INFO] Watcher started (loop=0s)
+[2026-02-14 15:42:02] [INFO] ==================================================
+[2026-02-14 15:42:02] [INFO] WATCHER CYCLE START
+[2026-02-14 15:42:02] [INFO] --- Checking onboardings ---
+[2026-02-14 15:42:04] [INFO] No new onboardings
+[2026-02-14 15:42:04] [INFO] --- Checking watched tasks ---
+[2026-02-14 15:42:04] [INFO] Checking task: List content sets per model (2721603979)
+[2026-02-14 15:42:06] [INFO]   Status: '' (not done yet)
+[2026-02-14 15:42:06] [INFO] WATCHER CYCLE END
+[2026-02-14 15:42:06] [INFO] 
+[2026-02-14 15:47:02] [INFO] Watcher started (loop=0s)
+[2026-02-14 15:47:02] [INFO] ==================================================
+[2026-02-14 15:47:02] [INFO] WATCHER CYCLE START
+[2026-02-14 15:47:02] [INFO] --- Checking onboardings ---
+[2026-02-14 15:47:05] [INFO] No new onboardings
+[2026-02-14 15:47:05] [INFO] --- Checking watched tasks ---
+[2026-02-14 15:47:05] [INFO] Checking task: List content sets per model (2721603979)
+[2026-02-14 15:47:06] [INFO]   Status: '' (not done yet)
+[2026-02-14 15:47:06] [INFO] WATCHER CYCLE END
+[2026-02-14 15:47:06] [INFO] 
+[2026-02-14 15:52:02] [INFO] Watcher started (loop=0s)
+[2026-02-14 15:52:02] [INFO] ==================================================
+[2026-02-14 15:52:02] [INFO] WATCHER CYCLE START
+[2026-02-14 15:52:02] [INFO] --- Checking onboardings ---
+[2026-02-14 15:52:04] [INFO] No new onboardings
+[2026-02-14 15:52:04] [INFO] --- Checking watched tasks ---
+[2026-02-14 15:52:04] [INFO] Checking task: List content sets per model (2721603979)
+[2026-02-14 15:52:07] [INFO]   Status: '' (not done yet)
+[2026-02-14 15:52:07] [INFO] WATCHER CYCLE END
+[2026-02-14 15:52:07] [INFO] 
+[2026-02-14 15:57:02] [INFO] Watcher started (loop=0s)
+[2026-02-14 15:57:02] [INFO] ==================================================
+[2026-02-14 15:57:02] [INFO] WATCHER CYCLE START
+[2026-02-14 15:57:02] [INFO] --- Checking onboardings ---
+[2026-02-14 15:57:05] [INFO] No new onboardings
+[2026-02-14 15:57:05] [INFO] --- Checking watched tasks ---
+[2026-02-14 15:57:05] [INFO] Checking task: List content sets per model (2721603979)
+[2026-02-14 15:57:07] [INFO]   Status: '' (not done yet)
+[2026-02-14 15:57:07] [INFO] WATCHER CYCLE END
+[2026-02-14 15:57:07] [INFO] 
+[2026-02-14 16:02:04] [INFO] Watcher started (loop=0s)
+[2026-02-14 16:02:04] [INFO] ==================================================
+[2026-02-14 16:02:04] [INFO] WATCHER CYCLE START
+[2026-02-14 16:02:04] [INFO] --- Checking onboardings ---
+[2026-02-14 16:02:52] [ERROR] Error checking Monday onboardings: HTTPSConnectionPool(host='api.monday.com', port=443): Max retries exceeded with url: /v2 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1032)')))
+[2026-02-14 16:02:53] [INFO] --- Checking watched tasks ---
+[2026-02-14 16:02:53] [INFO] Checking task: List content sets per model (2721603979)
+[2026-02-14 16:03:56] [ERROR] Task check error: HTTPSConnectionPool(host='api.monday.com', port=443): Max retries exceeded with url: /v2 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1032)')))
+[2026-02-14 16:03:56] [INFO] WATCHER CYCLE END
+[2026-02-14 16:03:56] [INFO] 
+[2026-02-14 16:07:03] [INFO] Watcher started (loop=0s)
+[2026-02-14 16:07:03] [INFO] ==================================================
+[2026-02-14 16:07:03] [INFO] WATCHER CYCLE START
+[2026-02-14 16:07:03] [INFO] --- Checking onboardings ---
+[2026-02-14 16:07:07] [INFO] No new onboardings
+[2026-02-14 16:07:07] [INFO] --- Checking watched tasks ---
+[2026-02-14 16:07:07] [INFO] Checking task: List content sets per model (2721603979)
+[2026-02-14 16:07:30] [INFO]   Status: '' (not done yet)
+[2026-02-14 16:07:42] [INFO] WATCHER CYCLE END
+[2026-02-14 16:07:48] [INFO] 
+[2026-02-14 16:12:04] [INFO] Watcher started (loop=0s)
+[2026-02-14 16:12:04] [INFO] ==================================================
+[2026-02-14 16:12:04] [INFO] WATCHER CYCLE START
+[2026-02-14 16:12:04] [INFO] --- Checking onboardings ---
+[2026-02-14 16:12:17] [INFO] No new onboardings
+[2026-02-14 16:12:17] [INFO] --- Checking watched tasks ---
+[2026-02-14 16:12:17] [INFO] Checking task: List content sets per model (2721603979)
+[2026-02-14 16:12:20] [INFO]   Status: '' (not done yet)
+[2026-02-14 16:12:20] [INFO] WATCHER CYCLE END
+[2026-02-14 16:12:20] [INFO] 
+[2026-02-14 16:17:02] [INFO] Watcher started (loop=0s)
+[2026-02-14 16:17:02] [INFO] ==================================================
+[2026-02-14 16:17:02] [INFO] WATCHER CYCLE START
+[2026-02-14 16:17:02] [INFO] --- Checking onboardings ---
+[2026-02-14 16:17:04] [INFO] No new onboardings
+[2026-02-14 16:17:04] [INFO] --- Checking watched tasks ---
+[2026-02-14 16:17:04] [INFO] Checking task: List content sets per model (2721603979)
+[2026-02-14 16:17:06] [INFO]   Status: '' (not done yet)
+[2026-02-14 16:17:06] [INFO] WATCHER CYCLE END
+[2026-02-14 16:17:06] [INFO] 
+[2026-02-14 16:22:02] [INFO] Watcher started (loop=0s)
+[2026-02-14 16:22:02] [INFO] ==================================================
+[2026-02-14 16:22:02] [INFO] WATCHER CYCLE START
+[2026-02-14 16:22:02] [INFO] --- Checking onboardings ---
+[2026-02-14 16:22:05] [INFO] No new onboardings
+[2026-02-14 16:22:05] [INFO] --- Checking watched tasks ---
+[2026-02-14 16:22:05] [INFO] Checking task: List content sets per model (2721603979)
+[2026-02-14 16:22:07] [INFO]   Status: '' (not done yet)
+[2026-02-14 16:22:07] [INFO] WATCHER CYCLE END
+[2026-02-14 16:22:07] [INFO] 
+[2026-02-14 16:27:02] [INFO] Watcher started (loop=0s)
+[2026-02-14 16:27:02] [INFO] ==================================================
+[2026-02-14 16:27:02] [INFO] WATCHER CYCLE START
+[2026-02-14 16:27:02] [INFO] --- Checking onboardings ---
+[2026-02-14 16:27:04] [INFO] No new onboardings
+[2026-02-14 16:27:04] [INFO] --- Checking watched tasks ---
+[2026-02-14 16:27:04] [INFO] Checking task: List content sets per model (2721603979)
+[2026-02-14 16:27:07] [INFO]   Status: 'working on it' (not done yet)
+[2026-02-14 16:27:07] [INFO] WATCHER CYCLE END
+[2026-02-14 16:27:07] [INFO] 
+[2026-02-14 16:32:02] [INFO] Watcher started (loop=0s)
+[2026-02-14 16:32:02] [INFO] ==================================================
+[2026-02-14 16:32:02] [INFO] WATCHER CYCLE START
+[2026-02-14 16:32:02] [INFO] --- Checking onboardings ---
+[2026-02-14 16:32:04] [INFO] No new onboardings
+[2026-02-14 16:32:04] [INFO] --- Checking watched tasks ---
+[2026-02-14 16:32:04] [INFO] Checking task: List content sets per model (2721603979)
+[2026-02-14 16:32:06] [INFO]   Status: 'working on it' (not done yet)
+[2026-02-14 16:32:06] [INFO] WATCHER CYCLE END
+[2026-02-14 16:32:06] [INFO] 
+[2026-02-14 16:37:02] [INFO] Watcher started (loop=0s)
+[2026-02-14 16:37:02] [INFO] ==================================================
+[2026-02-14 16:37:02] [INFO] WATCHER CYCLE START
+[2026-02-14 16:37:02] [INFO] --- Checking onboardings ---
+[2026-02-14 16:37:04] [INFO] No new onboardings
+[2026-02-14 16:37:04] [INFO] --- Checking watched tasks ---
+[2026-02-14 16:37:04] [INFO] Checking task: List content sets per model (2721603979)
+[2026-02-14 16:37:06] [INFO]   Status: 'working on it' (not done yet)
+[2026-02-14 16:37:06] [INFO] WATCHER CYCLE END
+[2026-02-14 16:37:06] [INFO] 

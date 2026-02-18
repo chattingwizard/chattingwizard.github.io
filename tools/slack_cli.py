@@ -43,9 +43,15 @@ Env var required: SLACK_USER_TOKEN (xoxp-...)
 """
 
 import argparse
+import io
 import os
 import sys
 from datetime import datetime
+
+# Fix Windows console encoding to handle UTF-8 output (emojis, accents, arrows, etc.)
+if sys.platform == "win32":
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding="utf-8", errors="replace")
 
 try:
     from slack_sdk import WebClient
@@ -213,11 +219,20 @@ def cmd_read(args):
         sys.exit(1)
 
 
+def _resolve_message(args):
+    """Read message from --file (UTF-8) if provided, otherwise use the message argument."""
+    if getattr(args, "file", None):
+        with open(args.file, "r", encoding="utf-8") as f:
+            return f.read().strip()
+    return args.message
+
+
 def cmd_send(args):
     client = get_client()
     channel_id = resolve_channel(client, args.channel)
+    message = _resolve_message(args)
     try:
-        client.chat_postMessage(channel=channel_id, text=args.message)
+        client.chat_postMessage(channel=channel_id, text=message)
         print(f"[OK] Message sent to #{args.channel} (as you)")
     except SlackApiError as e:
         print(f"Error: {e.response['error']}")
@@ -268,6 +283,7 @@ def cmd_read_dm(args):
 def cmd_send_dm(args):
     client = get_client()
     user_id = resolve_user_id(client, args.user)
+    message = _resolve_message(args)
     try:
         result = client.conversations_open(users=[user_id])
         dm_channel = result["channel"]["id"]
@@ -275,7 +291,7 @@ def cmd_send_dm(args):
         print(f"Error opening DM: {e.response['error']}")
         sys.exit(1)
     try:
-        client.chat_postMessage(channel=dm_channel, text=args.message)
+        client.chat_postMessage(channel=dm_channel, text=message)
         other_name = resolve_user_name(client, user_id)
         print(f"[OK] DM sent to {other_name} (as you)")
     except SlackApiError as e:
@@ -558,7 +574,8 @@ def main():
 
     p = sub.add_parser("send", help="Send message to channel")
     p.add_argument("channel", help="Channel name or ID")
-    p.add_argument("message")
+    p.add_argument("message", nargs="?", default="")
+    p.add_argument("--file", help="Read message from a UTF-8 text file instead of argument")
 
     sub.add_parser("dms", help="List DMs")
 
@@ -568,7 +585,8 @@ def main():
 
     p = sub.add_parser("send-dm", help="Send DM")
     p.add_argument("user", help="User name or ID")
-    p.add_argument("message")
+    p.add_argument("message", nargs="?", default="")
+    p.add_argument("--file", help="Read message from a UTF-8 text file instead of argument")
 
     sub.add_parser("users", help="List users")
 

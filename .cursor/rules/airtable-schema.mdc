@@ -32,7 +32,7 @@ alwaysApply: true
 
 ### Reportes (por rol)
 - **Shift Report** (`tblHRpUH8WUQqSJOr`) — Reporte fin de turno de chatters. ✅ Muy activa.
-- **🔵CHM Shift/Weekly Report** — Reportes del Chatter Manager (Ryzel).
+- **🔵CHM Shift/Weekly Report** — Reportes del Chatter Manager (Rycel).
 - **🟡TL Live Assistance Report** (`tblzj0mONmQUvuQqI`) — TLs ayudando chatters en vivo. ✅ Muy activa.
 - **🟡TL Week Report** — Reporte semanal de TLs.
 - **🟣SM Weekly Shift Report** — Reporte del Script Manager.

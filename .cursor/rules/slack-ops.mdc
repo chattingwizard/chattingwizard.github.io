@@ -1,0 +1,85 @@
+# Slack Operations
+
+## Access
+You have full access to the Chatting Wizard Slack workspace as Santi Jiang (owner) via `tools/slack_cli.py`. The token is in the environment (`SLACK_USER_TOKEN`). All actions execute as Santi's account, not a bot.
+
+## CLI Reference
+Run commands with: `python3 tools/slack_cli.py <command>`
+
+### Reading
+- `auth-test` — Verify connection
+- `channels` — List all channels (public + private)
+- `read <channel> [--limit N]` — Read recent messages from a channel (name or ID)
+- `dms` — List DM conversations
+- `read-dm <user> [--limit N]` — Read DMs with a user (by name or ID)
+- `users` — List all workspace users
+- `user-info <user>` — Detailed info on a user
+- `search <query> [--limit N]` — Search messages across Slack
+- `files <channel> [--limit N]` — List files in a channel
+
+### Writing
+- `send <channel> <message>` — Send message to a channel as Santi
+- `send-dm <user> <message>` — Send DM to a user as Santi
+- `create-channel <name> [--private]` — Create a new channel
+- `archive-channel <channel>` — Archive a channel
+- `rename-channel <channel> <new_name>` — Rename a channel
+- `set-topic <channel> <topic>` — Set channel topic
+- `set-purpose <channel> <purpose>` — Set channel purpose
+- `invite <channel> <user>` — Invite user to a channel
+- `kick <channel> <user>` — Remove user from a channel
+- `react <channel> <timestamp> <emoji>` — Add reaction to a message
+- `pin <channel> <timestamp>` — Pin a message
+- `unpin <channel> <timestamp>` — Unpin a message
+- `upload <channel> <filepath> [--title T]` — Upload a file
+- `remind <user> <text> <time>` — Set a reminder
+
+## User Resolution
+Users can be referenced by real name, display name, or Slack user ID. The CLI resolves names automatically. Example: `send-dm "Carlos Ribas" "Hello"`.
+
+## Channel Resolution
+Channels can be referenced by name (with or without #) or channel ID. Example: `read announcements` or `read #announcements`.
+
+## Message Formatting Rules
+
+**Assume the reader has zero context and low attention span.** Write for people who skim.
+
+1. **Short and scannable** — No walls of text. Max 2-3 words per line where possible.
+2. **One idea per line** — Break everything into bite-sized pieces.
+3. **Emojis as visual anchors** — Use emojis at the start of each section to create visual structure. :wave: :clipboard: :point_right: :white_check_mark: :x: etc.
+4. **Bold for key words** — Use `*bold*` for anything the reader MUST notice.
+5. **Arrows for actions** — Use `→` to show cause/effect or "what to do".
+6. **Blank lines between sections** — Generous whitespace. Never stack lines without a break.
+7. **No long paragraphs** — If a sentence is longer than ~12 words, break it.
+8. **Good/bad examples** — When explaining something, show a concrete example of what they'll see.
+9. **End with a clear CTA** — What should they DO? Or "that's it" if nothing.
+10. **Language** — Match the team's working language (English for TLs/Rycel, Spanish for Pau).
+11. **Tone** — Friendly, direct, zero corporate speak. Like a WhatsApp to a colleague.
+
+### Bad example:
+```
+Hey team, starting today we have implemented a new coaching compliance tracking system that will automatically check whether each Team Leader completed their recommended coaching calls during their shift. The system runs at the end of each shift and posts a report to this channel. Please review these reports and take action if needed.
+```
+
+### Good example:
+```
+:wave: Hey team
+
+New thing starting today :point_down:
+
+:clipboard:  *Coaching compliance report*
+→  Automatic check after each TL's shift
+→  Shows if they did their coaching calls
+
+:white_check_mark:  Good = all calls done
+:x:  Bad = missed some calls
+
+:point_right:  *Your action:* follow up with TLs who keep missing
+
+That's it :raised_hands:
+```
+
+## General Guidelines
+- When asked to "read" a channel or DM, use the `read` or `read-dm` command and summarize the content.
+- When composing messages, ALWAYS follow the formatting rules above.
+- For channel/user context, see `context/channels.md` and `context/company.md`.
+- Always confirm before sending messages to channels with many members (>50), unless explicitly told to send.

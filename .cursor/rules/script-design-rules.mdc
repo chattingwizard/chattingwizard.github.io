@@ -1,0 +1,102 @@
+---
+description: Script design rules — Objection Handling, aftercare, personalization, branch logic. Applies to ALL models.
+alwaysApply: true
+---
+
+# Script Design Rules — Chatting Wizard
+
+## Aftercare Rule (CRITICAL)
+- NEVER close the conversation in aftercare. No goodbyes, no "I need to sleep."
+- Aftercare = deepen connection, build GFE experience. Chatter stays warm and girlfriend/boyfriend-like.
+- Re-engagement messages only kick in if things die naturally or the next day.
+- Applies to ALL models, ALL scripts.
+
+## Objection Handling — 3 Categories
+
+### A. OBJECTION HANDLING (PPV/payment resistance)
+Fan doesn't want to buy:
+- OBJ-PRICE — "That's too expensive"
+- OBJ-DISCOUNT — "Can I get a discount?"
+- OBJ-FREE — "Send it for free"
+- OBJ-NOMONEY — "I don't have money"
+- OBJ-NOPPV — "I don't buy PPVs" (identity-based, not price)
+- OBJ-CARD — "My card doesn't work"
+- OBJ-IGNORE — Fan ignores PPV entirely
+
+### B. RESISTANCE HANDLING (flow/direction resistance)
+Fan resists where the conversation is going:
+- RES-NOSEX — "I don't want to sext"
+- RES-OFFTOPIC — Goes off topic
+- RES-REAL — "Can we meet in real life?"
+- RES-VOICE — "Send me a voice note / video call"
+- RES-CUSTOM-YES / RES-CUSTOM-NO — Custom content response
+- RES-DONE — "I already came" / post-climax
+
+### C. SITUATIONAL SCRIPTS (specific moments)
+- SIT-CUM — Fan is climaxing
+- SIT-DICKPIC — Fan sends dick pic (huge sales opportunity)
+- SIT-HORNY — Fan is already excited
+
+## Branch Rules After Every PPV Drop
+3 possible outcomes:
+1. **Fan BOUGHT** → continue sequence
+2. **Fan SILENT (3+ min)** → NR Wave system (max 5 waves: playful nudge → curiosity hook → emotional pull → scarcity → final attempt). After wave 5 = stop.
+3. **Fan OBJECTS** → Route to appropriate OBJ script
+
+## Persuasion Psychology (Governs ALL OBJ Handling)
+1. Never argue, always redirect
+2. Loss aversion > Gain framing (2x stronger)
+3. Ego is the most powerful lever ("I thought you were different")
+4. Reciprocity creates obligation ("I spent 10 min recording this FOR YOU")
+5. Commitment + consistency ("You've come this far...")
+6. Always alternate positive/negative — never 3 negatives in a row
+7. Every "no" is information about the real resistance type
+
+## Script Personalization (4 Key Moments)
+1. **Rapport** — reference model's life/hobbies
+2. **Teasing Bridge pivot** — physical context connected to THEIR life
+3. **Pre-PPV** — what they do for the fan is special because of who THEY are
+4. **Aftercare** — return to the "real person"
+- **Spot-check test:** read a message out of context — can you tell which model? If not, too generic.
+
+## Note Types in Script UIs
+| Icon | Type | Meaning |
+|------|------|---------|
+| ✏️ | EDIT | Chatter must modify before sending |
+| ⏳ | WAIT | Stop, wait for fan response |
+| 🤖 | AUTO | System handles, chatter does nothing |
+| 💡 | TIP | Context/strategy FYI |
+
+## Infloww: Scripts vs Sequences
+- **Script** = single standalone message, chatter picks manually
+- **Sequence** = chain of scripts, first triggers auto-queue of next
+- Rule of thumb: If chatter needs to READ response → standalone. If 2+ messages regardless of response → sequence.
+- Journey (R → TB → S → AC) = ONE sequence
+- OBJ handling = standalone scripts (chatter evaluates response)
+
+## TPDs Selling Method (Custom Content)
+- T = Teasing (build excitement first)
+- P = Price (drop price while fan is excited)
+- Ds = Distraction Shift (immediately ask a question to redirect attention from price)
+- ALWAYS collect payment BEFORE making the custom
+
+## Dating App Traffic — Meetup Redirect Module
+- TOS rule: NEVER say "meet", "meeting", "meetup", "hook up" on OF
+- Strategy: Never reject meetup idea, never promise, never echo the word. Redirect immediately.
+- After MR → shortened rapport (R-3) → skip TB → straight to S1 (sexting)
+- Meetup Objection Protocol: Max 3 steps, then disengage. Alpha frame.
+
+## Male Creator Script Rules
+- 11 live male creators. Target: gay male fans
+- Tone: masculine, alpha, confident — NOT feminine GFE
+- Pet names: "bro", "dude", "man" — NEVER "baby", "babe", "honey"
+- During sexting: direct commands, fan's actual name, no pet names
+- Emojis: masculine (😏🥵💪🔥), NOT (💕🥰🙈)
+- Dynamic: hot guy in control, fan is the pursuer
+
+## Fan Priority Order (Inbox Queue)
+1. Active sexting (mid-sale)
+2. New subscribers (first 48h)
+3. Whales (big spenders)
+4. Past spenders
+5. Time wasters (lowest)

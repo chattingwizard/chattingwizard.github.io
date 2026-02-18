@@ -1,0 +1,32 @@
+---
+description: Notion integration status — current blocking issues
+alwaysApply: true
+---
+
+# Notion — Status (Feb 14, 2026)
+
+## Current Status: BLOCKED
+
+The Notion API token currently available (`ntn_...`) connects to **Pau's personal workspace**, which is a **frozen copy** of Santi's workspace. It does NOT reflect the live documentation.
+
+## Blocking Action
+- **Santi must create a Notion integration** in HIS workspace (the real one) and share the token
+- Until this is done, any Notion reads will return outdated/frozen content
+
+## Audit Findings (from Pau's frozen copy)
+1. Two duplicate root pages ("Chatting Wizard English")
+2. "How to Chat Like a Wizard" appears 6 times
+3. 8+ documents marked "(changes needed)" or "(NOT FINISHED)"
+4. "GENERAL MANAGEMENT" section completely empty
+5. Language inconsistency (English workspace with Spanish pages)
+6. Outdated workflows (Setter/Closer model no longer used)
+7. Zero Notion databases (everything is flat pages)
+8. No versioning or ownership on any document
+9. Missing: Coaching System docs, KPI definitions, Dashboard guide, Fan Lifecycle Strategy, Monday workflows, escalation procedures
+
+## Proposed New Structure (When Access Available)
+10 sections: Welcome & Company → Roles → Onboarding → SOPs & Workflows → Training → Tools & Platforms → Scripts & Templates → KPIs & Performance → Clients & Models → Archive
+
+## Tool
+- CLI: `tools/notion_cli.py` (exists in Ops Hub)
+- Token env var: `NOTION_TOKEN`

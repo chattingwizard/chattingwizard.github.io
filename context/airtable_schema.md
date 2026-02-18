@@ -311,7 +311,7 @@ La tabla **Chatter** es el hub central. Casi todas las demás tablas se vinculan
 - **ID**: `tblBn3cpMeGd5gIia`
 - **Registros**: 13 | **Campos**: 7
 - **Última actividad**: 2026-02-10 ✅ ACTIVA
-- **Función**: Reporte de turno del Chatter Manager (Ryzel).
+- **Función**: Reporte de turno del Chatter Manager (Rycel).
 - **Campos**: Date, Chatter Manager → Chatter, Key Achievements, Red Flags, Pending Follow-Ups
 
 ### 🔵CHM Weekly Report (Chatter Manager)

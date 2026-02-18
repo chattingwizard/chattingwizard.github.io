@@ -28,20 +28,20 @@ FEMALE_MODELS = [
     {"name": "Faby Monteiro", "folder": "faby", "age": 45, "nationality": "Brazilian", "page": "Paid Page", "traffic": "Other", "xlsx": "Faby_Complete_Infloww.xlsx"},
     {"name": "Irina", "folder": "irina", "age": 23, "nationality": "American/Russian", "page": "Free Page", "traffic": "IG/TikTok", "xlsx": "Irina_Complete_Infloww.xlsx", "tag": "non-explicit"},
     {"name": "Zansi", "folder": "zansi", "age": 26, "nationality": "American", "page": "Free Page", "traffic": "Social Media", "xlsx": "Zansi_Complete_Infloww.xlsx"},
-    {"name": "Adriana Meran", "folder": "adrianameran", "age": 42, "nationality": "Ecuadorian", "page": "Paid Page", "traffic": "Reddit + IG", "xlsx": "Adriana Meran_Complete_Infloww.xlsx"},
+    {"name": "Adriana Meran", "folder": "adrianameran", "age": 42, "nationality": "Ecuadorian", "page": "Paid Page", "traffic": "Reddit + IG", "xlsx": "Adriana_Meran_Complete_Infloww.xlsx"},
 ]
 
 MALE_DATING_APP = [
     {"name": "Max", "folder": "max", "age": 20, "nationality": "Italian", "page": "Paid Page", "traffic": "Dating Apps (Gay)", "xlsx": "Max_Complete_Infloww.xlsx"},
     {"name": "Marco", "folder": "marco", "age": 25, "nationality": "Turkish", "page": "Paid Page", "traffic": "Dating Apps (Gay) + Others", "xlsx": "Marco_Complete_Infloww.xlsx"},
-    {"name": "Lucas Passione", "folder": "lucas", "age": 24, "nationality": "Argentinian", "page": "Paid Page", "traffic": "Dating Apps", "xlsx": "Lucas Passione_Complete_Infloww.xlsx"},
+    {"name": "Lucas Passione", "folder": "lucas", "age": 24, "nationality": "Argentinian", "page": "Paid Page", "traffic": "Dating Apps", "xlsx": "Lucas_Passione_Complete_Infloww.xlsx"},
     {"name": "Liam", "folder": "liam", "age": 20, "nationality": "Argentinian", "page": "Paid Page", "traffic": "Dating Apps + Others", "xlsx": "Liam_Complete_Infloww.xlsx"},
     {"name": "Peter", "folder": "peter", "age": 20, "nationality": "American", "page": "Paid Page", "traffic": "Dating Apps", "xlsx": "Peter_Complete_Infloww.xlsx"},
     {"name": "Damon", "folder": "damon", "age": 24, "nationality": "Argentinian", "page": "Paid Page", "traffic": "Dating Apps + Others", "xlsx": "Damon_Complete_Infloww.xlsx"},
     {"name": "Stefan", "folder": "stefan", "age": 18, "nationality": "Argentinian", "page": "Paid Page", "traffic": "Dating Apps + Others", "xlsx": "Stefan_Complete_Infloww.xlsx"},
     {"name": "Zack", "folder": "zack", "age": 23, "nationality": "British", "page": "Paid Page", "traffic": "Dating Apps", "xlsx": "Zack_Complete_Infloww.xlsx"},
     {"name": "Noah", "folder": "noah", "age": 21, "nationality": "Italian", "page": "Paid Page", "traffic": "Dating Apps + Twitter/X", "xlsx": "Noah_Complete_Infloww.xlsx"},
-    {"name": "Jack Hollywood", "folder": "jack", "age": 20, "nationality": "American", "page": "Paid Page", "traffic": "Dating Apps + Others", "xlsx": "Jack Hollywood_Complete_Infloww.xlsx"},
+    {"name": "Jack Hollywood", "folder": "jack", "age": 20, "nationality": "American", "page": "Paid Page", "traffic": "Dating Apps + Others", "xlsx": "Jack_Hollywood_Complete_Infloww.xlsx"},
 ]
 
 MALE_OTHER = [
@@ -69,7 +69,7 @@ def _auto_discover_models():
             mod = __import__(f"models.{folder}", fromlist=["config"])
             c = mod.config
             clean_name = c.get("name", folder).strip()
-            xlsx_name = f"{clean_name}_Complete_Infloww.xlsx"
+            xlsx_name = f"{clean_name.replace(' ', '_')}_Complete_Infloww.xlsx"
             entry = {
                 "name": clean_name,
                 "folder": c.get("folder", folder),

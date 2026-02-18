@@ -1,0 +1,93 @@
+# Monday.com Integration
+
+## Acceso
+- API URL: `https://api.monday.com/v2` (GraphQL)
+- Token: variable de entorno `MONDAY_API_TOKEN`
+- Token almacenado en `.env` de cada proyecto y como variable de entorno de usuario de Windows
+
+## Herramienta
+- CLI: `tools/monday_cli.py`
+- Requiere: `pip install requests`
+
+## Comandos Disponibles
+```
+python tools/monday_cli.py boards                         # Listar todos los boards
+python tools/monday_cli.py items <board_id> [--limit N]   # Listar items de un board
+python tools/monday_cli.py columns <board_id>             # Ver estructura/columnas de un board
+python tools/monday_cli.py item <item_id>                 # Detalle completo de un item
+python tools/monday_cli.py onboardings                    # Detectar nuevos onboardings
+python tools/monday_cli.py create-item <board_id> <name> [options]  # Crear item
+python tools/monday_cli.py users                          # Listar usuarios (IDs para asignaciones)
+```
+
+## Boards del Sistema 🤖 (Task Management)
+| Board | ID | Owner | Uso |
+|---|---|---|---|
+| 🤖 CW Master Tasks | `5091787921` | Pau (COO) | Cockpit central — tareas para CUALQUIER persona |
+| 🤖 CW Chatting Ops | `5091787931` | Ryzel (CHM) | Coaching, performance, schedule, probation, traffic |
+| 🤖 CW Scripts | `5091787952` | Rei (SM) | Pipeline de scripts: new model, update, diversify, QA |
+| 🤖 CW Content & Clients | `5091787968` | Angeles | Content requests, customs, deep dives, client reports, on/offboarding |
+| 🤖 CW Hiring | `5091787979` | Mileh (HM) | Pipeline de recruitment: screening → interview → training → probation → hired |
+
+## Boards Preexistentes (Referencia)
+- `5018047892` — 👩🏻 Client OnOffboarding CWENG (onboarding de modelos en inglés)
+
+## Uso desde Scripts Python
+```python
+from monday_cli import query as monday_query
+
+data = monday_query("""
+{
+    boards(limit: 50) {
+        id
+        name
+        items_count
+    }
+}
+""")
+```
+
+## Columnas Comunes (todos los boards 🤖)
+Todos los boards comparten estas columnas base:
+- **Assignee** (people) — Quién es responsable
+- **Status** (status) — Not Started / Working on it / Stuck / Waiting / Done
+- **Priority** (status) — Critical ⚠️ / High / Medium / Low
+- **Deadline** (date) — Fecha límite
+- **Description** (text) — Qué hay que hacer
+
+## Lógica de Asignación de Boards
+Cuando Pau pide crear una tarea, el agente debe:
+1. Identificar el ASSIGNEE (persona responsable)
+2. Determinar el BOARD correcto según la persona/departamento:
+   - Ryzel, Danilyn, Huckle, Ezekiel → 🤖 CW Chatting Ops (`5091787931`)
+   - Rei, Cath → 🤖 CW Scripts (`5091787952`)
+   - Angeles → 🤖 CW Content & Clients (`5091787968`)
+   - Mileh → 🤖 CW Hiring (`5091787979`)
+   - Daniela, u otros → 🤖 CW Master Tasks (`5091787921`)
+   - Si no está claro o es cross-department → 🤖 CW Master Tasks (`5091787921`)
+3. Crear el item en el grupo correcto (grupo de mayor prioridad por defecto: "To Do" / "Urgent" según prioridad)
+4. Confirmar a Pau qué se creó y dónde
+
+## User IDs de Monday (para asignaciones)
+| Nombre | ID |
+|---|---|
+| Pau Lopez Ferrer | 89477039 |
+| Rycel Monique (Ryzel) | 90023534 |
+| Danilyn Deo | 90186609 |
+| Huckle Albisa | 90186611 |
+| Ezekiel Orika | 93910277 |
+| Reishi Glynne Quibido (Rei) | 95309506 |
+| Roussel Catherine Bonita (Cath) | 97512841 |
+| Angeles Diaz | 89875255 |
+| Mileh | 96683602 |
+| Ma. Daniela | 89989739 |
+| Daniela Rada | 92250193 |
+| Santi Jiang | 89476988 |
+
+## Reglas para Agentes
+- Siempre cargar el token desde `MONDAY_API_TOKEN` (env var)
+- Para explorar Monday, empezar con `boards` → luego `columns <board_id>` → luego `items <board_id>`
+- La API de Monday es GraphQL — las queries se pueden personalizar según necesidad
+- El CLI soporta lectura y escritura (create-item)
+- Para crear tareas desde voz de Pau: usar la lógica de asignación de boards + user IDs
+- Usar `tools/setup_monday_boards.py` como referencia de la estructura creada

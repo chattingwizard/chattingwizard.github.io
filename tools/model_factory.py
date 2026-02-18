@@ -452,7 +452,8 @@ class ModelFactory:
         wb_j = self.generate_journey_xlsx()
         wb_o = self.generate_obj_xlsx()
         
-        output = os.path.join(self.web_dir, f"{self.c['name']}_Complete_Infloww.xlsx")
+        clean_name = self.c['name'].strip().replace(" ", "_")
+        output = os.path.join(self.web_dir, f"{clean_name}_Complete_Infloww.xlsx")
         n_sheets, n_scripts = merge_workbooks(wb_j, wb_o, output)
         print(f"[XLSX] {output} — {n_sheets} sheets, {n_scripts} scripts")
         return output

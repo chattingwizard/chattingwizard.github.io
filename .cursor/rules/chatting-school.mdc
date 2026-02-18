@@ -1,0 +1,77 @@
+---
+description: Chatting School — training structure, content strategy, video production
+alwaysApply: true
+---
+
+# Chatting School — Training System
+
+## Project
+- Repo: `CW-ChattingSchool`
+- Hosted: GitHub Pages (chattingwizard.github.io)
+- Tech: Remotion (React video generation) + ElevenLabs TTS
+- Quality target: 7/10 (professional corporate explainer)
+- Reference channel: EverythingProfessor
+
+## Training Structure (5 Days)
+
+```
+Pre-training (recruit's time): Self-study on Chatting School + screening test. 24-48h.
+Day 0: Interview (15 min, simplified)
+Day 1: Infloww + Scripts + Model Persona (hands-on) — 2-3 hrs
+Day 2: Journey step-by-step + annotated chats + practice — 2-3 hrs
+Day 3: Advanced skills + objections drill + full simulation — 3 hrs
+Day 4: Written quiz (80% pass) + live chatting exam (3.5/5 avg) — 1-2 hrs
+Then: 14 days structured probation
+```
+
+- Self-study is MANDATORY before Mileh invests time
+- Screening test filters before live training
+- Organized by SECTIONS (Foundations, Tools, Journey, Advanced, Go Live) NOT by day numbers
+
+## Content Strategy
+- One concept = one video. Duration: 45s to 3 min (NOT rigid 1-minute)
+- Structure per video: Theory → Practical Example → Recall Question (10 sec at end)
+- Text on web = cheat sheet reference (3-5 bullets), NOT learning source
+- Video = primary learning tool
+- OF jargon (PPV, scripts, sexting, NR) must be TAUGHT with simple analogies
+- Planned repetition: each concept appears at least 3 times (intro, context use, review quiz)
+- Examples must be LITERAL, not abstract
+
+## Module Structure (Per Section)
+1. Micro-video (theory) — 1-3 min
+2. Micro-video (example) — 30s-1.5 min
+3. Mini-quiz — 30s-1 min
+4. Cheat sheet — 3-5 bullets
+5. End of section: Chat Simulator (5-10 min) + Scenario Cards (3-5 min)
+
+## Video Inventory (38 micro-videos)
+- Foundations (F): 9 videos (F-01 to F-09)
+- Tools & Scripts (T): 12 videos (T-01 to T-12)
+- The Journey (J): 10 videos (J-01 to J-10)
+- Advanced (A): 7 videos (A-01 to A-07)
+- Go Live (G): 0 videos (all interactive/live)
+- Total narration: ~68 min, ~56,000 characters for ElevenLabs
+
+## Interactive Exercises
+- **Mini-quiz**: 2-3 multiple choice after each video, instant feedback
+- **Chat Simulator**: Simulates Infloww-like interface. Fan messages → choose action → feedback. THE killer feature.
+- **Scenario Cards**: Situation → click to reveal → correct answer
+
+## Video Production Design System
+- Background: warm paper tone (#f7f3eb) with grid lines, NOT white/blue
+- Minimum 2 visual elements per scene
+- 10 component types: ComparisonPanel, FlowDiagram, StepProgression, ChatMockup, StatHighlight, IconGrid, QuoteMantra, Checklist, HierarchyTree, NumberCircle
+- 5 layouts: split, stack, grid-2x2, hero-center, timeline
+- Automated QA pre-render: validates visual elements, duration, terms defined, example present
+
+## Interview Structure (Updated)
+- Removed: formal intro, logistics check, English assessment
+- Kept: "Tell me about yourself" (3 min), Motivation Check (3 min), Knowledge Check (7 min), Quick Writing Test (2 min)
+- Pass: motivated, knowledge correct, B1+ English + personality in writing
+- Fail: can't answer basics, poor English, unclear motivation, red flags
+
+## Key Teaching Concepts
+- Script commands use `/` (forward slash), NOT `\`
+- "Unread" tab is Step 0 of every shift checklist
+- Before each training group: verify training model has ALL current scripts
+- Annotated Chat Examples: sourced from real Infloww conversations, prepared by senior TL (one-time task)
