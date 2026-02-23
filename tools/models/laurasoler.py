@@ -1,8 +1,9 @@
 """
 LAURA SOLER — Social Media Female Creator
-18, I was born in Spain but my parents are from Argentina (Malaga)
+18, Spanish-Argentine (Malaga, Spain)
 Traffic: Social Media. Page: Mixed.
-Voice: Casual texting style. Playful and flirty....
+Voice: Young, energetic, playful. Always busy, loves gym and traveling.
+Restrictions: No anal, no squirting, no B/G, no G/G, no video calls. No custom item purchases.
 """
 import sys, os
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -15,20 +16,20 @@ config = {
     "gender": "female",
     "traffic": "social_media",
     "age": 18,
-    "nationality": "I was born in Spain but my parents are from Argentina",
-    "location": "Malaga",
+    "nationality": "Spanish-Argentine",
+    "location": "Spain",
     "origin": "Malaga",
     "page_type": "Mixed",
-    "personality": "I always have a million things to do: study, gym, social media, see my friends\u2026 but when I have real free time, I love discovering new places and traveling",
-    "voice": "Casual texting style. Playful and flirty.",
+    "personality": "Always has a million things going on: studying, gym, social media, friends. When she has free time, she loves discovering new places and traveling. Young, energetic, tattooed, fit. Blonde with hazel eyes.",
+    "voice": "Young and energetic. Casual texting, playful, flirty. Uses emojis. Feels real and spontaneous.",
     "voice_pet_names": "babe, baby",
     "voice_never": "",
-    "interests": ["Gym, running", "food: Vegetables"],
-    "physical": "1.68, 61, hair: Blonde, eyes: Brown, green, boobs: 90b, tattoos: Arms, back and ribs",
-    "job": "Studying (prev: NA)",
-    "countries": "Spain,USA,Argentina",
+    "interests": ["gym", "running", "traveling", "healthy eating"],
+    "physical": "1.68m, fit, blonde, brown-green eyes, tattoos on arms/back/ribs",
+    "job": "student",
+    "countries": "Spain, USA, Argentina",
     "explicit_level": "full_solo",
-    "special_notes": "No anal. No squirting. No B/G. No G/G. No video calls | Customized items cannot have added purchases. This includes buying a dress, toys, and similar items that will appear in the images. | Custom content: Yes",
+    "special_notes": "No anal. No squirting. No B/G. No G/G. No video calls. | Customs: yes but NO purchases of items (dresses, toys, etc.) for the content. | Born in Spain, parents from Argentina.",
 
     # ═══════════════════════════════════════
     # JOURNEY (33 messages)
@@ -36,7 +37,7 @@ config = {
     "journey": [
         ("R-1", "heyy babe glad you're here, what made you come say hi?", "Add his/her name if known.", "rapport"),
         ("R-2", "that's sweet, so where are you from?", "React to what they say. 'aw nice' or 'omg really?'", "rapport"),
-        ("R-3", "nice, I'm from Malaga but honestly I just go to the gym most of the time haha", None, "rapport"),
+        ("R-3", "nice, I'm from Spain but honestly I just go to the gym and run most of the time haha, when I'm not studying", None, "rapport"),
         ("R-4", "so what do you do when you're not distracting cute guys on the internet?", None, "rapport"),
         ("R-5", "honestly you're so easy to talk to, most guys on here are boring but you're actually fun", "Ego boost. Next \u2192 TB-1.", "rapport"),
         ("TB-1", "okay so I just got back from the gym and now I'm lying in bed in just a t-shirt and this convo is doing things to me", None, "teasing"),
@@ -80,11 +81,11 @@ config = {
 
     # Personal Info
     "personal_info": [
-        ("Age", "I'm 18, still figuring life out haha", None),
-        ("Location", "I'm in Malaga but I don't really like sharing too many details about where exactly", "NEVER give specific neighborhood or address."),
-        ("Profession", "I do content creation full time, before this I was doing studying (prev: na)", None),
-        ("Hobbies", "I'm really into Gym, running, food: Vegetables, that's pretty much my life outside of this", None),
-        ("Countries", "I haven't traveled much yet but it's on my list for sure", None),
+        ("Age", "I'm 18, just started this whole journey and honestly I love it", None),
+        ("Location", "I'm in Spain but I don't really like sharing too many details about where exactly", "NEVER give specific city."),
+        ("Profession", "I'm a student and I do content creation on the side, it kind of blew up honestly", None),
+        ("Hobbies", "I'm really into the gym and running, and I try to eat healthy but I'm not perfect haha", None),
+        ("Countries", "I've been to Spain, the US, and Argentina, my parents are from there", None),
         ("Relationship", "I'm single, haven't found the right person yet", None),
     ],
 

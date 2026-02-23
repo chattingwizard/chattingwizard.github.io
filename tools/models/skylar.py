@@ -1,8 +1,9 @@
 """
 SKYLAR — Social Media Female Creator
-20, Poland (Match fan location)
-Traffic: Social Media. Page: Mixed.
-Voice: Casual texting style. Playful and flirty....
+20, Polish (location matches fan's)
+Traffic: Webcam / Social Media. Page: Mixed.
+Voice: Playful, flirty, confident webcam girl energy.
+Restrictions: No anal. Custom content available.
 """
 import sys, os
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -15,20 +16,20 @@ config = {
     "gender": "female",
     "traffic": "social_media",
     "age": 20,
-    "nationality": "Poland",
-    "location": "Match fan location",
-    "origin": "Match fan location",
+    "nationality": "Polish",
+    "location": "USA",
+    "origin": "Poland",
     "page_type": "Mixed",
-    "personality": "Webcam model, you can create new one",
-    "voice": "Casual texting style. Playful and flirty.",
+    "personality": "Cute Polish webcam girl. Petite, blonde, playful. Loves the gym and sushi. Confident on camera, flirty in DMs. Young energy, knows how to tease.",
+    "voice": "Playful and flirty. Cute but confident. Uses emojis sometimes. Light teasing tone.",
     "voice_pet_names": "babe, baby",
     "voice_never": "",
-    "interests": ["Gym", "food: Sushi"],
-    "physical": "1.58, 50, hair: Blonde, eyes: Blue, gray and green, boobs: n/a",
-    "job": "NA (prev: NA)",
-    "countries": "None",
+    "interests": ["gym", "sushi"],
+    "physical": "1.58m, petite, blonde, blue-green eyes",
+    "job": "webcam model and content creator",
+    "countries": "",
     "explicit_level": "full_bg",
-    "special_notes": "No anal | Custom content: Yes",
+    "special_notes": "CRITICAL: Location should match the fan's location. Chatter should adapt where she says she's from based on the sub. Default to USA if unknown. | No anal. | Custom content: Yes",
 
     # ═══════════════════════════════════════
     # JOURNEY (33 messages)
@@ -36,7 +37,7 @@ config = {
     "journey": [
         ("R-1", "heyy babe glad you're here, what made you come say hi?", "Add his/her name if known.", "rapport"),
         ("R-2", "that's sweet, so where are you from?", "React to what they say. 'aw nice' or 'omg really?'", "rapport"),
-        ("R-3", "nice, I'm from Match fan location but honestly I just go to the gym most of the time haha", None, "rapport"),
+        ("R-3", "nice, I'm from around here too but honestly I just go to the gym and eat sushi most of the time haha", "ADAPT: say you're from wherever the sub is from. Keep it vague.", "rapport"),
         ("R-4", "so what do you do when you're not distracting cute guys on the internet?", None, "rapport"),
         ("R-5", "honestly you're so easy to talk to, most guys on here are boring but you're actually fun", "Ego boost. Next \u2192 TB-1.", "rapport"),
         ("TB-1", "okay so I just took a long shower and now I'm lying in bed in just a t-shirt and this convo is doing things to me", None, "teasing"),
@@ -81,9 +82,9 @@ config = {
     # Personal Info
     "personal_info": [
         ("Age", "I'm 20, still figuring life out haha", None),
-        ("Location", "I'm in Match fan location but I don't really like sharing too many details about where exactly", "NEVER give specific neighborhood or address."),
-        ("Profession", "I do content creation full time, before this I was doing na (prev: na)", None),
-        ("Hobbies", "I'm really into Gym, food: Sushi, that's pretty much my life outside of this", None),
+        ("Location", "I don't really like sharing too many details about where I am exactly", "ADAPT to fan's location. Keep vague."),
+        ("Profession", "I do content creation full time, it kind of just happened and now it's my whole life", None),
+        ("Hobbies", "I'm obsessed with the gym and sushi is literally my weakness, that's pretty much my life", None),
         ("Countries", "I haven't traveled much yet but it's on my list for sure", None),
         ("Relationship", "I'm single, haven't found the right person yet", None),
     ],
