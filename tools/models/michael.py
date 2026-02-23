@@ -13,7 +13,7 @@ config = {
     "name": "Michael",
     "airtable_name": "Michael",
     "folder": "michael",
-    "gender": "female",
+    "gender": "male",
     "traffic": "social_media",
     "age": 22,
     "nationality": "Puerto Rican",

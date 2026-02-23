@@ -231,20 +231,67 @@ def get_model_info(model_name):
 
 
 def _guess_gender(fields, bio):
-    """Guess gender from available data."""
+    """Determine gender from all available data. Never blindly default."""
     bio_lower = bio.lower()
-    # Check for clear female indicators
-    female_indicators = ["she is", "she's", "her personality", "girl", "girlfriend", "good girl"]
-    male_indicators = ["he is", "he's", "his personality", "boy", "boyfriend", "guy"]
-    
-    f_score = sum(1 for i in female_indicators if i in bio_lower)
-    m_score = sum(1 for i in male_indicators if i in bio_lower)
-    
+    niche = (fields.get("Niche") or "").lower()
+    boobs = str(fields.get("Boobs Size") or "").strip()
+    name = (fields.get("Model Name") or "").strip()
+    traffic_raw = fields.get("Traffic", [])
+    traffic_str = " ".join(traffic_raw).lower() if isinstance(traffic_raw, list) else str(traffic_raw).lower()
+
+    f_score = 0
+    m_score = 0
+
+    # English bio indicators
+    for w in ["she is", "she's", "her personality", "girl", "girlfriend", "good girl", "woman", "female"]:
+        if w in bio_lower:
+            f_score += 2
+    for w in ["he is", "he's", "his personality", "boy", "boyfriend", "guy", "man", "male", "bro"]:
+        if w in bio_lower:
+            m_score += 2
+
+    # Spanish bio indicators
+    for w in ["ella es", "ella ", "femenina", "chica", "novia", "mujer"]:
+        if w in bio_lower:
+            f_score += 2
+    for w in ["él es", "el es", "masculino", "chico", "novio", "hombre"]:
+        if w in bio_lower:
+            m_score += 2
+
+    # Boobs Size: real value = female, empty/dot/placeholder = male
+    if boobs and boobs not in (".", ".,", ",", "", "N/A", "n/a", "NA", "none", "0"):
+        f_score += 3
+    elif boobs in (".", ".,", ",", ""):
+        m_score += 2
+
+    # Common names
+    male_names = {"tyler", "michael", "jack", "max", "marco", "lucas", "liam", "peter",
+                  "damon", "stefan", "zack", "noah", "tommy", "grant", "aitor", "javi"}
+    female_names = {"putri", "riri", "eva", "antonella", "jasmine", "fernanda", "isabella",
+                    "jessica", "maddison", "vera", "mia", "ashley", "chayla", "emily",
+                    "lana", "lia", "lina", "faby", "irina", "zansi", "adriana"}
+    name_lower = name.lower().split()[0] if name else ""
+    if name_lower in male_names:
+        m_score += 2
+    elif name_lower in female_names:
+        f_score += 2
+
+    # Niche hints
+    if "gay" in niche or "gay" in traffic_str:
+        m_score += 3
+
+    # Traffic: "Dating Apps" alone doesn't determine gender, but combined with other signals helps
+    if "dating" in traffic_str and m_score > 0:
+        m_score += 1
+
     if f_score > m_score:
         return "female"
     elif m_score > f_score:
         return "male"
-    return "female"  # default
+
+    # True ambiguity: log warning and default to female
+    print(f"[WARN] Could not determine gender for '{name}' (f={f_score}, m={m_score}). Defaulting to female.")
+    return "female"
 
 
 def _extract_personality_from_bio(bio, name):
