@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ANNA — Chatter Guide</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0d1117;--card:#161b22;--border:#30363d;--text:#e6edf3;--muted:#8b949e;--accent:#58a6ff;--green:#3fb950;--red:#f85149;--orange:#d29922;--purple:#bc8cff;--yellow:#e3b341}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:"Segoe UI",system-ui,sans-serif;line-height:1.6;padding:0 0 60px}
+.page{max-width:960px;margin:0 auto;padding:16px 20px}
+.back-btn{display:inline-flex;align-items:center;gap:6px;color:var(--muted);text-decoration:none;font-size:.85rem;padding:10px 0;transition:.15s}
+.back-btn:hover{color:var(--accent)}
+.hero{display:flex;align-items:center;gap:18px;padding:20px 0 16px;border-bottom:1px solid var(--border)}
+.hero-photo{width:72px;height:72px;border-radius:50%;object-fit:cover;border:3px solid var(--accent);flex-shrink:0}
+.hero-info{flex:1}.hero h1{font-size:1.8rem;font-weight:800;letter-spacing:2px;line-height:1.2}
+.hero .tagline{color:var(--muted);font-size:.85rem}
+.toc{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--border);padding:8px 0;margin:0 -20px;padding-left:20px;padding-right:20px;display:flex;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.toc.shadow{box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.toc a{font-size:.72rem;color:var(--muted);background:var(--card);border:1px solid var(--border);padding:4px 10px;border-radius:14px;text-decoration:none;white-space:nowrap;transition:.15s;flex-shrink:0}
+.toc a:hover,.toc a.active{color:var(--accent);border-color:var(--accent)}
+.toc a.toc-ppv{color:var(--green);border-color:#3fb95033}
+.toc a.toc-ref{color:var(--orange);border-color:#d2992233}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0}
+.profile{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 18px}
+.profile h2{font-size:.78rem;color:var(--accent);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:12px}
+.profile-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 16px}
+.profile-item .label{color:var(--muted);font-size:.7rem;text-transform:uppercase;letter-spacing:.5px}
+.profile-item .value{font-size:.85rem}
+.voice-box{background:#1c262f;border-left:3px solid var(--purple);padding:10px 14px;border-radius:0 8px 8px 0;margin-top:12px;font-size:.84rem;color:#c4b5e0}
+.voice-box strong{color:var(--purple)}
+.obj-link{display:flex;align-items:center;gap:14px;background:#f8514910;border:1px solid #f8514933;border-radius:12px;padding:14px 18px;margin:16px 0;text-decoration:none;transition:.15s}
+.obj-link:hover{border-color:var(--red)}
+.phase{margin:10px 0 0;border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.phase-header{display:flex;align-items:center;gap:10px;padding:12px 16px;cursor:pointer;user-select:none;background:var(--card);border-left:3px solid var(--phase-color,var(--accent))}
+.phase-header:hover{background:#1c2129}
+.phase-header .phase-emoji{font-size:1.2rem}
+.phase-header .phase-name{font-size:1rem;font-weight:700;flex:1}
+.phase-header .phase-meta{font-size:.72rem;color:var(--muted);background:var(--bg);padding:2px 10px;border-radius:12px;border:1px solid var(--border)}
+.phase-header .toggle{color:var(--muted);font-size:.8rem;transition:transform .2s}
+.phase.collapsed .toggle{transform:rotate(-90deg)}
+.phase-body{padding:4px 0 8px}.phase.collapsed .phase-body{display:none}
+.msg{display:flex;gap:10px;align-items:flex-start;padding:8px 16px;margin:2px 0;transition:background .12s}
+.msg:hover{background:#161b2266}
+.msg-id{font-size:.64rem;color:var(--muted);background:var(--card);border:1px solid var(--border);padding:2px 6px;border-radius:4px;white-space:nowrap;margin-top:4px;flex-shrink:0;min-width:36px;text-align:center;font-weight:600}
+.msg-body{flex:1;min-width:0}
+.msg-text{font-size:1rem;line-height:1.5;word-wrap:break-word}
+.msg-note{background:#e3b34112;border-left:3px solid var(--yellow);padding:5px 10px;border-radius:0 6px 6px 0;margin:4px 0 2px;font-size:.8rem;color:var(--yellow)}
+.msg-wait{background:#d2992210}.msg-wait .msg-id{border-color:var(--orange);color:var(--orange)}
+.intensity{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;padding:0 5px;border-radius:10px;font-size:.62rem;font-weight:700;border:1px solid;flex-shrink:0;letter-spacing:-.02em;margin-left:4px}
+.ppv-moment{background:#3fb95010;border:1px solid #3fb95028;border-radius:10px;padding:8px 14px;margin:6px 16px;display:flex;align-items:center;gap:10px}
+.ppv-moment .ppv-icon{font-size:1.2rem}
+.ppv-moment .ppv-label{font-size:.88rem;font-weight:600;color:var(--green)}
+.cp{background:none;border:1px solid transparent;color:var(--border);width:28px;height:28px;border-radius:6px;cursor:pointer;font-size:.75rem;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:.15s;position:relative;margin-top:2px;opacity:.3}
+.msg:hover .cp,.qi-item:hover .cp,.nr-table tr:hover .cp{opacity:1;border-color:var(--border)}
+.cp:hover{background:var(--card);color:var(--text);opacity:1}
+.cp.ok{border-color:var(--green);color:var(--green);opacity:1}
+.cp.ok::after{content:"\2713";position:absolute;font-size:.7rem;font-weight:700}
+.cp.ok .cp-icon{visibility:hidden}
+.divider{border:none;border-top:1px solid var(--border);margin:24px 0}
+.ref-section{margin:16px 0}
+.ref-title{font-size:.95rem;font-weight:700;padding:8px 0;border-bottom:2px solid var(--border);margin-bottom:8px}
+.nr-table{width:100%;border-collapse:collapse;margin:6px 0}
+.nr-table th{text-align:left;font-size:.68rem;color:var(--muted);text-transform:uppercase;padding:5px 10px;border-bottom:1px solid var(--border)}
+.nr-table td{padding:7px 10px;font-size:.88rem;border-bottom:1px solid #21262d;vertical-align:top}
+.nr-note{color:var(--muted);font-size:.8rem}
+.qi-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin:6px 0}
+.qi-item{display:flex;gap:8px;align-items:flex-start;padding:8px 12px;background:var(--card);border:1px solid var(--border);border-radius:8px}
+.qi-label{font-size:.7rem;font-weight:600;color:var(--accent);text-transform:uppercase;min-width:56px;margin-top:3px;flex-shrink:0}
+.qi-text{flex:1;font-size:.88rem}
+.top-btn{position:fixed;bottom:16px;right:16px;width:36px;height:36px;border-radius:50%;background:var(--card);border:1px solid var(--border);color:var(--muted);font-size:1rem;cursor:pointer;display:none;align-items:center;justify-content:center;z-index:100;transition:.15s}
+.top-btn:hover{color:var(--text);border-color:var(--muted)}.top-btn.show{display:flex}
+.search-wrap{margin:12px 0 4px;position:relative}
+.search-input{width:100%;background:var(--card);border:1px solid var(--border);color:var(--text);padding:8px 14px 8px 36px;border-radius:8px;font-size:.85rem;outline:none;transition:.15s}
+.search-input:focus{border-color:var(--accent);box-shadow:0 0 0 2px #58a6ff22}
+.search-input::placeholder{color:var(--muted)}
+.search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:.8rem;pointer-events:none}
+.search-count{position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:.72rem}
+.msg.search-hide,.phase.search-hide{display:none}
+.msg.search-match .msg-text{background:#58a6ff12;border-radius:4px}
+.copy-all{background:none;border:1px solid var(--border);color:var(--muted);padding:2px 8px;border-radius:6px;font-size:.64rem;cursor:pointer;transition:.15s;margin-left:auto;margin-right:8px}
+.copy-all:hover{border-color:var(--accent);color:var(--accent)}
+.copy-all.ok{border-color:var(--green);color:var(--green)}
+@media(max-width:700px){.page{padding:12px 10px}.info-grid,.qi-grid{grid-template-columns:1fr}.hero{flex-direction:column;text-align:center}.hero h1{font-size:1.5rem}.profile-grid{grid-template-columns:1fr}.toc{margin:0 -10px;padding-left:10px;padding-right:10px}}
+</style>
+</head>
+<body>
+<div class="page">
+
+<a href="../" class="back-btn">← All Creators</a>
+
+<div class="hero" id="top">
+  <img src="profile.jpg" alt="Anna" class="hero-photo">
+  <div class="hero-info">
+    <h1>ANNA</h1>
+    <div class="tagline">30 · Denmark · influencer and content creator</div>
+  </div>
+</div>
+
+<nav class="toc" id="toc">
+  <a href="#phase-0">💬 Rapport</a>
+  <a href="#phase-1">🔥 Teasing</a>
+  <a href="#phase-2" class="toc-ppv">🔥 Sexting Phase 1</a>
+  <a href="#phase-3" class="toc-ppv">🔥 Sexting Phase 2</a>
+  <a href="#phase-4" class="toc-ppv">🔥 Sexting Phase 3</a>
+  <a href="#phase-5" class="toc-ppv">🔥 Sexting Phase 4</a>
+  <a href="#phase-6">💪 Aftercare</a>
+  <a href="#nr-waves" class="toc-ref">NR</a>
+  <a href="#personal-info" class="toc-ref">Personal</a>
+  <a href="#positive-spin" class="toc-ref">Spin</a>
+  <a href="objections.html" class="toc-ref" style="color:var(--red);border-color:#f8514933">🛡️ OBJ/RES</a>
+</nav>
+
+<div class="search-wrap">
+  <span class="search-icon">&#128269;</span>
+  <input type="text" class="search-input" id="search" placeholder="Search scripts..." autocomplete="off">
+  <span class="search-count" id="search-count"></span>
+</div>
+
+<div class="info-grid">
+  <div>
+    <div class="profile">
+      <h2>👤 Character Profile</h2>
+      <div class="profile-grid"><div class="profile-item"><div class="label">Nationality</div><div class="value">Danish</div></div><div class="profile-item"><div class="label">Page Type</div><div class="value">Paid Page</div></div><div class="profile-item"><div class="label">Traffic</div><div class="value">social_media</div></div><div class="profile-item"><div class="label">Job</div><div class="value">influencer and content creator</div></div><div class="profile-item"><div class="label">Interests</div><div class="value">fitness, sushi, fashion, traveling</div></div><div class="profile-item"><div class="label">Physical</div><div class="value">161, 67, hair: Short dark hair, eyes: Green, boobs: Big, she does not use bras haha. Shes a Large in sports bra., tattoos: A lot of tattoos everywhere. Small patch tattoos.</div></div><div class="profile-item"><div class="label">Countries</div><div class="value">Denmark, Sweden, Mexico, Finland, Norway, Spain, Italy, France, Germany, Austria</div></div></div>
+    </div>
+    <div class="voice-box"><strong>🗣️ Voice:</strong> Casual texting style. Playful and flirty.<br><strong>Pet names:</strong> babe, baby</div>
+  </div>
+  <div>
+    <div class="profile" style="border-color:var(--border)">
+      <h2>Quick Reference</h2>
+      <div class="content-level" style="background:#8b949e12;border:1px solid #8b949e33;padding:8px 14px;border-radius:8px;margin-bottom:10px;font-size:.84rem"><strong style="color:#8b949e">Content Level:</strong> full_solo</div>
+      <div style="background:#e3b34112;border-left:3px solid var(--yellow);padding:10px 14px;border-radius:0 8px 8px 0;margin-bottom:10px;font-size:.84rem;color:var(--yellow)"><strong>Notes:</strong> No anal. No squirting. No B/G. No G/G. No video calls | Price guide: +500$ for custom content | Custom content: Yes</div>
+    </div>
+  </div>
+</div>
+
+<a href="objections.html" class="obj-link">
+  <span style="font-size:1.4rem">🛡️</span>
+  <div style="flex:1">
+    <div style="font-size:.95rem;font-weight:700;color:var(--red)">Objection & Resistance Handling</div>
+    <div style="font-size:.78rem;color:var(--muted)">Complete sequences for Infloww</div>
+  </div>
+  <span style="color:var(--red);font-size:.85rem;font-weight:600">Open →</span>
+</a>
+
+<div class="phase" id="phase-0" style="--phase-color:#3fb950">
+  <div class="phase-header">
+    <span class="phase-emoji">💬</span>
+    <span class="phase-name">Rapport</span>
+    <span class="phase-meta">5 msgs</span>
+    <button class="copy-all" data-copy-all="heyy babe glad you're here, what made you come say hi?\n\nthat's sweet, so where are you from?\n\nnice, I'm from Denmark but honestly I spend most of my time at the gym or finding the best sushi spots haha\n\nso what do you do when you're not distracting cute guys on the internet?\n\nhonestly you're so easy to talk to, most guys on here are boring but you're actually fun">Copy All</button>
+    <span class="toggle">▼</span>
+  </div>
+  <div class="phase-body">
+<div class="msg"><span class="msg-id">R-1</span><div class="msg-body"><div class="msg-text">heyy babe glad you&#x27;re here, what made you come say hi?</div><div class="msg-note">Add his/her name if known.</div></div><button class="cp" data-copy="heyy babe glad you&#x27;re here, what made you come say hi?"><span class="cp-icon">📋</span></button></div>
+<div class="msg"><span class="msg-id">R-2</span><div class="msg-body"><div class="msg-text">that&#x27;s sweet, so where are you from?</div><div class="msg-note">React to what they say. &#x27;aw nice&#x27; or &#x27;omg really?&#x27;</div></div><button class="cp" data-copy="that&#x27;s sweet, so where are you from?"><span class="cp-icon">📋</span></button></div>
+<div class="msg"><span class="msg-id">R-3</span><div class="msg-body"><div class="msg-text">nice, I&#x27;m from Denmark but honestly I spend most of my time at the gym or finding the best sushi spots haha</div></div><button class="cp" data-copy="nice, I&#x27;m from Denmark but honestly I spend most of my time at the gym or finding the best sushi spots haha"><span class="cp-icon">📋</span></button></div>
+<div class="msg"><span class="msg-id">R-4</span><div class="msg-body"><div class="msg-text">so what do you do when you&#x27;re not distracting cute guys on the internet?</div></div><button class="cp" data-copy="so what do you do when you&#x27;re not distracting cute guys on the internet?"><span class="cp-icon">📋</span></button></div>
+<div class="msg"><span class="msg-id">R-5</span><div class="msg-body"><div class="msg-text">honestly you&#x27;re so easy to talk to, most guys on here are boring but you&#x27;re actually fun</div><div class="msg-note">Ego boost. Next → TB-1.</div></div><button class="cp" data-copy="honestly you&#x27;re so easy to talk to, most guys on here are boring but you&#x27;re actually fun"><span class="cp-icon">📋</span></button></div>
+  </div>
+</div>
+<div class="phase collapsed" id="phase-1" style="--phase-color:#bc8cff">
+  <div class="phase-header">
+    <span class="phase-emoji">🔥</span>
+    <span class="phase-name">Teasing</span>
+    <span class="phase-meta">4 msgs + 1 PPV</span>
+    <button class="copy-all" data-copy-all="okay so I just took a long shower and now I'm lying in bed in just a t-shirt and this convo is doing things to me\n\nlike idk what it is about you but I can't stop smiling rn\n\nstoppp you're making me blush and nobody makes me blush">Copy All</button>
+    <span class="toggle">▼</span>
+  </div>
+  <div class="phase-body">
+<div class="msg"><span class="msg-id">TB-1</span><div class="msg-body"><div class="msg-text">okay so I just took a long shower and now I&#x27;m lying in bed in just a t-shirt and this convo is doing things to me</div></div><button class="cp" data-copy="okay so I just took a long shower and now I&#x27;m lying in bed in just a t-shirt and this convo is doing things to me"><span class="cp-icon">📋</span></button></div>
+<div class="msg"><span class="msg-id">TB-2</span><div class="msg-body"><div class="msg-text">like idk what it is about you but I can&#x27;t stop smiling rn</div><div class="msg-note">Wait for reply.</div></div><button class="cp" data-copy="like idk what it is about you but I can&#x27;t stop smiling rn"><span class="cp-icon">📋</span></button></div>
+<div class="msg"><span class="msg-id">TB-3</span><div class="msg-body"><div class="msg-text">stoppp you&#x27;re making me blush and nobody makes me blush</div><div class="msg-note">If sexual reply: add &#x27;especially after what you just said omg&#x27;</div></div><button class="cp" data-copy="stoppp you&#x27;re making me blush and nobody makes me blush"><span class="cp-icon">📋</span></button></div>
+<div class="msg msg-wait"><span class="msg-id">TB-4</span><div class="msg-body"><div class="msg-text">hold on let me show you something</div><div class="msg-note">WAIT 1-2 MIN</div></div><button class="cp" data-copy="hold on let me show you something"><span class="cp-icon">📋</span></button></div>
+<div class="ppv-moment"><span class="ppv-icon">📎</span><span class="ppv-label">be honest... what do you think?</span></div>
+  </div>
+</div>
+<div class="phase collapsed" id="phase-2" style="--phase-color:#f85149">
+  <div class="phase-header">
+    <span class="phase-emoji">🔥</span>
+    <span class="phase-name">Sexting Phase 1</span>
+    <span class="phase-meta">4 msgs + 1 PPV</span>
+    <button class="copy-all" data-copy-all="mmm you liked that? my body is already reacting to you... I can literally feel myself getting wet right now\n\nmy skin is tingling everywhere right now and my nipples are hard and I can feel my heartbeat getting faster... you're doing something to me\n\nI'm lying here and my fingers are starting to wander... I blame you for this babe">Copy All</button>
+    <span class="toggle">▼</span>
+  </div>
+  <div class="phase-body">
+<div class="msg"><span class="msg-id">S1-1</span><div class="msg-body"><div class="msg-text">mmm you liked that? my body is already reacting to you... I can literally feel myself getting wet right now</div><div class="msg-note">Wait for reply.</div></div><span class="intensity" title="Intensity 6/10" style="background:#eab30820;border-color:#eab30850;color:#facc15">6</span><button class="cp" data-copy="mmm you liked that? my body is already reacting to you... I can literally feel myself getting wet right now"><span class="cp-icon">📋</span></button></div>
+<div class="msg"><span class="msg-id">S1-2</span><div class="msg-body"><div class="msg-text">my skin is tingling everywhere right now and my nipples are hard and I can feel my heartbeat getting faster... you&#x27;re doing something to me</div><div class="msg-note">React to what they say.</div></div><span class="intensity" title="Intensity 7/10" style="background:#f9731620;border-color:#f9731650;color:#fb923c">7</span><button class="cp" data-copy="my skin is tingling everywhere right now and my nipples are hard and I can feel my heartbeat getting faster... you&#x27;re doing something to me"><span class="cp-icon">📋</span></button></div>
+<div class="msg"><span class="msg-id">S1-3</span><div class="msg-body"><div class="msg-text">I&#x27;m lying here and my fingers are starting to wander... I blame you for this babe</div></div><span class="intensity" title="Intensity 8/10" style="background:#f9731620;border-color:#f9731650;color:#fb923c">8</span><button class="cp" data-copy="I&#x27;m lying here and my fingers are starting to wander... I blame you for this babe"><span class="cp-icon">📋</span></button></div>
+<div class="msg msg-wait"><span class="msg-id">S1-4</span><div class="msg-body"><div class="msg-text">one sec</div><div class="msg-note">WAIT 2-3 MIN</div></div><button class="cp" data-copy="one sec"><span class="cp-icon">📋</span></button></div>
+<div class="ppv-moment"><span class="ppv-icon">📎</span><span class="ppv-label">I want to show you what you made me feel</span><span class="intensity" title="Intensity 8/10" style="background:#f9731620;border-color:#f9731650;color:#fb923c">8</span></div>
+  </div>
+</div>
+<div class="phase collapsed" id="phase-3" style="--phase-color:#f85149">
+  <div class="phase-header">
+    <span class="phase-emoji">🔥</span>
+    <span class="phase-name">Sexting Phase 2</span>
+    <span class="phase-meta">5 msgs + 1 PPV</span>
+    <button class="copy-all" data-copy-all="wow... okay I need a second after that\n\nbut I literally can't stop touching myself right now... it's like my body won't let me\n\nI'm dripping wet and every time I think about you watching me it gets worse\n\nwhat would you do if you were here right now babe? I need to hear it">Copy All</button>
+    <span class="toggle">▼</span>
+  </div>
+  <div class="phase-body">
+<div class="msg"><span class="msg-id">S1-6</span><div class="msg-body"><div class="msg-text">wow... okay I need a second after that</div><div class="msg-note">Wait for reply. Brief cooldown.</div></div><span class="intensity" title="Intensity 6/10" style="background:#eab30820;border-color:#eab30850;color:#facc15">6</span><button class="cp" data-copy="wow... okay I need a second after that"><span class="cp-icon">📋</span></button></div>
+<div class="msg"><span class="msg-id">S1-7</span><div class="msg-body"><div class="msg-text">but I literally can&#x27;t stop touching myself right now... it&#x27;s like my body won&#x27;t let me</div><div class="msg-note">React to what they said. HE caused this.</div></div><span class="intensity" title="Intensity 8/10" style="background:#f9731620;border-color:#f9731650;color:#fb923c">8</span><button class="cp" data-copy="but I literally can&#x27;t stop touching myself right now... it&#x27;s like my body won&#x27;t let me"><span class="cp-icon">📋</span></button></div>
+<div class="msg"><span class="msg-id">S1-8</span><div class="msg-body"><div class="msg-text">I&#x27;m dripping wet and every time I think about you watching me it gets worse</div></div><span class="intensity" title="Intensity 8/10" style="background:#f9731620;border-color:#f9731650;color:#fb923c">8</span><button class="cp" data-copy="I&#x27;m dripping wet and every time I think about you watching me it gets worse"><span class="cp-icon">📋</span></button></div>
+<div class="msg"><span class="msg-id">S1-9</span><div class="msg-body"><div class="msg-text">what would you do if you were here right now babe? I need to hear it</div><div class="msg-note">Wait for reply. React to what they say.</div></div><span class="intensity" title="Intensity 9/10" style="background:#ef444420;border-color:#ef444450;color:#f87171">9</span><button class="cp" data-copy="what would you do if you were here right now babe? I need to hear it"><span class="cp-icon">📋</span></button></div>
+<div class="msg msg-wait"><span class="msg-id">S1-10</span><div class="msg-body"><div class="msg-text">fuck hold on I need to show you something</div><div class="msg-note">WAIT 2-3 MIN</div></div><button class="cp" data-copy="fuck hold on I need to show you something"><span class="cp-icon">📋</span></button></div>
+<div class="ppv-moment"><span class="ppv-icon">📎</span><span class="ppv-label">look at what you&#x27;re doing to me... I can&#x27;t hold back anymore</span><span class="intensity" title="Intensity 9/10" style="background:#ef444420;border-color:#ef444450;color:#f87171">9</span></div>
+  </div>
+</div>
+<div class="phase collapsed" id="phase-4" style="--phase-color:#f85149">
+  <div class="phase-header">
+    <span class="phase-emoji">🔥</span>
+    <span class="phase-name">Sexting Phase 3</span>
+    <span class="phase-meta">4 msgs + 1 PPV</span>
+    <button class="copy-all" data-copy-all="oh fuck babe I can't stop touching myself\n\nI'm pushing my fingers deeper and I can't slow down... my legs are shaking\n\nI can feel myself about to cum... you need to see what's happening to my body right now">Copy All</button>
+    <span class="toggle">▼</span>
+  </div>
+  <div class="phase-body">
+<div class="msg"><span class="msg-id">S1-12</span><div class="msg-body"><div class="msg-text">oh fuck babe I can&#x27;t stop touching myself</div><div class="msg-note">Wait for reply. NO cooldown — keep momentum.</div></div><span class="intensity" title="Intensity 9/10" style="background:#ef444420;border-color:#ef444450;color:#f87171">9</span><button class="cp" data-copy="oh fuck babe I can&#x27;t stop touching myself"><span class="cp-icon">📋</span></button></div>
+<div class="msg"><span class="msg-id">S1-13</span><div class="msg-body"><div class="msg-text">I&#x27;m pushing my fingers deeper and I can&#x27;t slow down... my legs are shaking</div></div><span class="intensity" title="Intensity 9/10" style="background:#ef444420;border-color:#ef444450;color:#f87171">9</span><button class="cp" data-copy="I&#x27;m pushing my fingers deeper and I can&#x27;t slow down... my legs are shaking"><span class="cp-icon">📋</span></button></div>
+<div class="msg"><span class="msg-id">S1-14</span><div class="msg-body"><div class="msg-text">I can feel myself about to cum... you need to see what&#x27;s happening to my body right now</div></div><span class="intensity" title="Intensity 9/10" style="background:#ef444420;border-color:#ef444450;color:#f87171">9</span><button class="cp" data-copy="I can feel myself about to cum... you need to see what&#x27;s happening to my body right now"><span class="cp-icon">📋</span></button></div>
+<div class="msg msg-wait"><span class="msg-id">S1-15</span><div class="msg-body"><div class="msg-text">one second</div><div class="msg-note">WAIT 2-3 MIN</div></div><span class="intensity" title="Intensity 10/10" style="background:#ef444420;border-color:#ef444450;color:#f87171">10</span><button class="cp" data-copy="one second"><span class="cp-icon">📋</span></button></div>
+<div class="ppv-moment"><span class="ppv-icon">📎</span><span class="ppv-label">you need to see this... I&#x27;ve never been like this before</span></div>
+  </div>
+</div>
+<div class="phase collapsed" id="phase-5" style="--phase-color:#f85149">
+  <div class="phase-header">
+    <span class="phase-emoji">🔥</span>
+    <span class="phase-name">Sexting Phase 4</span>
+    <span class="phase-meta">4 msgs + 1 PPV</span>
+    <button class="copy-all" data-copy-all="oh my god my pussy is pulsing so hard and I can't stop\n\nI'm right there babe... my whole body is clenching and I need you watching when this happens\n\nI'm cumming... fuck I can barely breathe">Copy All</button>
+    <span class="toggle">▼</span>
+  </div>
+  <div class="phase-body">
+<div class="msg"><span class="msg-id">S1-17</span><div class="msg-body"><div class="msg-text">oh my god my pussy is pulsing so hard and I can&#x27;t stop</div><div class="msg-note">Wait for reply.</div></div><span class="intensity" title="Intensity 10/10" style="background:#ef444420;border-color:#ef444450;color:#f87171">10</span><button class="cp" data-copy="oh my god my pussy is pulsing so hard and I can&#x27;t stop"><span class="cp-icon">📋</span></button></div>
+<div class="msg"><span class="msg-id">S1-18</span><div class="msg-body"><div class="msg-text">I&#x27;m right there babe... my whole body is clenching and I need you watching when this happens</div></div><span class="intensity" title="Intensity 10/10" style="background:#ef444420;border-color:#ef444450;color:#f87171">10</span><button class="cp" data-copy="I&#x27;m right there babe... my whole body is clenching and I need you watching when this happens"><span class="cp-icon">📋</span></button></div>
+<div class="msg"><span class="msg-id">S1-19</span><div class="msg-body"><div class="msg-text">I&#x27;m cumming... fuck I can barely breathe</div></div><span class="intensity" title="Intensity 10/10" style="background:#ef444420;border-color:#ef444450;color:#f87171">10</span><button class="cp" data-copy="I&#x27;m cumming... fuck I can barely breathe"><span class="cp-icon">📋</span></button></div>
+<div class="msg msg-wait"><span class="msg-id">S1-20</span><div class="msg-body"><div class="msg-text">wait</div><div class="msg-note">WAIT 1-2 MIN</div></div><span class="intensity" title="Intensity 10/10" style="background:#ef444420;border-color:#ef444450;color:#f87171">10</span><button class="cp" data-copy="wait"><span class="cp-icon">📋</span></button></div>
+<div class="ppv-moment"><span class="ppv-icon">📎</span><span class="ppv-label">cum with me babe... watch what happens to my body right now</span></div>
+  </div>
+</div>
+<div class="phase collapsed" id="phase-6" style="--phase-color:#58a6ff">
+  <div class="phase-header">
+    <span class="phase-emoji">💪</span>
+    <span class="phase-name">Aftercare</span>
+    <span class="phase-meta">2 msgs</span>
+    <button class="copy-all" data-copy-all="oh my god that was... wow\n\nI've never had someone make me feel like that through a screen before. you're actually different babe">Copy All</button>
+    <span class="toggle">▼</span>
+  </div>
+  <div class="phase-body">
+<div class="msg"><span class="msg-id">AC-1</span><div class="msg-body"><div class="msg-text">oh my god that was... wow</div></div><button class="cp" data-copy="oh my god that was... wow"><span class="cp-icon">📋</span></button></div>
+<div class="msg"><span class="msg-id">AC-2</span><div class="msg-body"><div class="msg-text">I&#x27;ve never had someone make me feel like that through a screen before. you&#x27;re actually different babe</div><div class="msg-note">Mention something specific he said/did. KEEP TALKING — build bond. NEVER say goodbye.</div></div><button class="cp" data-copy="I&#x27;ve never had someone make me feel like that through a screen before. you&#x27;re actually different babe"><span class="cp-icon">📋</span></button></div>
+  </div>
+</div>
+
+<div class="phase collapsed" id="re-engagement" style="--phase-color:#58a6ff">
+  <div class="phase-header">
+    <span class="phase-emoji">🔄</span>
+    <span class="phase-name">Re-engagement</span>
+    <span class="phase-meta">2 msgs</span>
+    <span class="toggle">▼</span>
+  </div>
+  <div class="phase-body">
+<div class="msg"><span class="msg-id">RE-1</span><div class="msg-body"><div class="msg-text">can&#x27;t stop thinking about earlier, you free?</div><div class="msg-note">Send 6-12 hrs after convo goes quiet.</div></div><button class="cp" data-copy="can&#x27;t stop thinking about earlier, you free?"><span class="cp-icon">📋</span></button></div>
+<div class="msg"><span class="msg-id">RE-2</span><div class="msg-body"><div class="msg-text">sooo I did something even crazier after we stopped talking, you have to see this</div><div class="msg-note">Send next day. Seeds next session.</div></div><button class="cp" data-copy="sooo I did something even crazier after we stopped talking, you have to see this"><span class="cp-icon">📋</span></button></div>
+  </div>
+</div>
+<hr class="divider">
+
+<div class="ref-section" id="nr-waves">
+  <div class="ref-title">🔇 NR Wave Protocol</div>
+  <table class="nr-table"><thead><tr><th>Wave</th><th>Message</th><th>Note</th><th></th></tr></thead>
+  <tbody><tr><td><strong>NR-W1</strong></td><td>helloooo</td><td class="nr-note">Send 2-3 min after PPV. Ping.</td><td><button class="cp" data-copy="helloooo"><span class="cp-icon">📋</span></button></td></tr><tr><td><strong>NR-W2</strong></td><td>I have something to show you but you&#x27;re leaving me on read babe...</td><td class="nr-note">Send 3-5 min later. Curiosity.</td><td><button class="cp" data-copy="I have something to show you but you&#x27;re leaving me on read babe..."><span class="cp-icon">📋</span></button></td></tr><tr><td><strong>NR-W3</strong></td><td>fine I&#x27;ll just keep this to myself then</td><td class="nr-note">Send 5-10 min later. Takeaway.</td><td><button class="cp" data-copy="fine I&#x27;ll just keep this to myself then"><span class="cp-icon">📋</span></button></td></tr><tr><td><strong>NR-W4</strong></td><td>miss talking to you babe, where&#x27;d you go?</td><td class="nr-note">Send 15-30 min later. Warm close.</td><td><button class="cp" data-copy="miss talking to you babe, where&#x27;d you go?"><span class="cp-icon">📋</span></button></td></tr><tr><td><strong>NR-W5</strong></td><td>I made something special and you&#x27;re the only one I want to share it with, hmu when you&#x27;re free</td><td class="nr-note">Send 2-6 hrs later. New convo hook.</td><td><button class="cp" data-copy="I made something special and you&#x27;re the only one I want to share it with, hmu when you&#x27;re free"><span class="cp-icon">📋</span></button></td></tr></tbody></table>
+</div>
+<hr class="divider">
+<div class="ref-section" id="personal-info">
+  <div class="ref-title">👤 Personal Info</div>
+  <div class="qi-grid"><div class="qi-item"><span class="qi-label">Age</span><span class="qi-text">I&#x27;m 30, finally at a point where I actually know what I want haha</span><button class="cp" data-copy="I&#x27;m 30, finally at a point where I actually know what I want haha"><span class="cp-icon">📋</span></button></div><div class="qi-item"><span class="qi-label">Location</span><span class="qi-text">I&#x27;m in Denmark but I don&#x27;t really like sharing too many details about where exactly</span><button class="cp" data-copy="I&#x27;m in Denmark but I don&#x27;t really like sharing too many details about where exactly"><span class="cp-icon">📋</span></button></div><div class="qi-item"><span class="qi-label">Profession</span><span class="qi-text">I&#x27;m an influencer and content creator, I used to be a nurse actually but this is way more fun</span><button class="cp" data-copy="I&#x27;m an influencer and content creator, I used to be a nurse actually but this is way more fun"><span class="cp-icon">📋</span></button></div><div class="qi-item"><span class="qi-label">Hobbies</span><span class="qi-text">gym is my therapy honestly, and I&#x27;m obsessed with sushi and fashion, that&#x27;s basically my whole personality haha</span><button class="cp" data-copy="gym is my therapy honestly, and I&#x27;m obsessed with sushi and fashion, that&#x27;s basically my whole personality haha"><span class="cp-icon">📋</span></button></div><div class="qi-item"><span class="qi-label">Countries</span><span class="qi-text">I&#x27;ve traveled a lot actually, Spain and Italy are my favorites but Mexico was insane too</span><button class="cp" data-copy="I&#x27;ve traveled a lot actually, Spain and Italy are my favorites but Mexico was insane too"><span class="cp-icon">📋</span></button></div><div class="qi-item"><span class="qi-label">Relationship</span><span class="qi-text">I&#x27;m single, haven&#x27;t found the right person yet</span><button class="cp" data-copy="I&#x27;m single, haven&#x27;t found the right person yet"><span class="cp-icon">📋</span></button></div></div>
+</div>
+<hr class="divider">
+<div class="ref-section" id="positive-spin">
+  <div class="ref-title">✨ Positive Spin</div>
+  <div class="qi-grid"><div class="qi-item"><span class="qi-label">Age40Plus</span><span class="qi-text">omg I actually love older guys, they know what they want and that&#x27;s so attractive</span><button class="cp" data-copy="omg I actually love older guys, they know what they want and that&#x27;s so attractive"><span class="cp-icon">📋</span></button></div><div class="qi-item"><span class="qi-label">Age20s</span><span class="qi-text">oh nice we&#x27;re close in age? that&#x27;s actually rare on here</span><button class="cp" data-copy="oh nice we&#x27;re close in age? that&#x27;s actually rare on here"><span class="cp-icon">📋</span></button></div><div class="qi-item"><span class="qi-label">BoringJob</span><span class="qi-text">honestly that sounds stable and I respect that, plus you probably have stories right?</span><button class="cp" data-copy="honestly that sounds stable and I respect that, plus you probably have stories right?"><span class="cp-icon">📋</span></button></div><div class="qi-item"><span class="qi-label">CoolJob</span><span class="qi-text">wait that&#x27;s actually really cool, tell me more about that</span><button class="cp" data-copy="wait that&#x27;s actually really cool, tell me more about that"><span class="cp-icon">📋</span></button></div><div class="qi-item"><span class="qi-label">Fit</span><span class="qi-text">oh you work out? okay I see you, that&#x27;s hot</span><button class="cp" data-copy="oh you work out? okay I see you, that&#x27;s hot"><span class="cp-icon">📋</span></button></div><div class="qi-item"><span class="qi-label">NotFit</span><span class="qi-text">I don&#x27;t care about that stuff honestly, it&#x27;s about the vibe not the body</span><button class="cp" data-copy="I don&#x27;t care about that stuff honestly, it&#x27;s about the vibe not the body"><span class="cp-icon">📋</span></button></div><div class="qi-item"><span class="qi-label">SameCity</span><span class="qi-text">wait you&#x27;re close to me?? that&#x27;s crazy, small world</span><button class="cp" data-copy="wait you&#x27;re close to me?? that&#x27;s crazy, small world"><span class="cp-icon">📋</span></button></div><div class="qi-item"><span class="qi-label">FarAway</span><span class="qi-text">I love that you&#x27;re far away, there&#x27;s something exciting about connecting with someone from a different world</span><button class="cp" data-copy="I love that you&#x27;re far away, there&#x27;s something exciting about connecting with someone from a different world"><span class="cp-icon">📋</span></button></div></div>
+</div>
+<hr class="divider">
+<div style="text-align:center;padding:24px 0 10px;color:var(--muted);font-size:.73rem">Chatting Wizard · Script Manager · 2026</div>
+
+</div>
+<button class="top-btn" id="top-btn">↑</button>
+
+<script>
+document.addEventListener('click',e=>{const b=e.target.closest('.cp');if(b){navigator.clipboard.writeText(b.dataset.copy).then(()=>{b.classList.add('ok');setTimeout(()=>b.classList.remove('ok'),1200)});return;}const ca=e.target.closest('.copy-all');if(ca){e.stopPropagation();const txt=ca.dataset.copyAll.replace(/\\n/g,'\n');navigator.clipboard.writeText(txt).then(()=>{ca.classList.add('ok');ca.textContent='Copied!';setTimeout(()=>{ca.classList.remove('ok');ca.textContent='Copy All'},1500)});return;}});
+document.querySelectorAll('.phase-header').forEach(h=>{h.addEventListener('click',e=>{if(e.target.closest('.cp')||e.target.closest('.copy-all'))return;h.closest('.phase').classList.toggle('collapsed')})});
+document.querySelectorAll('.toc a[href^="#"]').forEach(a=>{a.addEventListener('click',()=>{const t=document.getElementById(a.getAttribute('href').slice(1));if(t&&t.classList.contains('phase'))t.classList.remove('collapsed')})});
+const topBtn=document.getElementById('top-btn');
+window.addEventListener('scroll',()=>topBtn.classList.toggle('show',window.scrollY>400));
+topBtn.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+const toc=document.getElementById('toc');
+window.addEventListener('scroll',()=>toc.classList.toggle('shadow',window.scrollY>200));
+const tocLinks=document.querySelectorAll('.toc a[href^="#"]');
+const sections=Array.from(tocLinks).map(a=>({link:a,el:document.getElementById(a.getAttribute('href').slice(1))})).filter(s=>s.el);
+function updateToc(){let a=sections[0];for(const s of sections)if(s.el.getBoundingClientRect().top<=100)a=s;tocLinks.forEach(l=>l.classList.remove('active'));if(a)a.link.classList.add('active')}
+window.addEventListener('scroll',updateToc);updateToc();
+const searchInput=document.getElementById('search');
+const searchCount=document.getElementById('search-count');
+searchInput.addEventListener('input',()=>{const q=searchInput.value.toLowerCase().trim();const msgs=document.querySelectorAll('.msg');const phases=document.querySelectorAll('.phase');if(!q){msgs.forEach(m=>{m.classList.remove('search-hide','search-match')});phases.forEach(p=>p.classList.remove('search-hide'));searchCount.textContent='';return;}let count=0;phases.forEach(p=>{let hasMatch=false;p.querySelectorAll('.msg').forEach(m=>{const txt=m.querySelector('.msg-text');if(txt&&txt.textContent.toLowerCase().includes(q)){m.classList.remove('search-hide');m.classList.add('search-match');hasMatch=true;count++;}else{m.classList.add('search-hide');m.classList.remove('search-match')}});if(hasMatch){p.classList.remove('search-hide','collapsed')}else{p.classList.add('search-hide')}});searchCount.textContent=count+' found'});
+searchInput.addEventListener('keydown',e=>{if(e.key==='Escape'){searchInput.value='';searchInput.dispatchEvent(new Event('input'));searchInput.blur()}});
+</script>
+</body>
+</html>
