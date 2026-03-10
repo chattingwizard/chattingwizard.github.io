@@ -204,15 +204,15 @@ def notify_slack(model_name, channel=SLACK_CHANNEL, notify_rei=True):
 
     clean_name = model_name.strip()
     folder = clean_name.lower().replace(" ", "")
-    url = f"https://chattingwizard.github.io/{folder}/"
     xlsx_filename = f"{clean_name.replace(' ', '_')}_Complete_Infloww.xlsx"
 
+    hub_url = "https://hub.chattingwizard.com/#/scripts"
+    xlsx_url = f"https://chattingwizard.github.io/{folder}/{xlsx_filename}"
+
     msg = (
-        f"Scripts ready for {clean_name}! "
-        f"All XLSX and HTML guides have been generated and deployed.\n\n"
-        f"Dashboard: https://chattingwizard.github.io/\n"
-        f"Model page: {url}\n"
-        f"XLSX: {url}{xlsx_filename}\n\n"
+        f"Scripts ready for *{clean_name}*!\n\n"
+        f"Hub (scripts): {hub_url}\n"
+        f"XLSX download: {xlsx_url}\n\n"
         f"Rei — please import the XLSX into Infloww and assign content to each PPV."
     )
 
@@ -978,27 +978,39 @@ def cmd_onboard(args):
         # Step 4: Update dashboard
         update_dashboard()
 
-        # Step 5: Push to GitHub + verify deploy
+        # Step 5: Sync scripts to Hub (Supabase)
+        print(f"\n[HUB] Syncing scripts to Hub...")
+        try:
+            from sync_to_hub import sync_model
+            hub_ok = sync_model(folder)
+            if hub_ok:
+                print(f"[HUB] Scripts synced to hub.chattingwizard.com")
+            else:
+                print(f"[WARN] Hub sync failed — scripts available locally but not in Hub")
+        except Exception as e:
+            print(f"[WARN] Hub sync error: {e}")
+            hub_ok = False
+
+        # Step 6: Push to GitHub (XLSX still served from GH Pages)
         clean_name = model_name.strip()
         pushed = git_push(f"Onboard {clean_name}: scripts + dashboard")
         deployed = False
         if pushed:
             deployed = wait_for_deploy(timeout=120)
 
-        # Step 6: Notify Rei (only after successful deploy)
+        # Step 7: Notify Rei
         if not args.no_notify:
-            if deployed:
+            if hub_ok or deployed:
                 notify_slack(model_name)
             else:
-                print(f"[WARN] Deploy not confirmed — skipping Slack notification. Check manually.")
+                print(f"[WARN] Neither Hub nor GH Pages confirmed — skipping Slack notification.")
 
         print(f"\n{'='*60}")
         print(f"[DONE] {model_name} fully onboarded!")
         print(f"  Config: tools/models/{folder}.py")
-        print(f"  Web: {folder}/")
-        print(f"  XLSX: {folder}/{clean_name}_Complete_Infloww.xlsx")
-        print(f"  Objections: {folder}/objections.html")
-        print(f"  Deployed: {'YES' if deployed else 'PENDING — check GitHub Pages'}")
+        print(f"  Hub: hub.chattingwizard.com/#/scripts (synced: {'YES' if hub_ok else 'NO'})")
+        print(f"  XLSX: {folder}/{clean_name.replace(' ', '_')}_Complete_Infloww.xlsx")
+        print(f"  GH Pages: {'YES' if deployed else 'PENDING'}")
         print(f"{'='*60}")
     else:
         print(f"[ERROR] Generation failed for {model_name}")
