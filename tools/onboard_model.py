@@ -197,45 +197,56 @@ def wait_for_deploy(timeout=120, poll_interval=10):
 
 
 def notify_slack(model_name, channel=SLACK_CHANNEL, notify_rei=True):
-    """Notify team on Slack that scripts are ready."""
+    """Notify team on Slack that scripts are ready — attach XLSX directly."""
     client, resolve_channel_fn, _, resolve_user_id = get_slack_client()
     from slack_sdk.errors import SlackApiError
-    from urllib.parse import quote
 
     clean_name = model_name.strip()
     folder = clean_name.lower().replace(" ", "")
     xlsx_filename = f"{clean_name.replace(' ', '_')}_Complete_Infloww.xlsx"
+    xlsx_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), folder, xlsx_filename)
 
     hub_url = "https://hub.chattingwizard.com/#/scripts"
-    xlsx_url = f"https://chattingwizard.github.io/{folder}/{xlsx_filename}"
 
     msg = (
         f"Scripts ready for *{clean_name}*!\n\n"
-        f"Hub (scripts): {hub_url}\n"
-        f"XLSX download: {xlsx_url}\n\n"
-        f"Rei — please import the XLSX into Infloww and assign content to each PPV."
+        f"Hub: {hub_url}\n"
+        f"Rei — XLSX attached below. Import into Infloww and assign content to each PPV."
     )
 
-    # Send to channel
     try:
         channel_id = resolve_channel_fn(client, channel)
         client.chat_postMessage(channel=channel_id, text=msg)
         print(f"[SLACK] Notification sent to #{channel}")
+
+        if os.path.exists(xlsx_path):
+            client.files_upload_v2(
+                channel=channel_id,
+                file=xlsx_path,
+                title=f"{clean_name} - Infloww Scripts",
+                initial_comment=f"XLSX for {clean_name} — ready for Infloww import.",
+            )
+            print(f"[SLACK] XLSX attached to #{channel}")
+        else:
+            print(f"[WARN] XLSX not found at {xlsx_path}")
     except SlackApiError as e:
         print(f"[WARN] Could not send to #{channel}: {e.response['error']}")
 
-    # Also DM Rei
     if notify_rei:
         try:
-            from slack_cli import cmd_send_dm
             rei_id = resolve_user_id(client, "Rei")
-            from slack_sdk.errors import SlackApiError as SAE
             try:
                 result = client.conversations_open(users=[rei_id])
                 dm_channel = result["channel"]["id"]
                 client.chat_postMessage(channel=dm_channel, text=msg)
-                print("[SLACK] DM sent to Rei")
-            except SAE as e:
+                if os.path.exists(xlsx_path):
+                    client.files_upload_v2(
+                        channel=dm_channel,
+                        file=xlsx_path,
+                        title=f"{clean_name} - Infloww Scripts",
+                    )
+                print("[SLACK] DM + XLSX sent to Rei")
+            except SlackApiError as e:
                 print(f"[WARN] Could not DM Rei: {e.response['error']}")
         except Exception:
             print("[WARN] Could not resolve Rei for DM")
