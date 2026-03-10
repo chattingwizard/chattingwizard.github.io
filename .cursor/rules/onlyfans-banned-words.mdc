@@ -1,6 +1,6 @@
 ---
 description: CRITICAL - OnlyFans banned words must NEVER appear in any script, message, or content
-alwaysApply: true
+alwaysApply: false
 ---
 
 # OnlyFans Banned Words — NEVER USE

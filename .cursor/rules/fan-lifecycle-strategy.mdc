@@ -1,6 +1,6 @@
 ---
 description: Core fan lifecycle strategy — New Sub vs Time Waster classification and approach
-alwaysApply: true
+alwaysApply: false
 ---
 
 # Fan Lifecycle Strategy — Chatting Wizard (Core Business Rule)

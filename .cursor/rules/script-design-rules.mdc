@@ -1,6 +1,6 @@
 ---
 description: Script design rules — Objection Handling, aftercare, personalization, branch logic. Applies to ALL models.
-alwaysApply: true
+alwaysApply: false
 ---
 
 # Script Design Rules — Chatting Wizard

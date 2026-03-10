@@ -1,6 +1,6 @@
 ---
 description: Notion integration status — current blocking issues
-alwaysApply: true
+alwaysApply: false
 ---
 
 # Notion — Status (Feb 14, 2026)

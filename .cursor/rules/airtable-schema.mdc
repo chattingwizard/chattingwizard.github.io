@@ -1,6 +1,6 @@
 ---
 description: Airtable schema completo de Chatting Wizard. Base de datos central con 36 tablas.
-alwaysApply: true
+alwaysApply: false
 ---
 
 # Airtable — Chatting Wizard

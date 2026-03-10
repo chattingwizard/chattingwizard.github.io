@@ -1,6 +1,6 @@
 ---
 description: Business logic and operational rules for the Chatting Wizard coaching/performance system
-alwaysApply: true
+alwaysApply: false
 ---
 
 # Coaching System — Business Rules

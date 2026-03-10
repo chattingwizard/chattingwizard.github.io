@@ -1,6 +1,6 @@
 ---
 description: Mandatory quality rules for creating Smart Messages (nudges, welcome, etc.)
-alwaysApply: true
+alwaysApply: false
 ---
 
 # Smart Messages — Quality Standards (MANDATORY)

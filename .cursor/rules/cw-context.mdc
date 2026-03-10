@@ -1,0 +1,24 @@
+---
+description: Script Manager kernel — project map, source of truth routing, and repo identity
+alwaysApply: true
+---
+
+# CW Script Manager (Kernel)
+
+## This Repo
+Script generation system for Chatting Wizard. Contains model configs, script generators, XLSX exports, HTML guides, and Smart Messages.
+
+## Repo Ecosystem
+
+| Repo | Purpose | Source of truth for | Never edit here |
+|---|---|---|---|
+| `CW-ScriptManager` (THIS) | Script generation per model | Model configs, XLSX, HTML guides, Smart Messages | Coaching logic, data pipeline |
+| `ChattingWizard-main` | Ops hub: coaching, data pipeline, integrations | Coaching, KPIs, briefings, workflows | Scripts |
+| `CW-ChattingSchool` | Training platform for chatters | Curriculum, videos, quizzes | Scripts, coaching |
+| `cw-coaching` | Deploy artifact ONLY | Nothing — generated output | Everything |
+
+## How to Operate
+- When writing script content: load `script-design-rules.mdc` + `onlyfans-banned-words.mdc`
+- When creating Smart Messages: load `smart-messages-quality.mdc` + `fan-psychology.mdc`
+- When reading model data from Airtable: load `airtable-schema.mdc`
+- Be proactive: if a task can be automated, suggest it
