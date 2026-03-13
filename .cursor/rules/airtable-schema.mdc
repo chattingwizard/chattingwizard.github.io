@@ -8,7 +8,7 @@ alwaysApply: false
 ## Acceso
 - Base ID: `appy0qGaMEfyDz9LZ`
 - Token: variable de entorno `AIRTABLE_TOKEN`
-- Documentación completa: `context/airtable_schema.md`
+- Documentación completa: en este mismo archivo
 
 ## Estructura General (36 tablas)
 
@@ -73,6 +73,6 @@ Recruitment → Chatter ← Team
 4. Chatters Call sin uso desde Oct 2025 (reemplazada parcialmente por Coaching Log)
 
 ## Reglas para Agentes
-- Para cualquier consulta sobre estructura de Airtable, leer `context/airtable_schema.md` para el detalle completo
+- Para cualquier consulta sobre estructura de Airtable, leer este archivo para el detalle completo
 - La tabla Chatter es el hub central — siempre empezar por ahí para encontrar relaciones
 - Usar `tools/airtable_cli.py` (si existe) o requests directos a la API con el token de entorno

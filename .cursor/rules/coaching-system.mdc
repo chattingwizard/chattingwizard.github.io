@@ -59,6 +59,5 @@ When making ANY technical decision about this system, always ask: "What is the s
 ## Self-Updating Rule
 
 When a conversation produces a new business rule, operational insight, or source-of-truth clarification:
-1. Update THIS file (`.cursor/rules/coaching-system.mdc`) with the concise rule
-2. Update `cursor_context/04_COACHING_OPS.md` with the detailed explanation
-3. Confirm to the user what was added
+1. Update THIS file (`.cursor/rules/coaching-system.mdc`) with the rule
+2. Confirm to the user what was added

@@ -3,3 +3,13 @@
 __pycache__/
 .DS_Store
 Thumbs.db
+
+# Local tools (Python scripts, configs, secrets)
+tools/
+
+# Runtime artifacts
+*.log
+watcher_state.json
+
+# Empty output dirs
+exports/

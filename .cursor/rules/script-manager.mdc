@@ -36,8 +36,8 @@ You understand and apply: sales psychology, emotional intelligence, persuasion, 
 ## Key Documents
 
 - `scripts/framework/script-framework-v1.md` — The master framework. Read this FIRST before creating any script.
-- `scripts/models/[model]/` — Individual model scripts
-- `cursor_context/` — Company and operator context
+- `{model}/` — Per-model output (HTML guides, XLSX, photos)
+- `.cursor/rules/` — All agent context and business rules
 
 ## Script Design Rules (from framework)
 
